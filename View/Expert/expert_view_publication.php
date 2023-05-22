@@ -19,6 +19,7 @@
 
     <!--CSS-->
     <link rel="stylesheet" href="../Common//css/navbar.css">
+    <link rel="stylesheet" href="../Common//css/footer.css">
     <link rel="stylesheet" href="css/expert_view_publication.css">
 
     <!-- Icon -->
@@ -33,10 +34,8 @@
   ?>
    
 
-  <div class="flexSection">
-    <div class="mainSection">
-        
-
+  <section class="flexSection">
+    <div class="mainSection mb-5 mt-3">
         <div id="publicationDetails_Component">
           
           <div class="content_details">
@@ -117,15 +116,14 @@
           <button class="button_View btn-dark btn btn-block text-white"  data-mdb-ripple-color="dark"><strong>View</strong></button>
 
         </div>
-        <div class=" bg-dark mt-5 ">
-          <p>dds</p>
-        </div>
     </div>
 
-    
-  </div>
+  </section>
 
-  
+  <!-- Footer -->
+  <?php
+    include_once('../Common/html/footer.html');
+  ?>
 
   <!-- MDB -->
   <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>

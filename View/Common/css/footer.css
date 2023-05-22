@@ -1,0 +1,11 @@
+
+footer{
+    background-color: #2D59AC;
+}
+
+footer p{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    margin-bottom: 0px;
+    letter-spacing: 1px;
+}

@@ -4,12 +4,6 @@ body{
     background-color: #F5F5F5;
 }
 
-footer{
-    margin-top: 40px;
-    background-color: #2D59AC;
-}
-
-
 .flexSection{
     display: flex;
     justify-content: center;
@@ -19,7 +13,6 @@ footer{
     background-color: #F5F5F5;
     width: 800px;
     height: fit-content;
-    margin-top: 20px;
 }
 
 .mainSection h2{
@@ -89,18 +82,11 @@ footer{
 }
 
 
-
-
 @media only screen and (max-width: 800px){
-    .mainSection{
-        width: 100%;
-        height: 95vh;
-    }
 
     #titlePage{
         text-align: center;
     }
-
 
     .content_details{
         flex-direction: column;
@@ -120,10 +106,6 @@ footer{
 } 
 
 @media only screen and (max-width: 600px){
-    .mainSection{
-        width: 100%;
-        height: 95vh;
-    }
 
     #titlePage{
         text-align: center;
