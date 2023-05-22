@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,900&display=swap');
+
+nav{
+    background-color: #2D59AC;
+}
+
+nav a{
+    color: white;
+}
+
+.search_Section input{
+    background-color: rgb(180, 189, 237);
+    border: transparent;
+}
+  
+
+.profile_section{
+    margin-right: 3vw;
+}
+
+.profile_name_Section{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 120px;
+    margin-left: 15%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.profile_name_Section h6{
+    font-family: 'Montserrat', sans-serif;
+    margin:  0px;
+    text-align: end;
+}
+
+#navName{
+    font-size: 12px;
+}
+
+#navUsername{
+    font-size: 10px;
+}
+
+.navbar a{
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container-fluid a{
+    font-size: 12px;
+}

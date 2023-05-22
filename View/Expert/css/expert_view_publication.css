@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,900&display=swap');
+
+body{
+    background-color: #F5F5F5;
+}
+
+footer{
+    margin-top: 40px;
+    background-color: #2D59AC;
+}
+
+
+.flexSection{
+    display: flex;
+    justify-content: center;
+}
+
+.mainSection{
+    background-color: #F5F5F5;
+    width: 800px;
+    height: fit-content;
+    margin-top: 20px;
+}
+
+.mainSection h2{
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+    text-align: left;
+    margin-bottom: 0;
+}
+
+#publicationDetails_Component{
+    background-color: white;
+    height: fit-content;
+    border-radius: 10px;
+    padding-top: 40px;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-bottom: 50px;
+    margin-top: 20px;
+}
+
+#publicationDetails_Component i{
+    color: #c8c8c8;
+}
+
+#titlePage{
+    width: 100%;
+}
+
+#impression_text{
+    font-size: 16px;
+    padding-left: 5px;
+    margin-left: 2px;
+    margin-bottom: 0;
+    color: #c8c8c8;
+}
+
+.content_details th{
+    width: 105px;
+    font-family: 'Montserrat', sans-serif;
+    color: black;
+    font-size: 12px;
+    text-align: right;
+    padding-right: 0;
+}
+
+.content_details td{
+    font-size: 12px;
+    text-align: left;
+    padding-left: 5px;
+}
+
+.content_details{
+    display: flex;
+    flex-direction: row;
+}
+
+#pubDesc{
+    text-align: justify;
+}
+
+.button_View{
+    background-color: #115FFB;
+}  
+
+.mainSection img{
+    margin-right: 30px;
+}
+
+
+
+
+@media only screen and (max-width: 800px){
+    .mainSection{
+        width: 100%;
+        height: 95vh;
+    }
+
+    #titlePage{
+        text-align: center;
+    }
+
+
+    .content_details{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .mainSection img{
+        margin-right: 0px;
+    }
+
+    footer{
+        margin-top: 40px;
+        background-color: #2D59AC;
+    }
+
+
+} 
+
+@media only screen and (max-width: 600px){
+    .mainSection{
+        width: 100%;
+        height: 95vh;
+    }
+
+    #titlePage{
+        text-align: center;
+    }
+
+
+    .content_details{
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .mainSection img{
+        margin-right: 0px;
+    }
+    
+    footer{
+        margin-top: 40px;
+        background-color: #2D59AC;
+    }
+} 
