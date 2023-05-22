@@ -24,23 +24,24 @@ body{
 }
 
 #publication_Component{
-    background-color: white;
     height: fit-content;
     border-radius: 10px;
-    padding: 40px;
     margin-top: 20px;
 }
 
-.post_publication{
+.post{
     height: fit-content;
     background-color: rgb(255, 255, 255);
+    padding: 30px;
+    margin-bottom: 15px;
+    border-radius: 10px;
 }
 
 p{
     font-family: 'Montserrat', sans-serif;
 }
 
-.post_publication h6{
+.post h6{
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     color: black;
@@ -50,16 +51,22 @@ p{
     text-overflow: ellipsis;
 }
 
-#impression_text{
+#datetime_text{
     font-size: 10px;
     color: black;
 }
 
 #post_desc{
-    font-size: 12px;
+    font-size: 14px;
     text-align: justify;
     width: fit-content;
     word-wrap: break-word
+}
+
+.likeRate_text{
+    font-size: 14px;
+    margin-left: 5px;
+    margin-bottom: 0px;
 }
 
 .button_View{
@@ -68,8 +75,7 @@ p{
 
 @media only screen and (max-width: 800px){
 
-    #publication_Component{
-        background-color: white;
+    #post_Component{
         height: fit-content;
         border-radius: 10px;
         padding-right: 80px;
@@ -83,8 +89,7 @@ p{
 
 @media only screen and (max-width: 600px){
 
-    #publication_Component{
-        background-color: white;
+    #post_Component{
         height: fit-content;
         border-radius: 10px;
         padding-right: 100px;

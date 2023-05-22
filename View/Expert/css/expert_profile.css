@@ -23,24 +23,29 @@ body{
     text-align: left;
 }
 
-#publication_Component{
-    background-color: white;
+#profile_Component{
     height: fit-content;
     border-radius: 10px;
-    padding: 40px;
     margin-top: 20px;
 }
 
-.post_publication{
+#profile_details{
     height: fit-content;
     background-color: rgb(255, 255, 255);
+    margin-bottom: 15px;
+    border-radius: 10px;
+}
+
+#profile-background-pic{
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
 }
 
 p{
     font-family: 'Montserrat', sans-serif;
 }
 
-.post_publication h6{
+#profile_details h6{
     font-family: 'Montserrat', sans-serif;
     font-size: 16px;
     color: black;
@@ -50,30 +55,33 @@ p{
     text-overflow: ellipsis;
 }
 
-#impression_text{
-    font-size: 10px;
+#profile_details h2{
+    font-family: 'Montserrat', sans-serif;
     color: black;
 }
 
-#post_desc{
-    font-size: 12px;
-    text-align: justify;
-    width: fit-content;
-    word-wrap: break-word
+.profile_Avatar{
+    position:absolute;
+    left: 5%;
+    top: 24%;
+    height: 120px;
 }
+
+.profile_content{
+    padding: 70px 20px 20px  50px;
+}
+
 
 .button_View{
     background-color: #115FFB;
+    font-family: 'Montserrat', sans-serif;
 }  
 
 @media only screen and (max-width: 800px){
 
-    #publication_Component{
-        background-color: white;
-        height: fit-content;
-        border-radius: 10px;
-        padding-right: 80px;
-        margin-top: 20px;
+    .profile_Avatar{
+        top: 17%;
+        height: 120px;
     }
 
     .mainSection h1{
@@ -83,12 +91,13 @@ p{
 
 @media only screen and (max-width: 600px){
 
-    #publication_Component{
-        background-color: white;
-        height: fit-content;
-        border-radius: 10px;
-        padding-right: 100px;
-        margin-top: 20px;
+    .profile_Avatar{
+        top: 7vh;
+        height: 120px;
+    }
+
+    .profile_pic{
+        height: 50px;
     }
     
     .mainSection h1{

@@ -35,7 +35,7 @@
    
 
   <section class="flexSection">
-    <div class="mainSection mb-5 mt-3">
+    <div class="mainSection mb-3 mt-3">
         <div id="publicationDetails_Component">
           
           <div class="content_details">
@@ -51,7 +51,7 @@
 
             <div class=" w-100">
 
-              <div class="d-flex justify-content-between  mb-3">
+              <div class="d-flex justify-content-between mt-4  mb-3">
                 <h2 id="titlePage"><strong>View Publication</strong></h2>
                 
                 <div class="d-flex align-items-center">
@@ -104,7 +104,7 @@
                   </tr>
 
                   <tr>
-                    <th scope="row"><strong>Scholar article :</strong></th>
+                    <th scope="row"><strong>Scholar : article</strong></th>
                     <td>JN Al-Karaki, AE Kamal - IEEE wireless communications, 2004</td>
                   </tr>
                 </tbody>

@@ -58,8 +58,8 @@
                 <div class="d-flex justify-content-between">
                   <h6><strong>Routing techniques in wireless sensor networks: a survey</strong></h6>
                   
-                  <div class="d-flex">
-                    <i class="far fa-eye text-muted mr-1"></i>
+                  <div class="d-flex align-items-center">
+                    <i class="far fa-eye mr-1 fa-sm text-center" style="margin-bottom: 1em; color: #7C7C7C;"></i>
                     <p id="impression_text">1.6K </p>
                   </div>
   
@@ -93,8 +93,8 @@
                 <div class="d-flex justify-content-between">
                   <h6><strong>Routing techniques in wireless sensor networks: a survey</strong></h6>
                   
-                  <div class="d-flex">
-                    <i class="far fa-eye text-muted mr-1"></i>
+                  <div class="d-flex align-items-center">
+                    <i class="far fa-eye mr-1 fa-sm text-center" style="margin-bottom: 1em; color: #7C7C7C;"></i>
                     <p id="impression_text">1.6K </p>
                   </div>
   
@@ -128,8 +128,8 @@
                 <div class="d-flex justify-content-between">
                   <h6><strong>Routing techniques in wireless sensor networks: a survey</strong></h6>
                   
-                  <div class="d-flex">
-                    <i class="far fa-eye text-muted mr-1"></i>
+                  <div class="d-flex align-items-center">
+                    <i class="far fa-eye mr-1 fa-sm text-center" style="margin-bottom: 1em; color: #7C7C7C;"></i>
                     <p id="impression_text">1.6K </p>
                   </div>
   
@@ -163,8 +163,8 @@
                 <div class="d-flex justify-content-between">
                   <h6><strong>Routing techniques in wireless sensor networks: a survey</strong></h6>
                   
-                  <div class="d-flex">
-                    <i class="far fa-eye text-muted mr-1"></i>
+                  <div class="d-flex align-items-center">
+                    <i class="far fa-eye mr-1 fa-sm text-center" style="margin-bottom: 1em; color: #7C7C7C;"></i>
                     <p id="impression_text">1.6K </p>
                   </div>
   
