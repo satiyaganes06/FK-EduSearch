@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="css/expert_homepage.css">
 
     <!-- Icon -->
-    <link rel="shortcut icon" type="image/jpg" href="../../Assert/icon_logo.png" />
+    <link rel="shortcut icon" type="image/jpg" href="../../Asset/icon_logo.png" />
 
 </head>
 <body>

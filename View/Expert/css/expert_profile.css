@@ -75,7 +75,18 @@ p{
 .button_View{
     background-color: #115FFB;
     font-family: 'Montserrat', sans-serif;
-}  
+}
+
+#tableHeaderBg{
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    border-radius: 10px;
+    background-color: #115FFB;
+}
+
+#tableHeaderBg th{
+    padding: 10px;
+}
 
 @media only screen and (max-width: 800px){
 
