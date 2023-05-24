@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FK-Edu Search</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!--Bootstrap Script-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <!-- MDB -->
+    <link rel="stylesheet" href="../../Bootstrap/mdb.min.css" />
+
+    <!--CSS-->
+    <link rel="stylesheet" href="../Common//css/navbar.css">
+    <link rel="stylesheet" href="../Common//css/footer.css">
+    <link rel="stylesheet" href="css/complaintStyle.css">
+    
+    <!-- Icon -->
+    <link rel="shortcut icon" type="image/jpg" href="../../Asset/icon_logo.png" />
+</head>
+<body>
+    
+</body>
+</html>

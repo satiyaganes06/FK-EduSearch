@@ -20,7 +20,7 @@
     <!--CSS-->
     <link rel="stylesheet" href="../Common//css/navbar.css">
     <link rel="stylesheet" href="../Common//css/footer.css">
-    <link rel="stylesheet" href="css/user_addStyle.css">
+    <link rel="stylesheet" href="css/complaintStyle.css">
     
     <!-- Icon -->
     <link rel="shortcut icon" type="image/jpg" href="../../Asset/icon_logo.png" />
