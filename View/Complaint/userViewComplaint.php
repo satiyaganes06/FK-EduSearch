@@ -26,7 +26,9 @@
     <link rel="shortcut icon" type="image/jpg" href="../../Asset/icon_logo.png" />
 
     <!-- Pie Chart -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>                  
+
+    
 
 </head>
 <body>
@@ -59,7 +61,7 @@
                 </div>
             </div>
             <div class="col-sm-3">
-                <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
+                <canvas id="myChart" style="width:80%;max-width:300px"></canvas>
             </div>
         </div>
     </div>
@@ -74,12 +76,13 @@
   ?>
 
 <script>
+
     var xValues = ["In Investigation", "On Hold", "Resolved"];
     var yValues = [3, 2, 1];
     var barColors = [
-    "#b91d47",
-    "#00aba9",
-    "#2b5797"
+    "#FF0000",
+    "#FFD600",
+    "#1FB712"
     ];
 
     new Chart("myChart", {
@@ -90,8 +93,10 @@
         backgroundColor: barColors,
         data: yValues
         }]
-    },
+    }
     });
+
+
 </script>
 
   <!-- MDB -->
