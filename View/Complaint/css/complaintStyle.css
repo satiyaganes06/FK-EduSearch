@@ -27,6 +27,17 @@ section {
     margin-top:20px;
    }
 
+   .box{
+    border-left: 8px solid;
+    margin-left: 20px;
+    text-align:center;
+   }
+
+   .box p{
+    font-size: 40px;
+    font-weight:600;
+   }
+
    /* Styles for responsive layout */
    @media (max-width: 767px) {
     section {
