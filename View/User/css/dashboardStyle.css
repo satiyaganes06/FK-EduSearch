@@ -1,18 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,900&display=swap');
 
-body{
-    background-color: #F5F5F5;
-}
-
-section {
-    padding: 20px;
-    background-color: #f2f2f2;
+  body{
+      background-color: #F5F5F5;
+      font-family: 'Montserrat', sans-serif;
   }
+
+  section {
+      padding: 20px;
+      background-color: #f2f2f2;
+    }
 
   /* Styles for the container */
   .container {
-    max-width: 94%;
-    margin: 0 auto;
     background-color: #E7E7E7;
     border-radius: 8px;
   }
@@ -22,14 +21,45 @@ section {
     margin-bottom: 15px;
   }
 
-   /* Styles for responsive layout */
-   @media (max-width: 767px) {
-    section {
-      padding: 10px;
-    }
+  .box{
+  border: 0px;
+  margin-left: 20px;
+  text-align:center;
+  }
 
-    .container {
-      max-width: 100%;
-      padding: 0 10px;
-    }
-}
+  .box p{
+  font-size: 40px;
+  font-weight:600;
+  }
+
+  a:link{
+  text-decoration: underline;
+  }
+
+  /* Styles table */
+  .center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  table, td, th{
+    padding: 10px;
+  }
+
+  /* Styles for image */
+  .imageDashboard{
+    content: url("../../../Asset/imageDashboard.png");
+    height: 150px;
+  }
+
+  /* Styles for responsive layout */
+  @media (max-width: 767px) {
+  section {
+    padding: 10px;
+  }
+
+  .container {
+    max-width: 100%;
+    padding: 0 10px;
+  }
+  }
