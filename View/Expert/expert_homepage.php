@@ -45,7 +45,7 @@
             <div class="post_publication d-flex">
               <!-- Image -->
               <img
-                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                src="https://i.pinimg.com/564x/20/b2/85/20b285930632c3bdb03a5297a777902e.jpg"
                 class="rounded-circle shadow"
                 height="60"
                 alt="Black and White Portrait of a Man"

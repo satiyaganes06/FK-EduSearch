@@ -1,0 +1,79 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    margin: 0px;
+    padding: 0px;
+}
+
+/*Form Elements*/
+.content{
+    width: 50%;
+}
+.logo img{
+width: 250px;
+}
+.dropdown{
+    width: 100%;
+    margin-left: 50%;
+
+}
+.inputfields{
+    align-items: center;
+    /* margin: 50px 20px 0px 0px; */
+    display: flex;
+    flex-direction: column;
+}
+
+.loginbtn button{
+    width: 155px;
+    border-radius: 10px;
+    margin-left: -10px;
+}
+.container-fluid{
+    width: 100%;
+}
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+footer{
+    left: 0;
+    margin-left: -12px;
+}
+@media screen and (max-width: 480px) {
+    .content{
+        width: 100%;
+    }
+    .backgroundImg{
+        visibility: hidden;
+    }
+    .title{
+        margin-left: 0px;
+    }
+    .inputfields{
+        
+        align-items: center;
+        
+        display: flex;
+        flex-direction: column;
+        margin: 40px 0px 32px 20px; /*top right bottom left*/
+        width: 350px;
+        
+    }
+    .loginform{
+        width: 100%;
+        
+    }
+    .loginbtn button{
+        width: 175px;
+        border-radius: 10px;
+        margin-left: 5px;
+    }
+    .signuptxt{
+        margin-left: 8px;
+        margin-bottom: 130px;
+    }
+  }
