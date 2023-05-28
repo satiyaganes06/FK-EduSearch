@@ -1,3 +1,17 @@
+<?php
+        session_start();
+        //If the user is not logged in send him/her to the login form
+     if(!isset( $_SESSION["Current_user_id"] )) {
+
+      ?>
+          <script>
+              alert("Access denied !!!")
+              window.location = "../Module 1/Login/General User Login/userLogin.php";
+          </script>
+      <?php
+
+  }
+        ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

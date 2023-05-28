@@ -12,7 +12,7 @@
   top: 0;
   height: 100%;
   width: 78px;
-  background: #11101D;
+  background: #FFFFFF;
   padding: 6px 14px;
   z-index: 99;
   transition: all 0.5s ease;
@@ -57,7 +57,7 @@
   text-align: right;
 }
 .sidebar i{
-  color: #fff;
+  color: #000000;
   height: 60px;
   min-width: 50px;
   font-size: 28px;
@@ -67,6 +67,7 @@
 .sidebar .nav-list{
   margin-top: 20px;
   height: 100%;
+  margin-left: -32px;
 }
 .sidebar li{
   position: relative;
@@ -141,19 +142,24 @@
   align-items: center;
   text-decoration: none;
   transition: all 0.4s ease;
-  background: #11101D;
+  background: #ffffff;
 }
+
 .sidebar li a:hover{
   background: #FFF;
 }
 .sidebar li a .links_name{
-  color: #fff;
+  color: #000000;
   font-size: 15px;
   font-weight: 400;
   white-space: nowrap;
   opacity: 0;
   pointer-events: none;
   transition: 0.4s;
+}
+.sidebar li .active{
+  background-color: #2C5864;
+  
 }
 .sidebar.open li a .links_name{
   opacity: 1;
@@ -231,6 +237,9 @@
   width: calc(100% - 78px);
   transition: all 0.5s ease;
   z-index: 2;
+}
+.section-heading{
+  font-size: 13px;
 }
 .sidebar.open ~ .home-section{
   left: 250px;
