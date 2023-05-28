@@ -32,7 +32,7 @@
     <!--CSS-->
     <link
       rel="stylesheet"
-      href="/View/Module 1/Login/General User Login/userLogin.css"
+      href="/View/Module 1/Login/Admin Login/adminlogin.css"
     />
     <!-- Icon -->
     <link rel="shortcut icon" type="image/jpg" href="/Asset/icon_logo.png" />
@@ -48,16 +48,8 @@
             <div class="title text-center text-dark">
               <h2><b>Login</b></h2>
             </div>
-            <form class="inputfields" id="LoginForm">
-              <div class="dropdown">
-                  <select class="form-select w-50" aria-label="Default select example" id="roleSelect" name="roleSelect">
-                      <option selected disabled>Roles</option>
-                      <option value="User">User</option>
-                      <option value="Staff">Staff</option>
-                      <option value="Expert">Expert</option>
-                    </select>
-                    <div id="selectError" class="error"></div>
-              </div>
+            <form class="inputfields" id="LoginForm" action="adminAuthentication.php" method="post">
+            
               
           
               <div class="w-50 mt-3">
@@ -70,23 +62,21 @@
           
               <div class="w-50 mt-3">
                 <label class="form-label text-dark" for="password"><b>Password</b></label>
-                <input type="password" id="password" class="form-control" />
+                <input type="password" id="password" name="password" class="form-control" />
                 <div id="passwordError" class="error"></div>
               </div>
           
               <div class="text-center pt-4 pb-3 loginbtn">
-                <button type="submit" class="btn btn-primary" id="submitButton"><b>Login</b></button>
+                <button type="submit" class="btn btn-primary" id="submitButton" style="background-color: rgba(44, 88, 100, 1)"><b>Login</b></button>
               </div>
 
-              <div class="signuptxt">
-                <p>Don't have an account?<a href="userSignUp.html">Sign Up Here</a></p>
-              </div>
+              
             </form>
           </div>
         </div>
         <div class="w-50 backgroundImg">
           <img
-            src="/Asset/userLoginbackground.jpg"
+            src="/Asset/adminloginbackground.jpg"
             alt="user login background"
             style="width: 820px; height: 688px; object-fit: fill"
           />
@@ -96,7 +86,7 @@
         <!-- Copyright -->
         <div
           class="text-center text-white p-3"
-          style="background-color: rgba(45, 89, 172, 1)"
+          style="background-color: rgba(44, 88, 100, 1)"
         >
           © 2020 Copyright:
           <a class="text-white" href="https://mdbootstrap.com/"
@@ -119,11 +109,9 @@
       const form = document.querySelector('#LoginForm');
 
 // Get the form inputs
-const roleSelect = form.querySelector('#roleSelect');
+
 const userID = form.querySelector('#userID');
-const username = form.querySelector('#username');
 const password = form.querySelector('#password');
-const select = form.querySelector('#selectError')
 const userIDError = form.querySelector('#userIDError');
 const passwordError = form.querySelector('#passwordError');
 const submitButton = form.querySelector('#submitButton');
@@ -134,15 +122,12 @@ form.addEventListener('submit', function(event) {
 event.preventDefault();
 
 // Clear previous error messages
-select.textContent = '';
+
 userIDError.textContent = '';
 passwordError.textContent = '';
 
 // Validate the role select
-if (roleSelect.value === 'Roles') {
- select.textContent = ('Please select a role.');
- return;
-}
+
 
 // Validate the user ID
 if (userID.value.trim() === '') {

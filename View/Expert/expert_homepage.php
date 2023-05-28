@@ -1,3 +1,17 @@
+<?php
+        session_start();
+        //If the user is not logged in send him/her to the login form
+     if(!isset( $_SESSION["Current_user_id"] )) {
+
+      ?>
+          <script>
+              alert("Access denied !!!")
+              window.location = "../Module 1/Login/General User Login/userLogin.php";
+          </script>
+      <?php
+
+  }
+        ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,6 +57,7 @@
           <!-- Post 1 -->
           <div>
             <div class="post_publication d-flex">
+              
               <!-- Image -->
               <img
                 src="https://i.pinimg.com/564x/20/b2/85/20b285930632c3bdb03a5297a777902e.jpg"

@@ -48,7 +48,7 @@
             <div class="title text-center text-dark">
               <h2><b>Sign Up</b></h2>
             </div>
-            <form class="inputfields" id="signupForm">
+            <form class="inputfields" id="signupForm" action="userSignUp.php" method="post">
                 <div class="dropdown">
                     <select class="form-select w-50" aria-label="Default select example" id="roleSelect" name="roleSelect">
                         <option selected disabled>Roles</option>
@@ -74,7 +74,7 @@
             
                 <div class="w-50 mt-3">
                   <label class="form-label text-dark" for="password"><b>Password</b></label>
-                  <input type="password" id="password" class="form-control" />
+                  <input type="password" id="password" name="password" class="form-control" />
                   <div id="passwordError" class="error"></div>
                 </div>
             
@@ -111,6 +111,8 @@
       </footer>
     </div>
 
+
+    
     <!-- MDB -->
     <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
     <!--Bootstrap 4 & 5 & jQuery Script-->
