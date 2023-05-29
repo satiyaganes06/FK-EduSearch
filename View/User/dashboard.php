@@ -34,9 +34,9 @@
   ?>
 
   <section>
-    <table>
+    <table class="allContent">
       <tr>
-        <td>
+        <td rowspan="8">
           <!--First Row Section-->
           <div class="container pt-3 pb-2">
                 <div class="row mt-3">
@@ -77,7 +77,7 @@
                 <div class="row mt-3">
                     <div class="col-sm">
                         <div class="box" style="text-align: center;">
-                            <h4><a href="">Software Engineering</a></h4> 
+                            <h4><a href="">Computer System & Networking</a></h4> 
                             <table class="center">
                                 <tr>
                                   <th>100</th>
@@ -92,16 +92,16 @@
                     </div>
                     <div class="col-sm">
                         <div class="box" style="text-align: left;">
-                            <h5>Human Computer Interaction</h5><br>
-                            <h5>Web Engineering</h5><br>
-                            <h5>Software Maintenance & Evolution</h5>
+                            <h5>Network technologies</h5><br>
+                            <h5>Network Services Administration</h5><br>
+                            <h5>Distributed & Parallel Computing</h5>
                         </div>
                     </div>
                     <div class="col-sm" >
                         <div class="box" style="text-align: left;">
-                            <h5>Software Testing</h5><br>
-                            <h5>Formal Method</h5><br>
-                            <h5>Software Quality Assurance</h5>
+                            <h5>Network Analysis & Design</h5><br>
+                            <h5>Network Management</h5><br>
+                            <h5>Structured Networks Cabling</h5>
                         </div>
                     </div>
                 </div>
@@ -177,19 +177,22 @@
                 </div>
             </div>
         </td>
-        <td>
+        <td class="cell1">
           <div class="imageDashboard"></div>
         </td>
       </tr>
       <tr>
-        <td>Total of student</td>
+        <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of student <h2> 180</h2></td>
       </tr>
       <tr>
-        <td>Total of student</td>
+        <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of lecturer <h2> 180</h2></td>
       </tr>
       <tr>
-        <td>Total of student</td>
+        <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of expert <h2> 180</h2></td>
       </tr>
+      <tr><td></td></tr>
+      <tr><td></td></tr>
+      <tr><td></td></tr>
       <tr><td></td></tr>
     </table>
   </section>
