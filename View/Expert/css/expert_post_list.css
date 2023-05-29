@@ -64,7 +64,8 @@ p{
 }
 
 .likeRate_text{
-    font-size: 14px;
+    font-size: 12px;
+    color: black;
     margin-left: 5px;
     margin-bottom: 0px;
 }
