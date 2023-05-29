@@ -112,7 +112,7 @@
                 <div class="row mt-3">
                     <div class="col-sm">
                         <div class="box" style="text-align: center;">
-                            <h4><a href="">Software Engineering</a></h4> 
+                            <h4><a href="">Graphics & Multimedia Technology</a></h4> 
                             <table class="center">
                                 <tr>
                                   <th>100</th>
@@ -127,16 +127,16 @@
                     </div>
                     <div class="col-sm">
                         <div class="box" style="text-align: left;">
-                            <h5>Human Computer Interaction</h5><br>
-                            <h5>Web Engineering</h5><br>
-                            <h5>Software Maintenance & Evolution</h5>
+                            <h5>Fundamental of Digital Media Design</h5><br>
+                            <h5>Computer Graphics</h5><br>
+                            <h5>Computer Games Programming I</h5>
                         </div>
                     </div>
                     <div class="col-sm" >
                         <div class="box" style="text-align: left;">
-                            <h5>Software Testing</h5><br>
-                            <h5>Formal Method</h5><br>
-                            <h5>Software Quality Assurance</h5>
+                            <h5>Virtual Reality</h5><br>
+                            <h5>3D Modelling & Animation</h5><br>
+                            <h5>Project Development Workshop</h5>
                         </div>
                     </div>
                 </div>
@@ -147,7 +147,7 @@
                 <div class="row mt-3">
                     <div class="col-sm">
                         <div class="box" style="text-align: center;">
-                            <h4><a href="">Software Engineering</a></h4> 
+                            <h4><a href="">Cyber Security</a></h4> 
                             <table class="center">
                                 <tr>
                                   <th>100</th>
@@ -162,16 +162,16 @@
                     </div>
                     <div class="col-sm">
                         <div class="box" style="text-align: left;">
-                            <h5>Human Computer Interaction</h5><br>
-                            <h5>Web Engineering</h5><br>
-                            <h5>Software Maintenance & Evolution</h5>
+                            <h5>Cyber Law & Security Policy</h5><br>
+                            <h5>Cyber Threat Intelligence</h5><br>
+                            <h5>Cybersecurity Operations</h5>
                         </div>
                     </div>
                     <div class="col-sm" >
                         <div class="box" style="text-align: left;">
-                            <h5>Software Testing</h5><br>
-                            <h5>Formal Method</h5><br>
-                            <h5>Software Quality Assurance</h5>
+                            <h5>Cybercrime & Forensics Computing</h5><br>
+                            <h5>Penetration Testing</h5><br>
+                            <h5>Cryptography</h5>
                         </div>
                     </div>
                 </div>
@@ -185,10 +185,10 @@
         <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of student <h2> 180</h2></td>
       </tr>
       <tr>
-        <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of lecturer <h2> 180</h2></td>
+        <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of lecturer <h2> 98</h2></td>
       </tr>
       <tr>
-        <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of expert <h2> 180</h2></td>
+        <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of expert <h2> 40</h2></td>
       </tr>
       <tr><td></td></tr>
       <tr><td></td></tr>
