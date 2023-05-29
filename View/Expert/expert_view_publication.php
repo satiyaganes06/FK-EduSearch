@@ -1,17 +1,33 @@
 <?php
-        session_start();
-        //If the user is not logged in send him/her to the login form
-     if(!isset( $_SESSION["Current_user_id"] )) {
+  session_start();
+  //If the user is not logged in send him/her to the login form
+  if(!isset( $_SESSION["Current_user_id"] )) {
 
-      ?>
-          <script>
-              alert("Access denied !!!")
-              window.location = "../Module 1/Login/General User Login/userLogin.php";
-          </script>
-      <?php
+    ?>
+        <script>
+            alert("Access denied !!!")
+            window.location = "../Module 1/Login/General User Login/userLogin.php";
+        </script>
+    <?php
 
+  }else{
+    include("../../Config/database_con.php");
+
+    $idURL = $_GET['id'];
+
+    $sql = "SELECT * FROM publication WHERE publication_id  = '$idURL'";
+    $result = mysqli_query($conn,$sql) or die ("Could not execute query in view");
+    $row = mysqli_fetch_assoc($result);
+
+    $updateImpression = ++$row['publication_impression'];
+
+    $sql1 = "UPDATE publication set publication_impression = '$updateImpression' WHERE publication_id = '$idURL'";
+    $result1 = mysqli_query($conn,$sql1) or die ("Could not execute query in update");
   }
-        ?>
+
+  
+  
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,64 +86,71 @@
                 
                 <div class="d-flex align-items-center">
                   <i class="far fa-eye text-muted mr-1 fs-6"></i>
-                  <p id="impression_text">1.6K</p>
+                  <p id="impression_text"><?php echo $updateImpression; ?></p>
                 </div>
 
               </div>
               
               <table class="table align-middle">
                 <tbody>
+
+                  <tr>
+                    <th scope="row"><strong>Status :</strong></th>
+                    <td><?php echo $row["publication_status"]; ?></td>
+                  </tr>
+
+                  <tr>
+                    <th scope="row"><strong>Title :</strong></th>
+                    <td><?php echo $row["publication_title"]; ?></td>
+                  </tr>
                   <tr>
                     <th scope="row"><strong>Authors :</strong></th>
-                    <td>Jamal N Al-Karaki, Ahmed E Kamal</td>
+                    <td><?php echo $row["publication_author"]; ?></td>
                   </tr>
 
                   <tr>
                     <th scope="row"><strong>Publication : date </strong></th>
-                    <td>2004/12/20</td>
+                    <td><?php echo $row["publication_date"]; ?></td>
                   </tr>
 
                   <tr>
                     <th scope="row"><strong>Journal :</strong></th>
-                    <td>IEEE wireless communications</td>
+                    <td><?php echo $row["publication_journal"]; ?></td>
                   </tr>
 
                   <tr>
                     <th scope="row"><strong>Volume :</strong></th>
-                    <td>11</td>
+                    <td><?php echo $row["publication_volume"]; ?></td>
                   </tr>
 
                   <tr>
                     <th scope="row"><strong>Issue :</strong></th>
-                    <td>6</td>
+                    <td><?php echo $row["publication_issue"]; ?></td>
                   </tr>
 
                   <tr>
                     <th scope="row"><strong>Pages :</strong></th>
-                    <td>6-28</td>
+                    <td><?php echo $row["publication_pages"]; ?></td>
                   </tr>
 
                   <tr>
                     <th scope="row"><strong>Publisher :</strong></th>
-                    <td>IEEE</td>
+                    <td><?php echo $row["publication_publisher"]; ?></td>
                   </tr>
 
                   <tr>
                     <th scope="row"><strong>Description :</strong></th>
-                    <td id='pubDesc'>Wireless sensor networks consist of small nodes with sensing, computation, and wireless communications capabilities. Many routing, power management, and data dissemination protocols have been specifically designed for WSNs where energy awareness is an essential design issue. Routing protocols in WSNs might differ depending on the application and network architecture. In this article we present a survey of state-of-the-art routing techniques in WSNs. We first outline the design challenges for routing protocols in WSNs followed by a comprehensive survey of routing techniques. Overall, the routing techniques are classified into three categories based on the underlying network structure: flit, hierarchical, and location-based routing. Furthermore, these protocols can be classified into multipath-based, query-based, negotiation-based, QoS-based, and coherent-based depending on the protocol operation. We …</td>
+                    <td id='pubDesc'><?php echo $row["publication_description"]; ?></td>
                   </tr>
 
-                  <tr>
-                    <th scope="row"><strong>Scholar : article</strong></th>
-                    <td>JN Al-Karaki, AE Kamal - IEEE wireless communications, 2004</td>
-                  </tr>
                 </tbody>
               </table>
               
             </div>
            
           </div>
-          <button class="button_View btn-dark btn btn-block text-white"  data-mdb-ripple-color="dark"><strong>View</strong></button>
+
+          <button class="button_View btn-dark btn btn-block text-white" onClick="javascript:window.open('<?php echo $row["publication_link"]; ?>', '_blank');" data-mdb-ripple-color="dark"><strong>View</strong></button>
 
         </div>
     </div>
