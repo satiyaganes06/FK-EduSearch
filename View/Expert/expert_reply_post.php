@@ -96,17 +96,12 @@
                         
                     </div>
 
-                    <div class="d-flex mb">
+                    <div class="d-flex mb-2">
 
-                        <div class="d-flex align-items-center mr-4">
-                            <i class="fas fa-heart text-danger"></i>
-                            <p class="likeRate_text">15 Likes</p>
-                        </div>
+                        <button type="button" class="btn btn-outline-light mr-2"><p class="likeRate_text"><i class="fas fa-heart text-danger mr-2"></i> 15 Likes</p></button>
 
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-star text-warning"></i>
-                            <p class="likeRate_text">15 Likes</p>
-                        </div>
+                        <button type="button" class="btn btn-outline-light"><p class="likeRate_text"><i class="fas fa-star text-warning mr-2"></i> 15 Rates</p></button>
+
                         
                         
                     </div>
@@ -134,12 +129,8 @@
 
                 </div>
 
-
-              
             </div>  
         </div>
-        
-        
       </section>
     
     <!-- Footer -->

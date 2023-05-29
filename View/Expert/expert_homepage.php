@@ -1,17 +1,27 @@
 <?php
-        session_start();
-        //If the user is not logged in send him/her to the login form
-     if(!isset( $_SESSION["Current_user_id"] )) {
+    session_start();
+      //If the user is not logged in send him/her to the login form
+    if(!isset( $_SESSION["Current_user_id"] )) {
 
-      ?>
-          <script>
-              alert("Access denied !!!")
-              window.location = "../Module 1/Login/General User Login/userLogin.php";
-          </script>
-      <?php
+    ?>
+        <script>
+            alert("Access denied !!!")
+            window.location = "../Module 1/Login/General User Login/userLogin.php";
+        </script>
+    <?php
 
-  }
-        ?>
+    }else{
+      include("../../Config/database_con.php");
+  
+  
+      $sql = "SELECT * FROM publication ORDER BY publication_impression ASC";
+      $result = mysqli_query($conn,$sql) or die ("Could not execute query in homepage");
+      $row = mysqli_fetch_assoc($result);
+
+      $_SESSION["route"] = "home";
+  
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -53,147 +63,48 @@
         <h1><strong>Top Publication</strong></h1>
 
         <div id="publication_Component">
-
-          <!-- Post 1 -->
-          <div>
-            <div class="post_publication d-flex">
-              
-              <!-- Image -->
-              <img
-                src="https://i.pinimg.com/564x/20/b2/85/20b285930632c3bdb03a5297a777902e.jpg"
-                class="rounded-circle shadow"
-                height="60"
-                alt="Black and White Portrait of a Man"
-                loading="lazy"
-              />
-  
-              <!-- Content -->
-              <div class="w-100 pl-3">
-  
-                <div class="d-flex justify-content-between">
-                  <h6><strong>Routing techniques in wireless sensor networks: a survey</strong></h6>
-                  
-                  <div class="d-flex align-items-center">
-                    <i class="far fa-eye mr-1 fa-sm text-center" style="margin-bottom: 1em; color: #7C7C7C;"></i>
-                    <p id="impression_text">1.6K </p>
+          <?php
+              while($row = $result->fetch_assoc()) {
+                ?> <!-- Post 1 -->
+                <div>
+                  <div class="post_publication d-flex">
+                    
+                    <!-- Image -->
+                    <img
+                      src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                      class="rounded-circle shadow"
+                      height="60"
+                      alt="Black and White Portrait of a Man"
+                      loading="lazy"
+                    />
+        
+                    <!-- Content -->
+                    <div class="w-100 pl-3">
+        
+                      <div class="d-flex justify-content-between">
+                        <h6><strong><?php echo $row['publication_title'];?></strong></h6>
+                        
+                        <div class="d-flex align-items-center">
+                          <i class="far fa-eye mr-1 fa-sm text-center" style="margin-bottom: 1em; color: #7C7C7C;"></i>
+                          <p id="impression_text"><?php echo $row['publication_impression'];?></p>
+                        </div>
+        
+                      </div>
+        
+                      <p id="post_desc"><?php echo $row['publication_description'];?></p>
+        
+                      <button class="button_View btn-dark btn btn-block mb-4 text-white"  data-mdb-ripple-color="dark"><strong>View</strong></button>
+                    </div>
+                    
                   </div>
-  
-                </div>
-  
-                <p id="post_desc">Wireless sensor networks consist of small nodes with sensing, computation, and wireless communs capabilities. Many routing, power management, and data dissemination protocols have been people specifically designed for WSNs where energy awareness is an essential design issue. Routing protocol in WSNs might differ depending on the application and network architecture. In this article we ready present a survey of state-of-the-art routing techniques in WSNs. We first outline the design challenge for routing protocols in WSNs followed by a compre survey of routing techniques. Overall, the routing .</p>
-  
-                <button class="button_View btn-dark btn btn-block mb-4 text-white"  data-mdb-ripple-color="dark"><strong>View</strong></button>
-              </div>
-              
-            </div>
+      
+                  <hr>
+                </div> 
+              <?php }
+          ?>
+          
+          
 
-            <hr>
-          </div>
-
-          <!-- Post 2 -->
-          <div>
-            <div class="post_publication d-flex">
-              <!-- Image -->
-              <img
-                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                class="rounded-circle shadow"
-                height="60"
-                alt="Black and White Portrait of a Man"
-                loading="lazy"
-              />
-  
-              <!-- Content -->
-              <div class="w-100 pl-3">
-  
-                <div class="d-flex justify-content-between">
-                  <h6><strong>Routing techniques in wireless sensor networks: a survey</strong></h6>
-                  
-                  <div class="d-flex align-items-center">
-                    <i class="far fa-eye mr-1 fa-sm text-center" style="margin-bottom: 1em; color: #7C7C7C;"></i>
-                    <p id="impression_text">1.6K </p>
-                  </div>
-  
-                </div>
-  
-                <p id="post_desc">Wireless sensor networks consist of small nodes with sensing, computation, and wireless communs capabilities. Many routing, power management, and data dissemination protocols have been people specifically designed for WSNs where energy awareness is an essential design issue. Routing protocol in WSNs might differ depending on the application and network architecture. In this article we ready present a survey of state-of-the-art routing techniques in WSNs. We first outline the design challenge for routing protocols in WSNs followed by a compre survey of routing techniques. Overall, the routing .</p>
-  
-                <button class="button_View btn-dark btn btn-block mb-4 text-white"  data-mdb-ripple-color="dark"><strong>View</strong></button>
-              </div>
-              
-            </div>
-
-            <hr>
-          </div>
-
-          <!-- Post 3 -->
-          <div>
-            <div class="post_publication d-flex">
-              <!-- Image -->
-              <img
-                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                class="rounded-circle shadow"
-                height="60"
-                alt="Black and White Portrait of a Man"
-                loading="lazy"
-              />
-  
-              <!-- Content -->
-              <div class="w-100 pl-3">
-  
-                <div class="d-flex justify-content-between">
-                  <h6><strong>Routing techniques in wireless sensor networks: a survey</strong></h6>
-                  
-                  <div class="d-flex align-items-center">
-                    <i class="far fa-eye mr-1 fa-sm text-center" style="margin-bottom: 1em; color: #7C7C7C;"></i>
-                    <p id="impression_text">1.6K </p>
-                  </div>
-  
-                </div>
-  
-                <p id="post_desc">Wireless sensor networks consist of small nodes with sensing, computation, and wireless communs capabilities. Many routing, power management, and data dissemination protocols have been people specifically designed for WSNs where energy awareness is an essential design issue. Routing protocol in WSNs might differ depending on the application and network architecture. In this article we ready present a survey of state-of-the-art routing techniques in WSNs. We first outline the design challenge for routing protocols in WSNs followed by a compre survey of routing techniques. Overall, the routing .</p>
-  
-                <button class="button_View btn-dark btn btn-block mb-4 text-white"  data-mdb-ripple-color="dark"><strong>View</strong></button>
-              </div>
-              
-            </div>
-
-            <hr>
-          </div>
-
-          <!-- Post 4 -->
-          <div>
-            <div class="post_publication d-flex">
-              <!-- Image -->
-              <img
-                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                class="rounded-circle shadow"
-                height="60"
-                alt="Black and White Portrait of a Man"
-                loading="lazy"
-              />
-  
-              <!-- Content -->
-              <div class="w-100 pl-3">
-  
-                <div class="d-flex justify-content-between">
-                  <h6><strong>Routing techniques in wireless sensor networks: a survey</strong></h6>
-                  
-                  <div class="d-flex align-items-center">
-                    <i class="far fa-eye mr-1 fa-sm text-center" style="margin-bottom: 1em; color: #7C7C7C;"></i>
-                    <p id="impression_text">1.6K </p>
-                  </div>
-  
-                </div>
-  
-                <p id="post_desc">Wireless sensor networks consist of small nodes with sensing, computation, and wireless communs capabilities. Many routing, power management, and data dissemination protocols have been people specifically designed for WSNs where energy awareness is an essential design issue. Routing protocol in WSNs might differ depending on the application and network architecture. In this article we ready present a survey of state-of-the-art routing techniques in WSNs. We first outline the design challenge for routing protocols in WSNs followed by a compre survey of routing techniques. Overall, the routing .</p>
-  
-                <button class="button_View btn-dark btn btn-block mb-4 text-white"  data-mdb-ripple-color="dark"><strong>View</strong></button>
-              </div>
-              
-            </div>
-
-            <hr>
-          </div>
         </div>
 
     </div>
