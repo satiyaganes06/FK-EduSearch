@@ -60,7 +60,7 @@
                     <p>1</p>
                 </div>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-3 mt-3">
                 <canvas id="myChart" style="width:80%;max-width:300px"></canvas>
             </div>
         </div>
