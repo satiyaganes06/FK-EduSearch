@@ -13,6 +13,8 @@
   }else{
     include("../../Config/database_con.php");
 
+    $_SESSION["route"] = "post";
+
     $idURL = $_GET['id'];
 
     $sql = "SELECT * FROM publication WHERE publication_id  = '$idURL'";
@@ -23,9 +25,9 @@
 
     $sql1 = "UPDATE publication set publication_impression = '$updateImpression' WHERE publication_id = '$idURL'";
     $result1 = mysqli_query($conn,$sql1) or die ("Could not execute query in update");
-  }
 
-  
+
+  }
   
 ?>
 <!DOCTYPE html>
@@ -60,7 +62,7 @@
   
   <!-- Navbar -->
   <?php
-    include_once('../Common/html/navbar.html');
+    include_once('../Common/html/expertNavbar.php');
   ?>
    
 
