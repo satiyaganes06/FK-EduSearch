@@ -64,8 +64,11 @@
   text-align: center;
   line-height: 60px;
 }
+.menu-section{
+  margin-top: 30px;
+}
 .sidebar .nav-list{
-  margin-top: 20px;
+  margin-top: 15px;
   height: 100%;
   margin-left: -32px;
 }
@@ -146,7 +149,15 @@
 }
 
 .sidebar li a:hover{
-  background: #FFF;
+  background: #2C5864;
+ 
+}
+.sidebar li a:hover span{
+  color: #FFF !important;
+  transition: 20ms ease-in;
+}
+.sidebar li a:hover .fa-solid{
+  color: #FFF !important;
 }
 .sidebar li a .links_name{
   color: #000000;
@@ -159,6 +170,13 @@
 }
 .sidebar li .active{
   background-color: #2C5864;
+}
+.sidebar li .active .links_name{
+  color: #ffffff;
+ 
+}
+.sidebar .active i{
+  color: #ffffff;
   
 }
 .sidebar.open li a .links_name{
@@ -194,6 +212,7 @@
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
+  background-color: #FFFFFF;
 }
 .sidebar li img{
   height: 45px;
@@ -256,4 +275,5 @@
   .sidebar li .tooltip{
     display: none;
   }
+  
 }
