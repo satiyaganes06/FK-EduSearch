@@ -42,7 +42,7 @@
                 <div class="row mt-3">
                     <div class="col-sm">
                         <div class="box" style="text-align: center;">
-                            <h4><a href="">Software Engineering</a></h4> 
+                            <h4><a href="posting.php">Software Engineering</a></h4> 
                             <table class="center">
                                 <tr>
                                   <th>100</th>
@@ -77,7 +77,7 @@
                 <div class="row mt-3">
                     <div class="col-sm">
                         <div class="box" style="text-align: center;">
-                            <h4><a href="">Computer System & Networking</a></h4> 
+                            <h4><a href="posting.php">Computer System & Networking</a></h4> 
                             <table class="center">
                                 <tr>
                                   <th>100</th>
@@ -112,7 +112,7 @@
                 <div class="row mt-3">
                     <div class="col-sm">
                         <div class="box" style="text-align: center;">
-                            <h4><a href="">Graphics & Multimedia Technology</a></h4> 
+                            <h4><a href="posting.php">Graphics & Multimedia Technology</a></h4> 
                             <table class="center">
                                 <tr>
                                   <th>100</th>
@@ -147,7 +147,7 @@
                 <div class="row mt-3">
                     <div class="col-sm">
                         <div class="box" style="text-align: center;">
-                            <h4><a href="">Cyber Security</a></h4> 
+                            <h4><a href="posting.php">Cyber Security</a></h4> 
                             <table class="center">
                                 <tr>
                                   <th>100</th>

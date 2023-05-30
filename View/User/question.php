@@ -24,7 +24,8 @@
     
     <!-- Icon -->
     <link rel="shortcut icon" type="image/jpg" href="../../Asset/icon_logo.png" />
-
+    <script src="../../js/question.js"></script>
+  
 </head>
 <body>
   
@@ -42,16 +43,12 @@
     </div>
     <div class="container mt-3 p-3 align-items-center">
       <div class="col-sm-7 mx-auto col-10 col-md-8 col-lg-6">
-        <form name="question" id="question" action="#">
+        <form id="questionForm" action="#">
           <div class="row mb-2">
             <div class="col">
                 <label class="form-label" for="researchArea">Research Area</label>
                 <select class="form-select" aria-label="questionForm" id="researchArea">
                     <option disabled selected>Select your research area</option>
-                    <option value="BCS">Software Engineering</option>
-                    <option value="BCN">Computer System & Networking</option>
-                    <option value="BCG">Graphic & Multimedia Technology</option>
-                    <option value="BCY">Cyber Security</option>
                 </select>
             </div>
             <div class="col">
@@ -85,7 +82,7 @@
   ?>
 
   <!-- MDB -->
-  <script src="../../js/question.js"></script>
+  
   <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
   <!--Bootstrap 4 & 5 & jQuery Script-->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
