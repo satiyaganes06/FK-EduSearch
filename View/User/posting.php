@@ -37,14 +37,12 @@
   <section>
     <table class="titleTable">
         <tr>
-            <td>
-                <p class="title">
+            <td><p class="title">
                     <?php 
                         $researchArea = $_GET["researchArea"];
                         echo $researchArea;
                     ?>
-                </p>
-            </td>
+                </p></td>
             <td>
                 <select class="form-select" aria-label="questionForm" id="categories">
                     <option disabled selected>Select your categories</option>
@@ -64,15 +62,18 @@
     <!-- Footer -->
     <?php
     include_once('../Common/html/footer.html');
-    session_abort();
   ?>
 
 
   <!-- MDB -->
+  <script src="../../js/posting.js"></script>
   <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
   <!--Bootstrap 4 & 5 & jQuery Script-->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+<?php
+session_abort();
+?>
 </html>
