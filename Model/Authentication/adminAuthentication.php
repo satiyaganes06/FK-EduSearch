@@ -1,5 +1,5 @@
 <?php
-include_once('../../../../Config/database_con.php');
+include_once('../../Config/database_con.php');
 session_start();
 
 

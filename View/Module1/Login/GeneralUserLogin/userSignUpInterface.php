@@ -32,7 +32,7 @@
     <!--CSS-->
     <link
       rel="stylesheet"
-      href="/View/Module 1/Login/General User Login/userSignUpInterface.css"
+      href="/View/Module1/Login/GeneralUserLogin/userSignUpInterface.css"
     />
     <!-- Icon -->
     <link rel="shortcut icon" type="image/jpg" href="/Asset/icon_logo.png" />
@@ -48,7 +48,7 @@
             <div class="title text-center text-dark">
               <h2><b>Sign Up</b></h2>
             </div>
-            <form class="inputfields" id="signupForm" action="userSignUp.php" method="post">
+            <form class="inputfields" id="signupForm" action="../../../../Model/Authentication/userSignUp.php" method="post">
                 <div class="dropdown">
                     <select class="form-select w-50" aria-label="Default select example" id="roleSelect" name="roleSelect">
                         <option selected disabled>Roles</option>

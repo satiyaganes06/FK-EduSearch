@@ -1,6 +1,6 @@
 <?php
-  include_once('../../../../Config/database_con.php');
-
+  include_once('../../Config/database_con.php');
+  
   $role = $_REQUEST['roleSelect'];
   $userID = $_REQUEST['userID'];
   $username = $_REQUEST['username'];
@@ -12,7 +12,7 @@
   if(mysqli_query($conn, $sql)){
      echo '<script type="text/javascript">';
   echo 'alert("Sign up successful! Redirecting to login page.");';
-  echo 'window.location.href = "userLogin.html";';
+  echo 'window.location.href = "../../View/Module1/Login/GeneralUserLogin/userLogin.php";';
   echo '</script>';
     
   }else{

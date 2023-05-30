@@ -32,7 +32,7 @@
     <!--CSS-->
     <link
       rel="stylesheet"
-      href="/View/Module 1/Login/General User Login/userLogin.css"
+      href="/View/Module1/Login/GeneralUserLogin/userLogin.css"
     />
     <!-- Icon -->
     <link rel="shortcut icon" type="image/jpg" href="/Asset/icon_logo.png" />
@@ -50,7 +50,7 @@
             <div class="title text-center text-dark">
               <h2><b>Login</b></h2>
             </div>
-            <form class="inputfields" id="LoginForm" action="userAuthentication.php" method="post">
+            <form class="inputfields" id="LoginForm" action="../../../../Model/Authentication/userAuthentication.php" method="post">
               <div class="dropdown">
                 <select
                   class="form-select w-50"
@@ -106,7 +106,7 @@
 
               <div class="signuptxt">
                 <p>
-                  Don't have an account?<a href="userSignUp.html"
+                  Don't have an account?<a href="userSignUpInterface.php"
                     >Sign Up Here</a
                   >
                 </p>

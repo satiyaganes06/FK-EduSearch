@@ -48,7 +48,7 @@
             <div class="title text-center text-dark">
               <h2><b>Login</b></h2>
             </div>
-            <form class="inputfields" id="LoginForm" action="adminAuthentication.php" method="post">
+            <form class="inputfields" id="LoginForm" action="../../../../Model/Authentication/adminAuthentication.php" method="post">
             
               
           
@@ -86,7 +86,7 @@
         <!-- Copyright -->
         <div
           class="text-center text-white p-3"
-          style="background-color: rgba(45, 89, 172, 1)"
+          style="background-color: rgba(44, 88, 100, 1)"
         >
         © 2019  2023. FK-EDU SEARCH
         </div>
