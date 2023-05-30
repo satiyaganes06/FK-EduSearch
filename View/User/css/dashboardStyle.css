@@ -37,6 +37,14 @@
   }
 
   /* Styles table */
+  .allContent{
+    margin: auto;
+  }
+  h2{
+    float: right;
+    font-size: -webkit-xxx-large;
+  }
+
   .center {
     margin-left: auto;
     margin-right: auto;

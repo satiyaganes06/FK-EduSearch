@@ -1,17 +1,3 @@
-<?php
-        session_start();
-        //If the user is not logged in send him/her to the login form
-     if(!isset( $_SESSION["Current_user_id"] )) {
-
-      ?>
-          <script>
-              alert("Access denied !!!")
-              window.location = "../Module 1/Login/General User Login/userLogin.php";
-          </script>
-      <?php
-
-  }
-        ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -114,7 +100,7 @@
                 <div id="profile_details" class="p-5">
                   <div class="d-flex justify-content-between mb-3">
                     <h2 class="m-0"><strong>List of Publication</strong></h2>
-                    <button class="button_View btn-dark btn rounded-8 text-white pt-1 pb-1" data-mdb-ripple-color="dark"><i class="fas fa-circle-plus mr-1"></i><strong>Add</strong></button>
+                    <button class="button_View btn-dark btn rounded-8 text-white pt-1 pb-1" onclick="location.href='expert_add_publication.php'" data-mdb-ripple-color="dark"><i class="fas fa-circle-plus mr-1"></i><strong>Add</strong></button>
                   </div>
 
                   <div id="inMainContentOutline" class="table-responsive p-4">
@@ -130,65 +116,53 @@
                       </thead>
                       <tbody>
 
-                         <!-- Table Content 1 -->
+                        <?php
+                          include("../../Config/database_con.php");
+                          $bilNum = 0;
+                          $sql = "SELECT * FROM publication";
+                          $result = mysqli_query($conn,$sql);
+                          $monthImpression = array();
+
+                          while ($row = mysqli_fetch_assoc($result)){
+                            $id = $row["publication_id"];
+                            $monthImpression = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+
+                            // Retrieve comments from the database
+                            $sql1 = "SELECT * FROM publication ORDER BY publication_uploaded_date DESC";
+                            $result1 = $conn->query($sql1);
+
+                            if ($result1->num_rows > 0) {
+                                while($row1 = $result1->fetch_assoc()) {
+                                    $month = date('n', strtotime($row1['publication_uploaded_date']));
+                                    $monthImpression[$month] += $row1['publication_impression'];
+                                }
+                            }
+
+                        ?>
+
+
+                         <!-- Rows -->
                         <tr>
                           <td style="width: 5%; padding: 10px;">
-                              1
+                              <?php echo ++$bilNum; ?>
                           </td>
 
                           <td style="width: 75%; padding: 10px;">
                               
-                              <div class="nameEllipsis">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam, accusamus!</div>
+                          <div class="nameEllipsis"><a id="titleClickEffect" href="../Expert/expert_view_publication.php?id=<?php echo $id; ?>"><?php echo $row['publication_title']; ?></div>
                           </td>
 
                           <td style="width: 10%; padding: 10px;">
-                              <span>2016</span>
+                              <span><?php echo $row['publication_date']; ?></span>
                           </td>
 
                           <td style="width: 15%; padding: 10px; text-align: center;">
-                            5012
+                            <?php echo $row['publication_impression']; ?>
                           </td>
                         </tr>
 
-                        <!-- Table Content 2 -->
-                        <tr>
-                          <td style="width: 5%; padding: 10px;">
-                              2
-                          </td>
+                        <?php } ?>    
 
-                          <td style="width: 75%; padding: 10px;">
-                              
-                              <div class="nameEllipsis">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam, accusamus!</div>
-                          </td>
-
-                          <td style="width: 10%; padding: 10px;">
-                              <span>2016</span>
-                          </td>
-
-                          <td style="width: 15%; padding: 10px; text-align: center;">
-                            100000
-                          </td>
-                        </tr>
-                        
-                        <!-- Table Content 3 -->
-                        <tr>
-                          <td style="width: 5%; padding: 10px;">
-                              3
-                          </td>
-
-                          <td style="width: 75%; padding: 10px;">
-                              
-                              <div class="nameEllipsis">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam, accusamus!</div>
-                          </td>
-
-                          <td style="width: 10%; padding: 10px;">
-                              <span>2016</span>
-                          </td>
-
-                          <td style="width: 15%; padding: 10px; text-align: center;">
-                            100
-                          </td>
-                        </tr>
                       </tbody>
                     </table>
                   </div>
@@ -208,8 +182,12 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
   <script>
-    const xValues = [50,60,70,80,90,100,110,120,130,140,150,160,170,180,190,200,210,220];
-    const yValues = [7,8,8,9,9,9,10,11,14,14,15,8,7,14,14,15,8,7];
+    const xValues = ["","Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const yValues = [];
+
+    <?php for ($i = 0; $i < 12; $i++) { ?>
+        yValues[<?php echo $i; ?>] = <?php echo $monthImpression[$i]; ?>;
+    <?php } ?>
     
     new Chart("myChart", {
       type: "line",
@@ -226,7 +204,7 @@
       options: {
         legend: {display: false},
         scales: {
-          yAxes: [{ticks: {min: 6, max:16}}],
+          yAxes: [{ticks: {min: 100, max:10000}}],
         }
       }
     });

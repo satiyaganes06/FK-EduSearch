@@ -50,3 +50,7 @@ nav a{
 .container-fluid a{
     font-size: 12px;
 }
+
+.imageLogo{
+    content: url("../../Asset/logo.png");
+}

@@ -1,17 +1,18 @@
 <?php
-        session_start();
-        //If the user is not logged in send him/her to the login form
-     if(!isset( $_SESSION["Current_user_id"] )) {
 
-      ?>
-          <script>
-              alert("Access denied !!!")
-              window.location = "../Module 1/Login/General User Login/userLogin.php";
-          </script>
-      <?php
+  session_start();
+  //If the user is not logged in send him/her to the login form
+    if(!isset( $_SESSION["Current_user_id"] )) {
+
+    ?>
+        <script>
+            alert("Access denied !!!")
+            window.location = "../Module 1/Login/General User Login/userLogin.php";
+        </script>
+    <?php
 
   }
-        ?>
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -50,90 +51,95 @@
   <section class="flexSection">
     <div class="mainSection d-flex flex-column mb-5 mt-3">
 
-        <div id="publicationDetails_Component">
-          
-          <div class="content_details">
-            <!-- Image -->
-            <img
-              src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-              class="rounded-circle shadow mb-3"
-              height="150"
-              width="150"
-              alt="Black and White Portrait of a Man"
-              loading="lazy"
-            />
+        <form action="../../Model/Expert/addPublication.php" method="post">
+          <div id="publicationDetails_Component">
+            
+            <div class="content_details">
+              <!-- Image -->
+              <img
+                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                class="rounded-circle shadow mb-3"
+                height="150"
+                width="150"
+                alt="Black and White Portrait of a Man"
+                loading="lazy"
+              />
 
-            <div class=" w-100">
+              <div class=" w-100">
 
-              <div class="d-flex justify-content-between  mb-3">
-                <h2 id="titlePage"><strong>Add Publication</strong></h2>
+                <div class="d-flex justify-content-between  mb-3">
+                  <h2 id="titlePage"><strong>Add Publication</strong></h2>
+                  
+                </div>
+                
+                <table class="table align-middle">
+                  <tbody>
+                  <tr>
+                      <th scope="row"><strong>Authors :</strong></th>
+                      <td>
+                          
+                          <input type="text" class="form-control" name="publication_author" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                      
+                      </td>
+                    </tr>
+                    <tr>
+                      <th scope="row"><strong>Publication : Title</strong></th>
+                      <td>
+                          
+                          <input type="text" class="form-control" name="publication_title" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                      
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row"><strong>Publication : date </strong></th>
+                      <td><input type="text" class="form-control" name="publication_date" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row"><strong>Journal :</strong></th>
+                      <td><input type="text" class="form-control" name="publication_journal" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" ></td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row"><strong>Volume :</strong></th>
+                      <td><input type="number" class="form-control" name="publication_volume" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row"><strong>Issue :</strong></th>
+                      <td><input type="number" class="form-control" name="publication_issue" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row"><strong>Pages :</strong></th>
+                      <td><input type="number" class="form-control" name="publication_pages" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row"><strong>Publisher :</strong></th>
+                      <td><input type="text" class="form-control" name="publication_publisher" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row"><strong>Description :</strong></th>
+                      <td id='pubDesc'><textarea  class="form-control" name="publication_description" id="exampleFormControlTextarea1" rows="3"></textarea></td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row"><strong>Article : Source </strong></th>
+                      <td><input type="url" class="form-control" name="publication_link" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></td>
+                    </tr>
+                  </tbody>
+                </table>
                 
               </div>
-              
-              <table class="table align-middle">
-                <tbody>
-                  <tr>
-                    <th scope="row"><strong>Authors :</strong></th>
-                    <td>
-                        
-                        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-                    
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row"><strong>Publication : date </strong></th>
-                    <td><input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row"><strong>Journal :</strong></th>
-                    <td><input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" ></td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row"><strong>Volume :</strong></th>
-                    <td><input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row"><strong>Issue :</strong></th>
-                    <td><input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row"><strong>Pages :</strong></th>
-                    <td><input type="number" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row"><strong>Publisher :</strong></th>
-                    <td><input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row"><strong>Description :</strong></th>
-                    <td id='pubDesc'><textarea  class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea></td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row"><strong>Scholar : article </strong></th>
-                    <td><input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row"><strong>Article : Source </strong></th>
-                    <td><input type="url" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></td>
-                  </tr>
-                </tbody>
-              </table>
-              
+            
             </div>
-           
-          </div>
-          <button class="button_View btn-dark btn btn-block text-white mt-3"  data-mdb-ripple-color="dark"><strong>Review</strong></button>
+            <button class="button_View btn-dark btn btn-block text-white mt-3" type="submit"  data-mdb-ripple-color="dark"><strong>Review</strong></button>
 
-        </div> 
+          </div> 
+        </form>
         
     </div>
   </section>
