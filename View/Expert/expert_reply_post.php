@@ -18,10 +18,10 @@
     $sql = "SELECT * FROM posting WHERE posting_id  = '$idURL'";
     $result = mysqli_query($conn,$sql) or die ("Could not execute query in view");
     $row = mysqli_fetch_assoc($result);
+
+    $_SESSION["route"] = "post";
   }
 
-  
-  
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +56,7 @@
   
     <!-- Navbar -->
     <?php
-      include_once('../Common/html/navbar.html');
+      include_once('../Common/html/expertNavbar.php');
     ?>
     
     <section class="flexSection">

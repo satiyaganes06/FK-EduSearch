@@ -1,17 +1,22 @@
 <?php
-        session_start();
-        //If the user is not logged in send him/her to the login form
-     if(!isset( $_SESSION["Current_user_id"] )) {
+    session_start();
+    //If the user is not logged in send him/her to the login form
+    if(!isset( $_SESSION["Current_user_id"] )) {
 
-      ?>
-          <script>
-              alert("Access denied !!!")
-              window.location = "../Module 1/Login/General User Login/userLogin.php";
-          </script>
-      <?php
-
-  }
         ?>
+            <script>
+                alert("Access denied !!!")
+                window.location = "../Module 1/Login/General User Login/userLogin.php";
+            </script>
+        <?php
+
+    }else{
+        include("../../Config/database_con.php");
+ 
+        $_SESSION["route"] = "notifi";
+    
+    }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -45,7 +50,7 @@
     
     <!-- Navbar -->
     <?php
-        include_once('../Common/html/navbar.html');
+        include_once('../Common/html/expertNavbar.php');
     ?>
     
     <section class="flexSection">

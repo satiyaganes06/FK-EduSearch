@@ -10,6 +10,11 @@
             window.location = "../Module 1/Login/General User Login/userLogin.php";
         </script>
     <?php
+    
+  }else{
+    include("../../Config/database_con.php");
+
+    $_SESSION["route"] = "addPub";
 
   }
 ?>
@@ -45,7 +50,7 @@
   
   <!-- Navbar -->
   <?php
-    include_once('../Common/html/navbar.html');
+    include_once('../Common/html/expertNavbar.php');
   ?>
 
   <section class="flexSection">

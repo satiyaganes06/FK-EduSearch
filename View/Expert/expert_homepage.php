@@ -54,7 +54,7 @@
   
   <!-- Navbar -->
   <?php
-    include_once('../Common/html/navbar.html');
+    include_once('../Common/html/expertNavbar.php');
   ?>
    
 
@@ -65,6 +65,7 @@
         <div id="publication_Component">
           <?php
               while($row = $result->fetch_assoc()) {
+                  $id = $row["publication_id"];
                 ?> <!-- Post 1 -->
                 <div>
                   <div class="post_publication d-flex">
@@ -93,7 +94,7 @@
         
                       <p id="post_desc"><?php echo $row['publication_description'];?></p>
         
-                      <button class="button_View btn-dark btn btn-block mb-4 text-white"  data-mdb-ripple-color="dark"><strong>View</strong></button>
+                      <a href="../Expert/expert_view_publication.php?id=<?php echo $id; ?>"><button class="button_View btn-dark btn btn-block mb-4 text-white"  data-mdb-ripple-color="dark"><strong>View</strong></button></a>
                     </div>
                     
                   </div>
