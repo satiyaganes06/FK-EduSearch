@@ -10,7 +10,7 @@
   position: fixed;
   left: 0;
   top: 0;
-  height: 100%;
+  height: 90%;
   width: 78px;
   background: #FFFFFF;
   padding: 6px 14px;
@@ -179,6 +179,22 @@
   color: #ffffff;
   
 }
+.sidebar .profile-section li a{
+border: 1px solid black;
+color: #0B7A98!important;
+}
+.sidebar .profile-section li a span{
+  color: #0B7A98!important;
+}
+.sidebar .profile-section li a .fa-solid{
+  color: #0B7A98!important;
+}
+.sidebar .profile-section li a:hover span{
+  color: #ffffff!important;
+}
+.sidebar .profile-section li a:hover .fa-solid{
+  color: #ffffff!important;
+}
 .sidebar.open li a .links_name{
   opacity: 1;
   pointer-events: auto;
@@ -270,6 +286,10 @@
   font-size: 25px;
   font-weight: 500;
   margin: 18px
+}
+footer{
+  left: 0;
+  margin-left: -12px;
 }
 @media (max-width: 420px) {
   .sidebar li .tooltip{

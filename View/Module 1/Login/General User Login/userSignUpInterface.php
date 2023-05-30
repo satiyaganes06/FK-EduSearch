@@ -32,7 +32,7 @@
     <!--CSS-->
     <link
       rel="stylesheet"
-      href="/View/Module 1/Login/General User Login/userSignUp.css"
+      href="/View/Module 1/Login/General User Login/userSignUpInterface.css"
     />
     <!-- Icon -->
     <link rel="shortcut icon" type="image/jpg" href="/Asset/icon_logo.png" />
@@ -102,10 +102,9 @@
           class="text-center text-white p-3"
           style="background-color: rgba(45, 89, 172, 1)"
         >
-          © 2020 Copyright:
-          <a class="text-white" href="https://mdbootstrap.com/"
-            >MDBootstrap.com</a
-          >
+        © 2019  2023. FK-EDU SEARCH
+          
+          
         </div>
         <!-- Copyright -->
       </footer>
