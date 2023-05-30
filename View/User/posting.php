@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <?php session_start(); ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +19,7 @@
     <link rel="stylesheet" href="../../Bootstrap/mdb.min.css" />
 
     <!--CSS-->
-    <link rel="stylesheet" href="css/dashboardStyle.css">
+    <link rel="stylesheet" href="css/posting.css">
     <link rel="stylesheet" href="../Common//css/navbar.css">
     <link rel="stylesheet" href="../Common//css/footer.css">
     
@@ -34,8 +35,26 @@
   ?>
 
   <section>
-  <div class="container text-center pt-3 pb-2"> 
-      <h4>Complaint Form</h4>
+    <table class="titleTable">
+        <tr>
+            <td>
+                <p class="title">
+                    <?php 
+                        $researchArea = $_GET["researchArea"];
+                        echo $researchArea;
+                    ?>
+                </p>
+            </td>
+            <td>
+                <select class="form-select" aria-label="questionForm" id="categories">
+                    <option disabled selected>Select your categories</option>
+                </select>
+            </td>
+        </tr>
+    </table>
+  
+  <div class="container pt-3 pb-2"> 
+      <h4>sdfg</h4>
       <p>Please fill out the following form with 
         <br>your complaint. We will review your report
         <br>and follow up as soon as possible</p>
@@ -45,6 +64,7 @@
     <!-- Footer -->
     <?php
     include_once('../Common/html/footer.html');
+    session_abort();
   ?>
 
 
