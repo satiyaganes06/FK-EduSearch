@@ -27,7 +27,7 @@
 <!-- MDB -->
 <link rel="stylesheet" href="/Bootstrap/mdb.min.css" />
     <!--CSS-->
-    <link rel="stylesheet" href="adminViewUserList.css">
+    <link rel="stylesheet" href="adminUserApprovalList.css">
     <!-- Boxicons CDN Link -->
     <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
@@ -62,14 +62,14 @@
           <span class="tooltip">Dashboard</span>
         </li>
         <li>
-          <a href="#" class="active">
+          <a href="adminViewUserList.html" >
             <i class="fa-solid fa-user-group"></i>
             <span class="links_name">User List</span>
           </a>
           <span class="tooltip">User List</span>
         </li>
         <li>
-          <a href="adminUserApprovalList.html">
+          <a href="" class="active">
             <i class="fa-solid fa-user-check"></i>
             <span class="links_name">Approval List</span>
           </a>
@@ -82,20 +82,7 @@
           </a>
           <span class="tooltip">Complain List</span>
         </li>
-        <!-- <li>
-          <a href="#">
-            <i class='bx bx-folder' ></i>
-            <span class="links_name">File Manager</span>
-          </a>
-          <span class="tooltip">Files</span>
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-cart-alt' ></i>
-            <span class="links_name">Order</span>
-          </a>
-          <span class="tooltip">Order</span>
-        </li> -->
+      
         
       </ul>
     </div>
@@ -129,29 +116,197 @@
         <!--Tulis coding kat sini-->
           <div class="card h-100">
           <div class="card-body">
-            <h5 class="card-title fw-bold text-center">User List</h5>
-            <div class="d-flex w-100 justify-content-center align-items-center">
-              <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-              <div class="totalusers">
-                <h4>Total Users</h4>
-                <p>556</p>
-              </div>
-              
+            <h5 class="card-title fw-bold text-center">Approval List</h5>
+           
+            <div class="tabletitle">
+                <h4>Approval for Update Profile</h4>
             </div>
+            
             <div class="input-group d-flex w-25">
-              <div class="form-outline d-flex">
-                <input type="search" id="form1" class="form-control rounded" style="border-radius: 25px;" />
-                <label class="form-label" for="form1">Search</label>
-                <button type="button" class="btn" style="background-color:rgba(44, 88, 100, 1); color: white;">
-                  <i class="fas fa-search"></i>
-                </button>
+                <div class="form-outline d-flex">
+                  <input type="search" id="form1" class="form-control rounded" style="border-radius: 25px;" />
+                  <label class="form-label" for="form1">Search</label>
+                  <button type="button" class="btn" style="background-color:rgba(44, 88, 100, 1); color: white;">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+                
               </div>
-              
-            </div>
             <div>
-              <table class="table align-middle mb-0 bg-white mt-4 table-responsive-sm table-hover">
-
-
+               
+              <table class="table align-middle mb-0 bg-white mt-2 table-responsive-sm table-hover">
+                <thead>
+                  <tr>
+                    <th class="firstcol">No</th>
+                    <th>Username</th>
+                    <th>User ID</th>
+                    <th>Roles</th>
+                    <th class="lastcol">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                        
+                        <div class="ms-3">
+                          <p class="fw-bold mb-1">1</p>
+                          
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <p class="fw-normal mb-1">Loga A/L Munniyappan</p>
+                     
+                    </td>
+                    <td>CB21132</td>
+                    <td>
+                      <span class="badge badge-success rounded-pill d-inline">Expert</span>
+                    </td>
+                   
+                    <td>
+                      <div class="btn-group shadow-0" role="group">
+                        <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminViewApprovalDetails.html'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
+                        
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                       
+                        <div class="ms-3">
+                          <p class="fw-bold mb-1">2</p>
+                 
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <p class="fw-normal mb-1">Shatthiya</p>
+                  
+                    </td>
+                    <td>CB21135</td>
+                    <td>
+                      
+                      <span class="badge badge-primary rounded-pill d-inline"
+                            >Staff</span
+                        >
+                    </td>
+                   
+                    <td>
+                        <div class="btn-group shadow-0" role="group">
+                          <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminViewApprovalDetails.html'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
+                            
+                          </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                       
+                        <div class="ms-3">
+                          <p class="fw-bold mb-1">3</p>
+               
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <p class="fw-normal mb-1">Yattish</p>
+              
+                    </td>
+                    <td>
+                      <p>
+                        CB21132
+                      </p>
+                    </td>
+                    <td>
+                      <span class="badge badge-danger rounded-pill d-inline">User</span>
+                    </td>
+                    <td>
+                        <div class="btn-group shadow-0" role="group">
+                          <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminViewApprovalDetails.html'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
+                            
+                          </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                       
+                        <div class="ms-3">
+                          <p class="fw-bold mb-1">3</p>
+               
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <p class="fw-normal mb-1">Yattish</p>
+              
+                    </td>
+                    <td>
+                      <p>
+                        CB21132
+                      </p>
+                    </td>
+                    <td>
+                      <span class="badge badge-danger rounded-pill d-inline">User</span>
+                    </td>
+                    <td>
+                        <div class="btn-group shadow-0" role="group">
+                          <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminViewApprovalDetails.html'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
+                            
+                          </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="d-flex align-items-center">
+                       
+                        <div class="ms-3">
+                          <p class="fw-bold mb-1">3</p>
+               
+                        </div>
+                      </div>
+                    </td>
+                    <td>
+                      <p class="fw-normal mb-1">Yattish</p>
+              
+                    </td>
+                    <td>
+                      <p>
+                        CB21132
+                      </p>
+                    </td>
+                    <td>
+                      <span class="badge badge-danger rounded-pill d-inline">User</span>
+                    </td>
+                    <td>
+                        <div class="btn-group shadow-0" role="group">
+                          <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminViewApprovalDetails.html'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
+                            
+                          </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="tabletitle2">
+                <h4>Approval for Publication</h4>
+            </div>
+            
+            <div class="input-group d-flex w-25">
+                <div class="form-outline d-flex">
+                  <input type="search" id="form1" class="form-control rounded" style="border-radius: 25px;" />
+                  <label class="form-label" for="form1">Search</label>
+                  <button type="button" class="btn" style="background-color:rgba(44, 88, 100, 1); color: white;">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+                
+              </div>
+            <div>
+               
+              <table class="table align-middle mb-0 bg-white mt-2 table-responsive-sm table-hover">
                 <thead>
                   <tr>
                     <th class="firstcol">No</th>
@@ -184,8 +339,7 @@
                     <td>
                       <div class="btn-group shadow-0" role="group">
                         <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminViewUserProfile.html'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
-                        <button type="button" class="btn btn-link" data-mdb-color="dark"><i class="fa-regular fa-pen-to-square" style="color: #624de3; font-size: 20px;"></i></button>
-                        <button type="button" class="btn btn-link" data-mdb-color="dark"><i class="fa-regular fa-trash-can" style="color: #a30d11; font-size: 20px;"></i></button>
+                        
                       </div>
                     </td>
                   </tr>
@@ -212,11 +366,10 @@
                     </td>
                    
                     <td>
-                      <div class="btn-group shadow-0" role="group">
-                        <button type="button" class="btn btn-link" data-mdb-color="dark"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
-                        <button type="button" class="btn btn-link" data-mdb-color="dark"><i class="fa-regular fa-pen-to-square" style="color: #624de3; font-size: 20px;"></i></button>
-                        <button type="button" class="btn btn-link" data-mdb-color="dark"><i class="fa-regular fa-trash-can" style="color: #a30d11; font-size: 20px;"></i></button>
-                      </div>
+                        <div class="btn-group shadow-0" role="group">
+                            <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminViewUserProfile.html'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
+                            
+                          </div>
                     </td>
                   </tr>
                   <tr>
@@ -242,11 +395,10 @@
                       <span class="badge badge-danger rounded-pill d-inline">User</span>
                     </td>
                     <td>
-                      <div class="btn-group shadow-0" role="group">
-                        <button type="button" class="btn btn-link" data-mdb-color="dark"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
-                        <button type="button" class="btn btn-link" data-mdb-color="dark"><i class="fa-regular fa-pen-to-square" style="color: #624de3; font-size: 20px;"></i></button>
-                        <button type="button" class="btn btn-link" data-mdb-color="dark"><i class="fa-regular fa-trash-can" style="color: #a30d11; font-size: 20px;"></i></button>
-                      </div>
+                        <div class="btn-group shadow-0" role="group">
+                            <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminViewUserProfile.html'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
+                            
+                          </div>
                     </td>
                   </tr>
                   <tr>
@@ -272,11 +424,10 @@
                       <span class="badge badge-danger rounded-pill d-inline">User</span>
                     </td>
                     <td>
-                      <div class="btn-group shadow-0" role="group">
-                        <button type="button" class="btn btn-link" data-mdb-color="dark"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
-                        <button type="button" class="btn btn-link" data-mdb-color="dark"><i class="fa-regular fa-pen-to-square" style="color: #624de3; font-size: 20px;"></i></button>
-                        <button type="button" class="btn btn-link" data-mdb-color="dark"><i class="fa-regular fa-trash-can" style="color: #a30d11; font-size: 20px;"></i></button>
-                      </div>
+                        <div class="btn-group shadow-0" role="group">
+                            <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminViewUserProfile.html'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
+                            
+                          </div>
                     </td>
                   </tr>
                   <tr>
@@ -302,11 +453,10 @@
                       <span class="badge badge-danger rounded-pill d-inline">User</span>
                     </td>
                     <td>
-                      <div class="btn-group shadow-0" role="group">
-                        <button type="button" class="btn btn-link" data-mdb-color="dark"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
-                        <button type="button" class="btn btn-link" data-mdb-color="dark"><i class="fa-regular fa-pen-to-square" style="color: #624de3; font-size: 20px;"></i></button>
-                        <button type="button" class="btn btn-link" data-mdb-color="dark"><i class="fa-regular fa-trash-can" style="color: #a30d11; font-size: 20px;"></i></button>
-                      </div>
+                        <div class="btn-group shadow-0" role="group">
+                            <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminViewUserProfile.html'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
+                            
+                          </div>
                     </td>
                   </tr>
                 </tbody>

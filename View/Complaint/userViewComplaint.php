@@ -105,7 +105,7 @@
                                 </td>
                                 <td>
                                     <a href="#editModal" data-toggle="modal"><i class="fas fa-edit" style="padding-right:15px;color:blue"></i></a>
-                                    <a href=""><i class="fas fa-eye" style="padding-right:15px;color:green"></i></a>
+                                    <a href="#viewModal"  data-toggle="modal"><i class="fas fa-eye" style="padding-right:15px;color:green"></i></a>
                                     <a href="#deleteModal" data-toggle="modal"><i class="fas fa-trash" style="padding-right:15px;color:rgb(255, 5, 5)"></i></a>
                                     <?php include('modal.php');?>
                                 </td>
