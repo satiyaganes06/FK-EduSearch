@@ -1,3 +1,23 @@
+<?php
+  session_start();
+  
+  //If the user is not logged in send him/her to the login form
+  if(!isset( $_SESSION["Current_admin_id"] )) {
+
+      ?>
+          <script>
+              alert("Access denied !!!")
+              window.location = "../Login/Admin%20Login/adminLogin.php";
+          </script>
+      <?php
+
+  }else{
+    include("../../../Config/database_con.php");
+
+    $user_id = $_GET['user_id'];
+
+  }
+?>
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -27,7 +47,7 @@
     <!-- MDB -->
     <link rel="stylesheet" href="/Bootstrap/mdb.min.css" />
     <!--CSS-->
-    <link rel="stylesheet" href="adminViewApprovalDetails.css" />
+    <link rel="stylesheet" href="adminEditUserProfile.css" />
     <!-- Boxicons CDN Link -->
     <link
       href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
@@ -55,7 +75,11 @@
       <div class="menu-section">
         <h2 class="section-heading">Menu</h2>
         <ul class="nav-list">
-        
+          <!-- <li>
+          <i class='bx bx-search' ></i>
+          <input type="text" placeholder="Search...">
+          <span class="tooltip">Search</span>
+        </li> -->
           <li>
             <a href="adminDashboard.html">
               <i class="bx bx-grid-alt"></i>
@@ -64,14 +88,14 @@
             <span class="tooltip">Dashboard</span>
           </li>
           <li>
-            <a href="adminViewUserList.html" >
+            <a href="adminViewUserList.html" class="active">
               <i class="fa-solid fa-user-group"></i>
               <span class="links_name">User List</span>
             </a>
             <span class="tooltip">User List</span>
           </li>
           <li>
-            <a href="adminUserApprovalList.html" class="active">
+            <a href="adminUserApprovalList.html">
               <i class="fa-solid fa-user-check"></i>
               <span class="links_name">Approval List</span>
             </a>
@@ -116,110 +140,105 @@
           <!--Tulis coding kat sini-->
           <div class="card h-100">
             <div class="card-body">
-              <h5 class="card-title fw-bold text-center">Approval</h5>
+              <h5 class="card-title fw-bold text-center">User Details</h5>
               <div
                 class="d-flex w-100 justify-content-center align-items-center"
               ></div>
-              <div class="tabletitle">
-                <h4>Before Change</h4>
-            </div>
-            <div class="mainSection mb-3 mt-3">
-                <div id="publicationDetails_Component">
-                  
-                  <div class="content_details">
-                    <!-- Image -->
-                    <img
-                      src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                      class="rounded-circle shadow mb-3"
-                      height="150"
-                      width="150"
-                      alt="Black and White Portrait of a Man"
-                      loading="lazy"
-                    />
-        
-                    <div class=" w-100">
-        
-                      <div class="d-flex justify-content-between mt-4  mb-3">
-                        <h2 id="titlePage"><strong>View Publication</strong></h2>
-                        
-                        <div class="d-flex align-items-center">
-                          <i class="far fa-eye text-muted mr-1 fs-6"></i>
-                          <p id="impression_text"><?php echo $updateImpression; ?></p>
-                        </div>
-        
-                      </div>
-                      
-                      <table class="table align-middle">
-                        <tbody>
-        
-                          <tr>
-                            <th scope="row"><strong>Status :</strong></th>
-                            <td><?php echo $row["publication_status"]; ?></td>
-                          </tr>
-        
-                          <tr>
-                            <th scope="row"><strong>Title :</strong></th>
-                            <td><?php echo $row["publication_title"]; ?></td>
-                          </tr>
-                          <tr>
-                            <th scope="row"><strong>Authors :</strong></th>
-                            <td><?php echo $row["publication_author"]; ?></td>
-                          </tr>
-        
-                          <tr>
-                            <th scope="row"><strong>Publication : date </strong></th>
-                            <td><?php echo $row["publication_date"]; ?></td>
-                          </tr>
-        
-                          <tr>
-                            <th scope="row"><strong>Journal :</strong></th>
-                            <td><?php echo $row["publication_journal"]; ?></td>
-                          </tr>
-        
-                          <tr>
-                            <th scope="row"><strong>Volume :</strong></th>
-                            <td><?php echo $row["publication_volume"]; ?></td>
-                          </tr>
-        
-                          <tr>
-                            <th scope="row"><strong>Issue :</strong></th>
-                            <td><?php echo $row["publication_issue"]; ?></td>
-                          </tr>
-        
-                          <tr>
-                            <th scope="row"><strong>Pages :</strong></th>
-                            <td><?php echo $row["publication_pages"]; ?></td>
-                          </tr>
-        
-                          <tr>
-                            <th scope="row"><strong>Publisher :</strong></th>
-                            <td><?php echo $row["publication_publisher"]; ?></td>
-                          </tr>
-        
-                          <tr>
-                            <th scope="row"><strong>Description :</strong></th>
-                            <td id='pubDesc'><?php echo $row["publication_description"]; ?></td>
-                          </tr>
-        
-                        </tbody>
-                      </table>
-                      
-                    </div>
-                   
-                  </div>
-        
-                  <button class="button_View btn-dark btn btn-block text-white" onClick="javascript:window.open('<?php echo $row["publication_link"]; ?>', '_blank');" data-mdb-ripple-color="dark"><strong>View</strong></button>
-        
-                </div>
-            </div>
-             
+              <div id="profile_details" class="position-relative">
+                <img
+                  id="profile-background-pic"
+                  src="https://marketplace.canva.com/EAE2cQaUHVA/1/0/1600w/canva-black-minimal-motivation-quote-linkedin-banner-HoRi-2buBWk.jpg"
+                  class="shadows"
+                  width="100%"
+                  height="300px"
+                  alt="Black profile background"
+                  loading="lazy"
+                />
 
-                <div class="text-end">
-                  <button type="button" class="btn btn-success me-2" >Approve</button>
-                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Reject</button>
+                <img
+                  src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                  class="rounded-circle shadow-5 profile_Avatar"
+                  alt="Black and White Portrait of a Man"
+                  loading="lazy"
+                />
+        <form action="" method="post">
+                <div class="profile_content">
+                  <div class="d-flex justify-content-between">
+                    <div class="d-flex">
+                      <h2><strong>SHATTHIYA GANES</strong></h2>
+                      <i
+                        class="fas fa-circle-check fa-2x ml-3"
+                        style="color: #00ff00"
+                      ></i>
+                    </div>
+
+                 
+                  </div>
+                  <div class="d-flex justify-content-start mt-3">
+                <div class="input-group w-50 mr-3">
+                    <input type="email" class="form-control " value="satiyaganes@gmail.com" id="email" name="email">
+                    
+                </div>
+                <div class="input-group w-50">
+                    <input type="text" class="form-control text-truncate" value="Age : 28" id="age" name="age" >
+                </div>
+                </div>
+
+                <div class="d-flex justify-content-start mt-3">
+                <div class="input-group w-50 mr-3">
+                    <input type="text" class="form-control text-truncate" value="Academic Level : Master & PHD" id="academiclvl" name="academiclvl">
+                </div>
+                <div class="input-group w-50">
+                <p class="w-50 text-truncate">Last Seen : 05-06-2023</p>
+                </div>
+                </div>
+
+                <div class="input-group w-50 mt-3">
+                <input type="text" class="form-control text-truncate" value="Social Media : @satiyaganes" id="socialmedia" name="socialmedia">
+                </div>
+
+                  <div class="d-flex justify-content-start mt-4">
+                    <p class="mr-3">Research Area :</p>
+                    <p
+                      class="bg-secondary rounded-6"
+                      style="
+                        font-size: 12px;
+                        padding-top: 2px;
+                        padding-right: 10px;
+                        padding-left: 10px;
+                        color: white;
+                      "
+                    >
+                      Cloud Computing
+                    </p>
+                    <p
+                      class="ml-2 bg-secondary rounded-6"
+                      style="
+                        font-size: 12px;
+                        padding-top: 2px;
+                        padding-right: 10px;
+                        padding-left: 10px;
+                        color: white;
+                      "
+                    >
+                      Autonomic Computing
+                    </p>
+                    
+                  </div>
                 </div>
               </div>
+              <div class="d-flex justify-content-center">
+               
+
+                <div class="text-end">
+                  <button type="button" class="btn btn-warning me-2" >Save</button>
+
+                </div>
+              </div>
+              </form>
+              <?php 
               
+              ?>
             </div>
           </div>
         </div>
@@ -230,7 +249,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Are you Sure You Want to Reject The Changes?</h5>
+              <h5 class="modal-title" id="staticBackdropLabel">Are you Sure You Want to Delete This User?</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <!-- <div class="modal-body">
@@ -314,6 +333,44 @@
           },
         },
       });
+    </script>
+    <script>
+        const email = document.getElementById('email');
+        const age = document.getElementById('age');
+        const academiclvl = document.getElementById('academiclvl');
+        const socialmedia = document.getElementById('socialmedia');
+        let clicked1 = false;
+        let clicked2 = false;
+        let clicked3 = false;
+        let clicked4 = false;
+        
+        email.addEventListener('click', () => {
+           
+            if (!clicked1) {
+                email.value = '';
+                 clicked1 = true;
+             }
+        });
+        age.addEventListener('click', () => {
+            
+            if (!clicked2) {
+                age.value = '';
+                 clicked2 = true;
+             }
+        });
+        academiclvl.addEventListener('click', () => {
+            if (!clicked3) {
+                academiclvl.value = '';
+                 clicked3 = true;
+             }
+            
+        });
+        socialmedia.addEventListener('click', () => {
+            if (!clicked4) {
+                socialmedia.value = '';
+                 clicked4 = true;
+             }
+        });
     </script>
   </body>
 </html>

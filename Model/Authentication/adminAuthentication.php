@@ -1,6 +1,5 @@
 <?php
 include_once('../../Config/database_con.php');
-session_start();
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -41,14 +40,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       // Check if a matching user is found
       if ($count > 0) {
         // Authentication successful, redirect the user
-       
+       session_start();
+       $_SESSION["Current_admin_id"] = $userID;
             header('Location: ../../../../View/Module1/Admin/adminDashboard.html');
             exit();
         
         
         
       } else {
-        // Authentication failed, handle accordingly (e.g., display an error message)
+        // Authentication failed, handle accordingly
         // ...
         echo '<script type="text/javascript">';
         echo 'alert("Login Fail, Please Check Your Admin ID and Password Again.");';
