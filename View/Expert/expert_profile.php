@@ -19,6 +19,10 @@
     $result = mysqli_query($conn,$sql) or die ("Could not execute query in homepage");
     $row = mysqli_fetch_assoc($result);
 
+    $sql4 = "SELECT * FROM expert WHERE user_id = '$user_id'";
+    $result4 = mysqli_query($conn,$sql4) or die ("Could not execute query in homepage");
+    $row4 = mysqli_fetch_assoc($result4);
+
     $_SESSION["route"] = "profile";
 
   }
@@ -102,15 +106,16 @@
 
                         <div class="d-flex justify-content-start">
                             <p class="w-50 text-truncate mr-3">Academic Level : <?php echo $row['user_academicStatus']; ?></p>
-                            <p class="w-50 text-truncate">Last Seen : 05-06-2023</p>
+                            <p class="w-50 text-truncate">Last Seen : <?php echo $row4['lastUse_Date']; ?></p>
                         </div>
 
-                        <p class="w-50 text-truncate mr-3">Social Media : <a href=<?php echo $row['user_socialMedia']; ?> target="_blank">@satiyaganes</a></p>
-
-                        <div class="d-flex justify-content-start">
+                        <div class="d-flex justify-content-between">
+                          <div class="d-flex w-50">
                             <p class="mr-3">Research Area : </p>
-                            <p class="bg-secondary  rounded-6" style="font-size: 12px; padding-top: 2px; padding-right: 10px; padding-left: 10px; color: white;">Cloud Computing</p>
-                            <p class=" ml-2 bg-secondary  rounded-6" style="font-size: 12px; padding-top: 2px; padding-right: 10px; padding-left: 10px; color: white;">Autonomic Computing</p>
+                            <p class="bg-secondary rounded-6" style="font-size: 12px; padding-top: 2px; padding-right: 10px; padding-left: 10px; color: white;"><?php echo $row['user_researchArea']; ?></p>
+                          </div>
+                          <p class="w-50 text-truncate ml-3">Social Media : <a href=<?php echo $row['user_socialMedia']; ?> target="_blank"><i class="fab fa-instagram"></i></a></p>
+                          
                         </div>
 
                         <button class="button_View btn-dark btn rounded-8 text-white mt-3 mb-3" data-mdb-ripple-color="dark"><i class="fas fa-arrow-up-from-bracket mr-1"></i><strong> Upload CV</strong></button>
@@ -145,7 +150,9 @@
                         <?php
                           include("../../Config/database_con.php");
                           $bilNum = 0;
-                          $sql = "SELECT * FROM publication";
+                          $expert_id = $row4['expert_id'];
+
+                          $sql = "SELECT * FROM publication WHERE expert_id = '$expert_id'";
                           $result = mysqli_query($conn,$sql);
                           $monthImpression = array();
 
@@ -154,7 +161,7 @@
                             $monthImpression = array(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
 
                             // Retrieve comments from the database
-                            $sql1 = "SELECT * FROM publication ORDER BY publication_uploaded_date DESC";
+                            $sql1 = "SELECT * FROM publication WHERE expert_id = '$expert_id' ORDER BY publication_uploaded_date DESC";
                             $result1 = $conn->query($sql1);
 
                             if ($result1->num_rows > 0) {

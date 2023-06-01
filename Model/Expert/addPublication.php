@@ -5,7 +5,7 @@
     session_start();
     extract($_POST);  
     $uniqid = uniqid();
-    $expert_id = $_SESSION['Current_user_id'];
+    $expert_id = $_SESSION['expertID'];
     $status = "Pending";
     $impression = 0;
 
