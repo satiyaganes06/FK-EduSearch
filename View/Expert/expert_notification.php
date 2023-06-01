@@ -12,7 +12,12 @@
 
     }else{
         include("../../Config/database_con.php");
- 
+
+        //Post Info
+        $expert_id = $_SESSION['expertID'];
+        $sql = "SELECT * FROM posting WHERE expert_id = '$expert_id' AND posting_status = 'Accepted'";
+        $result = mysqli_query($conn,$sql) or die ("Could not execute query in homepage");
+
         $_SESSION["route"] = "notifi";
     
     }
@@ -59,75 +64,85 @@
     
             <div id="publication_Component">
 
-                <?php
-                    include("../../Config/database_con.php");
-                    $bilNum = 0;
-                    $expert_id = 1121;
-                    $sql = "SELECT * FROM notification WHERE expert_id='$expert_id'";
-                    $result = mysqli_query($conn,$sql);
-
-                    while ($row = mysqli_fetch_assoc($result)){
-                        $id = $row["notification_id"];
-                
-                ?>
-    
-                    <!-- Post 1 -->
-                    <div class="post">
-                        <div class="d-flex">
-                            <!-- Image -->
-                            <img
-                                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                                class="rounded-circle shadow"
-                                height="60"
-                                alt="Black and White Portrait of a Man"
-                                loading="lazy"
-                            />
-                
-                            <!-- Content -->
-                            <div class="w-100 pl-3">
-                
-                                <div class="d-flex justify-content-between">
-                                    <h6><strong><?php $row['notification_create_at']; ?></strong></h6>
-                                    
-                                    <div class="d-flex">
-                                        <p id="datetime_text" class="pr-1">2023-05-17</p>
-                                        <p id="datetime_text">12:07AM</p>
+            <?php
+                if ($result->num_rows > 0) {
+                    // Loop through each row and display the data
+                    while ($row = $result->fetch_assoc()) {
+                        $userID = $row["user_id"];
+                        $post_id = $row["posting_id"];
+                        //User Info
+                        $sql2 = "SELECT * FROM user_profile WHERE user_id = '$userID'";
+                        $result2 = mysqli_query($conn,$sql2) or die ("Could not execute query in homepage");
+                        $row2 = mysqli_fetch_assoc($result2); 
+                        ?> 
+                        
+                        <!-- Posts -->
+                        <div class="post">
+                            <div class="d-flex">
+                                <!-- Image -->
+                                <img
+                                    src= <?php echo $row2['user_profile_img']; ?>
+                                    class="rounded-circle shadow"
+                                    height="60"
+                                    alt="Black and White Portrait of a Man"
+                                    loading="lazy"
+                                />
+                    
+                                <!-- Content -->
+                                <div class="w-100 pl-3">
+                    
+                                    <div class="d-flex justify-content-between">
+                                        <h6><strong><?php $row['notification_create_at']; ?></strong></h6>
+                                        
+                                        <div class="d-flex">
+                                            <p id="datetime_text" class="pr-1">2023-05-17</p>
+                                            <p id="datetime_text">12:07AM</p>
+                                        </div>
+                        
                                     </div>
+
+                                    <p id="post_desc"><?php echo $row2['user_profile_img']; ?></p>
                     
                                 </div>
+                                
+                            </div>
 
-                                <p id="post_desc">Why wireless sensor networks consist of small nodes with sensing, computation, and wireless communs capabilities ?</p>
+                            <div class="d-flex mb">
+
+                                <div class="d-flex align-items-center mr-4">
+                                    <i class="fas fa-heart text-danger"></i>
+                                    <p class="likeRate_text">15 Likes</p>
+                                </div>
+
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <p class="likeRate_text">15 Likes</p>
+                                </div>
+                                
+                                
+                            </div>
+
+                            <hr>
+
+                            <div class="d-flex ">
+                                <button class="btn-danger btn btn-block text-white mt-2 mr-2 ml-2"  data-mdb-ripple-color="dark"><strong>Reject</strong></button>
+                                <button class="btn-success btn btn-block text-white mr-2 ml-2"  data-mdb-ripple-color="dark"><strong>Accept</strong></button>
+                            </div>
+                            
+
+                        </div>
+
+                    <?php }
                 
+                    }else {
+                        ?>
+                            <div class="text-center" style="height: 200px; margin:100px">
+                                <p><?php echo "No post found.";?></p>
                             </div>
-                            
-                        </div>
+                        <?php
+                }?>
 
-                        <div class="d-flex mb">
-
-                            <div class="d-flex align-items-center mr-4">
-                                <i class="fas fa-heart text-danger"></i>
-                                <p class="likeRate_text">15 Likes</p>
-                            </div>
-
-                            <div class="d-flex align-items-center">
-                                <i class="fas fa-star text-warning"></i>
-                                <p class="likeRate_text">15 Likes</p>
-                            </div>
-                            
-                            
-                        </div>
-
-                        <hr>
-
-                        <div class="d-flex ">
-                            <button class="btn-danger btn btn-block text-white mt-2 mr-2 ml-2"  data-mdb-ripple-color="dark"><strong>Reject</strong></button>
-                            <button class="btn-success btn btn-block text-white mr-2 ml-2"  data-mdb-ripple-color="dark"><strong>Accept</strong></button>
-                        </div>
-                        
-
-                    </div>
-            
-                <?php ;} ?>
+                
             </div>
     
         </div>
