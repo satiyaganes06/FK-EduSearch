@@ -13,7 +13,7 @@ body{
   position: fixed;
   left: 0;
   top: 0;
-  height: 95%;
+  height: 92.3%;
   width: 78px;
   background: #FFFFFF;
   padding: 6px 14px;
@@ -268,7 +268,7 @@ color: #0B7A98!important;
 }
 .home-section{
   position: relative;
-  background: #E4E9F7;
+  
   min-height: 100vh;
   top: 0;
   left: 78px;
@@ -297,10 +297,10 @@ color: #0B7A98!important;
   height: 100%;
 }
 .main-section{
-  width: 90%;
+  width: 96%;
   height: 100%;
   top: 500px;
-  margin-left: 8%;
+  margin-left: 2%;
   height: 100%;
 
 }
