@@ -315,22 +315,26 @@ color: #0B7A98!important;
   border-radius: 15px;
   box-shadow: 5px 10px 18px #888888;
 }
-.totalusers{
-  margin-top: 99px;
+.tabletitle{
+  margin-top: 30px;
+  margin-bottom: 12px;
 }
-.totalusers h4{
+.tabletitle h4{
   font-family: 'Raleway', sans-serif;
-  font-size: 25px;
+  font-size: 18px;
   font-weight: 700;
-  color: black;
+  color: rgb(68, 68, 68);
 }
-.totalusers p{
-
-  font-size: 25px;
-  font-weight: 500;
-  color: #888888;
+.tabletitle2{
+    margin-top: 40px;
+    margin-bottom: 12px;  
 }
-
+.tabletitle2 h4{
+    font-family: 'Raleway', sans-serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: rgb(68, 68, 68);
+  }
 .table thead{
   background-color: rgba(44, 88, 100, 1) ; 
   color: white;

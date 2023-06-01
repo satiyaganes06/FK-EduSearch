@@ -54,7 +54,7 @@
                         <option selected disabled>Roles</option>
                         <option value="User">User</option>
                         <option value="Staff">Staff</option>
-                        <option value="Expert">Expert</option>
+                        <!-- <option value="Expert">Expert</option> -->
                       </select>
                       <div id="selectError" class="error"></div>
                 </div>
