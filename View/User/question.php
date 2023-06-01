@@ -24,7 +24,7 @@
     
     <!-- Icon -->
     <link rel="shortcut icon" type="image/jpg" href="../../Asset/icon_logo.png" />
-    <script src="../../js/question.js"></script>
+    
   
 </head>
 <body>
@@ -82,7 +82,7 @@
   ?>
 
   <!-- MDB -->
-  
+  <script src="../../js/question.js"></script>
   <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
   <!--Bootstrap 4 & 5 & jQuery Script-->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

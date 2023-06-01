@@ -24,7 +24,8 @@
     <link rel="stylesheet" href="../Common//css/footer.css">
     
     <!-- Icon -->
-    <link rel="shortcut icon" type="image/jpg" href="../../Asset/icon_logo.png" />              
+    <link rel="shortcut icon" type="image/jpg" href="../../Asset/icon_logo.png" /> 
+    <script type="text/javascript" src="../../js/posting.js"></script>             
 
 </head>
 <body>
@@ -32,6 +33,7 @@
   <!-- Navbar -->
   <?php
     include_once('../Common/html/userNavBar.html');
+    $researchArea = $_GET["researchArea"];
   ?>
 
   <section>
@@ -39,9 +41,9 @@
         <tr>
             <td><p class="title">
                     <?php 
-                        $researchArea = $_GET["researchArea"];
                         echo $researchArea;
                     ?>
+                  <script> var js_var = "<?php echo $researchArea; ?>";</script>
                 </p></td>
             <td>
                 <select class="form-select" aria-label="questionForm" id="categories">
@@ -52,7 +54,7 @@
     </table>
   
   <div class="container pt-3 pb-2"> 
-      <h4>sdfg</h4>
+      <h4 id="output">hai</h4>
       <p>Please fill out the following form with 
         <br>your complaint. We will review your report
         <br>and follow up as soon as possible</p>
@@ -66,7 +68,6 @@
 
 
   <!-- MDB -->
-  <script src="../../js/posting.js"></script>
   <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
   <!--Bootstrap 4 & 5 & jQuery Script-->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
