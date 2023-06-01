@@ -44,27 +44,27 @@
       <div class="col-sm-7 mx-auto col-10 col-md-8 col-lg-6">
         <form>
           <div class="mb-2">
-            <label class="form-label" name="name">Name</label>
+            <label class="form-label" for="name">Name</label>
             <input type="text" id="name" class="form-control" placeholder="James Cooper" disabled/>
           </div>
           <div class="mb-2">
-            <label class="form-label" name="email">Email</label>
+            <label class="form-label" for="email">Email</label>
             <input type="email" id="email" class="form-control" placeholder="jamescooper@gmail.com" disabled />
           </div>
 
           <div class="row mb-2">
             <div class="col">
-                <label class="form-label" name="date">Date</label>
+                <label class="form-label" for="date">Date</label>
                 <input type="date" id="date" class="form-control" />
             </div>
             <div class="col">
-                <label class="form-label" name="phoneNum">Phone Number</label>
+                <label class="form-label" for="phoneNum">Phone Number</label>
                 <input type="tel" id="phoneNum" class="form-control" />
             </div>
           </div>
 
           <div class="mb-3">
-            <label class="form-label" name="type">Type of Complaints</label>
+            <label class="form-label" for="type">Type of Complaints</label>
             <select class="form-select" aria-label="typeComplaint">
               <option selected>Please Select...</option>
               <option value="1">Unsatisfied Expert's Feedback</option>

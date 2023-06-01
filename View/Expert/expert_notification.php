@@ -58,232 +58,76 @@
             <h1><strong>Assign Post</strong></h1>
     
             <div id="publication_Component">
+
+                <?php
+                    include("../../Config/database_con.php");
+                    $bilNum = 0;
+                    $expert_id = 1121;
+                    $sql = "SELECT * FROM notification WHERE expert_id='$expert_id'";
+                    $result = mysqli_query($conn,$sql);
+
+                    while ($row = mysqli_fetch_assoc($result)){
+                        $id = $row["notification_id"];
+                
+                ?>
     
-                <!-- Post 1 -->
-                <div class="post">
-                    <div class="d-flex">
-                        <!-- Image -->
-                        <img
-                            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                            class="rounded-circle shadow"
-                            height="60"
-                            alt="Black and White Portrait of a Man"
-                            loading="lazy"
-                        />
-            
-                        <!-- Content -->
-                        <div class="w-100 pl-3">
-            
-                            <div class="d-flex justify-content-between">
-                                <h6><strong>CB21132</strong></h6>
-                                
-                                <div class="d-flex">
-                                    <p id="datetime_text" class="pr-1">2023-05-17</p>
-                                    <p id="datetime_text">12:07AM</p>
+                    <!-- Post 1 -->
+                    <div class="post">
+                        <div class="d-flex">
+                            <!-- Image -->
+                            <img
+                                src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                                class="rounded-circle shadow"
+                                height="60"
+                                alt="Black and White Portrait of a Man"
+                                loading="lazy"
+                            />
+                
+                            <!-- Content -->
+                            <div class="w-100 pl-3">
+                
+                                <div class="d-flex justify-content-between">
+                                    <h6><strong><?php $row['notification_create_at']; ?></strong></h6>
+                                    
+                                    <div class="d-flex">
+                                        <p id="datetime_text" class="pr-1">2023-05-17</p>
+                                        <p id="datetime_text">12:07AM</p>
+                                    </div>
+                    
                                 </div>
+
+                                <p id="post_desc">Why wireless sensor networks consist of small nodes with sensing, computation, and wireless communs capabilities ?</p>
                 
                             </div>
-
-                            <p id="post_desc">Why wireless sensor networks consist of small nodes with sensing, computation, and wireless communs capabilities ?</p>
-            
-                        </div>
-                        
-                    </div>
-
-                    <div class="d-flex mb">
-
-                        <div class="d-flex align-items-center mr-4">
-                            <i class="fas fa-heart text-danger"></i>
-                            <p class="likeRate_text">15 Likes</p>
+                            
                         </div>
 
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-star text-warning"></i>
-                            <p class="likeRate_text">15 Likes</p>
-                        </div>
-                        
-                        
-                    </div>
+                        <div class="d-flex mb">
 
-                    <hr>
-
-                    <div class="d-flex ">
-                        <button class="btn-danger btn btn-block text-white mt-2 mr-2 ml-2"  data-mdb-ripple-color="dark"><strong>Reject</strong></button>
-                        <button class="btn-success btn btn-block text-white mr-2 ml-2"  data-mdb-ripple-color="dark"><strong>Accept</strong></button>
-                    </div>
-                    
-
-                </div>
-
-                <!-- Post 2 -->
-                <div class="post">
-                    <div class="d-flex">
-                        <!-- Image -->
-                        <img
-                            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                            class="rounded-circle shadow"
-                            height="60"
-                            alt="Black and White Portrait of a Man"
-                            loading="lazy"
-                        />
-            
-                        <!-- Content -->
-                        <div class="w-100 pl-3">
-            
-                            <div class="d-flex justify-content-between">
-                                <h6><strong>CB21132</strong></h6>
-                                
-                                <div class="d-flex">
-                                    <p id="datetime_text" class="pr-1">2023-05-17</p>
-                                    <p id="datetime_text">12:07AM</p>
-                                </div>
-                
+                            <div class="d-flex align-items-center mr-4">
+                                <i class="fas fa-heart text-danger"></i>
+                                <p class="likeRate_text">15 Likes</p>
                             </div>
 
-                            <p id="post_desc">Why wireless sensor networks consist of small nodes with sensing, computation, and wireless communs capabilities ?</p>
-            
-                        </div>
-                        
-                    </div>
-
-                    <div class="d-flex mb">
-
-                        <div class="d-flex align-items-center mr-4">
-                            <i class="fas fa-heart text-danger"></i>
-                            <p class="likeRate_text">15 Likes</p>
-                        </div>
-
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-star text-warning"></i>
-                            <p class="likeRate_text">15 Likes</p>
-                        </div>
-                        
-                        
-                    </div>
-
-                    <hr>
-
-                    <div class="d-flex ">
-                        <button class="btn-danger btn btn-block text-white mt-2 mr-2 ml-2"  data-mdb-ripple-color="dark"><strong>Reject</strong></button>
-                        <button class="btn-success btn btn-block text-white mr-2 ml-2"  data-mdb-ripple-color="dark"><strong>Accept</strong></button>
-                    </div>
-                    
-
-                </div>
-
-                <!-- Post 2 -->
-                <div class="post">
-                    <div class="d-flex">
-                        <!-- Image -->
-                        <img
-                            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                            class="rounded-circle shadow"
-                            height="60"
-                            alt="Black and White Portrait of a Man"
-                            loading="lazy"
-                        />
-            
-                        <!-- Content -->
-                        <div class="w-100 pl-3">
-            
-                            <div class="d-flex justify-content-between">
-                                <h6><strong>CB21132</strong></h6>
-                                
-                                <div class="d-flex">
-                                    <p id="datetime_text" class="pr-1">2023-05-17</p>
-                                    <p id="datetime_text">12:07AM</p>
-                                </div>
-                
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-star text-warning"></i>
+                                <p class="likeRate_text">15 Likes</p>
                             </div>
+                            
+                            
+                        </div>
 
-                            <p id="post_desc">Why wireless sensor networks consist of small nodes with sensing, computation, and wireless communs capabilities ?</p>
+                        <hr>
+
+                        <div class="d-flex ">
+                            <button class="btn-danger btn btn-block text-white mt-2 mr-2 ml-2"  data-mdb-ripple-color="dark"><strong>Reject</strong></button>
+                            <button class="btn-success btn btn-block text-white mr-2 ml-2"  data-mdb-ripple-color="dark"><strong>Accept</strong></button>
+                        </div>
+                        
+
+                    </div>
             
-                        </div>
-                        
-                    </div>
-
-                    <div class="d-flex mb">
-
-                        <div class="d-flex align-items-center mr-4">
-                            <i class="fas fa-heart text-danger"></i>
-                            <p class="likeRate_text">15 Likes</p>
-                        </div>
-
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-star text-warning"></i>
-                            <p class="likeRate_text">15 Likes</p>
-                        </div>
-                        
-                        
-                    </div>
-
-                    <hr>
-
-                    <div class="d-flex ">
-                        <button class="btn-danger btn btn-block text-white mt-2 mr-2 ml-2"  data-mdb-ripple-color="dark"><strong>Reject</strong></button>
-                        <button class="btn-success btn btn-block text-white mr-2 ml-2"  data-mdb-ripple-color="dark"><strong>Accept</strong></button>
-                    </div>
-                    
-
-                </div>
-
-
-                <!-- Post 4 -->
-                <div class="post">
-                    <div class="d-flex">
-                        <!-- Image -->
-                        <img
-                            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                            class="rounded-circle shadow"
-                            height="60"
-                            alt="Black and White Portrait of a Man"
-                            loading="lazy"
-                        />
-            
-                        <!-- Content -->
-                        <div class="w-100 pl-3">
-            
-                            <div class="d-flex justify-content-between">
-                                <h6><strong>CB21132</strong></h6>
-                                
-                                <div class="d-flex">
-                                    <p id="datetime_text" class="pr-1">2023-05-17</p>
-                                    <p id="datetime_text">12:07AM</p>
-                                </div>
-                
-                            </div>
-
-                            <p id="post_desc">Why wireless sensor networks consist of small nodes with sensing, computation, and wireless communs capabilities ?</p>
-            
-                        </div>
-                        
-                    </div>
-
-                    <div class="d-flex mb">
-
-                        <div class="d-flex align-items-center mr-4">
-                            <i class="fas fa-heart text-danger"></i>
-                            <p class="likeRate_text">15 Likes</p>
-                        </div>
-
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-star text-warning"></i>
-                            <p class="likeRate_text">15 Likes</p>
-                        </div>
-                        
-                        
-                    </div>
-
-                    <hr>
-
-                    <div class="d-flex ">
-                        <button class="btn-danger btn btn-block text-white mt-2 mr-2 ml-2"  data-mdb-ripple-color="dark"><strong>Reject</strong></button>
-                        <button class="btn-success btn btn-block text-white mr-2 ml-2"  data-mdb-ripple-color="dark"><strong>Accept</strong></button>
-                    </div>
-                    
-
-                </div>
-              
+                <?php ;} ?>
             </div>
     
         </div>
