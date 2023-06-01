@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <?php session_start(); ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,7 +43,11 @@
                 <div class="row mt-3">
                     <div class="col-sm">
                         <div class="box" style="text-align: center;">
-                            <h4><a href="posting.php">Software Engineering</a></h4> 
+                            <h4>
+                                  <?php $_SESSION["researchArea"] = "Software Engineering"; ?>
+                              <a href="posting.php?researchArea=<?php echo urlencode($_SESSION["researchArea"]); ?>">Software Engineering
+                              </a>
+                            </h4> 
                             <table class="center">
                                 <tr>
                                   <th>100</th>
@@ -77,7 +82,11 @@
                 <div class="row mt-3">
                     <div class="col-sm">
                         <div class="box" style="text-align: center;">
-                            <h4><a href="posting.php">Computer System & Networking</a></h4> 
+                            <h4>
+                              <?php $_SESSION["researchArea"] = "Computer System & Networking"; ?>
+                              <a href="posting.php?researchArea=<?php echo urlencode($_SESSION["researchArea"]); ?>">Computer System & Networking
+                              </a>
+                            </h4> 
                             <table class="center">
                                 <tr>
                                   <th>100</th>
@@ -112,7 +121,11 @@
                 <div class="row mt-3">
                     <div class="col-sm">
                         <div class="box" style="text-align: center;">
-                            <h4><a href="posting.php">Graphics & Multimedia Technology</a></h4> 
+                            <h4>
+                              <?php $_SESSION["researchArea"] = "Graphics & Multimedia Technology"; ?>
+                              <a href="posting.php?researchArea=<?php echo urlencode($_SESSION["researchArea"]); ?>">Graphics & Multimedia Technology
+                              </a>
+                            </h4> 
                             <table class="center">
                                 <tr>
                                   <th>100</th>
@@ -147,7 +160,11 @@
                 <div class="row mt-3">
                     <div class="col-sm">
                         <div class="box" style="text-align: center;">
-                            <h4><a href="posting.php">Cyber Security</a></h4> 
+                            <h4>
+                              <?php $_SESSION["researchArea"] = "Cyber Security"; ?>
+                              <a href="posting.php?researchArea=<?php echo urlencode($_SESSION["researchArea"]); ?>">Cyber Security
+                              </a>
+                            </h4> 
                             <table class="center">
                                 <tr>
                                   <th>100</th>

@@ -71,6 +71,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["Current_user_id"] = $userID;
         // Authentication successful, redirect the user
         if($role == "Expert"){
+          $sql = "SELECT * FROM expert WHERE user_id = '$userID'";
+          $result = mysqli_query($conn,$sql) or die("ERROR 401");
+          $row = mysqli_fetch_assoc($result);
+          $_SESSION["expertID"] = $row['expert_id'];
             header('Location: ../../../../View/Expert/expert_homepage.php');
             exit();
         }else{
