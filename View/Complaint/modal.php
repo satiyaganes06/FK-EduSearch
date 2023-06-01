@@ -11,14 +11,6 @@
             <div class="modal-body">
                 <form>
                     <div class="form-group">
-                        <label class="form-label" name="name">Name</label>
-                        <input type="text" id="name" class="form-control" placeholder="James Cooper" disabled />
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label" name="email">Email</label>
-                        <input type="email" id="email" class="form-control" placeholder="jamescooper@gmail.com" disabled />
-                    </div>
-                    <div class="form-group">
                         <label class="form-label" name="date">Date</label>
                         <input type="date" id="date" class="form-control" />
                     </div>
@@ -49,7 +41,53 @@
 </div>
 
 <!-- View Modal -->
-
+<div id="viewModal" class="modal fade" role="dialog" tabindex="-1">
+    <div class="modal-dialog  modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">View Complaint</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label class="form-label" for="date">Name</label>
+                        <input type="date" id="date" class="form-control" readonly/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="date">Email</label>
+                        <input type="date" id="date" class="form-control" readonly/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="date">Date</label>
+                        <input type="date" id="date" class="form-control" readonly/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="date">Time</label>
+                        <input type="date" id="date" class="form-control" readonly/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="phoneNum">Phone Number</label>
+                        <input type="tel" id="phoneNum" class="form-control" readonly/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="phoneNum">Type of Complaint</label>
+                        <input type="tel" id="phoneNum" class="form-control" readonly/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="desc">Brief Description</label>
+                        <textarea class="form-control" name="desc" rows="4" readonly></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Delete Modal -->
 
