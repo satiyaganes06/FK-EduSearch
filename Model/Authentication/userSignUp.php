@@ -9,8 +9,12 @@
   $sql = "INSERT INTO account (user_id, acc_password, acc_role, first_login)
   VALUES ('$userID', '$userPassword', '$role', '1')";
 
+  $sql2 = "INSERT INTO user_profile (user_id, admin_id, user_name)
+  VALUES ('$userID' , '0' , '$username')";
+
   if(mysqli_query($conn, $sql)){
-     echo '<script type="text/javascript">';
+    (mysqli_query($conn, $sql2));
+  echo '<script type="text/javascript">';
   echo 'alert("Sign up successful! Redirecting to login page.");';
   echo 'window.location.href = "../../View/Module1/Login/GeneralUserLogin/userLogin.php";';
   echo '</script>';

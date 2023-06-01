@@ -19,6 +19,7 @@
       $row = mysqli_fetch_assoc($result);
 
       $_SESSION["route"] = "home";
+      echo $_SESSION["expertID"];
   
     }
 ?>

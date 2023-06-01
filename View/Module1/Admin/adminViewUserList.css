@@ -1,5 +1,7 @@
 /* Google Font Link */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@500&family=Wix+Madefor+Display:wght@600&display=swap');
+
 *{
   margin: 0;
   padding: 0;
@@ -13,7 +15,7 @@ body{
   position: fixed;
   left: 0;
   top: 0;
-  height: 92.3%;
+  height: 100%;
   width: 78px;
   background: #FFFFFF;
   padding: 6px 14px;
@@ -311,9 +313,14 @@ color: #0B7A98!important;
   border-radius: 15px;
   box-shadow: 5px 10px 18px #888888;
 }
+.totalusers{
+  font-family: 'Raleway', sans-serif;
+font-family: 'Wix Madefor Display', 
+}
 footer{
   left: 0;
-  margin-left: -12px;
+  margin-left: -80px;
+  margin-top: 20px;
 }
 @media (max-width: 420px) {
   .sidebar li .tooltip{
