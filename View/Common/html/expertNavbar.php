@@ -1,6 +1,11 @@
 <?php
   $route = $_SESSION["route"];
 
+  $user_id =  $_SESSION['Current_user_id'];
+  $sql1 = "SELECT * FROM user_profile WHERE user_id  = '$user_id'";
+  $result1 = mysqli_query($conn,$sql1) or die ("Could not execute query in view");
+  $row1 = mysqli_fetch_assoc($result1);
+
   if($route == 'home'){
     $home = 'active' ;
 
@@ -75,33 +80,45 @@
             <i class="fas fa-search"></i>
           </span>
         </form>
-  
 
-        <!-- Profile Avatar -->
-        <div class="dropdown d-flex profile_section">
+        
+          <div class="dropdown d-flex profile_section">
 
-          <div class="mr-3 profile_name_Section">
-            <h6 id="navName"><strong>Satiya Ganes</strong></h6>
-            <h6 id="navUsername">@satiyaganes06</h6>
+            <div class="mr-3 profile_name_Section">
+            <h6 id="navName"><strong><?php echo $row1['user_name']; ?></strong></h6>
+              <h6 id="navUsername"><?php echo $row1['user_id']; ?></h6>
+            </div>
+            <a
+              class="dropdown-toggle d-flex align-items-center hidden-arrow"
+              href="#"
+              id="navbarDropdownMenuAvatar"
+              role="button"
+              data-mdb-toggle="dropdown"
+              aria-expanded="false"
+            >
+              <img
+                src= <?php echo $row1['user_profile_img']; ?>
+                class="rounded-circle"
+                height="35"
+                alt="Black and White Portrait of a Man"
+                loading="lazy"
+              />
+            </a>
+
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarDropdownMenuAvatar"
+            >
+              <li>
+                <a class="dropdown-item" href="/View/Expert/expert_profile.php">My profile</a>
+              </li>
+              <li>
+                <a class="dropdown-item" href="/Config/logout.php">Logout</a>
+              </li>
+            </ul>
           </div>
-
-          <a
-            class="dropdown-toggle d-flex align-items-center hidden-arrow"
-            href="/View/Expert/expert_profile.php"
-            role="button"
-            aria-expanded="false"
-          >
-            <img
-              src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-              class="rounded-circle shadow"
-              height="40"
-              alt="Black and White Portrait of a Man"
-              loading="lazy"
-            />
-          </a>
-
-          
         </div>
+  
       </div>
       <!-- Right elements -->
     </div>

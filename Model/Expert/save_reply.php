@@ -6,11 +6,27 @@ if ($conn->connect_error) {
 }
 
 // Save comment to the database
-$reply = $_POST['reply'];
-$expert_id = $_SESSION['Current_user_id'];
+session_start();
+
+if(isset($_POST['reply'])) {
+    $reply = $_POST['reply'];
+    echo "Received reply: " . $reply;
+} else {
+    ?>
+        <script>
+                alert("No reply input");
+                window.location='../../View/Expert/expert_reply_post.php';
+        </script>
+    <?php
+}
+
+$expert_id = $_SESSION['expertID'];
+$user_id = $_SESSION['Current_user_id'];
+$post_id = $_SESSION['current_comment_post_id'];
+
 
 $sql = "INSERT INTO discussion (posting_id, expert_id, user_id, discussion_content) 
-            VALUES ('1251', '$expert_id', '1251', '$reply')";
+            VALUES ('$post_id', '$expert_id', '$user_id', '$reply')";
 $conn->query($sql);
 
 $conn->close();

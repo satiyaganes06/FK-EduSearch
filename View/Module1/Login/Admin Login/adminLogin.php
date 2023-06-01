@@ -32,7 +32,7 @@
     <!--CSS-->
     <link
       rel="stylesheet"
-      href="/View/Module 1/Login/Admin Login/adminlogin.css"
+      href="/View/Module1/Login/Admin Login/adminlogin.css"
     />
     <!-- Icon -->
     <link rel="shortcut icon" type="image/jpg" href="/Asset/icon_logo.png" />

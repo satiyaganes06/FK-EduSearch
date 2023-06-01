@@ -14,6 +14,10 @@
   }else{
     include("../../Config/database_con.php");
 
+    //Post Info
+    $expert_id = $_SESSION['expertID'];
+    $sql = "SELECT * FROM posting WHERE expert_id = '$expert_id'";
+    $result = mysqli_query($conn,$sql) or die ("Could not execute query in homepage");
 
     $_SESSION["route"] = "post";
 
@@ -58,218 +62,83 @@
     <section class="flexSection">
         <div class="mainSection mb-5">
             <h1><strong>View Post</strong></h1>
-    
             <div id="publication_Component">
-    
-                <!-- Post 1 -->
-                <div class="post">
-                    <div class="d-flex">
-                        <!-- Image -->
-                        <img
-                            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                            class="rounded-circle shadow"
-                            height="60"
-                            alt="Black and White Portrait of a Man"
-                            loading="lazy"
-                        />
-            
-                        <!-- Content -->
-                        <div class="w-100 pl-3">
-            
-                            <div class="d-flex justify-content-between">
-                                <h6><strong>CB21132</strong></h6>
-                                
-                                <div class="d-flex">
-                                    <p id="datetime_text" class="pr-1">2023-05-17</p>
-                                    <p id="datetime_text">12:07AM</p>
-                                </div>
                 
+                <?php
+                if ($result->num_rows > 0) {
+                    // Loop through each row and display the data
+                    while ($row = $result->fetch_assoc()) {
+                        $userID = $row["user_id"];
+                        $post_id = $row["posting_id"];
+                        //User Info
+                        $sql2 = "SELECT * FROM user_profile WHERE user_id = '$userID'";
+                        $result2 = mysqli_query($conn,$sql2) or die ("Could not execute query in homepage");
+                        $row2 = mysqli_fetch_assoc($result2); 
+                        ?> 
+                        
+                        <!-- Posts -->
+                        <div class="post">
+                            <div class="d-flex">
+                                <!-- Image -->
+                                <img
+                                    src=<?php echo $row2['user_profile_img']; ?>
+                                    class="rounded-circle shadow"
+                                    height="60"
+                                    alt="Black and White Portrait of a Man"
+                                    loading="lazy"
+                                />
+                    
+                                <!-- Content -->
+                                <div class="w-100 pl-3">
+                                
+                                    <div class="d-flex justify-content-between">
+                                        <h6><strong><?php echo $row2['user_name']; ?></strong></h6>
+                                        
+                                        <div class="d-flex">
+                                            <p id="datetime_text" class="pr-1"><?php echo $row['posting_date']; ?></p>
+                                            <p id="datetime_text"><?php echo $row['posting_assign_time']; ?></p>
+                                        </div>
+                        
+                                    </div>
+
+                                    <p id="post_desc"><?php echo $row['posting_content']; ?></p>
+                    
+                                </div>
+                                
                             </div>
 
-                            <p id="post_desc">Why wireless sensor networks consist of small nodes with sensing, computation, and wireless communs capabilities ?</p>
-            
-                        </div>
-                        
-                    </div>
+                            <div class="d-flex mb-3">
 
-                    <div class="d-flex mb">
-
-                        <div class="d-flex align-items-center mr-4">
-                            <i class="fas fa-heart text-danger"></i>
-                            <p class="likeRate_text">15 Likes</p>
-                        </div>
-
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-star text-warning"></i>
-                            <p class="likeRate_text">15 Likes</p>
-                        </div>
-                        
-                        
-                    </div>
-
-                    <hr>
-
-                    <button class="button_View btn-dark btn btn-block text-white mt-3"  data-mdb-ripple-color="dark"><strong>View</strong></button>
-
-                </div>
-              
-                <!-- Post 2 -->
-                <div class="post">
-                    <div class="d-flex">
-                        <!-- Image -->
-                        <img
-                            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                            class="rounded-circle shadow"
-                            height="60"
-                            alt="Black and White Portrait of a Man"
-                            loading="lazy"
-                        />
-            
-                        <!-- Content -->
-                        <div class="w-100 pl-3">
-            
-                            <div class="d-flex justify-content-between">
-                                <h6><strong>CB21132</strong></h6>
-                                
-                                <div class="d-flex">
-                                    <p id="datetime_text" class="pr-1">2023-05-17</p>
-                                    <p id="datetime_text">12:07AM</p>
+                                <div class="d-flex align-items-center mr-4">
+                                    <i class="fas fa-heart text-danger"></i>
+                                    <p class="likeRate_text"><?php echo $row['posting_like']; ?> Likes</p>
                                 </div>
-                
+
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-star text-warning"></i>
+                                    <p class="likeRate_text">15 Likes</p>
+                                </div>
+                                
+                                
                             </div>
 
-                            <p id="post_desc">Why wireless sensor networks consist of small nodes with sensing, computation, and wireless communs capabilities ?</p>
-            
-                        </div>
-                        
-                    </div>
+                            <hr>
 
-                    <div class="d-flex mb">
+                            <a href="../Expert/expert_reply_post.php?post_id=<?php echo $post_id; ?>&user_id=<?php echo $userID; ?>"><button class="button_View btn-dark btn btn-block text-white"  data-mdb-ripple-color="dark"><strong>Comment</strong></button></a>
 
-                        <div class="d-flex align-items-center mr-4">
-                            <i class="fas fa-heart text-danger"></i>
-                            <p class="likeRate_text">15 Likes</p>
                         </div>
 
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-star text-warning"></i>
-                            <p class="likeRate_text">15 Likes</p>
-                        </div>
-                        
-                        
-                    </div>
-
-                    <hr>
-
-                    <button class="button_View btn-dark btn btn-block text-white mt-3"  data-mdb-ripple-color="dark"><strong>View</strong></button>
-
-                </div>
+                    <?php }
                 
-                <!-- Post 3 -->
-                <div class="post">
-                    <div class="d-flex">
-                        <!-- Image -->
-                        <img
-                            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                            class="rounded-circle shadow"
-                            height="60"
-                            alt="Black and White Portrait of a Man"
-                            loading="lazy"
-                        />
-            
-                        <!-- Content -->
-                        <div class="w-100 pl-3">
-            
-                            <div class="d-flex justify-content-between">
-                                <h6><strong>CB21132</strong></h6>
-                                
-                                <div class="d-flex">
-                                    <p id="datetime_text" class="pr-1">2023-05-17</p>
-                                    <p id="datetime_text">12:07AM</p>
-                                </div>
-                
+                    }else {
+                        ?>
+                            <div class="text-center" style="height: 200px; margin:100px">
+                                <p><?php echo "No post found.";?></p>
                             </div>
-
-                            <p id="post_desc">Why wireless sensor networks consist of small nodes with sensing, computation, and wireless communs capabilities ?</p>
-            
-                        </div>
+                        <?php
+                }?>
+                    
                         
-                    </div>
-
-                    <div class="d-flex mb">
-
-                        <div class="d-flex align-items-center mr-4">
-                            <i class="fas fa-heart text-danger"></i>
-                            <p class="likeRate_text">15 Likes</p>
-                        </div>
-
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-star text-warning"></i>
-                            <p class="likeRate_text">15 Likes</p>
-                        </div>
-                        
-                        
-                    </div>
-
-                    <hr>
-
-                    <button class="button_View btn-dark btn btn-block text-white mt-3"  data-mdb-ripple-color="dark"><strong>View</strong></button>
-
-                </div>
-              
-                <!-- Post 4 -->
-                <div class="post">
-                    <div class="d-flex">
-                        <!-- Image -->
-                        <img
-                        src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                        class="rounded-circle shadow"
-                        height="60"
-                        alt="Black and White Portrait of a Man"
-                        loading="lazy"
-                        />
-            
-                        <!-- Content -->
-                        <div class="w-100 pl-3">
-            
-                            <div class="d-flex justify-content-between">
-                                <h6><strong>CB21132</strong></h6>
-                                
-                                <div class="d-flex">
-                                    <p id="datetime_text" class="pr-1">2023-05-17</p>
-                                    <p id="datetime_text">12:07AM</p>
-                                </div>
-                
-                            </div>
-
-                            <p id="post_desc">Why wireless sensor networks consist of small nodes with sensing, computation, and wireless communs capabilities ?</p>
-            
-                        </div>
-                        
-                    </div>
-
-                    <div class="d-flex mb">
-
-                        <div class="d-flex align-items-center mr-4">
-                            <i class="fas fa-heart text-danger"></i>
-                            <p class="likeRate_text">15 Likes</p>
-                        </div>
-
-                        <div class="d-flex align-items-center">
-                            <i class="fas fa-star text-warning"></i>
-                            <p class="likeRate_text">15 Likes</p>
-                        </div>
-                        
-                        
-                    </div>
-
-                    <hr>
-
-                    <button class="button_View btn-dark btn btn-block text-white mt-3"  data-mdb-ripple-color="dark"><strong>View</strong></button>
-
-                </div>
-              
-            </div>
     
         </div>
         

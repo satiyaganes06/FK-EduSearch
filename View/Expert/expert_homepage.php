@@ -6,7 +6,7 @@
     ?>
         <script>
             alert("Access denied !!!")
-            window.location = "../Module 1/Login/General User Login/userLogin.php";
+            window.location = "../Module1/Login/GeneralUserLogin/userLogin.php";
         </script>
     <?php
 
@@ -19,7 +19,6 @@
       $row = mysqli_fetch_assoc($result);
 
       $_SESSION["route"] = "home";
-      echo $_SESSION["expertID"];
   
     }
 ?>
@@ -67,7 +66,9 @@
           <?php
               while($row = $result->fetch_assoc()) {
                   $id = $row["publication_id"];
-                ?> <!-- Post 1 -->
+                ?> 
+                
+                <!-- Posts -->
                 <div>
                   <div class="post_publication d-flex">
                     

@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if ($count > 0) {
         // Authentication successful, redirect the user
        
-            header('Location: ../../../../View/Module 1/Admin/adminDashboard.html');
+            header('Location: ../../../../View/Module1/Admin/adminDashboard.html');
             exit();
         
         

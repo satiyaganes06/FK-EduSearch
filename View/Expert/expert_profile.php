@@ -14,6 +14,10 @@
   }else{
     include("../../Config/database_con.php");
 
+    $user_id = $_SESSION["Current_user_id"] ;
+    $sql = "SELECT * FROM user_profile WHERE user_id = '$user_id'";
+    $result = mysqli_query($conn,$sql) or die ("Could not execute query in homepage");
+    $row = mysqli_fetch_assoc($result);
 
     $_SESSION["route"] = "profile";
 
@@ -64,7 +68,7 @@
                 <div id="profile_details" class="position-relative">
                     <img 
                         id="profile-background-pic"
-                        src="https://marketplace.canva.com/EAE2cQaUHVA/1/0/1600w/canva-black-minimal-motivation-quote-linkedin-banner-HoRi-2buBWk.jpg" 
+                        src= <?php echo $row['user_profile_bg']; ?>
                         class="shadows"
                         width="100%"
                         alt="Black profile background"
@@ -72,7 +76,7 @@
                     />
 
                     <img
-                        src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                        src=<?php echo $row['user_profile_img']; ?>
                         class="rounded-circle shadow-5 profile_Avatar"
                         alt="Black and White Portrait of a Man"
                         loading="lazy"
@@ -82,7 +86,7 @@
                         <div class="d-flex justify-content-between">
                        
                             <div class="d-flex">
-                                <h2><strong>SHATTHIYA GANES</strong></h2>
+                                <h2><strong><?php echo $row['user_name']; ?></strong></h2>
                                 <i class="fas fa-circle-check fa-2x ml-3" style="color: #00FF00;"></i>
                             </div>
     
@@ -92,16 +96,16 @@
                         </div>
 
                         <div class="d-flex justify-content-start mt-3">
-                            <p class="w-50 text-truncate mr-3">satiyaganes@gmail.com</p>
-                            <p class="w-50 text-truncate">Age : 28</p>
+                            <p class="w-50 text-truncate mr-3"><?php echo $row['user_email']; ?></p>
+                            <p class="w-50 text-truncate">Age : <?php echo $row['user_age']; ?></p>
                         </div>
 
                         <div class="d-flex justify-content-start">
-                            <p class="w-50 text-truncate mr-3">Academic Level : Master & PHD</p>
+                            <p class="w-50 text-truncate mr-3">Academic Level : <?php echo $row['user_academicStatus']; ?></p>
                             <p class="w-50 text-truncate">Last Seen : 05-06-2023</p>
                         </div>
 
-                        <p class="w-50 text-truncate mr-3">Social Media : <a href="https://www.instagram.com/satiyaganes06/" target="_blank">@satiyaganes</a></p>
+                        <p class="w-50 text-truncate mr-3">Social Media : <a href=<?php echo $row['user_socialMedia']; ?> target="_blank">@satiyaganes</a></p>
 
                         <div class="d-flex justify-content-start">
                             <p class="mr-3">Research Area : </p>

@@ -13,11 +13,18 @@
   }else{
     include("../../Config/database_con.php");
 
-    $idURL = 1;
+    $posting_id = $_GET['post_id'];
+    $user_id = $_GET['user_id'];
 
-    $sql = "SELECT * FROM posting WHERE posting_id  = '$idURL'";
+    $_SESSION['current_comment_post_id'] = $posting_id ;
+
+    $sql = "SELECT * FROM posting WHERE posting_id  = '$posting_id'";
     $result = mysqli_query($conn,$sql) or die ("Could not execute query in view");
     $row = mysqli_fetch_assoc($result);
+
+    $sql2 = "SELECT * FROM user_profile WHERE user_id  = '$user_id'";
+    $result2 = mysqli_query($conn,$sql2) or die ("Could not execute query in view");
+    $row2 = mysqli_fetch_assoc($result2);
 
     $_SESSION["route"] = "post";
   }
@@ -70,7 +77,7 @@
                     <div class="d-flex">
                         <!-- Image -->
                         <img
-                            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                            src=<?php echo $row2['user_profile_img']; ?>
                             class="rounded-circle shadow"
                             height="60"
                             alt="Black and White Portrait of a Man"
@@ -81,7 +88,7 @@
                         <div class="w-100 pl-3">
             
                             <div class="d-flex justify-content-between">
-                                <h6 class="w-75"><strong>CB21132</strong></h6>
+                                <h6 class="w-75"><strong><?php echo $row2['user_name']; ?></strong></h6>
                                 
                                 <div class="d-flex">
                                     <p id="datetime_text" class="pr-1"><?php echo $row['posting_date']; ?></p>
@@ -147,9 +154,7 @@
             // Add new comment
             $('#comment-form').on('submit', function(e){
                 e.preventDefault();
-                var posting_id = <?php echo $row['posting_id']; ?>;
                 var reply = $('#reply').val();
-                var user_id = 1452;
 
                 if(reply !== ''){
                     $.ajax({
