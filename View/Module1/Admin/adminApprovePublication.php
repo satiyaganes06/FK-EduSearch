@@ -1,3 +1,19 @@
+<?php
+ include("../../../Config/database_con.php");
+
+
+
+ $idURL = $_GET['posting_id'];
+
+ $sql = "SELECT * FROM publication WHERE publication_id  = '$idURL'";
+ $result = mysqli_query($conn,$sql) or die ("Could not execute query in view");
+ $row = mysqli_fetch_assoc($result);
+
+ $updateImpression = ++$row['publication_impression'];
+
+ $sql1 = "UPDATE publication set publication_impression = '$updateImpression' WHERE publication_id = '$idURL'";
+ $result1 = mysqli_query($conn,$sql1) or die ("Could not execute query in update");
+?>
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -71,7 +87,7 @@
             <span class="tooltip">User List</span>
           </li>
           <li>
-            <a href="adminUserApprovalList.html" class="active">
+            <a href="adminUserApprovalList.php" class="active">
               <i class="fa-solid fa-user-check"></i>
               <span class="links_name">Approval List</span>
             </a>
@@ -123,175 +139,96 @@
               <div class="tabletitle">
                 <h4>Before Change</h4>
             </div>
-              <div id="profile_details" class="position-relative">
-                <img
-                  id="profile-background-pic"
-                  src="https://marketplace.canva.com/EAE2cQaUHVA/1/0/1600w/canva-black-minimal-motivation-quote-linkedin-banner-HoRi-2buBWk.jpg"
-                  class="shadows"
-                  width="100%"
-                  height="300px"
-                  alt="Black profile background"
-                  loading="lazy"
-                />
-
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                  class="rounded-circle shadow-5 profile_Avatar"
-                  alt="Black and White Portrait of a Man"
-                  loading="lazy"
-                />
-
-                <div class="profile_content">
-                  <div class="d-flex justify-content-between">
-                    <div class="d-flex">
-                      <h2><strong>SHATTHIYA GANES</strong></h2>
-                      <i
-                        class="fas fa-circle-check fa-2x ml-3"
-                        style="color: #00ff00"
-                      ></i>
+            <div class="mainSection mb-3 mt-3">
+                <div id="publicationDetails_Component">
+                  
+                  <div class="content_details">
+                    <!-- Image -->
+                    <img
+                      src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                      class="rounded-circle shadow mb-3"
+                      height="150"
+                      width="150"
+                      alt="Black and White Portrait of a Man"
+                      loading="lazy"
+                    />
+        
+                    <div class=" w-100">
+        
+                      <div class="d-flex justify-content-between mt-4  mb-3">
+                        <h2 id="titlePage"><strong>View Publication</strong></h2>
+                        
+                        <div class="d-flex align-items-center">
+                          <i class="far fa-eye text-muted mr-1 fs-6"></i>
+                          <p id="impression_text"><?php echo $updateImpression; ?></p>
+                        </div>
+        
+                      </div>
+                      
+                      <table class="table align-middle">
+                        <tbody>
+        
+                          <tr>
+                            <th scope="row"><strong>Status :</strong></th>
+                            <td><?php echo $row["publication_status"]; ?></td>
+                          </tr>
+        
+                          <tr>
+                            <th scope="row"><strong>Title :</strong></th>
+                            <td><?php echo $row["publication_title"]; ?></td>
+                          </tr>
+                          <tr>
+                            <th scope="row"><strong>Authors :</strong></th>
+                            <td><?php echo $row["publication_author"]; ?></td>
+                          </tr>
+        
+                          <tr>
+                            <th scope="row"><strong>Publication : date </strong></th>
+                            <td><?php echo $row["publication_date"]; ?></td>
+                          </tr>
+        
+                          <tr>
+                            <th scope="row"><strong>Journal :</strong></th>
+                            <td><?php echo $row["publication_journal"]; ?></td>
+                          </tr>
+        
+                          <tr>
+                            <th scope="row"><strong>Volume :</strong></th>
+                            <td><?php echo $row["publication_volume"]; ?></td>
+                          </tr>
+        
+                          <tr>
+                            <th scope="row"><strong>Issue :</strong></th>
+                            <td><?php echo $row["publication_issue"]; ?></td>
+                          </tr>
+        
+                          <tr>
+                            <th scope="row"><strong>Pages :</strong></th>
+                            <td><?php echo $row["publication_pages"]; ?></td>
+                          </tr>
+        
+                          <tr>
+                            <th scope="row"><strong>Publisher :</strong></th>
+                            <td><?php echo $row["publication_publisher"]; ?></td>
+                          </tr>
+        
+                          <tr>
+                            <th scope="row"><strong>Description :</strong></th>
+                            <td id='pubDesc'><?php echo $row["publication_description"]; ?></td>
+                          </tr>
+        
+                        </tbody>
+                      </table>
+                      
                     </div>
-
-                 
+                   
                   </div>
-
-                  <div class="d-flex justify-content-start mt-3">
-                    <p class="w-50 text-truncate mr-3">satiyaganes@gmail.com</p>
-                    <p class="w-50 text-truncate">Age : 28</p>
-                  </div>
-
-                  <div class="d-flex justify-content-start">
-                    <p class="w-50 text-truncate mr-3">
-                      Academic Level : Master & PHD
-                    </p>
-                    <p class="w-50 text-truncate">Last Seen : 05-06-2023</p>
-                  </div>
-
-                  <p class="w-50 text-truncate mr-3">
-                    Social Media :
-                    <a
-                      href="https://www.instagram.com/satiyaganes06/"
-                      target="_blank"
-                      >@satiyaganes</a
-                    >
-                  </p>
-
-                  <div class="d-flex justify-content-start">
-                    <p class="mr-3">Research Area :</p>
-                    <p
-                      class="bg-secondary rounded-6"
-                      style="
-                        font-size: 12px;
-                        padding-top: 2px;
-                        padding-right: 10px;
-                        padding-left: 10px;
-                        color: white;
-                      "
-                    >
-                      Cloud Computing
-                    </p>
-                    <p
-                      class="ml-2 bg-secondary rounded-6"
-                      style="
-                        font-size: 12px;
-                        padding-top: 2px;
-                        padding-right: 10px;
-                        padding-left: 10px;
-                        color: white;
-                      "
-                    >
-                      Autonomic Computing
-                    </p>
-                  </div>
+        
+                  <button class="button_View btn-dark btn btn-block text-white" onClick="javascript:window.open('<?php echo $row["publication_link"]; ?>', '_blank');" data-mdb-ripple-color="dark"><strong>View</strong></button>
+        
                 </div>
-              </div>
-              <div class="tabletitle2">
-                <h4>After Change</h4>
             </div>
-              <div id="profile_details" class="position-relative">
-                <img
-                  id="profile-background-pic"
-                  src="https://marketplace.canva.com/EAE2cQaUHVA/1/0/1600w/canva-black-minimal-motivation-quote-linkedin-banner-HoRi-2buBWk.jpg"
-                  class="shadows"
-                  width="100%"
-                  height="300px"
-                  alt="Black profile background"
-                  loading="lazy"
-                />
-
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                  class="rounded-circle shadow-5 profile_Avatar"
-                  alt="Black and White Portrait of a Man"
-                  loading="lazy"
-                />
-
-                <div class="profile_content">
-                  <div class="d-flex justify-content-between">
-                    <div class="d-flex">
-                      <h2><strong>SHATTHIYA GANES</strong></h2>
-                      <i
-                        class="fas fa-circle-check fa-2x ml-3"
-                        style="color: #00ff00"
-                      ></i>
-                    </div>
-
-                 
-                  </div>
-
-                  <div class="d-flex justify-content-start mt-3">
-                    <p class="w-50 text-truncate mr-3">satiyaganes@gmail.com</p>
-                    <p class="w-50 text-truncate">Age : 28</p>
-                  </div>
-
-                  <div class="d-flex justify-content-start">
-                    <p class="w-50 text-truncate mr-3">
-                      Academic Level : Master & PHD
-                    </p>
-                    <p class="w-50 text-truncate">Last Seen : 05-06-2023</p>
-                  </div>
-
-                  <p class="w-50 text-truncate mr-3">
-                    Social Media :
-                    <a
-                      href="https://www.instagram.com/satiyaganes06/"
-                      target="_blank"
-                      >@satiyaganes</a
-                    >
-                  </p>
-
-                  <div class="d-flex justify-content-start">
-                    <p class="mr-3">Research Area :</p>
-                    <p
-                      class="bg-secondary rounded-6"
-                      style="
-                        font-size: 12px;
-                        padding-top: 2px;
-                        padding-right: 10px;
-                        padding-left: 10px;
-                        color: white;
-                      "
-                    >
-                      Cloud Computing
-                    </p>
-                    <p
-                      class="ml-2 bg-secondary rounded-6"
-                      style="
-                        font-size: 12px;
-                        padding-top: 2px;
-                        padding-right: 10px;
-                        padding-left: 10px;
-                        color: white;
-                      "
-                    >
-                      Autonomic Computing
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="d-flex justify-content-between">
-                <div class="text-start">
-                <button type="button" class="btn btn-info me-2" >View CV</button>
-                 </div>
+             
 
                 <div class="text-end">
                   <button type="button" class="btn btn-success me-2" >Approve</button>

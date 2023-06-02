@@ -1,3 +1,24 @@
+<?php
+  session_start();
+  
+  //If the user is not logged in send him/her to the login form
+  if(!isset( $_SESSION["Current_admin_id"] )) {
+
+      ?>
+          <script>
+              alert("Access denied !!!")
+              window.location = "../Login/Admin%20Login/adminLogin.php";
+          </script>
+      <?php
+
+  }else{
+    include("../../../Config/database_con.php");
+
+  
+
+  }
+?>
+
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -62,7 +83,7 @@
           <span class="tooltip">Dashboard</span>
         </li>
         <li>
-          <a href="adminViewUserList.html" >
+          <a href="adminViewUserList.php" >
             <i class="fa-solid fa-user-group"></i>
             <span class="links_name">User List</span>
           </a>
@@ -99,7 +120,7 @@
           <span class="tooltip">View Profile</span>
         </li>
         <li style="margin-top: 10px;">
-          <a href="#">
+          <a href="../../../Config/adminlogout.php">
             <i class="fa-solid fa-right-from-bracket"></i>
             <span class="links_name">Logout</span>
           </a>
@@ -229,64 +250,7 @@
                           </div>
                     </td>
                   </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex align-items-center">
-                       
-                        <div class="ms-3">
-                          <p class="fw-bold mb-1">3</p>
-               
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="fw-normal mb-1">Yattish</p>
-              
-                    </td>
-                    <td>
-                      <p>
-                        CB21132
-                      </p>
-                    </td>
-                    <td>
-                      <span class="badge badge-danger rounded-pill d-inline">User</span>
-                    </td>
-                    <td>
-                        <div class="btn-group shadow-0" role="group">
-                          <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminViewApprovalDetails.html'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
-                            
-                          </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex align-items-center">
-                       
-                        <div class="ms-3">
-                          <p class="fw-bold mb-1">3</p>
-               
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="fw-normal mb-1">Yattish</p>
-              
-                    </td>
-                    <td>
-                      <p>
-                        CB21132
-                      </p>
-                    </td>
-                    <td>
-                      <span class="badge badge-danger rounded-pill d-inline">User</span>
-                    </td>
-                    <td>
-                        <div class="btn-group shadow-0" role="group">
-                          <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminViewApprovalDetails.html'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
-                            
-                          </div>
-                    </td>
-                  </tr>
+                 
                 </tbody>
               </table>
             </div>
@@ -310,155 +274,59 @@
                 <thead>
                   <tr>
                     <th class="firstcol">No</th>
-                    <th>Username</th>
-                    <th>User ID</th>
-                    <th>Roles</th>
+                    <th>Title</th>
+                    <th>Expert ID</th>
+                    <th>Author</th>
                     <th class="lastcol">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>
-                      <div class="d-flex align-items-center">
-                        
-                        <div class="ms-3">
-                          <p class="fw-bold mb-1">1</p>
+                <?php
+                          include("../../../Config/database_con.php");
+                          $bilNum = 0;
                           
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="fw-normal mb-1">Loga A/L Munniyappan</p>
-                     
-                    </td>
-                    <td>CB21132</td>
-                    <td>
-                      <span class="badge badge-success rounded-pill d-inline">Expert</span>
-                    </td>
-                   
-                    <td>
-                      <div class="btn-group shadow-0" role="group">
-                        <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminViewUserProfile.html'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
-                        
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex align-items-center">
-                       
-                        <div class="ms-3">
-                          <p class="fw-bold mb-1">2</p>
+
+                          $sql = "SELECT * FROM publication WHERE publication_status = 'Pending'";
+                          $result = mysqli_query($conn,$sql);
+                          
+
+                          while ($row = mysqli_fetch_assoc($result)){
+                            $id = $row["publication_id"];
+                            echo $id; ?>
+                            <tr>
+                            <td>
+                              <div class="d-flex align-items-center">
+                                
+                                <div class="ms-3">
+                                  <p class="fw-bold mb-1"> <?php echo ++$bilNum; ?></p>
+                                 
+                                  
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <p class="fw-normal mb-1"><?php echo $row['publication_title']; ?></p>
+                             
+                            </td>
+                            <td>
+                              <p class="fw-normal mb-1"><?php echo $row['expert_id']; ?></p>
+                            </td>
+                            <td>
+                              <span class="badge badge-success rounded-pill d-inline"><?php echo $row['publication_author']; ?></span>
+                            </td>
+                           
+                            <td>
+                              <div class="btn-group shadow-0" role="group">
+                                <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminApprovePublication.php?posting_id=<?php echo $id ?>'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
+                                
+                              </div>
+                            </td>
+                          </tr>
+                       <?php   }
+
+                            ?>
                  
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="fw-normal mb-1">Shatthiya</p>
-                  
-                    </td>
-                    <td>CB21135</td>
-                    <td>
-                      
-                      <span class="badge badge-primary rounded-pill d-inline"
-                            >Staff</span
-                        >
-                    </td>
-                   
-                    <td>
-                        <div class="btn-group shadow-0" role="group">
-                            <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminViewUserProfile.html'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
-                            
-                          </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex align-items-center">
-                       
-                        <div class="ms-3">
-                          <p class="fw-bold mb-1">3</p>
-               
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="fw-normal mb-1">Yattish</p>
-              
-                    </td>
-                    <td>
-                      <p>
-                        CB21132
-                      </p>
-                    </td>
-                    <td>
-                      <span class="badge badge-danger rounded-pill d-inline">User</span>
-                    </td>
-                    <td>
-                        <div class="btn-group shadow-0" role="group">
-                            <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminViewUserProfile.html'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
-                            
-                          </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex align-items-center">
-                       
-                        <div class="ms-3">
-                          <p class="fw-bold mb-1">3</p>
-               
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="fw-normal mb-1">Yattish</p>
-              
-                    </td>
-                    <td>
-                      <p>
-                        CB21132
-                      </p>
-                    </td>
-                    <td>
-                      <span class="badge badge-danger rounded-pill d-inline">User</span>
-                    </td>
-                    <td>
-                        <div class="btn-group shadow-0" role="group">
-                            <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminViewUserProfile.html'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
-                            
-                          </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex align-items-center">
-                       
-                        <div class="ms-3">
-                          <p class="fw-bold mb-1">3</p>
-               
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="fw-normal mb-1">Yattish</p>
-              
-                    </td>
-                    <td>
-                      <p>
-                        CB21132
-                      </p>
-                    </td>
-                    <td>
-                      <span class="badge badge-danger rounded-pill d-inline">User</span>
-                    </td>
-                    <td>
-                        <div class="btn-group shadow-0" role="group">
-                            <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminViewUserProfile.html'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
-                            
-                          </div>
-                    </td>
-                  </tr>
+                 
                 </tbody>
               </table>
             </div>

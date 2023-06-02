@@ -38,7 +38,7 @@
     <link rel="shortcut icon" type="image/jpg" href="/Asset/icon_logo.png" />
   </head>
   <body>
-    <div class="container-fluid p-0 mb-5">
+    <div class="container-fluid p-0">
       <div
         class="d-flex justify-content-space bg-light w-100 h-100 mw-100 mh-100 overflow-hidden"
       >
@@ -125,7 +125,18 @@
         
       </div>
 
-  
+      <footer class="bg-light text-center text-lg-start">
+        <!-- Copyright -->
+        <div
+          class="text-center text-white p-3"
+          style="background-color: rgba(45, 89, 172, 1)"
+        >
+        © 2019  2023. FK-EDU SEARCH
+          
+          
+        </div>
+        <!-- Copyright -->
+      </footer>
     
 
 <!-- Modal -->
@@ -158,18 +169,7 @@
   </div>
 </div>
     </div>
-    <footer class="text-center text-white fixed-bottom overflow-hidden">
-        <!-- Copyright -->
-        <div
-          class="text-center text-white p-3"
-          style="background-color: rgba(45, 89, 172, 1)"
-        >
-        © 2019  2023. FK-EDU SEARCH
-          
-          
-        </div>
-        <!-- Copyright -->
-      </footer>
+
     <!-- MDB -->
     <script type="text/javascript" src="../../../../Bootstrap/mdb.min.js"></script>
     <!--Bootstrap 4 & 5 & jQuery Script-->

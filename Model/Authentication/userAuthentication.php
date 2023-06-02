@@ -116,7 +116,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         
       } else {
-        // Authentication failed, handle accordingly (e.g., display an error message)
+        // Authentication failed, handle accordingly
         // ...
         echo '<script type="text/javascript">';
         echo 'alert("Login Fail, Please Check Your Role, User ID and Password Again.");';

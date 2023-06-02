@@ -1,3 +1,23 @@
+<?php
+  session_start();
+  
+  //If the user is not logged in send him/her to the login form
+  if(!isset( $_SESSION["Current_admin_id"] )) {
+
+      ?>
+          <script>
+              alert("Access denied !!!")
+              window.location = "../Login/Admin%20Login/adminLogin.php";
+          </script>
+      <?php
+
+  }else{
+    include("../../../Config/database_con.php");
+
+    $user_id = $_GET['user_id'];
+
+  }
+?>
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -27,7 +47,7 @@
     <!-- MDB -->
     <link rel="stylesheet" href="/Bootstrap/mdb.min.css" />
     <!--CSS-->
-    <link rel="stylesheet" href="adminViewApprovalDetails.css" />
+    <link rel="stylesheet" href="adminEditUserProfile.css" />
     <!-- Boxicons CDN Link -->
     <link
       href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css"
@@ -55,7 +75,11 @@
       <div class="menu-section">
         <h2 class="section-heading">Menu</h2>
         <ul class="nav-list">
-        
+          <!-- <li>
+          <i class='bx bx-search' ></i>
+          <input type="text" placeholder="Search...">
+          <span class="tooltip">Search</span>
+        </li> -->
           <li>
             <a href="adminDashboard.html">
               <i class="bx bx-grid-alt"></i>
@@ -64,14 +88,14 @@
             <span class="tooltip">Dashboard</span>
           </li>
           <li>
-            <a href="adminViewUserList.html" >
+            <a href="adminViewUserList.html" class="active">
               <i class="fa-solid fa-user-group"></i>
               <span class="links_name">User List</span>
             </a>
             <span class="tooltip">User List</span>
           </li>
           <li>
-            <a href="adminUserApprovalList.html" class="active">
+            <a href="adminUserApprovalList.html">
               <i class="fa-solid fa-user-check"></i>
               <span class="links_name">Approval List</span>
             </a>
@@ -116,13 +140,10 @@
           <!--Tulis coding kat sini-->
           <div class="card h-100">
             <div class="card-body">
-              <h5 class="card-title fw-bold text-center">Approval</h5>
+              <h5 class="card-title fw-bold text-center">User Details</h5>
               <div
                 class="d-flex w-100 justify-content-center align-items-center"
               ></div>
-              <div class="tabletitle">
-                <h4>Before Change</h4>
-            </div>
               <div id="profile_details" class="position-relative">
                 <img
                   id="profile-background-pic"
@@ -140,7 +161,7 @@
                   alt="Black and White Portrait of a Man"
                   loading="lazy"
                 />
-
+        <form action="" method="post">
                 <div class="profile_content">
                   <div class="d-flex justify-content-between">
                     <div class="d-flex">
@@ -153,29 +174,30 @@
 
                  
                   </div>
-
                   <div class="d-flex justify-content-start mt-3">
-                    <p class="w-50 text-truncate mr-3">satiyaganes@gmail.com</p>
-                    <p class="w-50 text-truncate">Age : 28</p>
-                  </div>
+                <div class="input-group w-50 mr-3">
+                    <input type="email" class="form-control " value="satiyaganes@gmail.com" id="email" name="email">
+                    
+                </div>
+                <div class="input-group w-50">
+                    <input type="text" class="form-control text-truncate" value="Age : 28" id="age" name="age" >
+                </div>
+                </div>
 
-                  <div class="d-flex justify-content-start">
-                    <p class="w-50 text-truncate mr-3">
-                      Academic Level : Master & PHD
-                    </p>
-                    <p class="w-50 text-truncate">Last Seen : 05-06-2023</p>
-                  </div>
+                <div class="d-flex justify-content-start mt-3">
+                <div class="input-group w-50 mr-3">
+                    <input type="text" class="form-control text-truncate" value="Academic Level : Master & PHD" id="academiclvl" name="academiclvl">
+                </div>
+                <div class="input-group w-50">
+                <p class="w-50 text-truncate">Last Seen : 05-06-2023</p>
+                </div>
+                </div>
 
-                  <p class="w-50 text-truncate mr-3">
-                    Social Media :
-                    <a
-                      href="https://www.instagram.com/satiyaganes06/"
-                      target="_blank"
-                      >@satiyaganes</a
-                    >
-                  </p>
+                <div class="input-group w-50 mt-3">
+                <input type="text" class="form-control text-truncate" value="Social Media : @satiyaganes" id="socialmedia" name="socialmedia">
+                </div>
 
-                  <div class="d-flex justify-content-start">
+                  <div class="d-flex justify-content-start mt-4">
                     <p class="mr-3">Research Area :</p>
                     <p
                       class="bg-secondary rounded-6"
@@ -201,104 +223,22 @@
                     >
                       Autonomic Computing
                     </p>
+                    
                   </div>
                 </div>
               </div>
-              <div class="tabletitle2">
-                <h4>After Change</h4>
-            </div>
-              <div id="profile_details" class="position-relative">
-                <img
-                  id="profile-background-pic"
-                  src="https://marketplace.canva.com/EAE2cQaUHVA/1/0/1600w/canva-black-minimal-motivation-quote-linkedin-banner-HoRi-2buBWk.jpg"
-                  class="shadows"
-                  width="100%"
-                  height="300px"
-                  alt="Black profile background"
-                  loading="lazy"
-                />
-
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                  class="rounded-circle shadow-5 profile_Avatar"
-                  alt="Black and White Portrait of a Man"
-                  loading="lazy"
-                />
-
-                <div class="profile_content">
-                  <div class="d-flex justify-content-between">
-                    <div class="d-flex">
-                      <h2><strong>SHATTHIYA GANES</strong></h2>
-                      <i
-                        class="fas fa-circle-check fa-2x ml-3"
-                        style="color: #00ff00"
-                      ></i>
-                    </div>
-
-                 
-                  </div>
-
-                  <div class="d-flex justify-content-start mt-3">
-                    <p class="w-50 text-truncate mr-3">satiyaganes@gmail.com</p>
-                    <p class="w-50 text-truncate">Age : 28</p>
-                  </div>
-
-                  <div class="d-flex justify-content-start">
-                    <p class="w-50 text-truncate mr-3">
-                      Academic Level : Master & PHD
-                    </p>
-                    <p class="w-50 text-truncate">Last Seen : 05-06-2023</p>
-                  </div>
-
-                  <p class="w-50 text-truncate mr-3">
-                    Social Media :
-                    <a
-                      href="https://www.instagram.com/satiyaganes06/"
-                      target="_blank"
-                      >@satiyaganes</a
-                    >
-                  </p>
-
-                  <div class="d-flex justify-content-start">
-                    <p class="mr-3">Research Area :</p>
-                    <p
-                      class="bg-secondary rounded-6"
-                      style="
-                        font-size: 12px;
-                        padding-top: 2px;
-                        padding-right: 10px;
-                        padding-left: 10px;
-                        color: white;
-                      "
-                    >
-                      Cloud Computing
-                    </p>
-                    <p
-                      class="ml-2 bg-secondary rounded-6"
-                      style="
-                        font-size: 12px;
-                        padding-top: 2px;
-                        padding-right: 10px;
-                        padding-left: 10px;
-                        color: white;
-                      "
-                    >
-                      Autonomic Computing
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div class="d-flex justify-content-between">
-                <div class="text-start">
-                <button type="button" class="btn btn-info me-2" >View CV</button>
-                 </div>
+              <div class="d-flex justify-content-center">
+               
 
                 <div class="text-end">
-                  <button type="button" class="btn btn-success me-2" >Approve</button>
-                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Reject</button>
+                  <button type="button" class="btn btn-warning me-2" >Save</button>
+
                 </div>
               </div>
+              </form>
+              <?php 
               
+              ?>
             </div>
           </div>
         </div>
@@ -309,7 +249,7 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Are you Sure You Want to Reject The Changes?</h5>
+              <h5 class="modal-title" id="staticBackdropLabel">Are you Sure You Want to Delete This User?</h5>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <!-- <div class="modal-body">
@@ -393,6 +333,44 @@
           },
         },
       });
+    </script>
+    <script>
+        const email = document.getElementById('email');
+        const age = document.getElementById('age');
+        const academiclvl = document.getElementById('academiclvl');
+        const socialmedia = document.getElementById('socialmedia');
+        let clicked1 = false;
+        let clicked2 = false;
+        let clicked3 = false;
+        let clicked4 = false;
+        
+        email.addEventListener('click', () => {
+           
+            if (!clicked1) {
+                email.value = '';
+                 clicked1 = true;
+             }
+        });
+        age.addEventListener('click', () => {
+            
+            if (!clicked2) {
+                age.value = '';
+                 clicked2 = true;
+             }
+        });
+        academiclvl.addEventListener('click', () => {
+            if (!clicked3) {
+                academiclvl.value = '';
+                 clicked3 = true;
+             }
+            
+        });
+        socialmedia.addEventListener('click', () => {
+            if (!clicked4) {
+                socialmedia.value = '';
+                 clicked4 = true;
+             }
+        });
     </script>
   </body>
 </html>
