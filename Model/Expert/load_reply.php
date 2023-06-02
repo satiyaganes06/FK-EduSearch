@@ -13,7 +13,8 @@ if ($conn->connect_error) {
 }
 
 // Retrieve comments from the database
-$sql = "SELECT * FROM discussion ORDER BY discussion_time DESC";
+$post_id = $_SESSION['current_comment_post_id'];
+$sql = "SELECT * FROM discussion WHERE posting_id = '$post_id' ORDER BY discussion_date, discussion_time DESC";
 $result = $conn->query($sql);
 
 

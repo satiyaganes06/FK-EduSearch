@@ -71,12 +71,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION["Current_user_id"] = $userID;
         // Authentication successful, redirect the user
         if($role == "Expert"){
+
+          //Expert Info
           $sql = "SELECT * FROM expert WHERE user_id = '$userID'";
           $result = mysqli_query($conn,$sql) or die("ERROR 401");
           $row = mysqli_fetch_assoc($result);
-          $_SESSION["expertID"] = $row['expert_id'];
-            header('Location: ../../../../View/Expert/expert_homepage.php');
-            exit();
+
+          $expert_id = $row['expert_id'];
+          $_SESSION["expertID"] = $expert_id;
+
+          //Deactive Check
+          $last_interaction = $row['lastUse_Date'];
+          $current_date = new DateTime();
+          //$days_since_last_interaction = floor(($current_date - $last_interaction) / (60 * 60 * 24));
+          $last_interaction_date = new DateTime($last_interaction);
+
+
+          if ($last_interaction_date->diff($current_date)->days > 30) {
+
+            // Deactivate the expert's account
+            $sql3 = "SELECT * FROM user_profile WHERE user_id = '$userID'";
+            $result3 = mysqli_query($conn,$sql3) or die("ERROR 401");
+            $row3 = mysqli_fetch_assoc($result3);
+
+            $user_email = $row3['user_email'];
+
+            header('Location: ../../Api/PHPMailer/sendDeactiveEmail.php?user_id=' . $userID . '&user_email=' . $user_email .'&expert_id=' . $expert_id);
+
+          } else {
+              
+              // Update the last interaction date to the current date
+              $sql4 = "UPDATE expert SET lastUse_Date = NOW() WHERE user_id = '$userID'";
+              mysqli_query($conn, $sql4);
+
+              header('Location: ../../../../View/Expert/expert_homepage.php');
+              exit();
+          }
+          
+          
+            
         }else{
             header('Location: ../../../../View/User/dashboard.php');
             exit();
@@ -99,5 +132,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       // ...
     }
   }
+
+
+
   ?>
 
