@@ -17,11 +17,11 @@
     $user_id = $_SESSION["Current_user_id"] ;
     $sql = "SELECT * FROM user_profile WHERE user_id = '$user_id'";
     $result = mysqli_query($conn,$sql) or die ("Could not execute query in homepage");
-    $row = mysqli_fetch_assoc($result);
+    $userinfo = mysqli_fetch_assoc($result);
 
     $sql4 = "SELECT * FROM expert WHERE user_id = '$user_id'";
     $result4 = mysqli_query($conn,$sql4) or die ("Could not execute query in homepage");
-    $row4 = mysqli_fetch_assoc($result4);
+    $expertinfo = mysqli_fetch_assoc($result4);
 
     $_SESSION["route"] = "profile";
 
@@ -65,6 +65,7 @@
     ?>
     
     <section class="flexSection">
+    
         <div class="mainSection mb-5 mt-3">
     
             <div id="profile_Component">
@@ -72,7 +73,7 @@
                 <div id="profile_details" class="position-relative">
                     <img 
                         id="profile-background-pic"
-                        src= <?php echo $row['user_profile_bg']; ?>
+                        src= <?php echo $userinfo['user_profile_bg']; ?>
                         class="shadows"
                         width="100%"
                         alt="Black profile background"
@@ -80,7 +81,7 @@
                     />
 
                     <img
-                        src=<?php echo $row['user_profile_img']; ?>
+                        src=<?php echo $userinfo['user_profile_img']; ?>
                         class="rounded-circle shadow-5 profile_Avatar"
                         alt="Black and White Portrait of a Man"
                         loading="lazy"
@@ -90,35 +91,36 @@
                         <div class="d-flex justify-content-between">
                        
                             <div class="d-flex">
-                                <h2><strong><?php echo $row['user_name']; ?></strong></h2>
+                                <h2><strong><?php echo $userinfo['user_name']; ?></strong></h2>
                                 <i class="fas fa-circle-check fa-2x ml-3" style="color: #00FF00;"></i>
                             </div>
     
-                            <div class="rounded-circle text-center" style="height: 30px; width: 30px; background-color: rgb(210, 210, 210);">
-                                <i class="fas fa-pen-to-square"></i>
+                            <div style="height: 30px">
+                                <button style="border-color:azure;" type="button" class="rounded-5" data-toggle="modal" data-target="#editProfileModal"><i class="fas fa-pen-to-square"></i></button>
                             </div>
                         </div>
 
                         <div class="d-flex justify-content-start mt-3">
-                            <p class="w-50 text-truncate mr-3"><?php echo $row['user_email']; ?></p>
-                            <p class="w-50 text-truncate">Age : <?php echo $row['user_age']; ?></p>
+                            <p class="w-50 text-truncate mr-3"><?php echo $userinfo['user_email']; ?></p>
+                            <p class="w-50 text-truncate">Age : <?php echo $userinfo['user_age']; ?></p>
                         </div>
 
                         <div class="d-flex justify-content-start">
-                            <p class="w-50 text-truncate mr-3">Academic Level : <?php echo $row['user_academicStatus']; ?></p>
-                            <p class="w-50 text-truncate">Last Seen : <?php echo $row4['lastUse_Date']; ?></p>
+                            <p class="w-50 text-truncate mr-3">Academic Level : <?php echo $userinfo['user_academicStatus']; ?></p>
+                            <p class="w-50 text-truncate">Last Seen : <?php echo $expertinfo['lastUse_Date']; ?></p>
                         </div>
 
                         <div class="d-flex justify-content-between">
-                          <div class="d-flex w-50">
-                            <p class="mr-3">Research Area : </p>
-                            <p class="bg-secondary rounded-6" style="font-size: 12px; padding-top: 2px; padding-right: 10px; padding-left: 10px; color: white;"><?php echo $row['user_researchArea']; ?></p>
-                          </div>
-                          <p class="w-50 text-truncate ml-3">Social Media : <a href=<?php echo $row['user_socialMedia']; ?> target="_blank"><i class="fab fa-instagram"></i></a></p>
-                          
+                          <p class="w-50 text-truncate">Phone Number: <?php echo $userinfo['user_phoneNum']; ?></p>
+                          <p class="w-50 text-truncate ml-3">Social Media : <a href=<?php echo $userinfo['user_socialMedia']; ?> target="_blank"><i class="fab fa-instagram"></i></a></p>
                         </div>
 
-                        <button class="button_View btn-dark btn rounded-8 text-white mt-3 mb-3" data-mdb-ripple-color="dark"><i class="fas fa-arrow-up-from-bracket mr-1"></i><strong> Upload CV</strong></button>
+                        <div class="d-flex w-50">
+                          <p class="mr-3">Research Area : </p>
+                          <p class="bg-secondary rounded-6" style="font-size: 12px; padding-top: 2px; padding-right: 10px; padding-left: 10px; color: white;"><?php echo $userinfo['user_researchArea']; ?></p>
+                        </div>
+
+                        <a href="../../Model/Expert/displayPDF.php?id=<?=$expertinfo['expert_id']?>" target="_blank"><button class="button_View btn-dark btn rounded-8 text-white mt-3 mb-3" data-mdb-ripple-color="dark"><i class="fas fa-arrow-up-from-bracket mr-1"></i><strong>View CV</strong></button></a>
                     </div>
                 </div>
                 
@@ -150,7 +152,7 @@
                         <?php
                           include("../../Config/database_con.php");
                           $bilNum = 0;
-                          $expert_id = $row4['expert_id'];
+                          $expert_id = $expertinfo['expert_id'];
 
                           $sql = "SELECT * FROM publication WHERE expert_id = '$expert_id'";
                           $result = mysqli_query($conn,$sql);
@@ -210,6 +212,95 @@
     <?php
       include_once('../Common/html/footer.html');
     ?>
+
+
+
+  <!-- Edit Profile Modal -->
+  <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+      <form action="../../Model/Expert/profileUpdate.php" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              
+            <!-- Profile Image -->
+            <div class="form-group">
+              <label for="profile-image">Profile Image</label>
+              <input type="file"  class="form-control-file" id="profile-image" name="profile-image">
+            </div>
+
+            <!-- Profile Background Image -->
+            <div class="form-group">
+              <label for="profile-bg-image">Profile Background Image</label>
+              <input type="file" class="form-control-file" id="profile-bg-image" name="profile-bg-image">
+            </div>
+
+            <!-- Name -->
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" class="form-control" id="name" name="name" value="<?php echo $userinfo['user_name']; ?>" >
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" class="form-control" id="email" name="email" value="<?php echo $userinfo['user_email']; ?>">
+            </div>
+
+            <!-- Email -->
+            <div class="form-group">
+              <label for="phone number">Phone Number</label>
+              <input type="tel" class="form-control" id="phoneNum" name="phoneNum" value="<?php echo $userinfo['user_phoneNum']; ?>">
+            </div>
+
+            <!-- Age -->
+            <div class="form-group">
+              <label for="age">Age</label>
+              <input type="number" class="form-control" id="age" name="age" value="<?php echo $userinfo['user_age']; ?>">
+            </div>
+
+            <!-- Academic Level -->
+            <div class="form-group">
+              <label for="academic-level">Academic Level</label>
+              <input type="text" class="form-control" id="academic-level" name="academic-level" value="<?php echo $userinfo['user_academicStatus']; ?>">
+            </div>
+
+            <!-- Research Area -->
+            <div class="form-group">
+              <label for="research-area">Research Area</label>
+              <textarea class="form-control" id="research-area" rows="3" name="research-area"><?php echo $userinfo['user_researchArea']; ?></textarea>
+            </div>
+
+            <!-- Social Media Link -->
+            <div class="form-group">
+              <label for="social-media-link">Social Media Link</label>
+              <input type="text" class="form-control" id="social-media-link" name="social-media-link" value="<?php echo $userinfo['user_socialMedia']; ?>">
+            </div>
+
+            <!-- Cover Letter Document -->
+            <div class="form-group">
+              <label for="cover-letter">Cover Letter Document</label>
+              <input type="file" class="form-control-file" name="cover-letter">
+            </div>
+              
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Validate</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
 
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>

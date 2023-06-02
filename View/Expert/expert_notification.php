@@ -15,7 +15,7 @@
 
         //Post Info
         $expert_id = $_SESSION['expertID'];
-        $sql = "SELECT * FROM posting WHERE expert_id = '$expert_id' AND posting_status = 'Accepted'";
+        $sql = "SELECT * FROM posting WHERE expert_id = '$expert_id' AND posting_status = 'Assigned'";
         $result = mysqli_query($conn,$sql) or die ("Could not execute query in homepage");
 
         $_SESSION["route"] = "notifi";
@@ -92,16 +92,17 @@
                                 <div class="w-100 pl-3">
                     
                                     <div class="d-flex justify-content-between">
-                                        <h6><strong><?php $row['notification_create_at']; ?></strong></h6>
+
+                                        <div></div>
                                         
                                         <div class="d-flex">
-                                            <p id="datetime_text" class="pr-1">2023-05-17</p>
-                                            <p id="datetime_text">12:07AM</p>
+                                            <p id="datetime_text" class="pr-1"><?php echo $row['posting_date']; ?></p>
+                                            <p id="datetime_text"><?php echo $row['posting_assign_time']; ?></p>
                                         </div>
                         
                                     </div>
 
-                                    <p id="post_desc"><?php echo $row2['user_profile_img']; ?></p>
+                                    <p id="post_desc"><?php echo $row['posting_content']; ?></p>
                     
                                 </div>
                                 
@@ -111,7 +112,7 @@
 
                                 <div class="d-flex align-items-center mr-4">
                                     <i class="fas fa-heart text-danger"></i>
-                                    <p class="likeRate_text">15 Likes</p>
+                                    <p class="likeRate_text"><?php echo $row['posting_like']; ?> Likes</p>
                                 </div>
 
                                 <div class="d-flex align-items-center">
@@ -124,9 +125,9 @@
 
                             <hr>
 
-                            <div class="d-flex ">
-                                <button class="btn-danger btn btn-block text-white mt-2 mr-2 ml-2"  data-mdb-ripple-color="dark"><strong>Reject</strong></button>
-                                <button class="btn-success btn btn-block text-white mr-2 ml-2"  data-mdb-ripple-color="dark"><strong>Accept</strong></button>
+                            <div class="d-flex">
+                                <a class="btn-danger btn btn-block text-white mr-2 ml-2 mt-2" href="/Model/Expert/updatePostStatus.php?posting_id=<?php echo $post_id; ?>&status=<?php echo "Reject"; ?>"><strong>Reject</strong></a>
+                                <a class="btn-success btn btn-block text-white mr-2 ml-2" href="/Model/Expert/updatePostStatus.php?posting_id=<?php echo $post_id; ?>&status=<?php echo "Accepted"; ?>"><strong>Accept</strong></a>
                             </div>
                             
 
@@ -137,7 +138,7 @@
                     }else {
                         ?>
                             <div class="text-center" style="height: 200px; margin:100px">
-                                <p><?php echo "No post found.";?></p>
+                                <p><?php echo "No assign post found.";?></p>
                             </div>
                         <?php
                 }?>

@@ -13,8 +13,9 @@
     }else{
       include("../../Config/database_con.php");
   
-  
-      $sql = "SELECT * FROM publication ORDER BY publication_impression ASC";
+      $user_id = $_SESSION['Current_user_id'];
+
+      $sql = "SELECT * FROM publication ORDER BY publication_impression DESC";
       $result = mysqli_query($conn,$sql) or die ("Could not execute query in homepage");
       $row = mysqli_fetch_assoc($result);
 
@@ -66,6 +67,11 @@
           <?php
               while($row = $result->fetch_assoc()) {
                   $id = $row["publication_id"];
+
+                  $sql2 = "SELECT user_profile_img FROM user_profile WHERE user_id = '$user_id'";
+                  $result2 = mysqli_query($conn,$sql2) or die ("Could not execute query in homepage");
+                  $row2 = mysqli_fetch_assoc($result2);
+
                 ?> 
                 
                 <!-- Posts -->
@@ -74,7 +80,7 @@
                     
                     <!-- Image -->
                     <img
-                      src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                      src= <?php echo $row2['user_profile_img']; ?>
                       class="rounded-circle shadow"
                       height="60"
                       alt="Black and White Portrait of a Man"

@@ -14,8 +14,8 @@
   }else{
     include("../../../Config/database_con.php");
 
-  
-
+    $sql = "SELECT * FROM temp_user_profile";
+    $result = mysqli_query($conn,$sql) or die ("Could not execute query in homepage");
   }
 ?>
 
@@ -25,37 +25,37 @@
   <head>
     <meta charset="UTF-8">
     <title>FK-Edu Search</title>
- <!-- Font Awesome -->
- <link
- rel="stylesheet"
- href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-/>
+      <!-- Font Awesome -->
+      <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      />
 
-<!--Bootstrap Script-->
-<link
- href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
- rel="stylesheet"
-/>
-<link
- rel="stylesheet"
- href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
-/>
-<link
- rel="stylesheet"
- href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-/>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
-<!-- MDB -->
-<link rel="stylesheet" href="/Bootstrap/mdb.min.css" />
-    <!--CSS-->
-    <link rel="stylesheet" href="adminUserApprovalList.css">
-    <!-- Boxicons CDN Link -->
-    <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
+      <!--Bootstrap Script-->
+      <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      />
+      <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+      />
+      <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      />
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+      <!-- MDB -->
+      <link rel="stylesheet" href="/Bootstrap/mdb.min.css" />
+          <!--CSS-->
+          <link rel="stylesheet" href="adminUserApprovalList.css">
+          <!-- Boxicons CDN Link -->
+          <link href='https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css' rel='stylesheet'>
 
-    
-     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-     <link rel="shortcut icon" type="image/jpg" href="/Asset/icon_logo.png" />
+          <link rel="shortcut icon" type="image/jpg" href="/Asset/icon_logo.png" />
    </head>
 <body>
 
@@ -103,8 +103,6 @@
           </a>
           <span class="tooltip">Complain List</span>
         </li>
-      
-        
       </ul>
     </div>
     
@@ -166,91 +164,59 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>
-                      <div class="d-flex align-items-center">
-                        
-                        <div class="ms-3">
-                          <p class="fw-bold mb-1">1</p>
+                <?php
+                  $bilNum = 0;
+                  if ($result->num_rows > 0) {
+                      // Loop through each row and display the data
+                      while ($row = $result->fetch_assoc()) {
+
+                          
+
+                          $temp_user_id = $row["temp_user_id"];
+                          $user_id = $row["user_id"];
+
+                          //User Info
+                          $sql2 = "SELECT * FROM account WHERE user_id = '$user_id'";
+                          $result2 = mysqli_query($conn,$sql2) or die ("Could not execute query in homepage");
+                          $row2 = mysqli_fetch_assoc($result2); 
+                          ?>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          
+                          <div class="ms-3">
+                            <p class="fw-bold mb-1"><?php echo ++$bilNum; ?></p>
+                            
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p class="fw-normal mb-1"><?php echo $row['user_name']; ?></p>
+                      
+                      </td>
+                      <td><?php echo $user_id; ?></td>
+                      <td>
+                        <span class="badge badge-success rounded-pill d-inline"><?php echo $row2['acc_role']; ?></span>
+                      </td>
+                    
+                      <td>
+                        <div class="btn-group shadow-0" role="group">
+                          <a href="adminViewApprovalDetails.php?temp_id=<?php echo $row['temp_user_id']; ?> &userid=<?php echo $row['user_id']; ?>"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></a>
                           
                         </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="fw-normal mb-1">Loga A/L Munniyappan</p>
-                     
-                    </td>
-                    <td>CB21132</td>
-                    <td>
-                      <span class="badge badge-success rounded-pill d-inline">Expert</span>
-                    </td>
-                   
-                    <td>
-                      <div class="btn-group shadow-0" role="group">
-                        <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminViewApprovalDetails.html'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
-                        
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex align-items-center">
-                       
-                        <div class="ms-3">
-                          <p class="fw-bold mb-1">2</p>
-                 
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="fw-normal mb-1">Shatthiya</p>
+                      </td>
+                    </tr>
+
+                  <?php }
+                
+                      }else {
+                          ?>
+                              <div class="text-center" style="height: 20px; margin:100px">
+                                  <p><?php echo "No Approval List found.";?></p>
+                              </div>
+                          <?php
+                  }?>
                   
-                    </td>
-                    <td>CB21135</td>
-                    <td>
-                      
-                      <span class="badge badge-primary rounded-pill d-inline"
-                            >Staff</span
-                        >
-                    </td>
-                   
-                    <td>
-                        <div class="btn-group shadow-0" role="group">
-                          <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminViewApprovalDetails.html'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
-                            
-                          </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex align-items-center">
-                       
-                        <div class="ms-3">
-                          <p class="fw-bold mb-1">3</p>
-               
-                        </div>
-                      </div>
-                    </td>
-                    <td>
-                      <p class="fw-normal mb-1">Yattish</p>
-              
-                    </td>
-                    <td>
-                      <p>
-                        CB21132
-                      </p>
-                    </td>
-                    <td>
-                      <span class="badge badge-danger rounded-pill d-inline">User</span>
-                    </td>
-                    <td>
-                        <div class="btn-group shadow-0" role="group">
-                          <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminViewApprovalDetails.html'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
-                            
-                          </div>
-                    </td>
-                  </tr>
-                 
                 </tbody>
               </table>
             </div>

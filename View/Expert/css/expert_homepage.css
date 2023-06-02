@@ -7,7 +7,7 @@ body{
 .flexSection{
     display: flex;
     justify-content: center;
-    min-height:90vh
+    min-height:90vh;
 }
 
 .mainSection{
