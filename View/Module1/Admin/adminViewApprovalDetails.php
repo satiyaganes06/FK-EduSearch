@@ -1,3 +1,43 @@
+<?php
+
+  
+  session_start();
+  
+  //If the user is not logged in send him/her to the login form
+  if(!isset( $_SESSION["Current_admin_id"] )) {
+
+      ?>
+          <script>
+              alert("Access denied !!!")
+              window.location = "../Module1/Login/Admin Login/adminLogin.php";
+          </script>
+      <?php
+
+  }else{
+    include("../../../Config/database_con.php");
+
+    $userid = $_GET['userid'];
+    $temp_user_id = $_GET['temp_id'];
+
+    //Data from user profile table
+    $sql = "SELECT * FROM user_profile WHERE user_id = '$userid'";
+    $result = mysqli_query($conn,$sql) or die ("Could not execute query in homepage");
+    $userinfo = mysqli_fetch_assoc($result);
+
+    //Data from temp user profile table
+    $sql1 = "SELECT * FROM temp_user_profile WHERE temp_user_id = '$temp_user_id'";
+    $result1 = mysqli_query($conn,$sql1) or die ("Could not execute query in homepage");
+    $updateUserInfo = mysqli_fetch_assoc($result1);
+
+    // $sql4 = "SELECT * FROM temp_expert WHERE user_id = '$user_id'";
+    // $result4 = mysqli_query($conn,$sql4) or die ("Could not execute query in homepage");
+    // $expertinfo = mysqli_fetch_assoc($result4);
+
+  }
+
+?>
+
+
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -100,7 +140,7 @@
             <span class="tooltip">View Profile</span>
           </li>
           <li style="margin-top: 10px">
-            <a href="#">
+            <a href="../../../Config/logout.php">
               <i class="fa-solid fa-right-from-bracket"></i>
               <span class="links_name">Logout</span>
             </a>
@@ -126,7 +166,7 @@
               <div id="profile_details" class="position-relative">
                 <img
                   id="profile-background-pic"
-                  src="https://marketplace.canva.com/EAE2cQaUHVA/1/0/1600w/canva-black-minimal-motivation-quote-linkedin-banner-HoRi-2buBWk.jpg"
+                  src=<?php echo $userinfo['user_profile_bg']; ?>
                   class="shadows"
                   width="100%"
                   height="300px"
@@ -135,7 +175,7 @@
                 />
 
                 <img
-                  src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+                  src=<?php echo $userinfo['user_profile_img']; ?>
                   class="rounded-circle shadow-5 profile_Avatar"
                   alt="Black and White Portrait of a Man"
                   loading="lazy"
@@ -144,7 +184,10 @@
                 <div class="profile_content">
                   <div class="d-flex justify-content-between">
                     <div class="d-flex">
-                      <h2><strong>SHATTHIYA GANES</strong></h2>
+                      <?php if($updateUserInfo['user_name'] != $userinfo['user_name']){ ?>
+                        <h2><strong><?php echo $userinfo['user_name']; ?></strong></h2>
+                      <?php } ?>
+                      
                       <i
                         class="fas fa-circle-check fa-2x ml-3"
                         style="color: #00ff00"
@@ -155,151 +198,138 @@
                   </div>
 
                   <div class="d-flex justify-content-start mt-3">
-                    <p class="w-50 text-truncate mr-3">satiyaganes@gmail.com</p>
-                    <p class="w-50 text-truncate">Age : 28</p>
+                    <?php if($updateUserInfo['user_email'] != $userinfo['user_email']){ ?>
+                      <p class="w-50 text-truncate mr-3"><?php echo $userinfo['user_email']; ?></p>
+                    <?php } ?>
+
+                    <?php if($updateUserInfo['user_age'] != $userinfo['user_age']){ ?>
+                      <p class="w-50 text-truncate">Age : <?php echo $userinfo['user_age']; ?></p>
+                    <?php } ?>
                   </div>
 
                   <div class="d-flex justify-content-start">
-                    <p class="w-50 text-truncate mr-3">
-                      Academic Level : Master & PHD
-                    </p>
-                    <p class="w-50 text-truncate">Last Seen : 05-06-2023</p>
+                    <?php if($updateUserInfo['user_academicStatus'] !== $userinfo['user_academicStatus']){ ?>
+                      <p class="w-50 text-truncate mr-3">
+                        Academic Level : <?php echo $userinfo['user_academicStatus']; ?>
+                      </p>
+                    <?php } ?>
+
+                    <?php if($updateUserInfo['user_socialMedia'] != $userinfo['user_socialMedia']){ ?>
+                      <p class="w-50 text-truncate">Social Media : <a href=<?php echo $userinfo['user_socialMedia']; ?> target="_blank"><i class="fab fa-instagram"></i></a></p>
+                    <?php } ?>
                   </div>
 
-                  <p class="w-50 text-truncate mr-3">
-                    Social Media :
-                    <a
-                      href="https://www.instagram.com/satiyaganes06/"
-                      target="_blank"
-                      >@satiyaganes</a
-                    >
-                  </p>
+                    <?php if($updateUserInfo['user_phoneNum'] != $userinfo['user_phoneNum']){ ?>
+                      <div class="d-flex justify-content-between">
+                        <p class="w-50 text-truncate">Phone Number: <?php echo $userinfo['user_phoneNum']; ?></p>
+                        
+                      </div>
+                    <?php } ?>
 
-                  <div class="d-flex justify-content-start">
-                    <p class="mr-3">Research Area :</p>
-                    <p
-                      class="bg-secondary rounded-6"
-                      style="
-                        font-size: 12px;
-                        padding-top: 2px;
-                        padding-right: 10px;
-                        padding-left: 10px;
-                        color: white;
-                      "
-                    >
-                      Cloud Computing
-                    </p>
-                    <p
-                      class="ml-2 bg-secondary rounded-6"
-                      style="
-                        font-size: 12px;
-                        padding-top: 2px;
-                        padding-right: 10px;
-                        padding-left: 10px;
-                        color: white;
-                      "
-                    >
-                      Autonomic Computing
-                    </p>
-                  </div>
-                </div>
+                    <?php if($updateUserInfo['user_researchArea'] != $userinfo['user_researchArea']){ ?>
+                      <div class="d-flex w-50">
+                        <p class="mr-3">Research Area : </p>
+                        <p class="bg-secondary rounded-6" style="font-size: 12px; padding-top: 2px; padding-right: 10px; padding-left: 10px; color: white;"><?php echo $userinfo['user_researchArea']; ?></p>
+                      </div>
+                    <?php } ?>
+
+                    
+
+                </div> 
               </div>
+
+
               <div class="tabletitle2">
                 <h4>After Change</h4>
-            </div>
-              <div id="profile_details" class="position-relative">
-                <img
-                  id="profile-background-pic"
-                  src="https://marketplace.canva.com/EAE2cQaUHVA/1/0/1600w/canva-black-minimal-motivation-quote-linkedin-banner-HoRi-2buBWk.jpg"
-                  class="shadows"
-                  width="100%"
-                  height="300px"
-                  alt="Black profile background"
-                  loading="lazy"
-                />
+              </div>
+                <div id="profile_details" class="position-relative">
+                  <img
+                    id="profile-background-pic"
+                    src=<?php echo $updateUserInfo['user_profile_bg']; ?>
+                    class="shadows"
+                    width="100%"
+                    height="300px"
+                    alt="Black profile background"
+                    loading="lazy"
+                  />
 
-                <img
-                  src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
-                  class="rounded-circle shadow-5 profile_Avatar"
-                  alt="Black and White Portrait of a Man"
-                  loading="lazy"
-                />
+                  <img
+                    src=<?php echo $updateUserInfo['user_profile_img']; ?>
+                    class="rounded-circle shadow-5 profile_Avatar"
+                    alt="Black and White Portrait of a Man"
+                    loading="lazy"
+                  />
 
-                <div class="profile_content">
-                  <div class="d-flex justify-content-between">
-                    <div class="d-flex">
-                      <h2><strong>SHATTHIYA GANES</strong></h2>
-                      <i
-                        class="fas fa-circle-check fa-2x ml-3"
-                        style="color: #00ff00"
-                      ></i>
+                  <div class="profile_content">
+                    <div class="d-flex justify-content-between">
+                      <div class="d-flex">
+
+                        <?php if($updateUserInfo['user_name'] != $userinfo['user_name']){ ?>
+                          <h2><strong><?php echo $updateUserInfo['user_name']; ?></strong></h2>
+                        <?php } ?>
+                        
+                        <i
+                          class="fas fa-circle-check fa-2x ml-3"
+                          style="color: #00ff00"
+                        ></i>
+                      </div>
+
+                  
                     </div>
 
-                 
+                    <div class="d-flex justify-content-start mt-3">
+                      <?php if($updateUserInfo['user_email'] != $userinfo['user_email']){ ?>
+                        <p class="w-50 text-truncate mr-3"><?php echo $updateUserInfo['user_email']; ?></p>
+                      <?php } ?>
+
+                      <?php if($updateUserInfo['user_age'] != $userinfo['user_age']){ ?>
+                        <p class="w-50 text-truncate">Age : <?php echo $updateUserInfo['user_age']; ?></p>
+                      <?php } ?>
+                    </div>
+
+                    <div class="d-flex justify-content-start">
+                      <?php if($updateUserInfo['user_academicStatus'] != $userinfo['user_academicStatus']){ ?>
+                        <p class="w-50 text-truncate mr-3">
+                          Academic Level : <?php echo $updateUserInfo['user_academicStatus']; ?>
+                        </p>
+                      <?php } ?>
+
+                      <?php if($updateUserInfo['user_socialMedia'] != $userinfo['user_socialMedia']){ ?>
+                        <p class="w-50 text-truncate">Social Media : <a href=<?php echo $updateUserInfo['user_socialMedia']; ?> target="_blank"><i class="fab fa-instagram"></i></a></p>
+                      <?php } ?>
+                      
+                    </div>
+
+                    <?php if($updateUserInfo['user_phoneNum'] != $userinfo['user_phoneNum']){ ?>
+                      <div class="d-flex justify-content-between">
+                          <p class="w-50 text-truncate">Phone Number: <?php echo $updateUserInfo['user_phoneNum']; ?></p>
+                          
+                      </div>
+                    <?php } ?>
+
+                    <?php if($updateUserInfo['user_researchArea'] != $userinfo['user_researchArea']){ ?>
+                      <div class="d-flex w-50">
+                        <p class="mr-3">Research Area : </p>
+                        <p class="bg-secondary rounded-6" style="font-size: 12px; padding-top: 2px; padding-right: 10px; padding-left: 10px; color: white;"><?php echo $updateUserInfo['user_researchArea']; ?></p>
+                      </div>
+                    <?php } ?>
+
+                    
+
+                  </div> 
+                </div>
+                <div class="d-flex justify-content-between">
+                  <div class="text-start">
+                  <button type="button" class="btn btn-info me-2" >View CV</button>
                   </div>
 
-                  <div class="d-flex justify-content-start mt-3">
-                    <p class="w-50 text-truncate mr-3">satiyaganes@gmail.com</p>
-                    <p class="w-50 text-truncate">Age : 28</p>
-                  </div>
-
-                  <div class="d-flex justify-content-start">
-                    <p class="w-50 text-truncate mr-3">
-                      Academic Level : Master & PHD
-                    </p>
-                    <p class="w-50 text-truncate">Last Seen : 05-06-2023</p>
-                  </div>
-
-                  <p class="w-50 text-truncate mr-3">
-                    Social Media :
-                    <a
-                      href="https://www.instagram.com/satiyaganes06/"
-                      target="_blank"
-                      >@satiyaganes</a
-                    >
-                  </p>
-
-                  <div class="d-flex justify-content-start">
-                    <p class="mr-3">Research Area :</p>
-                    <p
-                      class="bg-secondary rounded-6"
-                      style="
-                        font-size: 12px;
-                        padding-top: 2px;
-                        padding-right: 10px;
-                        padding-left: 10px;
-                        color: white;
-                      "
-                    >
-                      Cloud Computing
-                    </p>
-                    <p
-                      class="ml-2 bg-secondary rounded-6"
-                      style="
-                        font-size: 12px;
-                        padding-top: 2px;
-                        padding-right: 10px;
-                        padding-left: 10px;
-                        color: white;
-                      "
-                    >
-                      Autonomic Computing
-                    </p>
+                  <div class="text-end">
+                    <a href="../../../Model/Expert/profileAdminValidateApprove.php?temp_id=<?php echo $temp_user_id ?>&userid=<?php echo $userid ?>"><button type="button" class="btn btn-success me-2" >Approve</button></a>
+                    <a href="../../../Model/Expert/profileAdminValidateApprove.php?temp_id=<?php echo $temp_user_id ?>"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Reject</button></a>
                   </div>
                 </div>
+                
               </div>
-              <div class="d-flex justify-content-between">
-                <div class="text-start">
-                <button type="button" class="btn btn-info me-2" >View CV</button>
-                 </div>
-
-                <div class="text-end">
-                  <button type="button" class="btn btn-success me-2" >Approve</button>
-                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Reject</button>
-                </div>
-              </div>
-              
-            </div>
           </div>
         </div>
       </div>
