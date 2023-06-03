@@ -1,3 +1,31 @@
+<?php
+  session_start();
+  
+  //If the user is not logged in send him/her to the login form
+  if(!isset( $_SESSION["Current_admin_id"] )) {
+
+      ?>
+          <script>
+              alert("Access denied !!!")
+              window.location = "../Login/Admin%20Login/adminLogin.php";
+          </script>
+      <?php
+
+  }else{
+    include("../../../Config/database_con.php");
+
+    if (isset($_SESSION['password_updated']) && $_SESSION['password_updated'] === true) {
+      echo "<script>alert('Password updated successfully.');</script>";
+      unset($_SESSION['password_updated']);
+      echo "<script>setTimeout(function() { location.reload(); }, 200);</script>";
+  }elseif (isset($_SESSION['password_update_error']) && $_SESSION['password_update_error'] === true) {
+    echo "<script>alert('Old Password do not match . Please try again.');</script>";
+    unset($_SESSION['password_update_error']);
+    echo "<script>setTimeout(function() { location.reload(); }, 200);</script>";
+}
+  }
+  ?>
+
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -116,36 +144,67 @@
           <!--Tulis coding kat sini-->
           <div class="card h-100">
             <div class="card-body">
-              <h5 class="card-title fw-bold text-center">Approval</h5>
+              <h5 class="card-title fw-bold text-center">Admin Profile</h5>
               <div
                 class="d-flex w-100 justify-content-center align-items-center"
               ></div>
-              <div class="tabletitle">
-                <h4>Before Change</h4>
-            </div>
-            <div class="card text-center">
+              
+            <div class="card text-center h-100">
                 <div class="card-header" style="background-color:#2C5864"><i class="fa-solid fa-user" style="color: #ffffff; font-size:30px;"></i></div>
                 <div class="card-body">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Button</a>
-                </div>
-                <div class="card-footer text-muted">2 days ago</div>
-                </div>
-              <div class="tabletitle2">
-                <h4>After Change</h4>
-            </div>
-             
-              <div class="d-flex justify-content-between">
-                <div class="text-start">
-                <button type="button" class="btn btn-info me-2" >View CV</button>
-                 </div>
+                    <h5 class="card-title">Admin Profile Details</h5>
+                    <?php
+                      include("../../../Config/database_con.php");
+                     
 
-                <div class="text-end">
-                  <button type="button" class="btn btn-success me-2" >Approve</button>
-                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Reject</button>
+
+                      $sql = "SELECT * FROM admin";
+                      $result = mysqli_query($conn,$sql);
+
+
+                      if ($result->num_rows > 0) {
+                        $row = mysqli_fetch_assoc($result);
+
+                      }
+
+                    ?>
+                    <div class="text-start">
+                    <p class="card-text">Admin Username : <?php echo $row['admin_username']; ?></p>
+                    <p class="card-text">Admin ID : <?php echo $row['admin_id']; ?></p>
+                    <p class="card-text">Admin Email : <?php echo $row['admin_email']; ?></p>
+                    </div>
+                  
+                   
                 </div>
-              </div>
+        
+                </div>
+                <div class="card text-center h-100">
+                <div class="card-header" style="background-color:#2C5864"><h4 class="text-white">Change Password</h4></div>
+                <div class="card-body">
+                    
+                 
+
+                <form action="../../../Model/adminChangePassword.php" method="post">
+                <div class="form-outline w-25 mb-4">
+                      <input type="text" id="form12" class="form-control" name="oldpass"/>
+                      <label class="form-label" for="form12">Enter Old Password</label>
+                    </div>
+                    <div class="text-start d-flex">
+                    
+                    <div class="form-outline w-25">
+                      <input type="text" id="form12" class="form-control" name="newpass"/>
+                      <label class="form-label" for="form12">Enter New Password</label>
+                    </div>
+                    <button type="submit" class="btn btn-warning ms-3 text-dark">Confirm Change</button>
+                    </form>
+                    </div>
+                   
+
+                   
+                </div>
+        
+                </div>
+             
               
             </div>
           </div>
