@@ -82,6 +82,7 @@
   ?>
 
   <!-- MDB -->
+  <script src="../../js/posting.js"></script>    
   <script src="../../js/question.js"></script>
   <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
   <!--Bootstrap 4 & 5 & jQuery Script-->

@@ -1,9 +1,8 @@
 
     var researchObject = {
-        "Software Engineering": 
-        ["Human Computer Interaction", "Web Engineering", "Software Maintenance & Evolution", "Software Testing", "Formal Method", "Software Quality Assurance"],
+        "Software Engineering": ["Human Computer Interaction", "Web Engineering", "Software Maintenance & Evolution", "Software Testing", "Formal Method", "Software Quality Assurance"],
         "Computer System & Networking": ["Network Technologies", "Network Services Administration", "Distributed & Parallel Computing", "Network Analysis & Design", "Network Management", "Structured Networks Cabling"],
-        "Graphic & Technology": ["Fundamental of Digital Media Design", "Computer Graphics", "Computer Games Programming I", "Virtual Reality", "3D Modellimh & Animation", "Project Development Workshop"],
+        "Graphics & Multimedia Technology": ["Fundamental of Digital Media Design", "Computer Graphics", "Computer Games Programming I", "Virtual Reality", "3D Modellimh & Animation", "Project Development Workshop"],
         "Cyber Security": ["Cyber Law & Security Policy", "Cyber Threat Intelligence", "Cybersecurity Operations", "Cybercrime & Forensics Computing", "Penetration Testing", "Cryptography"]
     }
 

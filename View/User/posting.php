@@ -24,8 +24,7 @@
     <link rel="stylesheet" href="../Common//css/footer.css">
     
     <!-- Icon -->
-    <link rel="shortcut icon" type="image/jpg" href="../../Asset/icon_logo.png" /> 
-    <script type="text/javascript" src="../../js/posting.js"></script>             
+    <link rel="shortcut icon" type="image/jpg" href="../../Asset/icon_logo.png" />          
 
 </head>
 <body>
@@ -37,17 +36,19 @@
   ?>
 
   <section>
+    <script> var valueResearch = '<?php echo $researchArea; ?>';</script>
     <table class="titleTable">
         <tr>
             <td><p class="title">
                     <?php 
                         echo $researchArea;
                     ?>
-                  <script> var js_var = "<?php echo $researchArea; ?>";</script>
                 </p></td>
             <td>
-                <select class="form-select" aria-label="questionForm" id="categories">
-                    <option disabled selected>Select your categories</option>
+              
+                <select class="form-select" aria-label="questionForm" id="categoriesDropdown">
+                <!--<option disabled selected>Select your categories</option>
+                    <option value=""></option>-->
                 </select>
             </td>
         </tr>
@@ -68,6 +69,7 @@
 
 
   <!-- MDB -->
+  <script src="../../js/posting.js"></script>
   <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
   <!--Bootstrap 4 & 5 & jQuery Script-->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
