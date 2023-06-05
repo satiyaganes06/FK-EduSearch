@@ -39,27 +39,42 @@
     <script> var valueResearch = '<?php echo $researchArea; ?>';</script>
     <table class="titleTable">
         <tr>
-            <td><p class="title">
+            <td>
+                <p class="title">
                     <?php 
                         echo $researchArea;
                     ?>
-                </p></td>
+                </p>
+            </td>
             <td>
-                <div id="dropdownContainer"></div>
-                <!--<select class="form-select" aria-label="questionForm" id="categoriesDropdown">
+                <select class="form-select" aria-label="questionForm" id="categoriesDropdown">
                     <option disabled selected>Select your categories</option>
-                    <option value=""></option>
-                </select>-->
+                </select></div>
+            </td>
+            <td>
+                <div class=box1> <button> <i class="fa-solid fa-filter" style="color: #757D8A;"></i></button></div>
             </td>
         </tr>
     </table>
   
-  <div class="container pt-3 pb-2"> 
-      <h4 id="output">hai</h4>
-      <p>Please fill out the following form with 
-        <br>your complaint. We will review your report
-        <br>and follow up as soon as possible</p>
+    <div class="container">
+        <div class="left-side">
+            <h2>Left Side</h2>
+            <p>This is the content on the left side.</p>
+        </div>
+        <div class="right-side">
+            <h4>INFORMATION BOARD</h4>
+            <p><div class="circle" style="background-color: #84D17E;"></div> Completed</p>
+            <p><div class="circle" style="background-color: #DFF45C;"></div>Revised</p>
+            <p><div class="circle" style="background-color: #3E9BA8;"></div>Accepted</p>
+            <p><div class="circle" style="background-color: #FFFFFF;"></div>Assign</p>
+        </div>
+        <div class="comment">
+                <h2>Left Side</h2>
+                <p>This is the content on the left side.</p>
+            </div>
     </div>
+
   </section>
 
     <!-- Footer -->

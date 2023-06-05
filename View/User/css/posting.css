@@ -12,16 +12,34 @@ section {
 
 /* Styles for the container */
 .container {
-    max-width: 94%;
-    margin: 0 auto;
-    background-color: #E7E7E7;
-    border-radius: 8px;
-}
+    display: grid;
+    grid-template-columns: 5fr 1fr;
+    grid-gap: 50px;
+  }
+  
+.left-side{
+    background-color: #E2E0E0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 20px;
+    margin-left: -200px;
+    margin-right: -90px;
+  }
 
-.container h4{
-    font-weight: bold;
-    margin-bottom: 15px;
-}
+.right-side{
+    margin-left: 90px;
+    margin-right: -400px;
+    top: 0;
+    position: sticky;
+  }
+
+.comment{
+    background-color: #EFEFEF;
+    padding: 20px;
+    margin-left: -200px;
+    margin-right: -90px;
+    margin-top: -50px;
+  }
 
 /* The title */
 .title{
@@ -46,4 +64,33 @@ section {
         padding: 0 10px;
     }
     
+}
+
+/* style small box filter */
+
+.box1 {
+    width: 60px;
+    height: 40px;
+    background-color: white;
+    text-align: center;
+    padding-top: 8px;
+    border: 1px solid #aaaaaa;
+    border-radius: 10px;
+  }
+
+button {
+    all: unset;
+    cursor: pointer;
+  }
+
+/* status */
+.circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+    float: left;
+  }
+p.right-side{
+    text-align: center;
 }

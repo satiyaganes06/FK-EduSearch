@@ -22,17 +22,13 @@ if (valueResearch == "Software Engineering"){
     alert("Go to dashboard and click the link");
 }
 
-// Create the select element
-var dropdown = document.createElement("select");
+var x = document.getElementById("categoriesDropdown");
 
-// Create and add options to the dropdown
-for (var i = 0; i < categoriesData.length; i++) {
-    var categoriesData = document.createElement("categoriesData");
-    categoriesData.value = categoriesData[i];
-    categoriesData.text = categoriesData[i];
-    dropdown.appendChild(categoriesData);
-  }
+for(var i=0; i<categoriesData.length; i++){
+    var option = document.createElement("option");
+    option.text = categoriesData[i];
+    x.add(option);
+}
 
-// Add the dropdown to the document body
-document.getElementById("dropdownContainer").appendChild(dropdown);
+
 
