@@ -45,11 +45,11 @@
                     ?>
                 </p></td>
             <td>
-              
-                <select class="form-select" aria-label="questionForm" id="categoriesDropdown">
-                <!--<option disabled selected>Select your categories</option>
-                    <option value=""></option>-->
-                </select>
+                <div id="dropdownContainer"></div>
+                <!--<select class="form-select" aria-label="questionForm" id="categoriesDropdown">
+                    <option disabled selected>Select your categories</option>
+                    <option value=""></option>
+                </select>-->
             </td>
         </tr>
     </table>
