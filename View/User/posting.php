@@ -59,8 +59,13 @@
   
     <div class="container">
         <div class="left-side">
-            <h2>Left Side</h2>
+            <div class="logoimg"></div>
+            <h2>POSTING</h2>
             <p>This is the content on the left side.</p>
+            <div class="comment">
+                <h2>COMMENT</h2>
+                <p>This is the content on the left side.</p>
+            </div>
         </div>
         <div class="right-side">
             <h4>INFORMATION BOARD</h4>
@@ -69,10 +74,6 @@
             <p><div class="circle" style="background-color: #3E9BA8;"></div>Accepted</p>
             <p><div class="circle" style="background-color: #FFFFFF;"></div>Assign</p>
         </div>
-        <div class="comment">
-                <h2>Left Side</h2>
-                <p>This is the content on the left side.</p>
-            </div>
     </div>
 
   </section>
