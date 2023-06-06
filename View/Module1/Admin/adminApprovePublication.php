@@ -9,10 +9,6 @@
  $result = mysqli_query($conn,$sql) or die ("Could not execute query in view");
  $row = mysqli_fetch_assoc($result);
 
- $updateImpression = ++$row['publication_impression'];
-
- $sql1 = "UPDATE publication set publication_impression = '$updateImpression' WHERE publication_id = '$idURL'";
- $result1 = mysqli_query($conn,$sql1) or die ("Could not execute query in update");
 ?>
 <!DOCTYPE html>
 
@@ -160,7 +156,7 @@
                         
                         <div class="d-flex align-items-center">
                           <i class="far fa-eye text-muted mr-1 fs-6"></i>
-                          <p id="impression_text"><?php echo $updateImpression; ?></p>
+                          <p id="impression_text"><?php echo $row['publication_impression'] ?></p>
                         </div>
         
                       </div>
@@ -231,8 +227,8 @@
              
 
                 <div class="text-end">
-                  <button type="button" class="btn btn-success me-2" >Approve</button>
-                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Reject</button>
+                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#addReasonModal">Reject</button>
+                  <a type="button" class="btn btn-success me-2" href="../../../Model/Expert/approvePublication.php?pub_id=<?php echo $row["publication_id"]; ?>&status=Accept">Approve</a>
                 </div>
               </div>
               
@@ -242,23 +238,39 @@
       </div>
     </section>
 
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog">
+    <!-- Add Reason -->
+  <div class="modal fade" id="addReasonModal" tabindex="-1" role="dialog" aria-labelledby="addReasonModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+      <form action="../../../Model/Expert/approvePublication.php?pub_id=<?php echo $row["publication_id"]; ?>&status=Reject" method="post" accept-charset="utf-8" enctype="multipart/form-data">
           <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Are you Sure You Want to Reject The Changes?</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="modal-header bg-danger">
+              <h5 class="modal-title" id="addReasonModalLabel">Reason</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
             </div>
-            <!-- <div class="modal-body">
+            <div class="modal-body">
+
+              
+            <!-- Profile bg -->
+            <div class="form-group">
+              <label for="profile-image">Reason</label>
+              <textarea type="text"  class="form-control-file" id="reason" name="reason" required></textarea>
+            </div>
             
-            </div> -->
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Yes</button>
-            </div>
           </div>
-        </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Send</button>
+          </div>
+
+        </form>
       </div>
+    </div>
+  </div>
+
+    
     <footer
       class="text-center text-white fixed-bottom overflow-hidden"
       style="background-color: #21081a; margin-top: 20px"

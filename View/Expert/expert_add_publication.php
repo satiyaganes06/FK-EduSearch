@@ -97,7 +97,7 @@
                     </tr>
 
                     <tr>
-                      <th scope="row"><strong>Publication : date </strong></th>
+                      <th scope="row"><strong>Publication : year </strong></th>
                       <td><input type="text" class="form-control" name="publication_date" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default"></td>
                     </tr>
 

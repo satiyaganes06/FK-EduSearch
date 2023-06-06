@@ -14,7 +14,7 @@ if ($conn->connect_error) {
 
 // Retrieve comments from the database
 $post_id = $_SESSION['current_comment_post_id'];
-$sql = "SELECT * FROM discussion WHERE posting_id = '$post_id' ORDER BY discussion_date, discussion_time DESC";
+$sql = "SELECT * FROM discussion WHERE posting_id = '$post_id' ORDER BY discussion_date DESC, discussion_time DESC";
 $result = $conn->query($sql);
 
 
@@ -27,13 +27,9 @@ if ($result->num_rows > 0) {
         echo '<div class="ml-5 mt-3 d-flex">
 
         <!-- Image -->
-        <img
-            src='. $row3['user_profile_img'] . '
-            class="rounded-circle shadow"
-            height="40"
-            alt="Black and White Portrait of a Man"
-            loading="lazy"
-        />
+        <img class="rounded-circle shadow" src="data:image/jpeg;base64,' . $row3['user_profile_img'] . '" height="40"
+            alt="Expert Profile"
+            loading="lazy"">
 
         <!-- Content -->
         <div class="w-100 pl-3">

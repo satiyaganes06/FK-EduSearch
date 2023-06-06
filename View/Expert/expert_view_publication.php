@@ -96,10 +96,31 @@
               <table class="table align-middle">
                 <tbody>
 
+                <?php
+                  if($row['publication_status'] == "Accept"){
+                    $color = "color:green";
+                  }elseif($row['publication_status'] == "Reject"){
+                    $color = "color:red";
+                  }else{
+                    $color = "color:blue";
+                  }
+                
+                ?>
+
                   <tr>
                     <th scope="row"><strong>Status :</strong></th>
-                    <td><?php echo $row["publication_status"]; ?></td>
+                    <td style="<?php echo $color ?>"><strong><?php echo $row["publication_status"]; ?></strong></td>
                   </tr>
+
+                  <?php
+                    if ($row["publication_status"] == "Reject") {
+                        echo "<tr>";
+                        echo "<th scope='row'><strong>Reason to: reject</strong></th>";
+                        echo "<td>" . $row["publication_reject_reason"] . "</td>";
+                        echo "</tr>";
+                    }
+                  ?>
+                  
 
                   <tr>
                     <th scope="row"><strong>Title :</strong></th>
