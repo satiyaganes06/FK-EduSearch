@@ -36,10 +36,8 @@
 
   <section>
     <div class="container text-center pt-3 pb-2"> 
-      <h4>Question Form</h4>
-      <p>Please fill out the following form with 
-        <br>your question. We will upload your question
-        <br>and follow up as soon as possible</p>
+      <h4>Update Profile</h4>
+      <p>You need Admin approval before successfully update your profile</p>
     </div>
     <div class="container mt-3 p-3 align-items-center">
       <div class="col-sm-7 mx-auto col-10 col-md-8 col-lg-6">

@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,900&display=swap');
+
+body{
+    background-color: #F5F5F5;
+    font-family: 'Montserrat', sans-serif;
+}
+
+section {
+    padding: 20px;
+    background-color: #f2f2f2;
+}
+/* layout section */
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+  }
+  .posting{
+    display: flex;
+    flex-direction: column;
+    padding-left: 20px;
+  }
+  .question{
+    width: 900px;
+    background-color: #E2E0E0;
+    padding: 20px; 
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding-bottom: 0;
+  }
+  .commentBox{
+    background-color: #EFEFEF;
+    margin-top: auto;
+    padding: 20px; 
+  }
+  .perPosting{
+    padding-bottom: 20px;
+  }
+
+/* Info Profile */
+.infoProfile{
+    width: 300px;
+    height: 500px;
+    padding: 50px;
+    background-color: #EFEFEF;
+    padding: 20px; 
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.background{
+    height: 180px;
+}
+hr.solid {
+    border-top: 3px solid #ccc9c9;
+    margin: auto;
+}
+.pictureProfile{
+    position: relative;
+    text-align: center;
+}
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.infoAge{
+    margin-left: auto;
+    padding-right: 10px;
+}
+h4.userName{
+    text-align: center;
+    padding-top: 50px;
+}
+.infoFirst{
+    display: flex;
+}
+
+/* posting */
+.profile{
+    display: flex;
+    align-items: center;
+    padding-bottom: 20px;
+  }
+  .profileImg{
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+  .username {
+    font-size: 18px;
+  }
+  .circle1 {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  .status{
+    margin-left: auto;
+  }
+  .perComment{
+    display: flex;
+    flex-direction: column;
+  }
+  .commentText{
+    padding-left: 60px;
+    margin-top: -30px;
+  }
+  
+  /* interaction */
+  .interaction{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    display: flex;
+  }
+  #like, .comment, .views, .rates{
+    padding-right: 5px;
+    border: none;
+    cursor: pointer;
+  }
+  .likeCounter, .commentCounter, .viewCounter, .rateCounter{
+    padding-right: 10px;
+  }
+  .dateTime{
+    margin-left: auto;
+  }
+  
+  /* status */
+  .circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 10px;
+    float: left;
+  }
+  p.infoBoard{
+    text-align: center;
+  }
+  
+  /* color */
+  .yellow{
+    color:#d2db57;
+  }
+  .red{
+    color: #a81f1f;
+  }
+  
+  #textareaComment {
+    display: none;
+  }
+  
