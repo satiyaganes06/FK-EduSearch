@@ -24,8 +24,6 @@
     
     <!-- Icon -->
     <link rel="shortcut icon" type="image/jpg" href="../../Asset/icon_logo.png" />
-    
-  
 </head>
 <body>
   
@@ -42,33 +40,56 @@
     <div class="container mt-3 p-3 align-items-center">
       <div class="col-sm-7 mx-auto col-10 col-md-8 col-lg-6">
         <form id="questionForm" action="#">
+        <div class="mb-2">
+            <label class="form-label" for="id">ID</label>
+            <input type="text" id="id" class="form-control" placeholder="CA21100" disabled/>
+          </div>
+        <div class="mb-2">
+            <label class="form-label" for="name">Name</label>
+            <input type="text" id="name" class="form-control" placeholder="James Cooper" disabled/>
+          </div>
+          <div class="mb-2">
+            <label class="form-label" for="email">Email</label>
+            <input type="email" id="email" class="form-control" placeholder="jamescooper@gmail.com" disabled />
+          </div>
+        <div class="mb-2">
+            <label class="form-label" for="age">Age</label>
+            <input type="text" id="age" class="form-control" placeholder="28"/>
+          </div>
+
           <div class="row mb-2">
             <div class="col">
-                <label class="form-label" for="researchArea">Research Area</label>
-                <select class="form-select" aria-label="questionForm" id="researchArea">
-                    <option disabled selected>Select your research area</option>
-                </select>
+                <label class="form-label" for="date">Academic Level</label>
+                <select class="form-select" aria-label="typeComplaint">
+              <option disabled selected>Please Select...</option>
+              <option value="Diploma">Diploma</option>
+              <option value="Degree">Degree</option>
+              <option value="Master">Master</option>
+              <option value="PhD">PhD</option>
+            </select>
             </div>
             <div class="col">
-                <label class="form-label" for="categories">Categories</label>
-                <select class="form-select" aria-label="questionForm" id="categories">
-                    <option disabled selected>Select your categories</option>
-                </select>
+                <label class="form-label" for="phoneNum">Social Media</label>
+                <input type="text" id="age" class="form-control"/>
             </div>
           </div>
 
-          <!-- Message input -->
           <div class="mb-3">
-            <label class="form-label" for="desc">Question</label>
-            <textarea class="form-control" id="desc" rows="4"></textarea>
+            <label class="form-label" for="type">Research Area</label>
+            <select class="form-select" aria-label="typeComplaint">
+              <option disabled selected>Please Select...</option>
+              <option value="1">Software Engineering</option>
+              <option value="2">Computer System & Networking</option>
+              <option value="3">Graphics & Multimedia Technology</option>
+              <option value="4">Cyber Security</option>
+            </select>
           </div>
           
           <!-- button -->
           <div class="button-box col-lg-12 mb-2">
-            <button class="btn btn-gray fw-bold">Cancel</button>
-            <button class="btn btn-primary ml-5 fw-bold">Submit</button>
+            <a href="profile.php" class="btn btn-gray fw-bold">Cancel</a>
+            <a class="btn btn-primary ml-5 fw-bold text-white">Submit</a>
           </div>
-
         </form>
       </div>
     </div>

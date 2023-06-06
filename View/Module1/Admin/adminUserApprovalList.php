@@ -258,7 +258,7 @@
 
                           while ($row = mysqli_fetch_assoc($result)){
                             $id = $row["publication_id"];
-                            echo $id; ?>
+                            ?>
                             <tr>
                             <td>
                               <div class="d-flex align-items-center">

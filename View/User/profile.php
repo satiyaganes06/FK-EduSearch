@@ -1,7 +1,34 @@
+<?php
+  session_start();
+  
+  //If the user is not logged in send him/her to the login form
+  if(!isset( $_SESSION["Current_user_id"] )) {
+
+      ?>
+          <script>
+              alert("Access denied !!!")
+              window.location = "../../View/Module1/Login/GeneralUserLogin/userLogin.php";
+          </script>
+      <?php
+  }else{
+    include("../../Config/database_con.php");
+
+    $user_id = $_SESSION["Current_user_id"] ;
+    $sql = "SELECT * FROM user_profile WHERE user_id = '$user_id'";
+    $result = mysqli_query($conn,$sql) or die ("Could not execute query in homepage");
+    $userinfo = mysqli_fetch_assoc($result);
+
+    $sql4 = "SELECT * FROM expert WHERE user_id = '$user_id'";
+    $result4 = mysqli_query($conn,$sql4) or die ("Could not execute query in homepage");
+    $expertinfo = mysqli_fetch_assoc($result4);
+
+    $_SESSION["route"] = "profile";
+
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php session_start(); ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,8 +51,7 @@
     <link rel="stylesheet" href="../Common//css/footer.css">
     
     <!-- Icon -->
-    <link rel="shortcut icon" type="image/jpg" href="../../Asset/icon_logo.png" />              
-
+    <link rel="shortcut icon" type="image/jpg" href="../../Asset/icon_logo.png" />  
 </head>
 <body>
   
@@ -37,10 +63,19 @@
   <section>
     <div class="container">
         <div class="infoProfile">
+        <?php
+          include("../../Config/database_con.php");
+          while($row = $result->fetch_assoc()) {
+            $id = $row["publication_id"];
+
+            $sql2 = "SELECT * FROM user_profile WHERE user_id = '$user_id'";
+            $result2 = mysqli_query($conn,$sql2) or die ("Could not execute query in homepage");
+            $row2 = mysqli_fetch_assoc($result2);
+        ?>
           <div class="background">
               <img 
                   id="profile-background-pic"
-                  src= "#"
+                  src= <?php echo $userinfo['user_profile_bg']; ?>
                   class="shadows"
                   width="100%"
                   alt="Black profile background"
@@ -51,7 +86,7 @@
             <hr class="solid">
             <div class="centered">
               <img
-                src="../../Asset/pp.jpg"
+                src=<?php echo $userinfo['user_profile_img']; ?>
                 class="rounded-circle"
                 height="100"
                 width= "100"
@@ -62,18 +97,19 @@
           </div>
           <div class="infoUser">
             <h4 class="userName">
-                <strong>James Cooper</strong> 
+                <strong><?php echo $userinfo['user_name']; ?></strong> 
                 <a href="updateInfo.php"><i class="fa-solid fa-gear" style="color: #8d9096;"></i></a>
             </h4>
               <div class="infoFirst">
-                <p>ID:</p>
-                <p class="infoAge">Age:</p>
+                <p>ID: <?php echo $userinfo['user_id']; ?></p>
+                <p class="infoAge">Age: <?php echo $userinfo['user_age']; ?></p>
               </div>
-              <p>Email: </p>
-              <p>Academic Level: </p>
-              <p>Social Media: </p>
-              <p>Research Area: </p>
+              <p>Email: <?php echo $userinfo['user_email']; ?></p>
+              <p>Academic Level: <?php echo $userinfo['user_academicStatus']; ?></p>
+              <p>Social Media: <?php echo $userinfo['user_socialMedia']; ?></p>
+              <p>Research Area: <?php echo $userinfo['user_researchArea']; ?></p>
           </div>
+          <?php } ?>
         </div>
         <br>
         <div class="posting">
