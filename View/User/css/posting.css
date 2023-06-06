@@ -73,6 +73,7 @@ button {
   flex-direction: column;
 }
 .question{
+  flex: 1;
   background-color: #E2E0E0;
   padding: 20px; 
   border-top-left-radius: 10px;
@@ -84,6 +85,7 @@ button {
   padding: 20px; 
 }
 .infoBoard{
+  flex: 0;
   position: sticky;
   margin-left: auto;
   padding-left: 20px;
@@ -110,6 +112,14 @@ button {
 }
 .status{
   margin-left: auto;
+}
+.perComment{
+  display: flex;
+  flex-direction: column;
+}
+.commentText{
+  padding-left: 60px;
+  margin-top: -30px;
 }
 
 /* interaction */

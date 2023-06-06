@@ -115,8 +115,27 @@
                 </div>
             </div>
             <div class="commentBox">
-                <h2>Additional Container</h2>
-                <p>This is the additional container below the left side.</p>
+                <div class="perComment">
+                    <div class="profile">
+                        <div class="profileImg">
+                            <!-- Image -->
+                            <img
+                                src= "../../../Asset/pp.jpg"
+                                class="rounded-circle shadow"
+                                height="40"
+                                width= "40";
+                                alt="Black and White Portrait of a Man"
+                                loading="lazy"
+                                />
+                        </div>
+                        <div class="username">
+                            <strong>James Cooper</strong>
+                        </div>
+                    </div>
+                    <div class="commentText">
+                        <p>This is the additional container below the left side.</p>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="infoBoard">
