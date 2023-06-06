@@ -29,7 +29,7 @@ section {
     }
 
     .container {
-        max-width: 100%;
+        max-width: 80%;
         padding: 0 10px;
     }
     
@@ -51,53 +51,93 @@ button {
     cursor: pointer;
   }
 
-/* Styles for the container */
-.container {
-    display: grid;
-    grid-template-columns: 5fr 1fr;
-    grid-gap: 50px;
-  }
-  
-.left-side{
-    background-color: #E2E0E0;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    padding: 20px;
-    margin-left: -200px;
-    margin-right: -90px;
+/* Responsive layout */
+@media (min-width: 768px) {
+  .posting {
+    flex: 1 0 60%;
   }
 
-.right-side{
-    margin-left: 90px;
-    margin-right: -400px;
-    top: 0;
-    position: sticky;
+  .commentBox{
+    flex: 1 0 40%;
   }
 
-.comment{
-    background-color: #EFEFEF;
-    padding: 20px;
-    margin-left: -20px;
-    margin-right: -20px;
-    margin-bottom: -30px;
-  }
+}
+
+/* layout section */
+.container{
+  display: flex;
+  flex-wrap: wrap;
+}
+.posting{
+  display: flex;
+  flex-direction: column;
+}
+.question{
+  background-color: #E2E0E0;
+  padding: 20px; 
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;  
+}
+.commentBox{
+  background-color: #EFEFEF;
+  margin-top: auto;
+  padding: 20px; 
+}
+.infoBoard{
+  position: sticky;
+  margin-left: auto;
+  padding-left: 20px;
+}
+
+/* posting */
+.profile{
+  display: flex;
+  align-items: center;
+  padding-bottom: 20px;
+}
+.profileImg{
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+.username {
+  font-size: 18px;
+}
+.circle1 {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.status{
+  margin-left: auto;
+}
+
+/* interaction */
+.interaction{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+}
+.like, .comment, .view, .rates{
+  padding-right: 5px;
+  border: none;
+  cursor: pointer;
+}
+.likeCounter, .commentCounter, .viewCounter, .rateCounter{
+  padding-right: 10px;
+}
+.dateTime{
+  margin-left: auto;
+}
 
 /* status */
 .circle {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    margin-right: 10px;
-    float: left;
-  }
-p.right-side{
-    text-align: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+  float: left;
 }
-
-.logoimg{
-    content: url("../../../Asset/pp.jpg");
-    border-radius: 50%;
-    margin-top: 5px;
-    width: 40px;
-    height: 40px;
+p.infoBoard{
+  text-align: center;
 }

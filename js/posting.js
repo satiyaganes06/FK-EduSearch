@@ -20,6 +20,7 @@ if (valueResearch == "Software Engineering"){
 
 }else{
     alert("Go to dashboard and click the link");
+    window.location = "../User/dashboard.php";
 }
 
 var x = document.getElementById("categoriesDropdown");

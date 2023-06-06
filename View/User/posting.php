@@ -37,6 +37,7 @@
 
   <section>
     <script> var valueResearch = '<?php echo $researchArea; ?>';</script>
+    <!-- Title Section -->
     <table class="titleTable">
         <tr>
             <td>
@@ -56,18 +57,69 @@
             </td>
         </tr>
     </table>
-  
+    <!-- Posting Section -->
     <div class="container">
-        <div class="left-side">
-            <div class="logoimg"></div>
-            <h2>POSTING</h2>
-            <p>This is the content on the left side.</p>
-            <div class="comment">
-                <h2>COMMENT</h2>
-                <p>This is the content on the left side.</p>
+        <div class="posting">
+            <div class="question">
+                <div class="profile">
+                    <div class="profileImg">
+                        <!-- Image -->
+                        <img
+                            src= "../../../Asset/pp.jpg"
+                            class="rounded-circle shadow"
+                            height="50"
+                            width= "50";
+                            alt="Black and White Portrait of a Man"
+                            loading="lazy"
+                            />
+                    </div>
+                    <div class="username">
+                        <strong>James Cooper</strong>
+                    </div>
+                    <div class="status" id="status">
+                        <div class="circle1" style="background-color: #84D17E;"></div>
+                    </div>
+                </div>
+                <h4>What is a MAC address in networking?</h4>
+                <!-- icon section -->
+                <div class="interaction">
+                    <div class="like">
+                        <button><i class="fa-regular fa-heart fa-xl" style="color: #999999;"></i></button>
+                        <!-- <i class="fa-solid fa-heart fa-xl" style="color: #a81f1f;"></i> -->
+                    </div>
+                    <div class="likeCounter">
+                        <p>Like</p>
+                    </div>
+                    <div class="views">
+                        <i class="fa-solid fa-eye fa-xl" style="color: #8e9095;"></i>
+                    </div>
+                    <div class="viewCounter">
+                        <p>View</p>
+                    </div>
+                    <div class="comment">
+                        <i class="fa-regular fa-comment fa-xl" style="color: #96989c;"></i>
+                    </div>
+                    <div class="commentCounter">
+                        <p>Comment</p>
+                    </div>
+                    <div class="rates">
+                        <i class="fa-regular fa-star fa-xl" style="color: #a0a2a6;"></i>
+                        <!-- <i class="fa-solid fa-star fa-xl" style="color: #d2db57;"></i> -->
+                    </div>
+                    <div class="rateCounter">
+                        <p>Rates</p>
+                    </div>
+                    <div class="dateTime">
+                        <p>DateTime</p>
+                    </div>
+                </div>
+            </div>
+            <div class="commentBox">
+                <h2>Additional Container</h2>
+                <p>This is the additional container below the left side.</p>
             </div>
         </div>
-        <div class="right-side">
+        <div class="infoBoard">
             <h4>INFORMATION BOARD</h4>
             <p><div class="circle" style="background-color: #84D17E;"></div> Completed</p>
             <p><div class="circle" style="background-color: #DFF45C;"></div>Revised</p>
