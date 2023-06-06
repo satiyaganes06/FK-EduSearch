@@ -93,7 +93,7 @@
         <ul class="nav-list">
         
           <li>
-            <a href="adminDashboard.html">
+            <a href="adminDashboard.php">
               <i class="bx bx-grid-alt"></i>
               <span class="links_name">Dashboard</span>
             </a>
@@ -114,7 +114,7 @@
             <span class="tooltip">Approval List</span>
           </li>
           <li>
-            <a href="#">
+            <a href="adminManageComplaint.php">
               <i class="fa-solid fa-rectangle-list"></i>
               <span class="links_name">Complain List</span>
             </a>

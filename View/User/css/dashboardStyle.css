@@ -27,12 +27,12 @@
   text-align:center;
   }
 
-  .box p{
+  p.box{
   font-size: 40px;
   font-weight:600;
   }
 
-  a:link{
+ .box a:link{
     text-decoration: underline;
   }
 
