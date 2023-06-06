@@ -34,6 +34,12 @@
     include_once('../Common/html/userNavBar.html');
   ?>
 
+  <section>
+    <div class="container">
+      <div class="profile"></div>
+      <div class="posting"></div>
+    </div>
+  </section>
   
   <!-- Footer -->
   <?php

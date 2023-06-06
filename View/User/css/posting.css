@@ -78,6 +78,7 @@ button {
   padding: 20px; 
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  padding-bottom: 0;
 }
 .commentBox{
   background-color: #EFEFEF;
@@ -128,7 +129,7 @@ button {
   padding-bottom: 10px;
   display: flex;
 }
-.like, .comment, .view, .rates{
+#like, .comment, .views, .rates{
   padding-right: 5px;
   border: none;
   cursor: pointer;
@@ -150,4 +151,16 @@ button {
 }
 p.infoBoard{
   text-align: center;
+}
+
+/* color */
+.yellow{
+  color:#d2db57;
+}
+.red{
+  color: #a81f1f;
+}
+
+#textareaComment {
+  display: none;
 }

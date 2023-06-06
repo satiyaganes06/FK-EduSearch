@@ -24,11 +24,9 @@
     <link rel="stylesheet" href="../Common//css/footer.css">
     
     <!-- Icon -->
-    <link rel="shortcut icon" type="image/jpg" href="../../Asset/icon_logo.png" />          
-
+    <link rel="shortcut icon" type="image/jpg" href="../../Asset/icon_logo.png" />
 </head>
 <body>
-  
   <!-- Navbar -->
   <?php
     include_once('../Common/html/userNavBar.html');
@@ -83,28 +81,26 @@
                 <h4>What is a MAC address in networking?</h4>
                 <!-- icon section -->
                 <div class="interaction">
-                    <div class="like">
-                        <button><i class="fa-regular fa-heart fa-xl" style="color: #999999;"></i></button>
-                        <!-- <i class="fa-solid fa-heart fa-xl" style="color: #a81f1f;"></i> -->
+                    <div id="like">
+                        <i id="iconLike" class="fa-regular fa-heart fa-xl"></i>
                     </div>
                     <div class="likeCounter">
                         <p>Like</p>
                     </div>
                     <div class="views">
-                        <i class="fa-solid fa-eye fa-xl" style="color: #8e9095;"></i>
+                        <i class="fa-solid fa-eye fa-xl"></i>
                     </div>
                     <div class="viewCounter">
                         <p>View</p>
                     </div>
                     <div class="comment">
-                        <i class="fa-regular fa-comment fa-xl" style="color: #96989c;"></i>
+                        <i id="iconComment" class="fa-regular fa-comment fa-xl"></i>
                     </div>
                     <div class="commentCounter">
                         <p>Comment</p>
                     </div>
                     <div class="rates">
-                        <i class="fa-regular fa-star fa-xl" style="color: #a0a2a6;"></i>
-                        <!-- <i class="fa-solid fa-star fa-xl" style="color: #d2db57;"></i> -->
+                        <i id="iconRate" class="fa-regular fa-star fa-xl"></i>
                     </div>
                     <div class="rateCounter">
                         <p>Rates</p>
@@ -135,6 +131,7 @@
                     <div class="commentText">
                         <p>This is the additional container below the left side.</p>
                     </div>
+                    <textarea id="textareaComment" placeholder="Enter your text..."></textarea>
                 </div>
             </div>
         </div>
