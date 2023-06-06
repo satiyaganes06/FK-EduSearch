@@ -58,68 +58,16 @@
     <!-- Posting Section -->
     <div class="container">
         <div class="posting">
-            <div class="question">
-                <div class="profile">
-                    <div class="profileImg">
-                        <!-- Image -->
-                        <img
-                            src= "../../../Asset/pp.jpg"
-                            class="rounded-circle shadow"
-                            height="50"
-                            width= "50";
-                            alt="Black and White Portrait of a Man"
-                            loading="lazy"
-                            />
-                    </div>
-                    <div class="username">
-                        <strong>James Cooper</strong>
-                    </div>
-                    <div class="status" id="status">
-                        <div class="circle1" style="background-color: #84D17E;"></div>
-                    </div>
-                </div>
-                <h4>What is a MAC address in networking?</h4>
-                <!-- icon section -->
-                <div class="interaction">
-                    <div id="like">
-                        <i id="iconLike" class="fa-regular fa-heart fa-xl"></i>
-                    </div>
-                    <div class="likeCounter">
-                        <p>Like</p>
-                    </div>
-                    <div class="views">
-                        <i class="fa-solid fa-eye fa-xl"></i>
-                    </div>
-                    <div class="viewCounter">
-                        <p>View</p>
-                    </div>
-                    <div class="comment">
-                        <i id="iconComment" class="fa-regular fa-comment fa-xl"></i>
-                    </div>
-                    <div class="commentCounter">
-                        <p>Comment</p>
-                    </div>
-                    <div class="rates">
-                        <i id="iconRate" class="fa-regular fa-star fa-xl"></i>
-                    </div>
-                    <div class="rateCounter">
-                        <p>Rates</p>
-                    </div>
-                    <div class="dateTime">
-                        <p>DateTime</p>
-                    </div>
-                </div>
-            </div>
-            <div class="commentBox">
-                <div class="perComment">
+            <div class="perPosting">
+                <div class="question">
                     <div class="profile">
                         <div class="profileImg">
                             <!-- Image -->
                             <img
                                 src= "../../../Asset/pp.jpg"
                                 class="rounded-circle shadow"
-                                height="40"
-                                width= "40";
+                                height="50"
+                                width= "50";
                                 alt="Black and White Portrait of a Man"
                                 loading="lazy"
                                 />
@@ -127,13 +75,145 @@
                         <div class="username">
                             <strong>James Cooper</strong>
                         </div>
+                        <div class="status" id="status">
+                            <div class="circle1" style="background-color: #84D17E;"></div>
+                        </div>
                     </div>
-                    <div class="commentText">
-                        <p>This is the additional container below the left side.</p>
+                    <h4>What is a MAC address in networking?</h4>
+                    <!-- icon section -->
+                    <div class="interaction">
+                        <div id="like">
+                            <i id="iconLike" class="fa-regular fa-heart fa-xl"></i>
+                        </div>
+                        <div class="likeCounter">
+                            <p>Like</p>
+                        </div>
+                        <div class="views">
+                            <i class="fa-solid fa-eye fa-xl"></i>
+                        </div>
+                        <div class="viewCounter">
+                            <p>View</p>
+                        </div>
+                        <div class="comment">
+                            <i id="iconComment" class="fa-regular fa-comment fa-xl"></i>
+                        </div>
+                        <div class="commentCounter">
+                            <p>Comment</p>
+                        </div>
+                        <div class="rates">
+                            <i id="iconRate" class="fa-regular fa-star fa-xl"></i>
+                        </div>
+                        <div class="rateCounter">
+                            <p>Rates</p>
+                        </div>
+                        <div class="dateTime">
+                            <p>DateTime</p>
+                        </div>
                     </div>
-                    <textarea id="textareaComment" placeholder="Enter your text..."></textarea>
+                </div>
+                <div class="commentBox">
+                    <div class="perComment">
+                        <div class="profile">
+                            <div class="profileImg">
+                                <!-- Image -->
+                                <img
+                                    src= "../../../Asset/pp.jpg"
+                                    class="rounded-circle shadow"
+                                    height="40"
+                                    width= "40";
+                                    alt="Black and White Portrait of a Man"
+                                    loading="lazy"
+                                    />
+                            </div>
+                            <div class="username">
+                                <strong>James Cooper</strong>
+                            </div>
+                        </div>
+                        <div class="commentText">
+                            <p>This is the additional container below the left side.</p>
+                        </div>
+                        <textarea id="textareaComment" placeholder="Enter your text..."></textarea>
+                    </div>
                 </div>
             </div>
+            <div class="perPosting">
+                <div class="question">
+                    <div class="profile">
+                        <div class="profileImg">
+                            <!-- Image -->
+                            <img
+                                src= "../../../Asset/pp.jpg"
+                                class="rounded-circle shadow"
+                                height="50"
+                                width= "50";
+                                alt="Black and White Portrait of a Man"
+                                loading="lazy"
+                                />
+                        </div>
+                        <div class="username">
+                            <strong>James Cooper</strong>
+                        </div>
+                        <div class="status" id="status">
+                            <div class="circle1" style="background-color: #84D17E;"></div>
+                        </div>
+                    </div>
+                    <h4>What is a MAC address in networking?</h4>
+                    <!-- icon section -->
+                    <div class="interaction">
+                        <div id="like">
+                            <i id="iconLike" class="fa-regular fa-heart fa-xl"></i>
+                        </div>
+                        <div class="likeCounter">
+                            <p>Like</p>
+                        </div>
+                        <div class="views">
+                            <i class="fa-solid fa-eye fa-xl"></i>
+                        </div>
+                        <div class="viewCounter">
+                            <p>View</p>
+                        </div>
+                        <div class="comment">
+                            <i id="iconComment" class="fa-regular fa-comment fa-xl"></i>
+                        </div>
+                        <div class="commentCounter">
+                            <p>Comment</p>
+                        </div>
+                        <div class="rates">
+                            <i id="iconRate" class="fa-regular fa-star fa-xl"></i>
+                        </div>
+                        <div class="rateCounter">
+                            <p>Rates</p>
+                        </div>
+                        <div class="dateTime">
+                            <p>DateTime</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="commentBox">
+                    <div class="perComment">
+                        <div class="profile">
+                            <div class="profileImg">
+                                <!-- Image -->
+                                <img
+                                    src= "../../../Asset/pp.jpg"
+                                    class="rounded-circle shadow"
+                                    height="40"
+                                    width= "40";
+                                    alt="Black and White Portrait of a Man"
+                                    loading="lazy"
+                                    />
+                            </div>
+                            <div class="username">
+                                <strong>James Cooper</strong>
+                            </div>
+                        </div>
+                        <div class="commentText">
+                            <p>This is the additional container below the left side.</p>
+                        </div>
+                        <textarea id="textareaComment" placeholder="Enter your text..."></textarea>
+                    </div>
+                </div>
+            </div>            
         </div>
         <div class="infoBoard">
             <h4>INFORMATION BOARD</h4>
@@ -153,6 +233,7 @@
 
 
   <!-- MDB -->
+  <script src="../../js/profile.js"></script>
   <script src="../../js/posting.js"></script>
   <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
   <!--Bootstrap 4 & 5 & jQuery Script-->

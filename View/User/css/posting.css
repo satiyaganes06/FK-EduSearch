@@ -91,6 +91,9 @@ button {
   margin-left: auto;
   padding-left: 20px;
 }
+.perPosting{
+  padding-bottom: 20px;
+}
 
 /* posting */
 .profile{
