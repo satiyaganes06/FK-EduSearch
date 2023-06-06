@@ -1,3 +1,32 @@
+<?php
+  session_start();
+  
+  //If the user is not logged in send him/her to the login form
+  if(!isset( $_SESSION["Current_user_id"] )) {
+
+      ?>
+          <script>
+              alert("Access denied !!!")
+              window.location = "../../View/Module1/Login/GeneralUserLogin/userLogin.php";
+          </script>
+      <?php
+
+  }else{
+    include("../../Config/database_con.php");
+
+    $user_id = $_SESSION["Current_user_id"] ;
+    $sql = "SELECT * FROM user_profile WHERE user_id = '$user_id'";
+    $result = mysqli_query($conn,$sql) or die ("Could not execute query in homepage");
+    $userinfo = mysqli_fetch_assoc($result);
+
+    $sql4 = "SELECT * FROM expert WHERE user_id = '$user_id'";
+    $result4 = mysqli_query($conn,$sql4) or die ("Could not execute query in homepage");
+    $expertinfo = mysqli_fetch_assoc($result4);
+
+    $_SESSION["route"] = "profile";
+
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
