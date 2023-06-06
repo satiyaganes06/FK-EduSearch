@@ -24,12 +24,9 @@
     <link rel="stylesheet" href="../Common//css/footer.css">
     
     <!-- Icon -->
-    <link rel="shortcut icon" type="image/jpg" href="../../Asset/icon_logo.png" /> 
-    <script type="text/javascript" src="../../js/posting.js"></script>             
-
+    <link rel="shortcut icon" type="image/jpg" href="../../Asset/icon_logo.png" />
 </head>
 <body>
-  
   <!-- Navbar -->
   <?php
     include_once('../Common/html/userNavBar.html');
@@ -37,28 +34,116 @@
   ?>
 
   <section>
+    <script> var valueResearch = '<?php echo $researchArea; ?>';</script>
+    <!-- Title Section -->
     <table class="titleTable">
         <tr>
-            <td><p class="title">
+            <td>
+                <p class="title">
                     <?php 
                         echo $researchArea;
                     ?>
-                  <script> var js_var = "<?php echo $researchArea; ?>";</script>
-                </p></td>
+                </p>
+            </td>
             <td>
-                <select class="form-select" aria-label="questionForm" id="categories">
+                <select class="form-select" aria-label="questionForm" id="categoriesDropdown">
                     <option disabled selected>Select your categories</option>
-                </select>
+                </select></div>
+            </td>
+            <td>
+                <div class=box1> <button> <i class="fa-solid fa-filter" style="color: #757D8A;"></i></button></div>
             </td>
         </tr>
     </table>
-  
-  <div class="container pt-3 pb-2"> 
-      <h4 id="output">hai</h4>
-      <p>Please fill out the following form with 
-        <br>your complaint. We will review your report
-        <br>and follow up as soon as possible</p>
+    <!-- Posting Section -->
+    <div class="container">
+        <div class="posting">
+            <div class="question">
+                <div class="profile">
+                    <div class="profileImg">
+                        <!-- Image -->
+                        <img
+                            src= "../../../Asset/pp.jpg"
+                            class="rounded-circle shadow"
+                            height="50"
+                            width= "50";
+                            alt="Black and White Portrait of a Man"
+                            loading="lazy"
+                            />
+                    </div>
+                    <div class="username">
+                        <strong>James Cooper</strong>
+                    </div>
+                    <div class="status" id="status">
+                        <div class="circle1" style="background-color: #84D17E;"></div>
+                    </div>
+                </div>
+                <h4>What is a MAC address in networking?</h4>
+                <!-- icon section -->
+                <div class="interaction">
+                    <div id="like">
+                        <i id="iconLike" class="fa-regular fa-heart fa-xl"></i>
+                    </div>
+                    <div class="likeCounter">
+                        <p>Like</p>
+                    </div>
+                    <div class="views">
+                        <i class="fa-solid fa-eye fa-xl"></i>
+                    </div>
+                    <div class="viewCounter">
+                        <p>View</p>
+                    </div>
+                    <div class="comment">
+                        <i id="iconComment" class="fa-regular fa-comment fa-xl"></i>
+                    </div>
+                    <div class="commentCounter">
+                        <p>Comment</p>
+                    </div>
+                    <div class="rates">
+                        <i id="iconRate" class="fa-regular fa-star fa-xl"></i>
+                    </div>
+                    <div class="rateCounter">
+                        <p>Rates</p>
+                    </div>
+                    <div class="dateTime">
+                        <p>DateTime</p>
+                    </div>
+                </div>
+            </div>
+            <div class="commentBox">
+                <div class="perComment">
+                    <div class="profile">
+                        <div class="profileImg">
+                            <!-- Image -->
+                            <img
+                                src= "../../../Asset/pp.jpg"
+                                class="rounded-circle shadow"
+                                height="40"
+                                width= "40";
+                                alt="Black and White Portrait of a Man"
+                                loading="lazy"
+                                />
+                        </div>
+                        <div class="username">
+                            <strong>James Cooper</strong>
+                        </div>
+                    </div>
+                    <div class="commentText">
+                        <p>This is the additional container below the left side.</p>
+                    </div>
+                    <textarea id="textareaComment" placeholder="Enter your text..."></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="infoBoard">
+            <h4>INFORMATION BOARD</h4>
+            <p><div class="circle" style="background-color: #84D17E;"></div> Completed</p>
+            <p><div class="circle" style="background-color: #DFF45C;"></div>Revised</p>
+            <p><div class="circle" style="background-color: #3E9BA8;"></div>Accepted</p>
+            <p><div class="circle" style="background-color: #FFFFFF;"></div>Assign</p>
+        </div>
     </div>
+
   </section>
 
     <!-- Footer -->
@@ -68,6 +153,7 @@
 
 
   <!-- MDB -->
+  <script src="../../js/posting.js"></script>
   <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
   <!--Bootstrap 4 & 5 & jQuery Script-->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>

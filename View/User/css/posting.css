@@ -10,19 +10,6 @@ section {
     background-color: #f2f2f2;
 }
 
-/* Styles for the container */
-.container {
-    max-width: 94%;
-    margin: 0 auto;
-    background-color: #E7E7E7;
-    border-radius: 8px;
-}
-
-.container h4{
-    font-weight: bold;
-    margin-bottom: 15px;
-}
-
 /* The title */
 .title{
     padding-top: 15px;
@@ -42,8 +29,138 @@ section {
     }
 
     .container {
-        max-width: 100%;
+        max-width: 80%;
         padding: 0 10px;
     }
     
+}
+
+/* style small box filter */
+.box1 {
+    width: 60px;
+    height: 40px;
+    background-color: white;
+    text-align: center;
+    padding-top: 8px;
+    border: 1px solid #aaaaaa;
+    border-radius: 10px;
+  }
+
+button {
+    all: unset;
+    cursor: pointer;
+  }
+
+/* Responsive layout */
+@media (min-width: 768px) {
+  .posting {
+    flex: 1 0 60%;
+  }
+
+  .commentBox{
+    flex: 1 0 40%;
+  }
+
+}
+
+/* layout section */
+.container{
+  display: flex;
+  flex-wrap: wrap;
+}
+.posting{
+  display: flex;
+  flex-direction: column;
+}
+.question{
+  flex: 1;
+  background-color: #E2E0E0;
+  padding: 20px; 
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  padding-bottom: 0;
+}
+.commentBox{
+  background-color: #EFEFEF;
+  margin-top: auto;
+  padding: 20px; 
+}
+.infoBoard{
+  flex: 0;
+  position: sticky;
+  margin-left: auto;
+  padding-left: 20px;
+}
+
+/* posting */
+.profile{
+  display: flex;
+  align-items: center;
+  padding-bottom: 20px;
+}
+.profileImg{
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+.username {
+  font-size: 18px;
+}
+.circle1 {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.status{
+  margin-left: auto;
+}
+.perComment{
+  display: flex;
+  flex-direction: column;
+}
+.commentText{
+  padding-left: 60px;
+  margin-top: -30px;
+}
+
+/* interaction */
+.interaction{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: flex;
+}
+#like, .comment, .views, .rates{
+  padding-right: 5px;
+  border: none;
+  cursor: pointer;
+}
+.likeCounter, .commentCounter, .viewCounter, .rateCounter{
+  padding-right: 10px;
+}
+.dateTime{
+  margin-left: auto;
+}
+
+/* status */
+.circle {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 10px;
+  float: left;
+}
+p.infoBoard{
+  text-align: center;
+}
+
+/* color */
+.yellow{
+  color:#d2db57;
+}
+.red{
+  color: #a81f1f;
+}
+
+#textareaComment {
+  display: none;
 }
