@@ -9,6 +9,8 @@
             window.location = "../Module 1/Login/General User Login/userLogin.php";
         </script>
     <?php
+  }else{
+    $_SESSION["user_route"] = "question";
   }
 ?>
 
@@ -45,7 +47,7 @@
   
   <!-- Navbar -->
   <?php
-    include_once('../Common/html/userNavBar.html');
+    include_once('../Common/html/userNavBar.php');
   ?>
 
   <section>

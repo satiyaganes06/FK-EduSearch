@@ -1,4 +1,4 @@
-<?php 
+<?php
 include_once('../../Config/database_con.php');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -7,7 +7,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $newPass = $_POST['newPassword'];
     $confirmPass = $_POST['confirmPassword'];
 
-    // Validate the input (you can add more validation as per your requirements)
+    // Validate the input
     if (empty($otp) || empty($newPass) || empty($confirmPass)) {
         // Handle empty fields error
         echo 'Please fill in all the input fields.';
@@ -17,22 +17,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             die("Connection failed: " . mysqli_connect_error());
         }
 
-        if (!($newPass == $confirmPass)){
-            
-        }else{
-        $query = "INSERT INTO account (acc_password, VALUE $confirmPass )WHERE OTP = '$otp'";
+        $query = "SELECT * FROM account WHERE OTP = '$otp'";
+        $result = mysqli_query($conn, $query);
 
-                $result = mysqli_query($conn, $query);
+        if (mysqli_num_rows($result) > 0) {
+            if ($newPass !== $confirmPass) {
+                
+            } else {
+                $queryUpdate = "UPDATE account SET acc_password = '$confirmPass' WHERE OTP = '$otp'";
+                $updateResult = mysqli_query($conn, $queryUpdate);
 
-            if ($result) {
-                    
-                        echo 'Password Changes ';
-                    } else {
-                        echo 'No matching user found.';
-                    }
-
+                if ($updateResult) {
+                    echo '<script>alert("Password changed successfully."); window.location.href = "../../View/Module1/Login/GeneralUserLogin/userLogin.php";</script>';
+                } else {
+                    echo '<script>alert("Failed to update password."); window.location.href = "../../View/Module1/Login/GeneralUserLogin/userLogin.php";</script>';
+                }
+            }
+        } else {
+            echo '<script>alert("Incorrect OTP."); window.location.href = "../../View/Module1/Login/GeneralUserLogin/userLogin.php";</script>';
         }
     }
 }
-
 ?>
