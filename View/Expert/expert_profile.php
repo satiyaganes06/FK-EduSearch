@@ -7,7 +7,7 @@
       ?>
           <script>
               alert("Access denied !!!")
-              window.location = "../Module 1/Login/General User Login/userLogin.php";
+              window.location = "../Module1/Login/GeneralUserLogin/userLogin.php";
           </script>
       <?php
 
@@ -15,6 +15,8 @@
     include("../../Config/database_con.php");
 
     $user_id = $_SESSION["Current_user_id"] ;
+    $expert_id = $_SESSION["expertID"];
+    
     $sql = "SELECT * FROM user_profile WHERE user_id = '$user_id'";
     $result = mysqli_query($conn,$sql) or die ("Could not execute query in homepage");
     $userinfo = mysqli_fetch_assoc($result);
@@ -71,21 +73,26 @@
             <div id="profile_Component">
     
                 <div id="profile_details" class="position-relative">
-                    <img 
-                        id="profile-background-pic"
-                        src= <?php echo $userinfo['user_profile_bg']; ?>
-                        class="shadows"
-                        width="100%"
-                        alt="Black profile background"
-                        loading="lazy"
-                    />
 
-                    <img
-                        src=<?php echo $userinfo['user_profile_img']; ?>
-                        class="rounded-circle shadow-5 profile_Avatar"
-                        alt="Black and White Portrait of a Man"
-                        loading="lazy"
-                    />
+                    <div >
+                      <?php echo '<img id="profile-background-pic" class="shadows " src="data:image/jpeg;base64,' . $userinfo['user_profile_bg'] . '" width="100%"
+                        alt="Black profile background"
+                        loading="lazy"">';  ?>
+                      <a type="button" data-toggle="modal" data-target="#editProfileBgModal" class="edit-icon-button2">
+                          <i class="fa fa-pencil" style="color:blue;"></i>
+                      </a>
+                    </div>
+                    
+
+                    <div class="profile_Avatar">
+                      
+                      <?php echo '<img class="rounded-circle shadow-5 " src="data:image/jpeg;base64,' . $userinfo['user_profile_img'] . '" height="120"
+                          alt="Black and White Portrait of a Man"
+                          loading="lazy"">';  ?>
+                      <a type="button" data-toggle="modal" data-target="#editProfileImgModal" class="edit-icon-button">
+                          <i class="fa fa-pencil" style="color:blue;"></i>
+                      </a>
+                    </div>
 
                     <div class="profile_content">
                         <div class="d-flex justify-content-between">
@@ -120,7 +127,7 @@
                           <p class="bg-secondary rounded-6" style="font-size: 12px; padding-top: 2px; padding-right: 10px; padding-left: 10px; color: white;"><?php echo $userinfo['user_researchArea']; ?></p>
                         </div>
 
-                        <a href="../../Model/Expert/displayPDF.php?id=<?=$expertinfo['expert_id']?>" target="_blank"><button class="button_View btn-dark btn rounded-8 text-white mt-3 mb-3" data-mdb-ripple-color="dark"><i class="fas fa-arrow-up-from-bracket mr-1"></i><strong>View CV</strong></button></a>
+                        <a href="../../Model/Expert/openCV.php?expert_id=<?=$expert_id?>" target="_blank"><button class="button_View btn-dark btn rounded-8 text-white mt-3 mb-3" data-mdb-ripple-color="dark"><i class="fas fa-arrow-up-from-bracket mr-1"></i><strong>View CV</strong></button></a>
                     </div>
                 </div>
                 
@@ -143,7 +150,7 @@
                           <tr>
                             <th style="border-top-left-radius: 20px; border-bottom-left-radius: 20px;">Bil</th>
                             <th>Title</th>
-                            <th>Year</th>
+                            <th>Status</th>
                             <th style="border-top-right-radius: 20px; border-bottom-right-radius: 20px;">Impression</th>
                           </tr>
                       </thead>
@@ -187,8 +194,19 @@
                           <div class="nameEllipsis"><a id="titleClickEffect" href="../Expert/expert_view_publication.php?id=<?php echo $id; ?>"><?php echo $row['publication_title']; ?></div>
                           </td>
 
-                          <td style="width: 10%; padding: 10px;">
-                              <span><?php echo $row['publication_date']; ?></span>
+                          <?php
+                            if($row['publication_status'] == "Accept"){
+                              $color = "color:green";
+                            }elseif($row['publication_status'] == "Reject"){
+                              $color = "color:red";
+                            }else{
+                              $color = "color:blue";
+                            }
+                          
+                          ?>
+
+                          <td style="width: 10%; padding: 10px; <?php echo $color; ?>">
+                              <span><?php echo $row['publication_status']; ?></span>
                           </td>
 
                           <td style="width: 15%; padding: 10px; text-align: center;">
@@ -214,12 +232,75 @@
     ?>
 
 
+  <!-- Edit Profile Img Modal -->
+  <div class="modal fade" id="editProfileImgModal" tabindex="-1" role="dialog" aria-labelledby="editProfileImgModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+      <form action="../../Model/Expert/profileUpdate.php?actionType=profileImgUpdate" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editProfileImgModalLabel">Edit Profile Image</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              
+            <!-- Profile Image -->
+            <div class="form-group">
+              <label for="profile-image">Profile Image</label>
+              <input type="file"  class="form-control-file" id="profile-image" name="profile-image" required>
+            </div>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Edit Profile Bg Modal -->
+  <div class="modal fade" id="editProfileBgModal" tabindex="-1" role="dialog" aria-labelledby="editProfileBgModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+
+      <form action="../../Model/Expert/profileUpdate.php?actionType=profileBgUpdate" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editProfileBgModalLabel">Edit Profile Background</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+
+              
+            <!-- Profile bg -->
+            <div class="form-group">
+              <label for="profile-image">Profile Background</label>
+              <input type="file"  class="form-control-file" id="profile-image-bg" name="profile-image-bg" required>
+            </div>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
 
   <!-- Edit Profile Modal -->
   <div class="modal fade" id="editProfileModal" tabindex="-1" role="dialog" aria-labelledby="editProfileModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
 
-      <form action="../../Model/Expert/profileUpdate.php" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+      <form action="../../Model/Expert/profileUpdate.php?actionType=formUpdate" method="post" accept-charset="utf-8" enctype="multipart/form-data">
           <div class="modal-content">
             <div class="modal-header">
               <h5 class="modal-title" id="editProfileModalLabel">Edit Profile</h5>
@@ -287,7 +368,7 @@
             <!-- Cover Letter Document -->
             <div class="form-group">
               <label for="cover-letter">Cover Letter Document</label>
-              <input type="file" class="form-control-file" name="cover-letter">
+              <input type="file" name="cover-letter" id="cover-letter" accept="application/pdf">
             </div>
               
             

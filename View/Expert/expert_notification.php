@@ -60,7 +60,7 @@
     
     <section class="flexSection">
         <div class="mainSection mb-5">
-            <h1><strong>Assign Post</strong></h1>
+            <h1><strong>Assigned Post</strong></h1>
     
             <div id="publication_Component">
 
@@ -80,6 +80,7 @@
                         <div class="post">
                             <div class="d-flex">
                                 <!-- Image -->
+                                
                                 <img
                                     src= <?php echo $row2['user_profile_img']; ?>
                                     class="rounded-circle shadow"

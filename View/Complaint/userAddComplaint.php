@@ -72,6 +72,15 @@
             </select>
           </div>
 
+          <div class="mb-3">
+            <label class="form-label" for="type">Choose Post</label>
+            <select class="form-select" aria-label="typeComplaint">
+              <option selected>Please Select...</option>
+              <option value="1">Unsatisfied Expert's Feedback</option>
+              <option value="2">Wrongly Assigned Research Area</option>
+            </select>
+          </div>
+
           <!-- Message input -->
           <div class="mb-3">
             <label class="form-label" for="desc">Brief Description</label>

@@ -1,56 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,900&display=swap');
 
-body{
-    background-color: #F5F5F5;
-    font-family: 'Montserrat', sans-serif;
-}
-
-section {
-    padding: 20px;
-    background-color: #f2f2f2;
-}
-
-/* The title */
-.title{
-    padding-top: 15px;
-    padding-left: 25px;
-    margin-bottom: 20px;
-}
-
-.titleTable, table, tr, td{
-    padding: 10px;
-    text-align: center;
-}
-
-    /* Styles for responsive layout */
-    @media (max-width: 767px) {
-    section {
-        padding: 10px;
-    }
-
-    .container {
-        max-width: 80%;
-        padding: 0 10px;
-    }
-    
-}
-
-/* style small box filter */
-.box1 {
-    width: 60px;
-    height: 40px;
-    background-color: white;
-    text-align: center;
-    padding-top: 8px;
-    border: 1px solid #aaaaaa;
-    border-radius: 10px;
+/* Styles for responsive layout */
+@media (max-width: 767px) {
+  section {
+      padding: 10px;
   }
 
-button {
-    all: unset;
-    cursor: pointer;
-  }
-
+  .container {
+      max-width: 80%;
+      padding: 0 10px;
+  }  
+}
 /* Responsive layout */
 @media (min-width: 768px) {
   .posting {
@@ -63,17 +23,58 @@ button {
 
 }
 
-/* layout section */
-.container{
-  display: flex;
-  flex-wrap: wrap;
+body{
+    background-color: #F5F5F5;
+    font-family: 'Montserrat', sans-serif;
 }
-.posting{
+section {
+    padding: 20px;
+    background-color: #f2f2f2;
+}
+.flexSection{
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  min-height:90vh
+}
+
+/* The title */
+.titlePosting{
+  display: flex;
+  padding-top: 15px;
+  padding-left: 25px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.form-select{
+  width: 300px;
+  margin-right: 10px;
+}
+p.title{
+  padding-right: 10px;
+  padding-top: 10px;
+}
+
+/* style small box filter */
+.box1 {
+    width: 60px;
+    height: 40px;
+    background-color: white;
+    text-align: center;
+    padding-top: 8px;
+    margin-top: 5px;
+    border: 1px solid #aaaaaa;
+    border-radius: 10px;
+}
+button {
+    all: unset;
+    cursor: pointer;
+}
+
+/* layout section */
+.perPosting{
+  padding-bottom: 20px;
 }
 .question{
-  flex: 1;
   background-color: #E2E0E0;
   padding: 20px; 
   border-top-left-radius: 10px;
@@ -86,32 +87,21 @@ button {
   padding: 20px; 
 }
 .infoBoard{
-  flex: 0;
+  background-color: #eeebeb;
   position: sticky;
-  margin-left: auto;
-  padding-left: 20px;
-}
-.perPosting{
-  padding-bottom: 20px;
+  border-radius: 10px;
+  padding: 20px;
 }
 
 /* posting */
-.profile{
-  display: flex;
-  align-items: center;
-  padding-bottom: 20px;
-}
 .profileImg{
   width: 50px;
   height: 50px;
   margin-right: 10px;
 }
-.username {
-  font-size: 18px;
-}
 .circle1 {
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
 }
 .status{
@@ -127,21 +117,13 @@ button {
 }
 
 /* interaction */
-.interaction{
-  padding-top: 10px;
-  padding-bottom: 10px;
-  display: flex;
-}
 #like, .comment, .views, .rates{
   padding-right: 5px;
   border: none;
   cursor: pointer;
 }
 .likeCounter, .commentCounter, .viewCounter, .rateCounter{
-  padding-right: 10px;
-}
-.dateTime{
-  margin-left: auto;
+  padding-right: 30px;
 }
 
 /* status */

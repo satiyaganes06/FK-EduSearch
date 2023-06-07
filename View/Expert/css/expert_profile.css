@@ -67,6 +67,42 @@ p{
     height: 120px;
 }
 
+.edit-icon-button {
+    position: absolute;
+    bottom: 5px;
+    right: 20px;
+    background-color: white;
+    color: gray;
+    border: none;
+    width: 25px;
+    height: 25px;
+    padding-left: 5px;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.edit-icon-button2{
+    position: absolute;
+    top: 150px;
+    right: 20px;
+    background-color: white;
+    color: gray;
+    border: none;
+    width: 25px;
+    height: 25px;
+    padding-left: 5px;
+    border-radius: 50%;
+    z-index: 2;
+}
+
+.edit-icon-button:hover {
+    color: black;
+}
+
+.edit-icon-button2{
+    color: black;
+}
+
 .profile_content{
     padding: 70px 20px 20px  50px;
 }
@@ -76,6 +112,8 @@ p{
     background-color: #115FFB;
     font-family: 'Montserrat', sans-serif;
 }
+
+
 
 #tableHeaderBg{
     font-family: 'Montserrat', sans-serif;

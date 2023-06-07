@@ -79,13 +79,10 @@
                   <div class="post_publication d-flex">
                     
                     <!-- Image -->
-                    <img
-                      src= <?php echo $row2['user_profile_img']; ?>
-                      class="rounded-circle shadow"
-                      height="60"
-                      alt="Black and White Portrait of a Man"
-                      loading="lazy"
-                    />
+
+                    <?php echo '<img class="rounded-circle shadow" src="data:image/jpeg;base64,' . $row2['user_profile_img'] . '" height="60"
+                          alt="Black and White Portrait of a Man"
+                          loading="lazy"">';  ?>
         
                     <!-- Content -->
                     <div class="w-100 pl-3">

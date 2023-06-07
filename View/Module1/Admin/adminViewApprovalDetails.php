@@ -29,10 +29,6 @@
     $result1 = mysqli_query($conn,$sql1) or die ("Could not execute query in homepage");
     $updateUserInfo = mysqli_fetch_assoc($result1);
 
-    // $sql4 = "SELECT * FROM temp_expert WHERE user_id = '$user_id'";
-    // $result4 = mysqli_query($conn,$sql4) or die ("Could not execute query in homepage");
-    // $expertinfo = mysqli_fetch_assoc($result4);
-
   }
 
 ?>
@@ -320,12 +316,12 @@
                 </div>
                 <div class="d-flex justify-content-between">
                   <div class="text-start">
-                  <button type="button" class="btn btn-info me-2" >View CV</button>
+                  <a href="../../../Model/Expert/openCV.php?user_id=<?=$userid?>" target="_blank"><button type="button"  class="btn btn-info me-2" >View CV</button></a>
                   </div>
 
                   <div class="text-end">
                     <a href="../../../Model/Expert/profileAdminValidateApprove.php?temp_id=<?php echo $temp_user_id ?>&userid=<?php echo $userid ?>"><button type="button" class="btn btn-success me-2" >Approve</button></a>
-                    <a href="../../../Model/Expert/profileAdminValidateApprove.php?temp_id=<?php echo $temp_user_id ?>"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Reject</button></a>
+                    <a href="../../../Model/Expert/profileAdminValidateReject.php?temp_id=<?php echo $temp_user_id ?>"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Reject</button></a>
                   </div>
                 </div>
                 

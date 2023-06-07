@@ -96,13 +96,10 @@
               data-mdb-toggle="dropdown"
               aria-expanded="false"
             >
-              <img
-                src= <?php echo $row1['user_profile_img']; ?>
-                class="rounded-circle"
-                height="35"
-                alt="Black and White Portrait of a Man"
-                loading="lazy"
-              />
+            
+            <?php echo '<img class="rounded-circle " src="data:image/jpeg;base64,' . $row1['user_profile_img'] . '" height="35"
+                        alt="Black and White Portrait of a Man"
+                        loading="lazy"">';  ?>
             </a>
 
             <ul

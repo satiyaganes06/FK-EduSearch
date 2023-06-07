@@ -1,3 +1,17 @@
+<?php
+  session_start();
+  //If the user is not logged in send him/her to the login form
+    if(!isset( $_SESSION["Current_user_id"] )) {
+
+    ?>
+        <script>
+            alert("Access denied !!!")
+            window.location = "../Module 1/Login/General User Login/userLogin.php";
+        </script>
+    <?php
+  }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -43,17 +57,17 @@
     </div>
     <div class="container mt-3 p-3 align-items-center">
       <div class="col-sm-7 mx-auto col-10 col-md-8 col-lg-6">
-        <form id="questionForm" action="#">
+        <form id="questionForm" action="../../Model/User/addPosting.php" method="POST">
           <div class="row mb-2">
             <div class="col">
                 <label class="form-label" for="researchArea">Research Area</label>
-                <select class="form-select" aria-label="questionForm" id="researchArea">
+                <select class="form-select" aria-label="questionForm" id="researchArea" name="researchArea">
                     <option disabled selected>Select your research area</option>
                 </select>
             </div>
             <div class="col">
                 <label class="form-label" for="categories">Categories</label>
-                <select class="form-select" aria-label="questionForm" id="categories">
+                <select class="form-select" aria-label="questionForm" id="categories" name="categories">
                     <option disabled selected>Select your categories</option>
                 </select>
             </div>
@@ -61,8 +75,8 @@
 
           <!-- Message input -->
           <div class="mb-3">
-            <label class="form-label" for="desc">Question</label>
-            <textarea class="form-control" id="desc" rows="4"></textarea>
+            <label class="form-label" for="question">Question</label>
+            <textarea class="form-control" id="question" name="question" rows="4"></textarea>
           </div>
           
           <!-- button -->
