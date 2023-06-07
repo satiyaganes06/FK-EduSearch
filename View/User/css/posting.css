@@ -70,21 +70,13 @@ button {
     cursor: pointer;
 }
 
-/* layout section */
-.perPosting{
-  padding-bottom: 20px;
-}
+/* posting section */
 .question{
-  background-color: #E2E0E0;
+  background-color: #EFEFEF;
   padding: 20px; 
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   padding-bottom: 0;
-}
-.commentBox{
-  background-color: #EFEFEF;
-  margin-top: auto;
-  padding: 20px; 
 }
 .infoBoard{
   background-color: #eeebeb;
@@ -92,28 +84,24 @@ button {
   border-radius: 10px;
   padding: 20px;
 }
+hr.solid {
+  border-top: 3px solid #ccc9c9;
+  margin: auto;
+}
 
-/* posting */
+/* posting - image */
 .profileImg{
   width: 50px;
   height: 50px;
   margin-right: 10px;
 }
 .circle1 {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
 }
 .status{
   margin-left: auto;
-}
-.perComment{
-  display: flex;
-  flex-direction: column;
-}
-.commentText{
-  padding-left: 60px;
-  margin-top: -30px;
 }
 
 /* interaction */

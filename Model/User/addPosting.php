@@ -20,7 +20,7 @@
       $posting_course = $_POST['categories'];
       $posting_like = 0;
       $posting_view = 0;
-      $posting_status = 'Revised';
+      $posting_status = 'Assign';
       $posting_rating = 0;
       $posting_date = date("Y-m-d H:i:s");
 

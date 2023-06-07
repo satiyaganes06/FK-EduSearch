@@ -57,7 +57,7 @@
   
   <!-- Navbar -->
   <?php
-    include_once('../Common/html/userNavBar.html');
+    include_once('../Common/html/userNavBar.php');
   ?>
 
   <section>

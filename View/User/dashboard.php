@@ -31,7 +31,7 @@
   
   <!-- Navbar -->
   <?php
-    include_once('../Common/html/userNavBar.html');
+    include_once('../Common/html/userNavBar.php');
   ?>
 
   <section>
@@ -202,7 +202,7 @@
         <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of student <h2> 180</h2></td>
       </tr>
       <tr>
-        <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of lecturer <h2> 98</h2></td>
+        <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of staff <h2> 98</h2></td>
       </tr>
       <tr>
         <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of expert <h2> 40</h2></td>
