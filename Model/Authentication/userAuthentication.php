@@ -1,3 +1,4 @@
+
 <?php
 include_once('../../Config/database_con.php');
 
@@ -76,7 +77,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           $sql = "SELECT * FROM expert WHERE user_id = '$userID'";
           $result = mysqli_query($conn,$sql) or die("ERROR 401");
           $row = mysqli_fetch_assoc($result);
-
+          
           $expert_id = $row['expert_id'];
           $_SESSION["expertID"] = $expert_id;
 
@@ -111,6 +112,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
           
             
         }else{
+
             header('Location: ../../../../View/User/dashboard.php');
             exit();
         }
