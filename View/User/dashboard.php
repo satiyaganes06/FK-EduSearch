@@ -1,7 +1,24 @@
 <?php
 session_start();
 $_SESSION["user_route"] = "home";
+if(!isset( $_SESSION["Current_user_id"] )) {
 
+    ?>
+        <script>
+            alert("Access denied !!!")
+            window.location = "../Module1/Login/GeneralUserLogin/userLogin.php";
+        </script>
+    <?php
+
+    }
+
+  include("../../Config/database_con.php");
+  $totalUser = "SELECT * FROM user_profile";
+
+  if ($result = mysqli_query($con, $totalUser)) {
+    // Return the number of rows in result set
+    $countUser = mysqli_num_rows( $result );
+ }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -204,10 +221,18 @@ $_SESSION["user_route"] = "home";
         </td>
       </tr>
       <tr>
-        <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of student <h2> 180</h2></td>
+        <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of student 
+        <h2> 
+          <?php
+            if ($result = mysqli_query($con, $totalUser)) {
+              // Return the number of rows in result set
+              $countUser = mysqli_num_rows( $result );
+           }
+          ?>
+        </h2></td>
       </tr>
       <tr>
-        <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of lecturer <h2> 98</h2></td>
+        <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of staff <h2> 98</h2></td>
       </tr>
       <tr>
         <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of expert <h2> 40</h2></td>

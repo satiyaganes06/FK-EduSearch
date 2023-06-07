@@ -1,7 +1,29 @@
+<?php
+  session_start();
+  $researchArea = $_GET["researchArea"];
+
+  if(!isset( $_SESSION["Current_user_id"] )) {
+
+    ?>
+        <script>
+            alert("Access denied !!!")
+            window.location = "../Module1/Login/GeneralUserLogin/userLogin.php";
+        </script>
+    <?php
+
+    }
+
+  include("../../Config/database_con.php");
+
+  $sql = "SELECT * FROM posting INNER JOIN user_profile 
+            ON posting.user_id=user_profile.user_id WHERE posting_categories='$researchArea'";
+  $result = mysqli_query($conn,$sql) or die ("Could not execute query in view");
+  //$row = mysqli_fetch_assoc($result);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php session_start(); ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,14 +51,13 @@
 <body>
   <!-- Navbar -->
   <?php
-    include_once('../Common/html/userNavBar.html');
-    $researchArea = $_GET["researchArea"];
+    include_once('../Common/html/userNavBar.php');
   ?>
 
 <section>
         <!-- Title Posting -->
         <div class="titlePosting">
-        <script> var valueResearch = '<?php echo $researchArea; ?>';</script>
+            <script> var valueResearch = '<?php echo $researchArea; ?>';</script>
             <p class="title">
                 <?php 
                     echo $researchArea;
@@ -53,13 +74,17 @@
             <div class="col-10" >
                 <!-- Posting section -->
                 <div class="d-flex flex-column" >
-                    <div class="perPosting" >
+                    <?php
+                    if ($result->num_rows > 0) {
+                        while($row = mysqli_fetch_assoc($result)){
+                    ?>
+                    <div class="pb-2" >
                         <div class="question" >
                             <div class="d-flex pb-3" >
                                 <!-- Image -->
                                 <div class="profileImg" >
                                     <img
-                                        src= "../../../Asset/pp.jpg"
+                                        src= <?php echo $row['user_profile_img']; ?>
                                         class="rounded-circle shadow"
                                         height="50"
                                         width= "50";
@@ -67,12 +92,25 @@
                                         loading="lazy"
                                         />
                                 </div>
-                                <div class="content d-flex flex-column pl-2">
-                                    <strong>James Cooper</strong>
-                                    <p>What is a MAC address in networking?</p>
+                                <div class="d-flex flex-column pl-2">
+                                    <strong><?php echo $row['user_name']; ?></strong>
+                                    <p><?php echo $row['posting_content']; ?></p>
                                 </div>
+                                <!-- Determine the color of status -->
+                                <?php
+                                $status = $row['posting_status'];
+                                if($status == "Assign"){
+                                    $colorStatus = "FFFFFF";
+                                }else if($status == "Accepted"){
+                                    $colorStatus = "3E9BA8";
+                                }else if($status == "Revised"){
+                                    $colorStatus = "DFF45C";
+                                }else if($status == "Completed"){
+                                    $colorStatus = "84D17E";
+                                }
+                                ?>
                                 <div class="status" id="status">
-                                    <div class="circle1" style="background-color: #84D17E;"></div>
+                                    <div class="circle1" style="background-color: #<?php echo $colorStatus;?>;"></div>
                                 </div>
                             </div>
                             <!-- icon section -->
@@ -81,13 +119,13 @@
                                     <i id="iconLike" class="fa-regular fa-heart fa-l"></i>
                                 </div>
                                 <div class="likeCounter">
-                                    <p>Like</p>
+                                    <p><?php echo $row['posting_like']; ?> Like</p>
                                 </div>
                                 <div class="views">
                                     <i class="fa-solid fa-eye fa-l"></i>
                                 </div>
                                 <div class="viewCounter">
-                                    <p>View</p>
+                                    <p><?php echo $row['posting_view']; ?> View</p>
                                 </div>
                                 <div class="comment">
                                     <i id="iconComment" class="fa-regular fa-comment fa-l"></i>
@@ -102,11 +140,44 @@
                                     <p>Rates</p>
                                 </div>
                                 <div class="ml-auto">
-                                    <p>DateTime</p>
+                                    <p><?php echo $row['posting_date']; ?></p>
                                 </div>
+                            </div>
+
+                            <!-- Comment section -->
+                            <hr class="solid" >
+                            <div class="py-4">
+                                <strong>Comments</strong>
+                            </div>
+                            <div class="d-flex flex-column pl-5">
+                                <div class="d-flex pb-3">
+                                    <div class="profileImg">
+                                        <!-- Image -->
+                                        <img
+                                            src= "../../../Asset/pp.jpg"
+                                            class="rounded-circle shadow"
+                                            height="40"
+                                            width= "40";
+                                            alt="Black and White Portrait of a Man"
+                                            loading="lazy"
+                                            />
+                                    </div>
+                                    <div class="d-flex flex-column pl-2">
+                                        <strong>James Cooper</strong>
+                                        <p>This is the additional container below the left side.</p>
+                                    </div>
+                                </div>
+                                <textarea id="textareaComment" placeholder="Enter your text..."></textarea>
                             </div>
                         </div>
                     </div>
+                    <?php }}else {
+                        ?>
+                            <div class="text-center" style="height: 200px; margin:100px">
+                                <p><?php echo "No post found.";?></p>
+                            </div>
+                        <?php
+                } ?>
                 </div>
             </div>
             <div class="col-2" >
@@ -119,7 +190,6 @@
                     <p><div class="circle" style="background-color: #FFFFFF;"></div>Assign</p>
                 </div>
             </div>
-            
         </div>
 </section>
 

@@ -1,5 +1,13 @@
 <?php
   $user_route = $_SESSION["user_route"];
+  include("../../Config/database_con.php");
+
+  $id = $_SESSION["Current_user_id"];
+
+  $sql0 = "SELECT * FROM user_profile WHERE user_id  = '$id'";
+  $result0 = mysqli_query($conn,$sql0) or die ("Could not execute query in view");
+  $row0 = mysqli_fetch_assoc($result0);
+
 
   if($user_route == 'home'){
     $home = 'active' ;
@@ -15,8 +23,12 @@
   }else{
      
   } 
-?>
 
+
+  
+
+
+?>
 <html>
     <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark text-white sticky-top">
@@ -86,13 +98,13 @@
         <div class="dropdown d-flex profile_section">
 
           <div class="mr-3 profile_name_Section">
-            <h6 id="navName"><strong>James Cooper</strong></h6>
-            <h6 id="navUsername">@jamescooper</h6>
+            <h6 id="navName"><strong><?php echo $row0['user_name']; ?></strong></h6>
+            <h6 id="navUsername">@<?php echo $row0['user_name']; ?></h6>
           </div>
 
           <div class="dropdown">
             <img
-              src="../../Asset/pp.jpg"
+              src=<?php echo $row0['user_profile_img']; ?>
               class="rounded-circle shadow"
               height="40"
               alt="Black and White Portrait of a Man"
@@ -104,23 +116,6 @@
               <a href="../../../Config/logout.php">Logout</a>
             </div>
           </div>
-          
-          <!--
-          <a
-            class="dropdown-toggle d-flex align-items-center hidden-arrow"
-            href=""
-            role="button"
-            aria-expanded="false"
-          >
-            <img
-              src="../../Asset/pp.jpg"
-              class="rounded-circle shadow"
-              height="40"
-              alt="Black and White Portrait of a Man"
-              loading="lazy"
-            />
-          </a>
-          -->
           
         </div>
       </div>
