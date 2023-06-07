@@ -12,12 +12,11 @@
     }
 
   include("../../Config/database_con.php");
+  //count user
   $totalUser = "SELECT * FROM user_profile";
 
-  if ($result = mysqli_query($con, $totalUser)) {
-    // Return the number of rows in result set
-    $countUser = mysqli_num_rows( $result );
- }
+  //count staff
+  $totalExpert = "SELECT * FROM expert";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -70,7 +69,11 @@
                             </h4> 
                             <table class="center">
                                 <tr>
-                                  <th>100</th>
+                                  <th>
+                                    <?php
+                                      
+                                    ?>
+                                  </th>
                                   <th>98</th>
                                 </tr>
                                 <tr>
@@ -222,18 +225,29 @@
         <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of student 
         <h2> 
           <?php
-            if ($result = mysqli_query($con, $totalUser)) {
+            if ($result = mysqli_query($conn, $totalUser)) {
               // Return the number of rows in result set
               $countUser = mysqli_num_rows( $result );
+
+              echo $countUser;
            }
           ?>
         </h2></td>
       </tr>
       <tr>
-        <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of staff <h2> 98</h2></td>
+      <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of expert 
+      <h2> 
+          <?php
+              if ($result = mysqli_query($conn, $totalExpert)) {
+                // Return the number of rows in result set
+                $countExpert = mysqli_num_rows( $result );
+                echo $countExpert;
+            }
+          ?>
+      </h2></td>
       </tr>
       <tr>
-        <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of expert <h2> 40</h2></td>
+      <td><!--<i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of staff <h2> 98</h2>--></td>
       </tr>
       <tr><td></td></tr>
       <tr><td></td></tr>
