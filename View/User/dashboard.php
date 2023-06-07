@@ -1,7 +1,27 @@
+<?php 
+  session_start(); 
+  if(!isset( $_SESSION["Current_user_id"] )) {
+
+    ?>
+        <script>
+            alert("Access denied !!!")
+            window.location = "../Module1/Login/GeneralUserLogin/userLogin.php";
+        </script>
+    <?php
+
+    }
+
+  include("../../Config/database_con.php");
+  $totalUser = "SELECT * FROM user_profile";
+
+  if ($result = mysqli_query($con, $totalUser)) {
+    // Return the number of rows in result set
+    $countUser = mysqli_num_rows( $result );
+ }
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php session_start(); ?>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -199,7 +219,15 @@
         </td>
       </tr>
       <tr>
-        <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of student <h2> 180</h2></td>
+        <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of student 
+        <h2> 
+          <?php
+            if ($result = mysqli_query($con, $totalUser)) {
+              // Return the number of rows in result set
+              $countUser = mysqli_num_rows( $result );
+           }
+          ?>
+        </h2></td>
       </tr>
       <tr>
         <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of staff <h2> 98</h2></td>

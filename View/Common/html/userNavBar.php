@@ -3,9 +3,9 @@
 
   $id = $_SESSION["Current_user_id"];
 
-  $sql2 = "SELECT * FROM user_profile WHERE user_id  = '$id'";
-  $result2 = mysqli_query($conn,$sql2) or die ("Could not execute query in view");
-  $row2 = mysqli_fetch_assoc($result2);
+  $sql0 = "SELECT * FROM user_profile WHERE user_id  = '$id'";
+  $result0 = mysqli_query($conn,$sql0) or die ("Could not execute query in view");
+  $row0 = mysqli_fetch_assoc($result0);
 ?>
 <html>
     <!-- Navbar -->
@@ -73,13 +73,13 @@
         <div class="dropdown d-flex profile_section">
 
           <div class="mr-3 profile_name_Section">
-            <h6 id="navName"><strong><?php echo $row2['user_name']; ?></strong></h6>
-            <h6 id="navUsername">@<?php echo $row2['user_name']; ?></h6>
+            <h6 id="navName"><strong><?php echo $row0['user_name']; ?></strong></h6>
+            <h6 id="navUsername">@<?php echo $row0['user_name']; ?></h6>
           </div>
 
           <div class="dropdown">
             <img
-              src=<?php echo $row2['user_profile_img']; ?>
+              src=<?php echo $row0['user_profile_img']; ?>
               class="rounded-circle shadow"
               height="40"
               alt="Black and White Portrait of a Man"
