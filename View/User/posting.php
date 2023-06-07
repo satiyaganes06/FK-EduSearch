@@ -33,198 +33,95 @@
     $researchArea = $_GET["researchArea"];
   ?>
 
-  <section>
-    <script> var valueResearch = '<?php echo $researchArea; ?>';</script>
-    <!-- Title Section -->
-    <table class="titleTable">
-        <tr>
-            <td>
-                <p class="title">
-                    <?php 
-                        echo $researchArea;
-                    ?>
-                </p>
-            </td>
-            <td>
-                <select class="form-select" aria-label="questionForm" id="categoriesDropdown">
-                    <option disabled selected>Select your categories</option>
-                </select></div>
-            </td>
-            <td>
-                <div class=box1> <button> <i class="fa-solid fa-filter" style="color: #757D8A;"></i></button></div>
-            </td>
-        </tr>
-    </table>
-    <!-- Posting Section -->
-    <div class="container">
-        <div class="posting">
-            <div class="perPosting">
-                <div class="question">
-                    <div class="profile">
-                        <div class="profileImg">
-                            <!-- Image -->
-                            <img
-                                src= "../../../Asset/pp.jpg"
-                                class="rounded-circle shadow"
-                                height="50"
-                                width= "50";
-                                alt="Black and White Portrait of a Man"
-                                loading="lazy"
-                                />
-                        </div>
-                        <div class="username">
-                            <strong>James Cooper</strong>
-                        </div>
-                        <div class="status" id="status">
-                            <div class="circle1" style="background-color: #84D17E;"></div>
-                        </div>
-                    </div>
-                    <h4>What is a MAC address in networking?</h4>
-                    <!-- icon section -->
-                    <div class="interaction">
-                        <div id="like">
-                            <i id="iconLike" class="fa-regular fa-heart fa-xl"></i>
-                        </div>
-                        <div class="likeCounter">
-                            <p>Like</p>
-                        </div>
-                        <div class="views">
-                            <i class="fa-solid fa-eye fa-xl"></i>
-                        </div>
-                        <div class="viewCounter">
-                            <p>View</p>
-                        </div>
-                        <div class="comment">
-                            <i id="iconComment" class="fa-regular fa-comment fa-xl"></i>
-                        </div>
-                        <div class="commentCounter">
-                            <p>Comment</p>
-                        </div>
-                        <div class="rates">
-                            <i id="iconRate" class="fa-regular fa-star fa-xl"></i>
-                        </div>
-                        <div class="rateCounter">
-                            <p>Rates</p>
-                        </div>
-                        <div class="dateTime">
-                            <p>DateTime</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="commentBox">
-                    <div class="perComment">
-                        <div class="profile">
-                            <div class="profileImg">
+<section>
+        <!-- Title Posting -->
+        <div class="titlePosting">
+        <script> var valueResearch = '<?php echo $researchArea; ?>';</script>
+            <p class="title">
+                <?php 
+                    echo $researchArea;
+                ?>
+            </p>
+            <select class="form-select" aria-label="questionForm" id="categoriesDropdown">
+                <option disabled selected>Select your categories</option>
+            </select>
+            <div class=box1> <button> <i class="fa-solid fa-filter" style="color: #757D8A;"></i></button></div>
+        </div>
+
+        <!-- Lower section -->
+        <div class="container-fluid d-flex">
+            <div class="col-10" >
+                <!-- Posting section -->
+                <div class="d-flex flex-column" >
+                    <div class="perPosting" >
+                        <div class="question" >
+                            <div class="d-flex pb-3" >
                                 <!-- Image -->
-                                <img
-                                    src= "../../../Asset/pp.jpg"
-                                    class="rounded-circle shadow"
-                                    height="40"
-                                    width= "40";
-                                    alt="Black and White Portrait of a Man"
-                                    loading="lazy"
-                                    />
+                                <div class="profileImg" >
+                                    <img
+                                        src= "../../../Asset/pp.jpg"
+                                        class="rounded-circle shadow"
+                                        height="50"
+                                        width= "50";
+                                        alt="Black and White Portrait of a Man"
+                                        loading="lazy"
+                                        />
+                                </div>
+                                <div class="content d-flex flex-column pl-2">
+                                    <strong>James Cooper</strong>
+                                    <p>What is a MAC address in networking?</p>
+                                </div>
+                                <div class="status" id="status">
+                                    <div class="circle1" style="background-color: #84D17E;"></div>
+                                </div>
                             </div>
-                            <div class="username">
-                                <strong>James Cooper</strong>
+                            <!-- icon section -->
+                            <div class="d-flex pt-1 pb-1">
+                                <div id="like">
+                                    <i id="iconLike" class="fa-regular fa-heart fa-l"></i>
+                                </div>
+                                <div class="likeCounter">
+                                    <p>Like</p>
+                                </div>
+                                <div class="views">
+                                    <i class="fa-solid fa-eye fa-l"></i>
+                                </div>
+                                <div class="viewCounter">
+                                    <p>View</p>
+                                </div>
+                                <div class="comment">
+                                    <i id="iconComment" class="fa-regular fa-comment fa-l"></i>
+                                </div>
+                                <div class="commentCounter">
+                                    <p>Comment</p>
+                                </div>
+                                <div class="rates">
+                                    <i id="iconRate" class="fa-regular fa-star fa-l"></i>
+                                </div>
+                                <div class="rateCounter">
+                                    <p>Rates</p>
+                                </div>
+                                <div class="ml-auto">
+                                    <p>DateTime</p>
+                                </div>
                             </div>
                         </div>
-                        <div class="commentText">
-                            <p>This is the additional container below the left side.</p>
-                        </div>
-                        <textarea id="textareaComment" placeholder="Enter your text..."></textarea>
                     </div>
                 </div>
             </div>
-            <div class="perPosting">
-                <div class="question">
-                    <div class="profile">
-                        <div class="profileImg">
-                            <!-- Image -->
-                            <img
-                                src= "../../../Asset/pp.jpg"
-                                class="rounded-circle shadow"
-                                height="50"
-                                width= "50";
-                                alt="Black and White Portrait of a Man"
-                                loading="lazy"
-                                />
-                        </div>
-                        <div class="username">
-                            <strong>James Cooper</strong>
-                        </div>
-                        <div class="status" id="status">
-                            <div class="circle1" style="background-color: #84D17E;"></div>
-                        </div>
-                    </div>
-                    <h4>What is a MAC address in networking?</h4>
-                    <!-- icon section -->
-                    <div class="interaction">
-                        <div id="like">
-                            <i id="iconLike" class="fa-regular fa-heart fa-xl"></i>
-                        </div>
-                        <div class="likeCounter">
-                            <p>Like</p>
-                        </div>
-                        <div class="views">
-                            <i class="fa-solid fa-eye fa-xl"></i>
-                        </div>
-                        <div class="viewCounter">
-                            <p>View</p>
-                        </div>
-                        <div class="comment">
-                            <i id="iconComment" class="fa-regular fa-comment fa-xl"></i>
-                        </div>
-                        <div class="commentCounter">
-                            <p>Comment</p>
-                        </div>
-                        <div class="rates">
-                            <i id="iconRate" class="fa-regular fa-star fa-xl"></i>
-                        </div>
-                        <div class="rateCounter">
-                            <p>Rates</p>
-                        </div>
-                        <div class="dateTime">
-                            <p>DateTime</p>
-                        </div>
-                    </div>
+            <div class="col-2" >
+            <!-- Info Status -->
+                <div class="infoBoard" >
+                    <p><strong>Info Status</strong></p>
+                    <p><div class="circle" style="background-color: #84D17E;"></div> Completed</p>
+                    <p><div class="circle" style="background-color: #DFF45C;"></div>Revised</p>
+                    <p><div class="circle" style="background-color: #3E9BA8;"></div>Accepted</p>
+                    <p><div class="circle" style="background-color: #FFFFFF;"></div>Assign</p>
                 </div>
-                <div class="commentBox">
-                    <div class="perComment">
-                        <div class="profile">
-                            <div class="profileImg">
-                                <!-- Image -->
-                                <img
-                                    src= "../../../Asset/pp.jpg"
-                                    class="rounded-circle shadow"
-                                    height="40"
-                                    width= "40";
-                                    alt="Black and White Portrait of a Man"
-                                    loading="lazy"
-                                    />
-                            </div>
-                            <div class="username">
-                                <strong>James Cooper</strong>
-                            </div>
-                        </div>
-                        <div class="commentText">
-                            <p>This is the additional container below the left side.</p>
-                        </div>
-                        <textarea id="textareaComment" placeholder="Enter your text..."></textarea>
-                    </div>
-                </div>
-            </div>            
+            </div>
+            
         </div>
-        <div class="infoBoard">
-            <h4>INFORMATION BOARD</h4>
-            <p><div class="circle" style="background-color: #84D17E;"></div> Completed</p>
-            <p><div class="circle" style="background-color: #DFF45C;"></div>Revised</p>
-            <p><div class="circle" style="background-color: #3E9BA8;"></div>Accepted</p>
-            <p><div class="circle" style="background-color: #FFFFFF;"></div>Assign</p>
-        </div>
-    </div>
-
-  </section>
+</section>
 
     <!-- Footer -->
     <?php
