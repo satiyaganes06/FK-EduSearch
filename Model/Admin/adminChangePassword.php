@@ -1,5 +1,5 @@
 <?php
-include("../Config/database_con.php");
+include("../../Config/database_con.php");
 
 session_start();
 // Retrieve the new password from the form
@@ -27,7 +27,8 @@ if ($result->num_rows > 0) {
                 if (mysqli_query($conn, $sql)) {
                     // Set the success message in a session variable
                     $_SESSION['password_updated'] = true;
-                    header('Location: ../View/Module1/Admin/adminProfile.php');
+                    
+                    header('Location: ../../View/Module1/Admin/adminProfile.php');
                     exit(); // Add this line to stop executing the code below
                 } else {
                     echo "Error updating password: " . mysqli_error($conn);
@@ -35,7 +36,7 @@ if ($result->num_rows > 0) {
         }else{
             echo "Error updating password: " . mysqli_error($conn);
             $_SESSION['password_update_error'] = true;
-            header('Location: ../View/Module1/Admin/adminProfile.php');
+            header('Location: ../../View/Module1/Admin/adminProfile.php');
          }
 
 // Close the database connection

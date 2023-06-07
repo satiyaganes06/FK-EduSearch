@@ -16,6 +16,10 @@
 
     $user_id = $_GET['user_id'];
 
+    $query = "SELECT * FROM user_profile WHERE user_id = '$user_id'";
+    $result = mysqli_query($conn, $query);
+    $row = mysqli_fetch_assoc($result);
+
   }
 ?>
 <!DOCTYPE html>
@@ -161,7 +165,7 @@
                   alt="Black and White Portrait of a Man"
                   loading="lazy"
                 />
-        <form action="" method="post">
+        <form action="../../../Model/Admin/adminChangeUserDetails.php?user_id=<?php echo  $user_id ; ?>" method="post">
                 <div class="profile_content">
                   <div class="d-flex justify-content-between">
                     <div class="d-flex">
@@ -175,26 +179,30 @@
                  
                   </div>
                   <div class="d-flex justify-content-start mt-3">
-                <div class="input-group w-50 mr-3">
-                    <input type="email" class="form-control " value="satiyaganes@gmail.com" id="email" name="email">
-                    
-                </div>
-                <div class="input-group w-50">
-                    <input type="text" class="form-control text-truncate" value="Age : 28" id="age" name="age" >
-                </div>
-                </div>
+                    <div class="input-group w-50 mr-3">
+                      <label for="email" class="form-control w-25">Email</label>
+                      <input type="email" class="form-control w-75 " value="<?php echo $row['user_email']; ?>" id="email" name="email">
+                        
+                    </div>
+                    <div class="input-group w-50">
+                      <label for="age" class="form-control w-25">Age</label>
+                      <input type="number" class="form-control text-truncate w-75" value="<?php echo $row['user_age']; ?>" id="age" name="age" >
+                    </div>
+                 </div>
 
                 <div class="d-flex justify-content-start mt-3">
-                <div class="input-group w-50 mr-3">
-                    <input type="text" class="form-control text-truncate" value="Academic Level : Master & PHD" id="academiclvl" name="academiclvl">
-                </div>
-                <div class="input-group w-50">
-                <p class="w-50 text-truncate">Last Seen : 05-06-2023</p>
-                </div>
+                    <div class="input-group w-50 mr-3">
+                      <label for="academiclvl" class="form-control w-25">Academic Level</label>
+                      <input type="text" class="form-control text-truncate w-75" value="<?php echo $row['user_academicStatus']; ?>" id="academiclvl" name="academiclvl">
+                    </div>
+                    <div class="input-group w-50">
+                        <p class="w-50 text-truncate">Last Seen : 05-06-2023</p>
+                    </div>
                 </div>
 
                 <div class="input-group w-50 mt-3">
-                <input type="text" class="form-control text-truncate" value="Social Media : @satiyaganes" id="socialmedia" name="socialmedia">
+                    <label for="socialmedia" class="form-control w-25">Social Media</label>
+                    <input type="text" class="form-control text-truncate w-75" value="<?php echo $row['user_socialMedia']; ?>" id="socialmedia" name="socialmedia">
                 </div>
 
                   <div class="d-flex justify-content-start mt-4">
@@ -231,14 +239,12 @@
                
 
                 <div class="text-end">
-                  <button type="button" class="btn btn-warning me-2" >Save</button>
+                <button type="button" class="btn btn-info me-2" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Save</button>
+
 
                 </div>
               </div>
-              </form>
-              <?php 
-              
-              ?>
+             
             </div>
           </div>
         </div>
@@ -249,19 +255,20 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-              <h5 class="modal-title" id="staticBackdropLabel">Are you Sure You Want to Delete This User?</h5>
+              <h6 class="modal-title" id="staticBackdropLabel">Are you Sure You Want to Change This User Details?</h6>
               <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <!-- <div class="modal-body">
             
             </div> -->
-            <div class="modal-footer">
+            <div class="modal-footer d-flex justify-content-center">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary">Yes</button>
+              <button type="submit" class="btn btn-primary">Yes</button>
             </div>
           </div>
         </div>
       </div>
+      </form>
     <footer
       class="text-center text-white fixed-bottom overflow-hidden"
       style="background-color: #21081a; margin-top: 20px"
@@ -333,44 +340,12 @@
           },
         },
       });
-    </script>
-    <script>
-        const email = document.getElementById('email');
-        const age = document.getElementById('age');
-        const academiclvl = document.getElementById('academiclvl');
-        const socialmedia = document.getElementById('socialmedia');
-        let clicked1 = false;
-        let clicked2 = false;
-        let clicked3 = false;
-        let clicked4 = false;
-        
-        email.addEventListener('click', () => {
-           
-            if (!clicked1) {
-                email.value = '';
-                 clicked1 = true;
-             }
-        });
-        age.addEventListener('click', () => {
-            
-            if (!clicked2) {
-                age.value = '';
-                 clicked2 = true;
-             }
-        });
-        academiclvl.addEventListener('click', () => {
-            if (!clicked3) {
-                academiclvl.value = '';
-                 clicked3 = true;
-             }
-            
-        });
-        socialmedia.addEventListener('click', () => {
-            if (!clicked4) {
-                socialmedia.value = '';
-                 clicked4 = true;
-             }
-        });
+
+      var numberInput = document.getElementById("age");
+    
+    numberInput.addEventListener("wheel", function(event) {
+        event.preventDefault();
+    });
     </script>
   </body>
 </html>

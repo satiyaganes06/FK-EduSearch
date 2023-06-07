@@ -173,7 +173,7 @@
     </div>
   </div>
 </div>
-<form action="../../../../Model/Authentication/userChangePassword.php" method="POST">
+<form action="../../../../Model/Authentication/userChangePassword.php" method="POST" onsubmit="return validateForm()">
 <div class="modal fade" id="otpModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="otpModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -273,6 +273,19 @@
     }
 });
 
+function validateForm() {
+        var newPassword = document.getElementById("newPassword").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+
+        // Check if the passwords match
+        if (newPassword !== confirmPassword) {
+            alert("Passwords do not match!");
+            return false; // Prevent form submission
+        }
+
+        // Passwords match, allow form submission
+        return true;
+    }
 
     </script>
   </body>

@@ -1,4 +1,5 @@
 <?php
+  $user_route = $_SESSION["user_route"];
   include("../../Config/database_con.php");
 
   $id = $_SESSION["Current_user_id"];
@@ -6,6 +7,27 @@
   $sql0 = "SELECT * FROM user_profile WHERE user_id  = '$id'";
   $result0 = mysqli_query($conn,$sql0) or die ("Could not execute query in view");
   $row0 = mysqli_fetch_assoc($result0);
+
+
+  if($user_route == 'home'){
+    $home = 'active' ;
+
+  }elseif($user_route == 'complaint'){
+      $complaint = 'active' ;
+
+  }elseif($user_route == 'question'){
+      $question = 'active';
+  }elseif($user_route == 'rating'){
+      $rating = 'active' ;
+
+  }else{
+     
+  } 
+
+
+  
+
+
 ?>
 <html>
     <!-- Navbar -->
@@ -41,14 +63,17 @@
 
         <!-- Left links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item active">
-            <a class="nav-link ml-2" href="#"><strong>RESEARCH</strong></a>
+          <li class="nav-item <?php echo $home?>">
+            <a class="nav-link ml-2" href="../../../View/User/dashboard.php"><strong>RESEARCH</strong></a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item <?php echo $complaint?>">
             <a class="nav-link ml-2" href="../../View/Complaint/userViewComplaint.php"><strong>COMPLAINT</strong></a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item <?php echo $question?>">
             <a class="nav-link ml-2" href="../../View/User/question.php"><strong>QUESTION</strong></a>
+          </li>
+          <li class="nav-item <?php echo $rating?>">
+            <a  class="nav-link ml-2" href="../../../View/User/test2.php"><strong>RATING</strong></a>
           </li>
         </ul>
       </div>

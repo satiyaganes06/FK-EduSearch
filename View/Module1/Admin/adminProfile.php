@@ -182,9 +182,9 @@
                 <div class="card-header" style="background-color:#2C5864"><h4 class="text-white">Change Password</h4></div>
                 <div class="card-body">
                     
-                 
+          
 
-                <form action="../../../Model/adminChangePassword.php" method="post">
+                <form action="../../../Model/Admin/adminChangePassword.php" method="post">
                 <div class="form-outline w-25 mb-4">
                       <input type="text" id="form12" class="form-control" name="oldpass"/>
                       <label class="form-label" for="form12">Enter Old Password</label>
