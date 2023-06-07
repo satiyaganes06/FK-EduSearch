@@ -62,23 +62,23 @@
         <form id="questionForm" action="../../Model/User/addPosting.php" method="POST">
           <div class="row mb-2">
             <div class="col">
-                <label class="form-label" for="researchArea">Research Area</label>
-                <select class="form-select" aria-label="questionForm" id="researchArea" name="researchArea">
-                    <option disabled selected>Select your research area</option>
+                <label class="form-label" for="researchArea">Research Area<span style="color: red;"> *</span></label>
+                <select class="form-select" onchange="checkOption()"  aria-label="questionForm" id="researchArea" name="researchArea" required>
+                    <option disabled selected value="option1">Select your research area</option>
                 </select>
             </div>
             <div class="col">
-                <label class="form-label" for="categories">Categories</label>
-                <select class="form-select" aria-label="questionForm" id="categories" name="categories">
-                    <option disabled selected>Select your categories</option>
+                <label class="form-label" for="categories">Categories<span style="color: red;"> *</span></label>
+                <select class="form-select" onchange="checkOption1()"  aria-label="questionForm" id="categories" name="categories" required>
+                    <option disabled selected value="option1">Select your categories</option>
                 </select>
             </div>
           </div>
 
           <!-- Message input -->
           <div class="mb-3">
-            <label class="form-label" for="question">Question</label>
-            <textarea class="form-control" id="question" name="question" rows="4"></textarea>
+            <label class="form-label" for="question">Question<span style="color: red;"> *</span></label>
+            <textarea class="form-control" id="question" name="question" rows="4" required></textarea>
           </div>
           
           <!-- button -->

@@ -16,7 +16,7 @@
   include("../../Config/database_con.php");
 
   $sql = "SELECT * FROM posting INNER JOIN user_profile 
-            ON posting.user_id=user_profile.user_id WHERE posting_categories='$researchArea'";
+            ON posting.user_id=user_profile.user_id WHERE posting_course='$researchArea'";
   $result = mysqli_query($conn,$sql) or die ("Could not execute query in view");
   //$row = mysqli_fetch_assoc($result);
 

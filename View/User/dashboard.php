@@ -73,10 +73,26 @@ if(!isset( $_SESSION["Current_user_id"] )) {
                                 <tr>
                                   <th>
                                     <?php
-                                      
+                                      $totalQuesBCS = "SELECT * FROM posting WHERE posting_course = 'Software Engineering' AND posting_status != 'Completed'";
+                                      if ($result = mysqli_query($conn, $totalQuesBCS)) {
+                                        // Return the number of rows in result set
+                                        $countQuesBCS = mysqli_num_rows( $result );
+                          
+                                        echo $countQuesBCS;
+                                     }
                                     ?>
                                   </th>
-                                  <th>98</th>
+                                  <th>
+                                    <?php
+                                      $totalSolvBCS = "SELECT * FROM posting WHERE posting_course = 'Software Engineering' AND posting_status = 'Completed'";
+                                      if ($result = mysqli_query($conn, $totalSolvBCS)) {
+                                        // Return the number of rows in result set
+                                        $countSolvBCS = mysqli_num_rows( $result );
+                          
+                                        echo $countSolvBCS;
+                                     }
+                                    ?>
+                                  </th>
                                 </tr>
                                 <tr>
                                   <td>Question</td>
@@ -114,8 +130,28 @@ if(!isset( $_SESSION["Current_user_id"] )) {
                             </h4> 
                             <table class="center">
                                 <tr>
-                                  <th>100</th>
-                                  <th>98</th>
+                                  <th>
+                                    <?php
+                                      $totalQuesBCN = "SELECT * FROM posting WHERE posting_course = 'Computer System & Networking' AND posting_status != 'Completed'";
+                                      if ($result = mysqli_query($conn, $totalQuesBCN)) {
+                                        // Return the number of rows in result set
+                                        $countQuesBCS = mysqli_num_rows( $result );
+                          
+                                        echo $countQuesBCS;
+                                     }
+                                    ?>
+                                  </th>
+                                  <th>
+                                    <?php
+                                      $totalSolvBCN = "SELECT * FROM posting WHERE posting_course = 'Computer System & Networking' AND posting_status = 'Completed'";
+                                      if ($result = mysqli_query($conn, $totalSolvBCN)) {
+                                        // Return the number of rows in result set
+                                        $countSolvBCN = mysqli_num_rows( $result );
+                          
+                                        echo $countSolvBCN;
+                                     }
+                                    ?>
+                                  </th>
                                 </tr>
                                 <tr>
                                   <td>Question</td>
@@ -153,8 +189,28 @@ if(!isset( $_SESSION["Current_user_id"] )) {
                             </h4> 
                             <table class="center">
                                 <tr>
-                                  <th>100</th>
-                                  <th>98</th>
+                                  <th>
+                                    <?php
+                                      $totalQuesBCG = "SELECT * FROM posting WHERE posting_course = 'Graphics & Multimedia Technology' AND posting_status != 'Completed'";
+                                      if ($result = mysqli_query($conn, $totalQuesBCG)) {
+                                        // Return the number of rows in result set
+                                        $countQuesBCG = mysqli_num_rows( $result );
+                          
+                                        echo $countQuesBCG;
+                                     }
+                                    ?>
+                                  </th>
+                                  <th>
+                                    <?php
+                                      $totalSolvBCG = "SELECT * FROM posting WHERE posting_course = 'Graphics & Multimedia Technology' AND posting_status = 'Completed'";
+                                      if ($result = mysqli_query($conn, $totalSolvBCG)) {
+                                        // Return the number of rows in result set
+                                        $countSolvBCG = mysqli_num_rows( $result );
+                          
+                                        echo $countSolvBCG;
+                                     }
+                                    ?>
+                                  </th>
                                 </tr>
                                 <tr>
                                   <td>Question</td>
@@ -192,8 +248,28 @@ if(!isset( $_SESSION["Current_user_id"] )) {
                             </h4> 
                             <table class="center">
                                 <tr>
-                                  <th>100</th>
-                                  <th>98</th>
+                                  <th>
+                                    <?php
+                                      $totalQuesBCY = "SELECT * FROM posting WHERE posting_course = 'Cyber Security' AND posting_status != 'Completed'";
+                                      if ($result = mysqli_query($conn, $totalQuesBCY)) {
+                                        // Return the number of rows in result set
+                                        $countQuesBCY = mysqli_num_rows( $result );
+                          
+                                        echo $countQuesBCY;
+                                     }
+                                    ?>
+                                  </th>
+                                  <th>
+                                    <?php
+                                      $totalSolvBCY = "SELECT * FROM posting WHERE posting_course = 'Cyber Security' AND posting_status = 'Completed'";
+                                      if ($result = mysqli_query($conn, $totalSolvBCY)) {
+                                        // Return the number of rows in result set
+                                        $countSolvBCY = mysqli_num_rows( $result );
+                          
+                                        echo $countSolvBCY;
+                                     }
+                                    ?>
+                                  </th>
                                 </tr>
                                 <tr>
                                   <td>Question</td>

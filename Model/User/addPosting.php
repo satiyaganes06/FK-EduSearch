@@ -55,7 +55,7 @@
         ?>
       <script>
         alert("The Data was Insert Sucessfully");
-        window.location='../../../View/User/dashboard.php';
+        window.location='../../../View/User/question.php';
       </script>
         <?php
     }
