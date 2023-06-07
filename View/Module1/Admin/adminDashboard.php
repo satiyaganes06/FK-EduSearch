@@ -60,7 +60,7 @@
           <span class="tooltip">User List</span>
         </li>
         <li>
-          <a href="#">
+          <a href="./adminUserApprovalList.php">
             <i class="fa-solid fa-user-check"></i>
             <span class="links_name">Approval List</span>
           </a>
