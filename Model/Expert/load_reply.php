@@ -30,6 +30,7 @@ if ($result->num_rows > 0) {
         <img class="rounded-circle shadow" src="data:image/jpeg;base64,' . $row3['user_profile_img'] . '" height="40"
             alt="Expert Profile"
             loading="lazy"">
+        
 
         <!-- Content -->
         <div class="w-100 pl-3">

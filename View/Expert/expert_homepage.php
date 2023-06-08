@@ -14,11 +14,11 @@
       include("../../Config/database_con.php");
   
       $user_id = $_SESSION['Current_user_id'];
+      $expert_id = $_SESSION['expertID'];
 
-      $sql = "SELECT * FROM publication ORDER BY publication_impression DESC";
+      $sql = "SELECT * FROM publication WHERE expert_id != $expert_id ORDER BY publication_impression DESC";
       $result = mysqli_query($conn,$sql) or die ("Could not execute query in homepage");
       $row = mysqli_fetch_assoc($result);
-
       $_SESSION["route"] = "home";
   
     }
@@ -67,10 +67,22 @@
           <?php
               while($row = $result->fetch_assoc()) {
                   $id = $row["publication_id"];
+                  $pub_expert_id = $row["expert_id"];
 
-                  $sql2 = "SELECT user_profile_img FROM user_profile WHERE user_id = '$user_id'";
-                  $result2 = mysqli_query($conn,$sql2) or die ("Could not execute query in homepage");
-                  $row2 = mysqli_fetch_assoc($result2);
+                  $expertSql = "SELECT user_id FROM expert WHERE expert_id = '$pub_expert_id'";
+                  $resultExpert = mysqli_query($conn,$expertSql) or die ("Could not execute query in homepage");
+                  $rowExpert = mysqli_fetch_assoc($resultExpert);
+
+                  if(!empty($rowExpert['user_id'])){
+                    $pub_user_id = $rowExpert['user_id'];
+
+                    $sql2 = "SELECT user_profile_img FROM user_profile WHERE user_id = '$pub_user_id'";
+                    $result2 = mysqli_query($conn,$sql2) or die ("Could not execute query in homepage");
+                    $row2 = mysqli_fetch_assoc($result2);
+                  }
+                  
+
+                  
 
                 ?> 
                 
@@ -79,10 +91,15 @@
                   <div class="post_publication d-flex">
                     
                     <!-- Image -->
-
-                    <?php echo '<img class="rounded-circle shadow" src="data:image/jpeg;base64,' . $row2['user_profile_img'] . '" height="60"
+                    <?php if(empty($row2['user_profile_img'])){
+                      echo '<img class="rounded-circle " src="' . "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541" . '" height="60"
+                      alt="Black and White Portrait of a Man"
+                      loading="lazy"">';
+                    }else{
+                      echo '<img class="rounded-circle shadow" src="data:image/jpeg;base64,' . $row2['user_profile_img'] . '" height="60"
                           alt="Black and White Portrait of a Man"
-                          loading="lazy"">';  ?>
+                          loading="lazy"">';
+                    } ?>
         
                     <!-- Content -->
                     <div class="w-100 pl-3">

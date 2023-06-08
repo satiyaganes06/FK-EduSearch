@@ -97,9 +97,18 @@
               aria-expanded="false"
             >
             
-            <?php echo '<img class="rounded-circle " src="data:image/jpeg;base64,' . $row1['user_profile_img'] . '" height="35"
-                        alt="Black and White Portrait of a Man"
-                        loading="lazy"">';  ?>
+            
+            <?php if(empty($row1['user_profile_img'])){
+              echo '<img class="rounded-circle " src="' . "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541" . '" height="35"
+              alt="Black and White Portrait of a Man"
+              loading="lazy"">';
+            }else{
+              echo '<img class="rounded-circle " src="data:image/jpeg;base64,' . $row1['user_profile_img'] . '" height="35"
+                  alt="Black and White Portrait of a Man"
+                  loading="lazy"">'; 
+            } ?>
+            
+            
             </a>
 
             <ul

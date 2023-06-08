@@ -160,22 +160,25 @@
                 <h4>Before Change</h4>
             </div>
               <div id="profile_details" class="position-relative">
-                <img
-                  id="profile-background-pic"
-                  src=<?php echo $userinfo['user_profile_bg']; ?>
-                  class="shadows"
-                  width="100%"
-                  height="300px"
-                  alt="Black profile background"
-                  loading="lazy"
-                />
+              
 
-                <img
-                  src=<?php echo $userinfo['user_profile_img']; ?>
-                  class="rounded-circle shadow-5 profile_Avatar"
-                  alt="Black and White Portrait of a Man"
-                  loading="lazy"
-                />
+                <?php if(empty($userinfo['user_profile_bg'])){
+                  echo '<img class="shadows" src="data:image/jpeg;base64,' . "https://libg.s3.us-east-2.amazonaws.com/download/Plain-Background.jpg" . '" width="100%"
+                  height="300px" alt="Grey profile background" loading="lazy"">';
+                }else{
+                  echo '<img class="shadows" src="data:image/jpeg;base64,' . $userinfo['user_profile_bg'] . '" width="100%"
+                    height="300px" alt="Grey profile background" loading="lazy"">';
+                    
+                } ?>
+
+
+                <?php if(empty($userinfo['user_profile_img'])){
+                  echo '<img class="rounded-circle shadow-5 profile_Avatar" src="data:image/jpeg;base64,' . "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541" . '" 
+                  alt="Placeholder" loading="lazy"">';
+                }else{
+                  echo '<img class="rounded-circle shadow-5 profile_Avatar  mt-5" src="data:image/jpeg;base64,' . $userinfo['user_profile_img'] . '" alt="Profile Avatar" loading="lazy"">';
+                    
+                } ?>
 
                 <div class="profile_content">
                   <div class="d-flex justify-content-between">
@@ -239,22 +242,24 @@
                 <h4>After Change</h4>
               </div>
                 <div id="profile_details" class="position-relative">
-                  <img
-                    id="profile-background-pic"
-                    src=<?php echo $updateUserInfo['user_profile_bg']; ?>
-                    class="shadows"
-                    width="100%"
-                    height="300px"
-                    alt="Black profile background"
-                    loading="lazy"
-                  />
 
-                  <img
-                    src=<?php echo $updateUserInfo['user_profile_img']; ?>
-                    class="rounded-circle shadow-5 profile_Avatar"
-                    alt="Black and White Portrait of a Man"
-                    loading="lazy"
-                  />
+                  <?php if(empty($userinfo['user_profile_bg'])){
+                    echo '<img class="shadows" src="data:image/jpeg;base64,' . "https://libg.s3.us-east-2.amazonaws.com/download/Plain-Background.jpg" . '" width="100%"
+                    height="300px" alt="Grey profile background" loading="lazy"">';
+                  }else{
+                    echo '<img class="shadows" src="data:image/jpeg;base64,' . $userinfo['user_profile_bg'] . '" width="100%"
+                      height="300px" alt="Grey profile background" loading="lazy"">';
+                      
+                  } ?>
+
+
+                  <?php if(empty($userinfo['user_profile_img'])){
+                    echo '<img class="rounded-circle shadow-5 profile_Avatar" src="data:image/jpeg;base64,' . "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541" . '" 
+                    alt="Placeholder" loading="lazy"">';
+                  }else{
+                    echo '<img class="rounded-circle shadow-5 profile_Avatar mt-5" src="data:image/jpeg;base64,' . $userinfo['user_profile_img'] . '" alt="Profile Avatar" loading="lazy" ">';
+                      
+                  } ?>
 
                   <div class="profile_content">
                     <div class="d-flex justify-content-between">

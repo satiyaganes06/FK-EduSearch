@@ -71,65 +71,79 @@
         <div class="mainSection mb-5 mt-3">
     
             <div id="profile_Component">
-    
-                <div id="profile_details" class="position-relative">
+                <?php
+                    if(empty($userinfo)){
+                      ?>
+                        <p>No Profile data</p>  
+                      <?php
+                    }else{
 
-                    <div >
-                      <?php echo '<img id="profile-background-pic" class="shadows " src="data:image/jpeg;base64,' . $userinfo['user_profile_bg'] . '" width="100%"
-                        alt="Black profile background"
-                        loading="lazy"">';  ?>
-                      <a type="button" data-toggle="modal" data-target="#editProfileBgModal" class="edit-icon-button2">
-                          <i class="fa fa-pencil" style="color:blue;"></i>
-                      </a>
-                    </div>
-                    
+                      ?>
+                        <div id="profile_details" class="position-relative">
 
-                    <div class="profile_Avatar">
-                      
-                      <?php echo '<img class="rounded-circle shadow-5 " src="data:image/jpeg;base64,' . $userinfo['user_profile_img'] . '" height="120"
-                          alt="Black and White Portrait of a Man"
-                          loading="lazy"">';  ?>
-                      <a type="button" data-toggle="modal" data-target="#editProfileImgModal" class="edit-icon-button">
-                          <i class="fa fa-pencil" style="color:blue;"></i>
-                      </a>
-                    </div>
+                          <div >
+                            <?php echo '<img id="profile-background-pic" class="shadows " src="data:image/jpeg;base64,' . $userinfo['user_profile_bg'] . '" width="100%"
+                              alt="Black profile background"
+                              loading="lazy"">';  ?>
+                            <a type="button" data-toggle="modal" data-target="#editProfileBgModal" class="edit-icon-button2">
+                                <i class="fa fa-pencil" style="color:blue;"></i>
+                            </a>
+                          </div>
 
-                    <div class="profile_content">
-                        <div class="d-flex justify-content-between">
-                       
-                            <div class="d-flex">
-                                <h2><strong><?php echo $userinfo['user_name']; ?></strong></h2>
-                                <i class="fas fa-circle-check fa-2x ml-3" style="color: #00FF00;"></i>
-                            </div>
-    
-                            <div style="height: 30px">
-                                <button style="border-color:azure;" type="button" class="rounded-5" data-toggle="modal" data-target="#editProfileModal"><i class="fas fa-pen-to-square"></i></button>
-                            </div>
-                        </div>
 
-                        <div class="d-flex justify-content-start mt-3">
-                            <p class="w-50 text-truncate mr-3"><?php echo $userinfo['user_email']; ?></p>
-                            <p class="w-50 text-truncate">Age : <?php echo $userinfo['user_age']; ?></p>
-                        </div>
+                          <div class="profile_Avatar">
+                            
+                            <?php echo '<img class="rounded-circle shadow-5 " src="data:image/jpeg;base64,' . $userinfo['user_profile_img'] . '" height="120"
+                                alt="Black and White Portrait of a Man"
+                                loading="lazy"">';  ?>
+                            <a type="button" data-toggle="modal" data-target="#editProfileImgModal" class="edit-icon-button">
+                                <i class="fa fa-pencil" style="color:blue;"></i>
+                            </a>
+                          </div>
 
-                        <div class="d-flex justify-content-start">
-                            <p class="w-50 text-truncate mr-3">Academic Level : <?php echo $userinfo['user_academicStatus']; ?></p>
-                            <p class="w-50 text-truncate">Last Seen : <?php echo $expertinfo['lastUse_Date']; ?></p>
-                        </div>
+                          <div class="profile_content">
+                              <div class="d-flex justify-content-between">
+                            
+                                  <div class="d-flex">
+                                      <h2><strong><?php echo $userinfo['user_name']; ?></strong></h2>
+                                      <i class="fas fa-circle-check fa-2x ml-3" style="color: #00FF00;"></i>
+                                  </div>
 
-                        <div class="d-flex justify-content-between">
-                          <p class="w-50 text-truncate">Phone Number: <?php echo $userinfo['user_phoneNum']; ?></p>
-                          <p class="w-50 text-truncate ml-3">Social Media : <a href=<?php echo $userinfo['user_socialMedia']; ?> target="_blank"><i class="fab fa-instagram"></i></a></p>
-                        </div>
+                                  <div style="height: 30px">
+                                      <button style="border-color:azure;" type="button" class="rounded-5" data-toggle="modal" data-target="#editProfileModal"><i class="fas fa-pen-to-square"></i></button>
+                                  </div>
+                              </div>
 
-                        <div class="d-flex w-50">
-                          <p class="mr-3">Research Area : </p>
-                          <p class="bg-secondary rounded-6" style="font-size: 12px; padding-top: 2px; padding-right: 10px; padding-left: 10px; color: white;"><?php echo $userinfo['user_researchArea']; ?></p>
-                        </div>
+                              <div class="d-flex justify-content-start mt-3">
+                                  <p class="w-50 text-truncate mr-3"><?php echo $userinfo['user_email']; ?></p>
+                                  <p class="w-50 text-truncate">Age : <?php echo $userinfo['user_age']; ?></p>
+                              </div>
 
-                        <a href="../../Model/Expert/openCV.php?expert_id=<?=$expert_id?>" target="_blank"><button class="button_View btn-dark btn rounded-8 text-white mt-3 mb-3" data-mdb-ripple-color="dark"><i class="fas fa-arrow-up-from-bracket mr-1"></i><strong>View CV</strong></button></a>
-                    </div>
-                </div>
+                              <div class="d-flex justify-content-start">
+                                  <p class="w-50 text-truncate mr-3">Academic Level : <?php echo $userinfo['user_academicStatus']; ?></p>
+                                  <p class="w-50 text-truncate">Last Seen : <?php echo $expertinfo['lastUse_Date']; ?></p>
+                              </div>
+
+                              <div class="d-flex justify-content-between">
+                                <p class="w-50 text-truncate">Phone Number: <?php echo $userinfo['user_phoneNum']; ?></p>
+                                <p class="w-50 text-truncate ml-3">Social Media : <a href=<?php echo $userinfo['user_socialMedia']; ?> target="_blank"><i class="fab fa-instagram"></i></a></p>
+                              </div>
+
+                              <div class="d-flex w-50">
+                                <p class="mr-3">Research Area : </p>
+                                <p class="bg-secondary rounded-6" style="font-size: 12px; padding-top: 2px; padding-right: 10px; padding-left: 10px; color: white;"><?php echo $userinfo['user_researchArea']; ?></p>
+                              </div>
+
+                              <a href="../../Model/Expert/openCV.php?user_id=<?php echo $user_id?>" target="_blank"><button class="button_View btn-dark btn rounded-8 text-white mt-3 mb-3" data-mdb-ripple-color="dark"><i class="fas fa-arrow-up-from-bracket mr-1"></i><strong>View CV</strong></button></a>
+                          </div>
+                          </div>
+
+                      <?php
+                    }
+                
+                
+                ?>
+                
                 
                 <div id="profile_details" class="p-5">
                   <h2><strong>Publication Popularity</strong></h2>
@@ -394,25 +408,26 @@
         yValues[<?php echo $i; ?>] = <?php echo $monthImpression[$i]; ?>;
     <?php } ?>
     
-    new Chart("myChart", {
-      type: "line",
-      data: {
-        labels: xValues,
-        datasets: [{
-          fill: false,
-          lineTension: 0,
-          backgroundColor: "rgba(0,0,255,1.0)",
-          borderColor: "rgba(0,160,255,0.1)",
-          data: yValues
-        }]
-      },
-      options: {
-        legend: {display: false},
-        scales: {
-          yAxes: [{ticks: {min: 100, max:10000}}],
+    
+        new Chart("myChart", {
+        type: "line",
+        data: {
+          labels: xValues,
+          datasets: [{
+            fill: false,
+            lineTension: 0,
+            backgroundColor: "rgba(0,0,255,1.0)",
+            borderColor: "rgba(0,160,255,0.1)",
+            data: yValues
+          }]
+        },
+        options: {
+          legend: {display: false},
+          scales: {
+            yAxes: [{ticks: {min: 100, max:10000}}],
+          }
         }
-      }
-    });
+      });
   </script>
 
   <!-- MDB -->

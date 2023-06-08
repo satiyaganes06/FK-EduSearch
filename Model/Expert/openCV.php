@@ -2,11 +2,11 @@
 include_once("../../Config/database_con.php");
 
 if (isset($_GET["user_id"])) {
-    $expert_id = $_GET["user_id"];
+    $user_id = $_GET["user_id"];
 
     // Prepare and execute the SQL query
     $stmt = $conn->prepare("SELECT expert_cv FROM temp_expert WHERE user_id = ?");
-    $stmt->bind_param("i", $expert_id);
+    $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $stmt->bind_result($fileData);
     $stmt->fetch();

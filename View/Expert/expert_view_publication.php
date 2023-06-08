@@ -6,7 +6,7 @@
     ?>
         <script>
             alert("Access denied !!!")
-            window.location = "../Module 1/Login/General User Login/userLogin.php";
+            window.location = "../Module1/Login/GeneralUserLogin/userLogin.php";
         </script>
     <?php
 
@@ -14,6 +14,7 @@
     include("../../Config/database_con.php");
 
     $_SESSION["route"] = "post";
+    $expert_id = $_SESSION["expertID"];
 
     $idURL = $_GET['id'];
 
@@ -106,21 +107,26 @@
                   }
                 
                 ?>
+                
+                <?php if($row["expert_id"] == $expert_id){
+                  ?><tr>
+                  <th scope="row"><strong>Status :</strong></th>
+                  <td style="<?php echo $color ?>"><strong><?php echo $row["publication_status"]; ?></strong></td>
+                </tr>
 
-                  <tr>
-                    <th scope="row"><strong>Status :</strong></th>
-                    <td style="<?php echo $color ?>"><strong><?php echo $row["publication_status"]; ?></strong></td>
-                  </tr>
+                <?php
+                  if ($row["publication_status"] == "Reject") {
+                      echo "<tr>";
+                      echo "<th scope='row'><strong>Reason to: reject</strong></th>";
+                      echo "<td>" . $row["publication_reject_reason"] . "</td>";
+                      echo "</tr>";
+                  }
+                }
+                ?>
+                
 
-                  <?php
-                    if ($row["publication_status"] == "Reject") {
-                        echo "<tr>";
-                        echo "<th scope='row'><strong>Reason to: reject</strong></th>";
-                        echo "<td>" . $row["publication_reject_reason"] . "</td>";
-                        echo "</tr>";
-                    }
-                  ?>
                   
+                
 
                   <tr>
                     <th scope="row"><strong>Title :</strong></th>

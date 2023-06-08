@@ -170,8 +170,6 @@
                       // Loop through each row and display the data
                       while ($row = $result->fetch_assoc()) {
 
-                          
-
                           $temp_user_id = $row["temp_user_id"];
                           $user_id = $row["user_id"];
 
