@@ -3,14 +3,12 @@
   $researchArea = $_GET["researchArea"];
 
   if(!isset( $_SESSION["Current_user_id"] )) {
-
     ?>
         <script>
             alert("Access denied !!!")
             window.location = "../Module1/Login/GeneralUserLogin/userLogin.php";
         </script>
     <?php
-
     }
 
   include("../../Config/database_con.php");
@@ -133,12 +131,16 @@
                                 <div class="commentCounter">
                                     <p>Comment</p>
                                 </div>
+                                <?php 
+                                  if ($status == "Completed"){
+                                ?>
                                 <div class="rates">
                                     <i id="iconRate" class="fa-regular fa-star fa-l"></i>
                                 </div>
                                 <div class="rateCounter">
-                                    <p>Rates</p>
+                                    <p><?php echo $row['posting_rating']; ?> Rates</p>
                                 </div>
+                                <?php } ?>
                                 <div class="ml-auto">
                                     <p><?php echo $row['posting_date']; ?></p>
                                 </div>

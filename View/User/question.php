@@ -63,13 +63,13 @@
           <div class="row mb-2">
             <div class="col">
                 <label class="form-label" for="researchArea">Research Area<span style="color: red;"> *</span></label>
-                <select class="form-select" onchange="checkOption()"  aria-label="questionForm" id="researchArea" name="researchArea" required>
+                <select class="form-select"  aria-label="questionForm" id="researchArea" name="researchArea" required>
                     <option disabled selected value="option1">Select your research area</option>
                 </select>
             </div>
             <div class="col">
                 <label class="form-label" for="categories">Categories<span style="color: red;"> *</span></label>
-                <select class="form-select" onchange="checkOption1()"  aria-label="questionForm" id="categories" name="categories" required>
+                <select class="form-select" aria-label="questionForm" id="categories" name="categories" required>
                     <option disabled selected value="option1">Select your categories</option>
                 </select>
             </div>
