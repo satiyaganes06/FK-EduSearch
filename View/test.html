@@ -7,14 +7,28 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 </head>
 <body>
-  <div class="container">
-    <h1>Edit Profile</h1>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editProfileModal">
-      Edit Profile
-    </button>
-  </div>
-
-  <!-- Edit Profile Modal -->
+    <script>
+        function checkOption() {
+          var selectBox = document.getElementById("mySelect");
+      
+          if (selectBox.value === "option1") {
+            selectBox.required = true;
+          } else {
+            selectBox.required = false;
+          }
+        }
+      </script>
+      
+      <form>
+        <select id="mySelect" onchange="checkOption()">
+          <option value="" disabled selected>Select an option</option>
+          <option value="option1">Option 1</option>
+          <option value="option2">Option 2</option>
+          <option value="option3">Option 3</option>
+        </select>
+      
+        <button type="submit">Submit</button>
+      </form>      
   
 
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

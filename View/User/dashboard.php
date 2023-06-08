@@ -1,7 +1,28 @@
+<?php
+session_start();
+$_SESSION["user_route"] = "home";
+if(!isset( $_SESSION["Current_user_id"] )) {
+
+    ?>
+        <script>
+            alert("Access denied !!!")
+            window.location = "../Module1/Login/GeneralUserLogin/userLogin.php";
+        </script>
+    <?php
+
+    }
+
+  include("../../Config/database_con.php");
+  //count user
+  $totalUser = "SELECT * FROM user_profile";
+
+  //count staff
+  $totalExpert = "SELECT * FROM expert";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <?php session_start(); ?>
+   
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,7 +52,7 @@
   
   <!-- Navbar -->
   <?php
-    include_once('../Common/html/userNavBar.html');
+    include_once('../Common/html/userNavBar.php');
   ?>
 
   <section>
@@ -50,8 +71,28 @@
                             </h4> 
                             <table class="center">
                                 <tr>
-                                  <th>100</th>
-                                  <th>98</th>
+                                  <th>
+                                    <?php
+                                      $totalQuesBCS = "SELECT * FROM posting WHERE posting_course = 'Software Engineering' AND posting_status != 'Completed'";
+                                      if ($result = mysqli_query($conn, $totalQuesBCS)) {
+                                        // Return the number of rows in result set
+                                        $countQuesBCS = mysqli_num_rows( $result );
+                          
+                                        echo $countQuesBCS;
+                                     }
+                                    ?>
+                                  </th>
+                                  <th>
+                                    <?php
+                                      $totalSolvBCS = "SELECT * FROM posting WHERE posting_course = 'Software Engineering' AND posting_status = 'Completed'";
+                                      if ($result = mysqli_query($conn, $totalSolvBCS)) {
+                                        // Return the number of rows in result set
+                                        $countSolvBCS = mysqli_num_rows( $result );
+                          
+                                        echo $countSolvBCS;
+                                     }
+                                    ?>
+                                  </th>
                                 </tr>
                                 <tr>
                                   <td>Question</td>
@@ -89,8 +130,28 @@
                             </h4> 
                             <table class="center">
                                 <tr>
-                                  <th>100</th>
-                                  <th>98</th>
+                                  <th>
+                                    <?php
+                                      $totalQuesBCN = "SELECT * FROM posting WHERE posting_course = 'Computer System & Networking' AND posting_status != 'Completed'";
+                                      if ($result = mysqli_query($conn, $totalQuesBCN)) {
+                                        // Return the number of rows in result set
+                                        $countQuesBCS = mysqli_num_rows( $result );
+                          
+                                        echo $countQuesBCS;
+                                     }
+                                    ?>
+                                  </th>
+                                  <th>
+                                    <?php
+                                      $totalSolvBCN = "SELECT * FROM posting WHERE posting_course = 'Computer System & Networking' AND posting_status = 'Completed'";
+                                      if ($result = mysqli_query($conn, $totalSolvBCN)) {
+                                        // Return the number of rows in result set
+                                        $countSolvBCN = mysqli_num_rows( $result );
+                          
+                                        echo $countSolvBCN;
+                                     }
+                                    ?>
+                                  </th>
                                 </tr>
                                 <tr>
                                   <td>Question</td>
@@ -128,8 +189,28 @@
                             </h4> 
                             <table class="center">
                                 <tr>
-                                  <th>100</th>
-                                  <th>98</th>
+                                  <th>
+                                    <?php
+                                      $totalQuesBCG = "SELECT * FROM posting WHERE posting_course = 'Graphics & Multimedia Technology' AND posting_status != 'Completed'";
+                                      if ($result = mysqli_query($conn, $totalQuesBCG)) {
+                                        // Return the number of rows in result set
+                                        $countQuesBCG = mysqli_num_rows( $result );
+                          
+                                        echo $countQuesBCG;
+                                     }
+                                    ?>
+                                  </th>
+                                  <th>
+                                    <?php
+                                      $totalSolvBCG = "SELECT * FROM posting WHERE posting_course = 'Graphics & Multimedia Technology' AND posting_status = 'Completed'";
+                                      if ($result = mysqli_query($conn, $totalSolvBCG)) {
+                                        // Return the number of rows in result set
+                                        $countSolvBCG = mysqli_num_rows( $result );
+                          
+                                        echo $countSolvBCG;
+                                     }
+                                    ?>
+                                  </th>
                                 </tr>
                                 <tr>
                                   <td>Question</td>
@@ -167,8 +248,28 @@
                             </h4> 
                             <table class="center">
                                 <tr>
-                                  <th>100</th>
-                                  <th>98</th>
+                                  <th>
+                                    <?php
+                                      $totalQuesBCY = "SELECT * FROM posting WHERE posting_course = 'Cyber Security' AND posting_status != 'Completed'";
+                                      if ($result = mysqli_query($conn, $totalQuesBCY)) {
+                                        // Return the number of rows in result set
+                                        $countQuesBCY = mysqli_num_rows( $result );
+                          
+                                        echo $countQuesBCY;
+                                     }
+                                    ?>
+                                  </th>
+                                  <th>
+                                    <?php
+                                      $totalSolvBCY = "SELECT * FROM posting WHERE posting_course = 'Cyber Security' AND posting_status = 'Completed'";
+                                      if ($result = mysqli_query($conn, $totalSolvBCY)) {
+                                        // Return the number of rows in result set
+                                        $countSolvBCY = mysqli_num_rows( $result );
+                          
+                                        echo $countSolvBCY;
+                                     }
+                                    ?>
+                                  </th>
                                 </tr>
                                 <tr>
                                   <td>Question</td>
@@ -199,13 +300,32 @@
         </td>
       </tr>
       <tr>
-        <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of student <h2> 180</h2></td>
+        <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of student 
+        <h2> 
+          <?php
+            if ($result = mysqli_query($conn, $totalUser)) {
+              // Return the number of rows in result set
+              $countUser = mysqli_num_rows( $result );
+
+              echo $countUser;
+           }
+          ?>
+        </h2></td>
       </tr>
       <tr>
-        <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of lecturer <h2> 98</h2></td>
+      <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of expert 
+      <h2> 
+          <?php
+              if ($result = mysqli_query($conn, $totalExpert)) {
+                // Return the number of rows in result set
+                $countExpert = mysqli_num_rows( $result );
+                echo $countExpert;
+            }
+          ?>
+      </h2></td>
       </tr>
       <tr>
-        <td><i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of expert <h2> 40</h2></td>
+      <td><!--<i class="fa-solid fa-graduation-cap" style="color: #928b8b;"></i>     Total of staff <h2> 98</h2>--></td>
       </tr>
       <tr><td></td></tr>
       <tr><td></td></tr>

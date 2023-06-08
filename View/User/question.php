@@ -1,59 +1,16 @@
 <?php
   session_start();
-  
   //If the user is not logged in send him/her to the login form
-  if(!isset( $_SESSION["Current_user_id"] )) {
+    if(!isset( $_SESSION["Current_user_id"] )) {
 
-      ?>
-          <script>
-              alert("Access denied !!!")
-              window.location = "../Module 1/Login/General User Login/userLogin.php";
-          </script>
-      <?php
-
+    ?>
+        <script>
+            alert("Access denied !!!")
+            window.location = "../Module 1/Login/General User Login/userLogin.php";
+        </script>
+    <?php
   }else{
-    include("../../Config/database_con.php");
-    try{
-      $user_id = $_SESSION['user_id'];
-      $posting_content = $_POST['question'];
-      $posting_categories = $_POST['researchArea'];
-      $posting_course = $_POST['categories'];
-      $posting_like = 0;
-      $posting_view = 0;
-      $posting_status = 'Revised';
-      $posting_rating = 0;
-      $posting_date = date("Y-m-d H:i:s");
-
-      $sql = "INSERT INTO posting (
-        user_id,
-        posting_content,
-        posting_categories,
-        posting_course,
-        posting_like,
-        posting_view,
-        posting_status,
-        posting_rating,
-        posting_date
-      ) VALUE (
-        '$user_id',
-        '$posting_content',
-        '$posting_categories',
-        '$posting_course',
-        '$posting_like',
-        '$posting_view',
-        '$posting_status',
-        '$posting_rating',
-        '$posting_date')";
-    } catch(PDOException $e) {
-      echo "Error: " . $e->getMessage();
-    }
-
-    if(!mysqli_query($conn,$sql)){
-      echo'not inserted';
-      echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-    }else{
-      echo "Data inserted successfully";
-    }
+    $_SESSION["user_route"] = "question";
   }
 ?>
 
@@ -90,7 +47,7 @@
   
   <!-- Navbar -->
   <?php
-    include_once('../Common/html/userNavBar.html');
+    include_once('../Common/html/userNavBar.php');
   ?>
 
   <section>
@@ -102,26 +59,26 @@
     </div>
     <div class="container mt-3 p-3 align-items-center">
       <div class="col-sm-7 mx-auto col-10 col-md-8 col-lg-6">
-        <form id="questionForm" action="profile.php" method="POST">
+        <form id="questionForm" action="../../Model/User/addPosting.php" method="POST">
           <div class="row mb-2">
             <div class="col">
-                <label class="form-label" for="researchArea">Research Area</label>
-                <select class="form-select" aria-label="questionForm" id="researchArea" name="researchArea">
-                    <option disabled selected>Select your research area</option>
+                <label class="form-label" for="researchArea">Research Area<span style="color: red;"> *</span></label>
+                <select class="form-select" onchange="checkOption()"  aria-label="questionForm" id="researchArea" name="researchArea" required>
+                    <option disabled selected value="option1">Select your research area</option>
                 </select>
             </div>
             <div class="col">
-                <label class="form-label" for="categories">Categories</label>
-                <select class="form-select" aria-label="questionForm" id="categories" name="categories">
-                    <option disabled selected>Select your categories</option>
+                <label class="form-label" for="categories">Categories<span style="color: red;"> *</span></label>
+                <select class="form-select" onchange="checkOption1()"  aria-label="questionForm" id="categories" name="categories" required>
+                    <option disabled selected value="option1">Select your categories</option>
                 </select>
             </div>
           </div>
 
           <!-- Message input -->
           <div class="mb-3">
-            <label class="form-label" for="question">Question</label>
-            <textarea class="form-control" id="question" name="question" rows="4"></textarea>
+            <label class="form-label" for="question">Question<span style="color: red;"> *</span></label>
+            <textarea class="form-control" id="question" name="question" rows="4" required></textarea>
           </div>
           
           <!-- button -->

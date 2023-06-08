@@ -1,3 +1,9 @@
+
+<?php
+session_start();
+$_SESSION["user_route"] = "complaint";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -48,7 +54,7 @@
 
     <!-- Navbar -->
     <?php
-    include_once('../Common/html/userNavBar.html');
+    include_once('../Common/html/userNavBar.php');
     ?>
 
     <section>

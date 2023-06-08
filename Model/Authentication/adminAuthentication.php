@@ -42,7 +42,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Authentication successful, redirect the user
        session_start();
        $_SESSION["Current_admin_id"] = $userID;
-            header('Location: ../../../../View/Module1/Admin/adminDashboard.html');
+            header('Location: ../../../../View/Module1/Admin/adminDashboard.php');
             exit();
         
         

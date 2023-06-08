@@ -212,7 +212,7 @@
                     <td>
                       <div class="btn-group shadow-0" role="group">
                         <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminViewUserProfile.html'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
-                        <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminEditUserProfile?user_id=<?php echo $id ?>'"><i class="fa-regular fa-pen-to-square" style="color: #624de3; font-size: 20px;"></i></button>
+                        <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminEditUserProfile.php?user_id=<?php echo $userID ?>'"><i class="fa-regular fa-pen-to-square" style="color: #624de3; font-size: 20px;"></i></button>
                         <button type="button" class="btn btn-link" data-mdb-color="dark"><i class="fa-regular fa-trash-can" style="color: #a30d11; font-size: 20px;"></i></button>
                       </div>
                     </td>

@@ -27,3 +27,22 @@
         }
     }
 
+  function checkOption() {
+    var selectBox = document.getElementById("researchArea");
+
+    if (selectBox.value === "option1") {
+      selectBox.required = true;
+    } else {
+      selectBox.required = false;
+    }
+  }
+  function checkOption1() {
+    var selectBox = document.getElementById("categories");
+
+    if (selectBox.value === "option1") {
+      selectBox.required = true;
+    } else {
+      selectBox.required = false;
+    }
+  }
+

@@ -21,6 +21,8 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
     />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.5.0/js/bootstrap.bundle.min.js"></script>
+
     <link
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
@@ -147,8 +149,9 @@
         <h5 class="modal-title" id="staticBackdropLabel">Forgot Password</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
+      <form action="../../../../Api/PHPMailer/sendOTP.php" method="POST">
       <div class="modal-body">
-        <form action="forgetpassword.php" method="POST">
+      
           <div class="form-outline">
             <input type="text" id="fpuserid" name="fpuserid" class="form-control" />
             <label class="form-label" for="fpuserid">User ID</label>
@@ -162,13 +165,48 @@
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="submit" class="btn btn-primary">Submit</button>
+       
         
+     ` </div>
+    `</form>
       </div>
-    </form>
     </div>
   </div>
 </div>
+<form action="../../../../Model/Authentication/userChangePassword.php" method="POST" onsubmit="return validateForm()">
+<div class="modal fade" id="otpModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" role="dialog" aria-labelledby="otpModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="otpModalLabel">OTP Verification</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        
+                </div>
+                <div class="modal-body text-center">
+                    <!-- OTP input field -->
+                    <span class="badge badge-success rounded-pill d-inline align-center">OTP Code Has Been Sent To Your Email!</span>
+
+                    <div class="form-outline mt-3">
+                       
+                        <input type="text" class="form-control" id="otp" name="otp" required>
+                        <label class="form-label" for="otp">OTP</label>
+                    </div>
+                    <div class="form-outline mt-3">
+                        <input type="password" id="newPassword" name="newPassword" class="form-control" />
+                        <label class="form-label" for="newPassword">New Password</label>
+                     </div>
+                     <div class="form-outline mt-3">
+                        <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" />
+                        <label class="form-label" for="confirmPassword">Confirm Password</label>
+                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Change Password</button>
+                </div>
+            </div>
+        </div>
     </div>
+    </form>
 
     <!-- MDB -->
     <script type="text/javascript" src="../../../../Bootstrap/mdb.min.js"></script>
@@ -222,6 +260,33 @@
         // If all validations pass, submit the form
         form.submit();
       });
+
+
+      $(document).ready(function() {
+    // Check if the OTP modal should be shown
+    var urlParams = new URLSearchParams(window.location.search);
+    var showOTPModal = urlParams.get('showOTPModal');
+
+    if (showOTPModal === 'true') {
+        // Open the OTP verification modal
+        $('#otpModal').modal('show');
+    }
+});
+
+function validateForm() {
+        var newPassword = document.getElementById("newPassword").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+
+        // Check if the passwords match
+        if (newPassword !== confirmPassword) {
+            alert("Passwords do not match!");
+            return false; // Prevent form submission
+        }
+
+        // Passwords match, allow form submission
+        return true;
+    }
+
     </script>
   </body>
 </html>
