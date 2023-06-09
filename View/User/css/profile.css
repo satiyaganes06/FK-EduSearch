@@ -18,19 +18,16 @@ section {
   .question{
     background-color: #E2E0E0;
     padding: 20px; 
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-radius: 10px;
     padding-bottom: 0;
   }
 
 /* Info Profile */
 .infoProfile{
-    height: 500px;
-    padding: 50px;
+    display: inline-block;
     background-color: #EFEFEF;
     padding: 20px; 
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-radius: 10px;
 }
 .background{
     height: 180px;
@@ -49,32 +46,21 @@ hr.solid {
     left: 50%;
     transform: translate(-50%, -50%);
 }
-.infoAge{
-    margin-left: auto;
-    padding-right: 10px;
-}
 h4.userName{
     text-align: center;
     padding-top: 50px;
 }
-.infoFirst{
-    display: flex;
-}
+
 
 /* posting */
-.profile{
-    display: flex;
-    align-items: center;
-    padding-bottom: 20px;
-  }
   .profileImg{
     width: 50px;
     height: 50px;
     margin-right: 10px;
   }
   .circle1 {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
   }
   .status{

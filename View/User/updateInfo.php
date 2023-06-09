@@ -1,3 +1,22 @@
+<?php 
+session_start();
+
+if(!isset( $_SESSION["Current_user_id"] )) {
+  ?>
+      <script>
+          alert("Access denied !!!")
+          window.location = "../Module1/Login/GeneralUserLogin/userLogin.php";
+      </script>
+  <?php
+  }
+  $user_id = $_SESSION["Current_user_id"];
+
+  include("../../Config/database_con.php");
+
+  $sql = "SELECT * FROM user_profile WHERE user_id ='$user_id'";
+  $result = mysqli_query($conn,$sql) or die ("Could not execute query in view");
+  $row = mysqli_fetch_assoc($result);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,25 +61,25 @@
         <form id="questionForm" action="#">
         <div class="mb-2">
             <label class="form-label" for="id">ID</label>
-            <input type="text" id="id" class="form-control" placeholder="CA21100" disabled/>
+            <input type="text" id="id" class="form-control" placeholder="CA21100" value="<?php echo $row['user_id'] ?>" disabled/>
           </div>
         <div class="mb-2">
             <label class="form-label" for="name">Name</label>
-            <input type="text" id="name" class="form-control" placeholder="James Cooper" disabled/>
+            <input type="text" id="name" class="form-control" placeholder="James Cooper" value="<?php echo $row['user_name'] ?>" required/>
           </div>
           <div class="mb-2">
             <label class="form-label" for="email">Email</label>
-            <input type="email" id="email" class="form-control" placeholder="jamescooper@gmail.com" disabled />
+            <input type="email" id="email" class="form-control" placeholder="jamescooper@gmail.com" value="<?php echo $row['user_email'] ?>" required />
           </div>
         <div class="mb-2">
             <label class="form-label" for="age">Age</label>
-            <input type="text" id="age" class="form-control" placeholder="28"/>
+            <input type="text" id="age" class="form-control" placeholder="28" value="<?php echo $row['user_age'] ?>" required/>
           </div>
 
           <div class="row mb-2">
             <div class="col">
                 <label class="form-label" for="date">Academic Level</label>
-                <select class="form-select" aria-label="typeComplaint">
+                <select class="form-select" aria-label="typeComplaint" required>
               <option disabled selected>Please Select...</option>
               <option value="Diploma">Diploma</option>
               <option value="Degree">Degree</option>
@@ -70,7 +89,7 @@
             </div>
             <div class="col">
                 <label class="form-label" for="phoneNum">Social Media</label>
-                <input type="text" id="age" class="form-control"/>
+                <input type="text" id="age" class="form-control" value="<?php echo $row['user_academicStatus'] ?>" required/>
             </div>
           </div>
 

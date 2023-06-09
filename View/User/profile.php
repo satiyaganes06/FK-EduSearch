@@ -9,13 +9,16 @@
         </script>
     <?php
     }
-    $user_id = $_SESSION["Current_user_id"]
+    $user_id = $_SESSION["Current_user_id"];
 
     include("../../Config/database_con.php");
 
-    $sql = "SELECT * FROM posting INNER JOIN user_profile 
-            ON posting.user_id=user_profile.user_id WHERE user_id ='$researchArea'";
+    $sql = "SELECT * FROM user_profile WHERE user_id ='$user_id'";
     $result = mysqli_query($conn,$sql) or die ("Could not execute query in view");
+    $row = mysqli_fetch_assoc($result);
+
+    $sql2 = "SELECT * FROM posting WHERE user_id ='$user_id' ORDER BY posting_date DESC";
+    $result2 = mysqli_query($conn,$sql2) or die ("Could not execute query in view");
   ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,9 +62,10 @@ include_once('../Common/html/userNavBar.php');
                 <div class="background">
                     <img 
                         id="profile-background-pic"
-                        src= "#"
+                        src= <?php echo $row['user_profile_bg']; ?>
                         class="shadows"
                         width="100%"
+                        height="100%"
                         alt="Black profile background"
                         loading="lazy"
                     />
@@ -70,7 +74,7 @@ include_once('../Common/html/userNavBar.php');
                 <hr class="solid">
                     <div class="centered">
                         <img
-                            src="#"
+                            src= <?php echo $row['user_profile_img']; ?>
                             class="rounded-circle"
                             height="100"
                             width= "100"
@@ -81,17 +85,17 @@ include_once('../Common/html/userNavBar.php');
                 </div>
                 <div class="infoUser">
                     <h4 class="userName">
-                        <strong>Nurul</strong> 
+                        <strong><?php echo $row['user_name']; ?></strong> 
                         <a href="updateInfo.php"><i class="fa-solid fa-gear" style="color: #8d9096;"></i></a>
                     </h4>
-                    <div class="infoFirst">
-                        <p>ID: CA21100</p>
-                        <p class="infoAge">Age: 23</p>
+                    <div class="d-flex">
+                        <p>ID: <?php echo $row['user_id']; ?></p>
+                        <p class="ml-auto pr-3">Age: <?php echo $row['user_age']; ?></p>
                     </div>
-                    <p>Email: gituw</p>
-                    <p>Academic Level: high school</p>
-                    <p>Social Media: @honeystar</p>
-                    <p>Research Area: jo</p>
+                    <p>Email: <?php echo $row['user_email']; ?></p>
+                    <p>Academic Level: <?php echo $row['user_academicStatus']; ?></p>
+                    <p>Social Media: <?php echo $row['user_socialMedia']; ?></p>
+                    <p>Research Area: <?php echo $row['user_researchArea']; ?></p>
                 </div>
             </div>
         </div>
@@ -99,8 +103,8 @@ include_once('../Common/html/userNavBar.php');
             <!-- Posting section -->
             <div class="d-flex flex-column" >
                 <?php
-                //if ($result->num_rows > 0) {
-                    //while($row = mysqli_fetch_assoc($result)){
+                if ($result2->num_rows > 0) {
+                    while($row2 = mysqli_fetch_assoc($result2)){
                 ?>
                 <div class="pb-2" >
                     <div class="question" >
@@ -108,7 +112,7 @@ include_once('../Common/html/userNavBar.php');
                             <!-- Image -->
                             <div class="profileImg" >
                                 <img
-                                    src= "#"
+                                    src= <?php echo $row['user_profile_img']; ?>
                                     class="rounded-circle shadow"
                                     height="50"
                                     width= "50";
@@ -117,12 +121,12 @@ include_once('../Common/html/userNavBar.php');
                                     />
                             </div>
                             <div class="d-flex flex-column pl-2">
-                                <strong>sdf</strong>
-                                <p>sdf</p>
+                                <strong><?php echo $row['user_name']; ?></strong>
+                                <p><?php echo $row2['posting_content']; ?></p>
                             </div>
                             <!-- Determine the color of status -->
                             <?php
-                            /*$status = $row['posting_status'];
+                            $status = $row2['posting_status'];
                             if($status == "Assign"){
                                 $colorStatus = "FFFFFF";
                             }else if($status == "Accepted"){
@@ -131,10 +135,10 @@ include_once('../Common/html/userNavBar.php');
                                 $colorStatus = "DFF45C";
                             }else if($status == "Completed"){
                                 $colorStatus = "84D17E";
-                            }*/
+                            }
                             ?>
                             <div class="status" id="status">
-                                <div class="circle1" style="background-color: #84D17E;"></div>
+                                <div class="circle1" style="background-color: #<?php echo $colorStatus;?>;"></div>
                             </div>
                         </div>
                         <!-- icon section -->
@@ -143,13 +147,13 @@ include_once('../Common/html/userNavBar.php');
                                 <i id="iconLike" class="fa-regular fa-heart fa-l"></i>
                             </div>
                             <div class="likeCounter">
-                                <p> Like</p>
+                                <p><?php echo $row2['posting_like']; ?> Like</p>
                             </div>
                             <div class="views">
                                 <i class="fa-solid fa-eye fa-l"></i>
                             </div>
                             <div class="viewCounter">
-                                <p> View</p>
+                                <p><?php echo $row2['posting_view']; ?> View</p>
                             </div>
                             <div class="comment">
                                 <i id="iconComment" class="fa-regular fa-comment fa-l"></i>
@@ -158,17 +162,17 @@ include_once('../Common/html/userNavBar.php');
                                 <p>Comment</p>
                             </div>
                             <?php 
-                                //if ($status == "Completed"){
+                                if ($status == "Completed"){
                             ?>
                             <div class="rates">
                                 <i id="iconRate" class="fa-regular fa-star fa-l"></i>
                             </div>
                             <div class="rateCounter">
-                                <p>okay Rates</p>
+                                <p><?php echo $row2['posting_rating']; ?> Rates</p>
                             </div>
-                            <?php //} ?>
+                            <?php } ?>
                             <div class="ml-auto">
-                                <p>lol</p>
+                                <p><?php echo $row2['posting_date']; ?></p>
                             </div>
                         </div>
 
@@ -199,13 +203,13 @@ include_once('../Common/html/userNavBar.php');
                         </div>
                     </div>
                 </div>
-                <?php //}}else {
+                <?php }}else {
                     ?>
                         <div class="text-center" style="height: 200px; margin:100px">
                             <p><?php echo "No post found.";?></p>
                         </div>
                     <?php
-           // } ?>
+            } ?>
             </div>
         </div>
     </div>
