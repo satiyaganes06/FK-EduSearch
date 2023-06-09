@@ -131,7 +131,8 @@ if(!isset( $_SESSION["Current_user_id"] )) {
           <!-- button -->
           <div class="button-box col-lg-12 mb-2">
             <a href="profile.php" class="btn btn-gray fw-bold">Cancel</a>
-            <button class="btn btn-primary ml-5 fw-bold text-white">Submit</button>
+            <a href="#confirmModal" data-toggle="modal" class="btn btn-primary ml-5 fw-bold text-white">Submit</a>
+            <?php include('popup.php'); ?>
           </div>
         </form>
       </div>

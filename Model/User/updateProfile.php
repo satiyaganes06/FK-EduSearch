@@ -73,7 +73,7 @@
     }else{
         ?>
       <script>
-        alert("The Data was Insert Sucessfully");
+        alert("The Data was update Sucessfully");
         window.location='../../../View/User/profile.php';
       </script>
         <?php
