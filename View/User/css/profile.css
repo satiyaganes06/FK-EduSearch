@@ -24,7 +24,7 @@ section {
 
 /* Info Profile */
 .infoProfile{
-    display: inline-block;
+    display: block;
     background-color: #EFEFEF;
     padding: 20px; 
     border-radius: 10px;

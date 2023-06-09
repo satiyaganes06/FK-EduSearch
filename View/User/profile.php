@@ -60,6 +60,11 @@ include_once('../Common/html/userNavBar.php');
         <div class="col-3" >
             <div class="infoProfile" >
                 <div class="background">
+                        <?php
+                            if($row['user_profile_bg'] == ""){ ?>
+                                <p class="text-center" >Insert backround picture</p>
+                        <?php }else{
+                        ?>
                     <img 
                         id="profile-background-pic"
                         src= <?php echo $row['user_profile_bg']; ?>
@@ -69,6 +74,7 @@ include_once('../Common/html/userNavBar.php');
                         alt="Black profile background"
                         loading="lazy"
                     />
+                    <?php } ?>
                 </div>
                 <div class="pictureProfile">
                 <hr class="solid">
@@ -88,14 +94,21 @@ include_once('../Common/html/userNavBar.php');
                         <strong><?php echo $row['user_name']; ?></strong> 
                         <a href="updateInfo.php"><i class="fa-solid fa-gear" style="color: #8d9096;"></i></a>
                     </h4>
+                        <?php
+                            if($row['user_fullName'] == ""){?>
+                                <p class="text-center" >Update your profile!</p>
+                        <?php }else{
+                        ?>
                     <div class="d-flex">
                         <p>ID: <?php echo $row['user_id']; ?></p>
                         <p class="ml-auto pr-3">Age: <?php echo $row['user_age']; ?></p>
                     </div>
+                    <p>Name: <?php echo $row['user_fullName']; ?></p>
                     <p>Email: <?php echo $row['user_email']; ?></p>
                     <p>Academic Level: <?php echo $row['user_academicStatus']; ?></p>
                     <p>Social Media: <?php echo $row['user_socialMedia']; ?></p>
                     <p>Research Area: <?php echo $row['user_researchArea']; ?></p>
+                    <?php } ?>
                 </div>
             </div>
         </div>

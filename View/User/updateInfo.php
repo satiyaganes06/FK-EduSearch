@@ -58,56 +58,80 @@ if(!isset( $_SESSION["Current_user_id"] )) {
     </div>
     <div class="container mt-3 p-3 align-items-center">
       <div class="col-sm-7 mx-auto col-10 col-md-8 col-lg-6">
-        <form id="questionForm" action="#">
+        <form id="updateProfile" action="../../Model/User/updateProfile.php" method="POST">
+        <div class="row mb-2">
+            <div class="col" >
+              <label class="form-label" for="id">ID <span style="color: red;"> *</span></label>
+              <input type="text" id="id" class="form-control" placeholder="CA21100" value="<?php echo $row['user_id'] ?>" disabled/>
+            </div>
+            <div class="col" >
+              <label class="form-label" for="name">Userame <span style="color: red;"> *</span></label>
+              <input type="text" id="name" name="name" class="form-control" placeholder="Enter your username" value="<?php echo $row['user_name'] ?>" required/>
+            </div>
+        </div>
         <div class="mb-2">
-            <label class="form-label" for="id">ID</label>
-            <input type="text" id="id" class="form-control" placeholder="CA21100" value="<?php echo $row['user_id'] ?>" disabled/>
-          </div>
-        <div class="mb-2">
-            <label class="form-label" for="name">Name</label>
-            <input type="text" id="name" class="form-control" placeholder="James Cooper" value="<?php echo $row['user_name'] ?>" required/>
+            <label class="form-label" for="fullName">Full Name <span style="color: red;"> *</span></label>
+            <input type="text" id="fullName" name="fullName" class="form-control" placeholder="Enter your full name" value="<?php echo $row['user_fullName'] ?>" required/>
           </div>
           <div class="mb-2">
-            <label class="form-label" for="email">Email</label>
-            <input type="email" id="email" class="form-control" placeholder="jamescooper@gmail.com" value="<?php echo $row['user_email'] ?>" required />
+            <label class="form-label" for="email">Email <span style="color: red;"> *</span></label>
+            <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" value="<?php echo $row['user_email'] ?>" required />
           </div>
-        <div class="mb-2">
-            <label class="form-label" for="age">Age</label>
-            <input type="text" id="age" class="form-control" placeholder="28" value="<?php echo $row['user_age'] ?>" required/>
+        <div class="row mb-2">
+            <div class="col" >
+              <label class="form-label" for="age">Age <span style="color: red;"> *</span></label>
+              <input type="text" id="age" name="age" class="form-control" placeholder="Enter your age" value="<?php echo $row['user_age'] ?>" required/>
+            </div>
+            <div class="col" >
+              <label class="form-label" for="phoneNum">Phone Number <span style="color: red;"> *</span></label>
+              <input type="text" id="phoneNum" name="phoneNum" class="form-control" placeholder="Enter your phone number" value="<?php echo $row['user_phoneNum'] ?>" required/>
+            </div>
           </div>
 
           <div class="row mb-2">
             <div class="col">
-                <label class="form-label" for="date">Academic Level</label>
-                <select class="form-select" aria-label="typeComplaint" required>
-              <option disabled selected>Please Select...</option>
-              <option value="Diploma">Diploma</option>
-              <option value="Degree">Degree</option>
-              <option value="Master">Master</option>
-              <option value="PhD">PhD</option>
-            </select>
+                <label class="form-label" for="date">Academic Level <span style="color: red;"> *</span></label>
+                <select class="form-select" name="academicStatus" aria-label="typeComplaint" required>
+                  <?php
+                  if ($row['user_academicStatus'] != ""){
+                  ?>
+                  <option value="<?php echo $row['user_academicStatus']; ?> " selected hidden><?php echo $row['user_academicStatus']; ?></option>
+                  <?php } else {?>
+                  <option disabled selected>Please Select...</option>
+                  <?php } ?>
+                  <option value="Diploma">Diploma</option>
+                  <option value="Degree">Degree</option>
+                  <option value="Master">Master</option>
+                  <option value="PhD">PhD</option>
+                </select>
             </div>
             <div class="col">
-                <label class="form-label" for="phoneNum">Social Media</label>
-                <input type="text" id="age" class="form-control" value="<?php echo $row['user_academicStatus'] ?>" required/>
+              <label class="form-label" for="phoneNum">Social Media <span style="color: red;"> *</span></label>
+              <input type="text" id="age" name="socialMedia" class="form-control" placeholder="Enter your link of social media" value="<?php echo $row['user_socialMedia'] ?>" required/>
             </div>
           </div>
 
           <div class="mb-3">
-            <label class="form-label" for="type">Research Area</label>
-            <select class="form-select" aria-label="typeComplaint">
-              <option disabled selected>Please Select...</option>
-              <option value="1">Software Engineering</option>
-              <option value="2">Computer System & Networking</option>
-              <option value="3">Graphics & Multimedia Technology</option>
-              <option value="4">Cyber Security</option>
-            </select>
+              <label class="form-label" for="type">Research Area <span style="color: red;"> *</span></label>
+              <select class="form-select" name="researchArea" aria-label="typeComplaint">
+                <?php
+                if ($row['user_researchArea'] != ""){
+                ?>
+                <option value="<?php echo $row['user_researchArea']; ?> " selected hidden><?php echo $row['user_researchArea']; ?></option>
+                <?php } else {?>
+                <option disabled selected>Please Select...</option>
+                <?php } ?>
+                <option value="Software Engineering">Software Engineering</option>
+                <option value="Computer System & Networking">Computer System & Networking</option>
+                <option value="Graphics & Multimedia Technology">Graphics & Multimedia Technology</option>
+                <option value="Cyber Security">Cyber Security</option>
+              </select>
           </div>
           
           <!-- button -->
           <div class="button-box col-lg-12 mb-2">
             <a href="profile.php" class="btn btn-gray fw-bold">Cancel</a>
-            <a class="btn btn-primary ml-5 fw-bold text-white">Submit</a>
+            <button class="btn btn-primary ml-5 fw-bold text-white">Submit</button>
           </div>
         </form>
       </div>
@@ -120,8 +144,6 @@ if(!isset( $_SESSION["Current_user_id"] )) {
   ?>
 
   <!-- MDB -->
-  <script src="../../js/posting.js"></script>    
-  <script src="../../js/question.js"></script>
   <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
   <!--Bootstrap 4 & 5 & jQuery Script-->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
