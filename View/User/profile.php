@@ -107,7 +107,15 @@ include_once('../Common/html/userNavBar.php');
                     <p>Email: <?php echo $row['user_email']; ?></p>
                     <p>Academic Level: <?php echo $row['user_academicStatus']; ?></p>
                     <p>Social Media: <?php echo $row['user_socialMedia']; ?></p>
-                    <p>Research Area: <?php echo $row['user_researchArea']; ?></p>
+                    <p>Research Area: <br> <?php 
+                    $user_researchArea = $row['user_researchArea']; 
+                    // Explode the comma-separated string into an array
+                    $researchAreas = explode(",", $user_researchArea);
+
+                    // Display the research areas with line breaks
+                    foreach ($researchAreas as $area) {
+                        echo $area . "<br>";}
+                    ?></p>
                     <?php } ?>
                 </div>
             </div>

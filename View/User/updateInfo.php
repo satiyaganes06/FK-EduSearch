@@ -111,27 +111,89 @@ if(!isset( $_SESSION["Current_user_id"] )) {
             </div>
           </div>
 
-          <div class="mb-3">
-              <label class="form-label" for="type">Research Area <span style="color: red;"> *</span></label>
-              <select class="form-select" name="researchArea" aria-label="typeComplaint">
+          <div class="row mb-2">
+            <div class="col">
+              <label class="form-label" for="type">Research Area (Course) <span style="color: red;"> *</span></label>
+              <select onchange="myFunction()" class="form-select" name="researchArea" id="researchArea" aria-label="typeComplaint">
                 <?php
                 if ($row['user_researchArea'] != ""){
                 ?>
                 <option value="<?php echo $row['user_researchArea']; ?> " selected hidden><?php echo $row['user_researchArea']; ?></option>
                 <?php } else {?>
-                <option disabled selected>Please Select...</option>
+                <option hidden selected>Please Select...</option>
                 <?php } ?>
                 <option value="Software Engineering">Software Engineering</option>
                 <option value="Computer System & Networking">Computer System & Networking</option>
                 <option value="Graphics & Multimedia Technology">Graphics & Multimedia Technology</option>
                 <option value="Cyber Security">Cyber Security</option>
               </select>
+            </div>
+            <div class="col" id="checkbox" style="display:none">
+              <label class="form-label" for="categoriesRA" >Research Area (Categories) <span style="color: red;"> *</span></label>
+              <div class="form-check" id="BCS" style="display:none">
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="Human Computer Interaction">
+                <label class="form-check-label" for="defaultCheck1">Human Computer Interaction</label><br>
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="Web Engineering">
+                <label class="form-check-label" for="defaultCheck1">Web Engineering</label><br>
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="Software Maintenance & Evolution">
+                <label class="form-check-label" for="defaultCheck1">Software Maintenance & Evolution</label><br>
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="Software Testing">
+                <label class="form-check-label" for="defaultCheck1">Software Testing</label><br>
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="Formal Method">
+                <label class="form-check-label" for="defaultCheck1">Formal Method</label><br>
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="Software Quality Assurance">
+                <label class="form-check-label" for="defaultCheck1">Software Quality Assurance</label><br>
+              </div>
+              <div class="form-check" id="BCN" style="display:none">
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="Network technologies">
+                <label class="form-check-label" for="defaultCheck1">Network technologies</label><br>
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="Network Services Administration">
+                <label class="form-check-label" for="defaultCheck1">Network Services Administration</label><br>
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="Distributed & Parallel Computing">
+                <label class="form-check-label" for="defaultCheck1">Distributed & Parallel Computing</label><br>
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="Network Analysis & Design">
+                <label class="form-check-label" for="defaultCheck1">Network Analysis & Design</label><br>
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="Network Management">
+                <label class="form-check-label" for="defaultCheck1">Network Management</label><br>
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="Structured Networks Cabling">
+                <label class="form-check-label" for="defaultCheck1">Structured Networks Cabling</label><br>
+              </div>
+              <div class="form-check" id="BCG" style="display:none">
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="Fundamental of Digital Media Design">
+                <label class="form-check-label" for="defaultCheck1">Fundamental of Digital Media Design</label><br>
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="Computer Graphics">
+                <label class="form-check-label" for="defaultCheck1">Computer Graphics</label><br>
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="Computer Games Programming I">
+                <label class="form-check-label" for="defaultCheck1">Computer Games Programming I</label><br>
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="Virtual Reality">
+                <label class="form-check-label" for="defaultCheck1">Virtual Reality</label><br>
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="3D Modelling & Animation">
+                <label class="form-check-label" for="defaultCheck1">3D Modelling & Animation</label><br>
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="Project Development Workshop">
+                <label class="form-check-label" for="defaultCheck1">Project Development Workshop</label><br>
+              </div>
+              <div class="form-check" id="BCY" style="display:none">
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="Cyber Law & Security Policy">
+                <label class="form-check-label" for="defaultCheck1">Cyber Law & Security Policy</label><br>
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="Cyber Threat Intelligence">
+                <label class="form-check-label" for="defaultCheck1">Cyber Threat Intelligence</label><br>
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="Cybersecurity Operations">
+                <label class="form-check-label" for="defaultCheck1">Cybersecurity Operations</label><br>
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="Cybercrime & Forensics Computing">
+                <label class="form-check-label" for="defaultCheck1">Cybercrime & Forensics Computing</label><br>
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="Penetration Testin">
+                <label class="form-check-label" for="defaultCheck1">Penetration Testin</label><br>
+                <input class="form-check-input" name="categoriesRA[]" type="checkbox" value="Cryptography">
+                <label class="form-check-label" for="defaultCheck1">Cryptography</label><br>
+              </div>
+            </div>
           </div>
           
           <!-- button -->
           <div class="button-box col-lg-12 mb-2">
             <a href="profile.php" class="btn btn-gray fw-bold">Cancel</a>
-            <a href="#confirmModal" data-toggle="modal" class="btn btn-primary ml-5 fw-bold text-white">Submit</a>
+            <button class="btn btn-primary ml-5 fw-bold text-white">Submit</button>
+            <!--<a href="#confirmModal" data-toggle="modal" class="btn btn-primary ml-5 fw-bold text-white">Submit</a>-->
             <?php include('popup.php'); ?>
           </div>
         </form>
@@ -145,6 +207,7 @@ if(!isset( $_SESSION["Current_user_id"] )) {
   ?>
 
   <!-- MDB -->
+  <script src="../../js/updateProfile.js"></script>
   <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
   <!--Bootstrap 4 & 5 & jQuery Script-->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

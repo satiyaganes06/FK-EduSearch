@@ -15,7 +15,7 @@
                     <div class="card-body px-sm-4 mb-2 pt-1 pb-0">
                         <div class="row justify-content-end no-gutters">
                             <div class="col-auto"><button type="button" class="btn btn-light text-muted mr-2" data-dismiss="modal">Cancel</button></div>
-                            <div class="col-auto"><button type="button" class="btn btn-danger px-4" data-dismiss="modal">Delete</button></div>
+                            <div class="col-auto"><button type="button" class="btn btn-danger px-4" data-dismiss="modal">Confirm</button></div>
                         </div>
                     </div>
                 </div>

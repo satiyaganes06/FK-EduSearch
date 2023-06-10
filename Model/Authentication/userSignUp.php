@@ -5,7 +5,7 @@
   $userID = $_REQUEST['userID'];
   $username = $_REQUEST['username'];
   $userPassword = $_REQUEST['password'];
-  $image = "https://o.remove.bg/uploads/15248c13-d51e-483f-b5ca-cd600c988b75/account-profile-icon-2.png";
+  $image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhJLRPWYOASOmvpCMobRDM2hVldrvApmgCSY-vNCYVWbuUM6dErtEZNGAo6-XvF8K-y0k&usqp=CAU";
 
   $sql = "INSERT INTO account (user_id, acc_password, acc_role, first_login)
   VALUES ('$userID', '$userPassword', '$role', '1')";

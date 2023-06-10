@@ -20,9 +20,10 @@
     $user_age = $_POST['age'];
     $user_email = $_POST['email'];
     $user_academicStatus = $_POST['academicStatus'];
-    $user_researchArea = $_POST['researchArea'];
     $user_socialMedia = $_POST['socialMedia'];
     $user_phoneNum = $_POST['phoneNum'];
+    $checkbox = $_POST['categoriesRA'];
+    $user_researchArea = implode(",", $checkbox);
 
     $sql_retrieve = "SELECT * FROM temp_user_profile";
     $result = mysqli_query($conn,$sql_retrieve) or die ("Could not execute query in view");
