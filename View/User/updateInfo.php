@@ -65,7 +65,7 @@ if(!isset( $_SESSION["Current_user_id"] )) {
               <input type="text" id="id" class="form-control" placeholder="CA21100" value="<?php echo $row['user_id'] ?>" disabled/>
             </div>
             <div class="col" >
-              <label class="form-label" for="name">Userame <span style="color: red;"> *</span></label>
+              <label class="form-label" for="name">Username <span style="color: red;"> *</span></label>
               <input type="text" id="name" name="name" class="form-control" placeholder="Enter your username" value="<?php echo $row['user_name'] ?>" required/>
             </div>
         </div>
