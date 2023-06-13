@@ -58,7 +58,7 @@ if(!isset( $_SESSION["Current_user_id"] )) {
     </div>
     <div class="container mt-3 p-3 align-items-center">
       <div class="col-sm-7 mx-auto col-10 col-md-8 col-lg-6">
-        <form id="updateProfile" action="../../Model/User/updateProfile.php" method="POST">
+        <form id="updateProfile" action="../../Model/User/updateProfile.php" method="POST" enctype="multipart/form-data">
         <div class="row mb-2">
             <div class="col" >
               <label class="form-label" for="id">ID <span style="color: red;"> *</span></label>
@@ -86,7 +86,17 @@ if(!isset( $_SESSION["Current_user_id"] )) {
               <label class="form-label" for="phoneNum">Phone Number <span style="color: red;"> *</span></label>
               <input type="text" id="phoneNum" name="phoneNum" class="form-control" placeholder="Enter your phone number" value="<?php echo $row['user_phoneNum'] ?>" required/>
             </div>
-          </div>
+          </div><!--
+          <div class="row mb-2">
+            <div class="col">
+                <label class="form-label" for="profBack">Profile Background</label>
+                <input type="file" name="imgBack" id="imgBack" class="form-control"/>
+            </div>
+            <div class="col">
+              <label class="form-label" for="imgProfile">Profile Picture</label>
+              <input type="file" name="imgProfile" id="imgProfile" class="form-control"/>
+            </div>
+          </div>-->
 
           <div class="row mb-2">
             <div class="col">
@@ -107,7 +117,7 @@ if(!isset( $_SESSION["Current_user_id"] )) {
             </div>
             <div class="col">
               <label class="form-label" for="phoneNum">Social Media <span style="color: red;"> *</span></label>
-              <input type="text" id="age" name="socialMedia" class="form-control" placeholder="Enter your link of social media" value="<?php echo $row['user_socialMedia'] ?>" required/>
+              <input type="text" id="socialMedia" name="socialMedia" class="form-control" placeholder="Enter your link of social media" value="<?php echo $row['user_socialMedia'] ?>" required/>
             </div>
           </div>
 

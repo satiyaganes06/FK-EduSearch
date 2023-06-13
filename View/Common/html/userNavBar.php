@@ -73,7 +73,7 @@
             <a class="nav-link ml-2" href="../../View/User/question.php"><strong>QUESTION</strong></a>
           </li>
           <li class="nav-item <?php echo $rating?>">
-            <a  class="nav-link ml-2" href="../../../View/User/test2.php"><strong>RATING</strong></a>
+            <a  class="nav-link ml-2" href="../../../View/User/rating.php"><strong>RATING</strong></a>
           </li>
         </ul>
       </div>

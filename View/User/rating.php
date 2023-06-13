@@ -58,25 +58,29 @@ $_SESSION["user_route"] = "rating";
     <?php
         include_once('../Common/html/userNavBar.php');
     ?>
-
-    <div class="container mt-5">
-        <h1>Star Rating</h1>
-        <form action="save_rating.php" method="post">
-        <div class="rating">
-          <input type="radio" name="rating" value="5" id="5">
-          <label for="5">☆</label>
-          <input type="radio" name="rating" value="4" id="4">
-          <label for="4">☆</label>
-          <input type="radio" name="rating" value="3" id="3">
-          <label for="3">☆</label>
-          <input type="radio" name="rating" value="2" id="2">
-          <label for="2">☆</label>
-          <input type="radio" name="rating" value="1" id="1">
-          <label for="1">☆</label>
+  <section>
+      <div class="container text-center pt-4 pb-3">
+        <div class="col">
+          <h1>Star Rating</h1>
+          <form action="save_rating.php" method="post">
+              <div class="rating col">
+                <input type="radio" name="rating" value="5" id="5">
+                <label for="5">☆</label>
+                <input type="radio" name="rating" value="4" id="4">
+                <label for="4">☆</label>
+                <input type="radio" name="rating" value="3" id="3">
+                <label for="3">☆</label>
+                <input type="radio" name="rating" value="2" id="2">
+                <label for="2">☆</label>
+                <input type="radio" name="rating" value="1" id="1">
+                <label for="1">☆</label>
+              </div>
+          <button type="submit" id="submitRating" class="btn btn-primary fw-bold" >Submit Rating</button>
+          </form>
         </div>
-        <button type="submit" id="submitRating" class="btn btn-primary mt-3" >Submit Rating</button>
-        </form>
       </div>
+  </section>
+    
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>

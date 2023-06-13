@@ -22,8 +22,17 @@
     $user_academicStatus = $_POST['academicStatus'];
     $user_socialMedia = $_POST['socialMedia'];
     $user_phoneNum = $_POST['phoneNum'];
-    $checkbox = $_POST['categoriesRA'];
-    $user_researchArea = implode(",", $checkbox);
+
+    // Check if 'categoriesRA' key exists in $_POST array
+    if (isset($_POST['categoriesRA']) && !empty($_POST['categoriesRA'])) {
+        $user_researchArea = implode(",", $_POST['categoriesRA']);
+    } else {
+        // Retrieve the current user's research area from the database
+        $sql_retrieve = "SELECT user_researchArea FROM temp_user_profile WHERE user_id = '$user_id'";
+        $result = mysqli_query($conn, $sql_retrieve) or die("Could not execute query in view");
+        $row = mysqli_fetch_assoc($result);
+        $user_researchArea = $row['user_researchArea'];
+    }
 
     $sql_retrieve = "SELECT * FROM temp_user_profile";
     $result = mysqli_query($conn,$sql_retrieve) or die ("Could not execute query in view");
@@ -51,7 +60,7 @@
               '$user_academicStatus',
               '$user_researchArea',
               '$user_socialMedia',
-              '$user_phoneNum'
+              '$user_phoneNum',
             )";
 
           }else {
@@ -64,7 +73,7 @@
               user_academicStatus = '$user_academicStatus',
               user_researchArea = '$user_researchArea',
               user_socialMedia = '$user_socialMedia',
-              user_phoneNum = '$user_phoneNum'
+              user_phoneNum = '$user_phoneNum',
               WHERE user_id = '$user_id'";
           }}
 

@@ -243,7 +243,7 @@ include_once('../Common/html/footer.html');
 
 
 <!-- MDB -->
-<script src="../../js/profile.js"></script>
+<script src="../../js/interaction.js"></script>
 <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
 <!--Bootstrap 4 & 5 & jQuery Script-->
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
