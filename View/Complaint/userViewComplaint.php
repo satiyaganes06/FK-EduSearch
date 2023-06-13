@@ -196,7 +196,7 @@ if (!isset($_SESSION['Current_user_id'])) {
                         <?php
                         $R = mysqli_query($conn, "SELECT complaint_status FROM complaint WHERE user_id  = '$id' AND complaint_status = 'Resolved'") or die("Could not execute query in view");
                         echo mysqli_num_rows($R);
-                        ?>,
+                        ?>
 
                     ]
                 }]
