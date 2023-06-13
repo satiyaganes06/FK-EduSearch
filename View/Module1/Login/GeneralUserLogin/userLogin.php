@@ -34,10 +34,10 @@
     <!--CSS-->
     <link
       rel="stylesheet"
-      href="/View/Module1/Login/GeneralUserLogin/userLogin.css"
+      href="../GeneralUserLogin/userLogin.css"
     />
     <!-- Icon -->
-    <link rel="shortcut icon" type="image/jpg" href="/Asset/icon_logo.png" />
+    <link rel="shortcut icon" type="image/jpg" href="../../../../Asset/icon_logo.png" />
   </head>
   <body>
     <div class="container-fluid p-0">
@@ -46,7 +46,7 @@
       >
         <div class="content">
           <div class="logo text-center">
-            <img src="/Asset/Logo Login.png" alt="Logo" />
+            <img src="../../../../Asset/Logo Login.png" alt="Logo" />
           </div>
           <div class="loginform mt-5">
             <div class="title text-center text-dark">
@@ -118,7 +118,7 @@
         </div>
         <div class="w-50 backgroundImg">
           <img
-            src="/Asset/userLoginbackground.jpg"
+            src="../../../../Asset/userLoginbackground.jpg"
             alt="user login background"
             style="width: 820px; height: 688px; object-fit: fill"
           />

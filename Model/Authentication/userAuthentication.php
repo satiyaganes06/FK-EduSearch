@@ -105,7 +105,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               $sql4 = "UPDATE expert SET lastUse_Date = NOW() WHERE user_id = '$userID'";
               mysqli_query($conn, $sql4);
 
-              header('Location: ../../../../View/Expert/expert_homepage.php');
+              header('Location: ../../View/Expert/expert_homepage.php');
               exit();
           }
           
@@ -113,7 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
         }else{
 
-            header('Location: ../../../../View/User/dashboard.php');
+            header('Location: ../../View/User/dashboard.php');
             exit();
         }
         
