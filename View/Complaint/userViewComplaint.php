@@ -1,7 +1,15 @@
-
 <?php
 session_start();
-$_SESSION["user_route"] = "complaint";
+
+//check session id ada ke tak
+if (!isset($_SESSION['Current_user_id'])) {
+    header("Location: ../Module1/Login/GeneralUserLogin/userLogin.php");
+    exit;
+} else {
+    include("../../Config/database_con.php");
+    $_SESSION["user_route"] = "complaint";
+    $id = $_SESSION["Current_user_id"];
+}
 
 ?>
 <!DOCTYPE html>
@@ -64,19 +72,34 @@ $_SESSION["user_route"] = "complaint";
                 <div class="col-sm-3 mt-4">
                     <div class="box" style="border-color:#FF0000;">
                         <h5>In Investigation</h5>
-                        <p>3</p>
+                        <?php
+                        $sql1 = "SELECT COUNT(complaint_status) AS II FROM complaint WHERE user_id  = '$id' AND complaint_status = 'In Investigation'";
+                        $result1 = mysqli_query($conn, $sql1) or die("Could not execute query in view");
+                        $row1 = mysqli_fetch_assoc($result1);
+                        ?>
+                        <p><?php echo $row1['II']; ?></p>
                     </div>
                 </div>
                 <div class="col-sm-3 mt-4">
                     <div class="box" style="border-color:#FFD600;">
                         <h5>On Hold</h5>
-                        <p>2</p>
+                        <?php
+                        $sql2 = "SELECT COUNT(complaint_status) AS OH FROM complaint WHERE user_id  = '$id' AND complaint_status = 'On Hold'";
+                        $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
+                        $row2 = mysqli_fetch_assoc($result2);
+                        ?>
+                        <p><?php echo $row2['OH']; ?></p>
                     </div>
                 </div>
                 <div class="col-sm-3 mt-4">
                     <div class="box" style="border-color:#1FB712;">
                         <h5>Resolved</h5>
-                        <p>1</p>
+                        <?php
+                        $sql3 = "SELECT COUNT(complaint_status) AS R FROM complaint WHERE user_id  = '$id' AND complaint_status = 'Resolved'";
+                        $result3 = mysqli_query($conn, $sql3) or die("Could not execute query in view");
+                        $row3 = mysqli_fetch_assoc($result3);
+                        ?>
+                        <p><?php echo $row3['R']; ?></p>
                     </div>
                 </div>
                 <div class="col-sm-3">
@@ -102,25 +125,42 @@ $_SESSION["user_route"] = "complaint";
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>12/2/2022</td>
-                                <td>Unsatisfied Expert's Feedback</td>
-                                <td>
-                                    <span class="badge badge-danger rounded-pill d-inline">In Investigation</span>
-                                </td>
-                                <td>
-                                    <a href="#editModal" data-toggle="modal"><i class="fas fa-edit" style="padding-right:15px;color:blue"></i></a>
-                                    <a href="#viewModal"  data-toggle="modal"><i class="fas fa-eye" style="padding-right:15px;color:green"></i></a>
-                                    <a href="#deleteModal" data-toggle="modal"><i class="fas fa-trash" style="padding-right:15px;color:rgb(255, 5, 5)"></i></a>
-                                    <?php include('modal.php');?>
-                                </td>
-                            </tr>
+                            <?php
+                            $sql = "SELECT * FROM complaint A JOIN user_profile B ON A.user_id = B.user_id WHERE A.user_id = '$id'";
+                            $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
+                            $row = mysqli_num_rows($result);
+                            $cnt = 1;
+                            if ($row > 0) {
+                                while ($row = mysqli_fetch_array($result)) {
+                            ?>
+                                    <tr>
+                                        <td><?php echo $cnt ?></td>
+                                        <td><?php echo $row['complaint_date'] ?></td>
+                                        <td><?php echo $row['complaint_type'] ?></td>
+                                        <?php
+                                        if ($row['complaint_status'] === "In Investigation") {
+                                            echo '<td><span class="badge badge-danger rounded-pill d-inline">In Investigation</span></td>';
+                                        } elseif ($row['complaint_status'] === "On Hold") {
+                                            echo '<td><span class="badge badge-warning rounded-pill d-inline">On Hold</span></td>';
+                                        } else {
+                                            echo '<td><span class="badge badge-success rounded-pill d-inline">Resolved</span></td>';
+                                        }
+                                        ?>
+                                        <td>
+                                            <a href="#editModal<?php echo $row['complaint_id'] ?>" data-toggle="modal"><i class="fas fa-edit" style="padding-right:15px;color:blue"></i></a>
+                                            <a href="#viewModal<?php echo $row['user_id'] ?><?php echo $row['complaint_id'] ?>" data-toggle="modal"><i class="fas fa-eye" style="padding-right:15px;color:green"></i></a>
+                                            <a href="#deleteModal<?php echo $row['complaint_id'] ?>" data-toggle="modal"><i class="fas fa-trash" style="padding-right:15px;color:rgb(255, 5, 5)"></i></a>
+                                            <?php include('modal.php'); ?>
+                                        </td>
+                                    </tr>
+                            <?php $cnt++;
+                                }
+                            } ?>
                         </tbody>
                     </table>
                 </div>
             </div>
-</section>
+    </section>
 
     <!-- Footer -->
     <?php
@@ -132,11 +172,10 @@ $_SESSION["user_route"] = "complaint";
         });
 
         var xValues = ["In Investigation", "On Hold", "Resolved"];
-        var yValues = [3, 2, 1];
         var barColors = [
             "#FF0000",
             "#FFD600",
-            "#1FB712"
+            "#1FB712",
         ];
 
         new Chart("myChart", {
@@ -145,9 +184,24 @@ $_SESSION["user_route"] = "complaint";
                 labels: xValues,
                 datasets: [{
                     backgroundColor: barColors,
-                    data: yValues
+                    data: [
+                        <?php
+                        $IT = mysqli_query($conn, "SELECT complaint_status FROM complaint WHERE user_id  = '$id' AND complaint_status = 'In Investigation'") or die("Could not execute query in view");
+                        echo mysqli_num_rows($IT);
+                        ?>,
+                        <?php
+                        $OH = mysqli_query($conn, "SELECT complaint_status FROM complaint WHERE user_id  = '$id' AND complaint_status = 'On Hold'") or die("Could not execute query in view");
+                        echo mysqli_num_rows($OH);
+                        ?>,
+                        <?php
+                        $R = mysqli_query($conn, "SELECT complaint_status FROM complaint WHERE user_id  = '$id' AND complaint_status = 'Resolved'") or die("Could not execute query in view");
+                        echo mysqli_num_rows($R);
+                        ?>
+
+                    ]
                 }]
-            }
+            },
+
         });
     </script>
 </body>
