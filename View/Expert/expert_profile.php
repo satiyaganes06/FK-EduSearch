@@ -134,7 +134,7 @@
                                 <p class="bg-secondary rounded-6" style="font-size: 12px; padding-top: 2px; padding-right: 10px; padding-left: 10px; color: white;"><?php echo $userinfo['user_researchArea']; ?></p>
                               </div>
 
-                              <a href="../../Model/Expert/openCV.php?user_id=<?php echo $user_id?>" target="_blank"><button class="button_View btn-dark btn rounded-8 text-white mt-3 mb-3" data-mdb-ripple-color="dark"><i class="fas fa-arrow-up-from-bracket mr-1"></i><strong>View CV</strong></button></a>
+                              <a href="../../Model/Expert/openCV.php?user_id=<?php echo $user_id?>" target="_blank"><button class="button_View btn-dark btn rounded-8 text-white mt-3 mb-3" data-mdb-ripple-color="dark"><i class="fas fa-eye"></i> <strong>View CV</strong></button></a>
                           </div>
                           </div>
 
@@ -323,19 +323,6 @@
               </button>
             </div>
             <div class="modal-body">
-
-              
-            <!-- Profile Image -->
-            <div class="form-group">
-              <label for="profile-image">Profile Image</label>
-              <input type="file"  class="form-control-file" id="profile-image" name="profile-image">
-            </div>
-
-            <!-- Profile Background Image -->
-            <div class="form-group">
-              <label for="profile-bg-image">Profile Background Image</label>
-              <input type="file" class="form-control-file" id="profile-bg-image" name="profile-bg-image">
-            </div>
 
             <!-- Name -->
             <div class="form-group">

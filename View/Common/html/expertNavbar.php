@@ -68,7 +68,7 @@
   
       <!-- Right elements -->
       <div class="d-flex align-items-center search_Section">
-        <form class="d-flex input-group w-auto">
+        <!-- <form class="d-flex input-group w-auto">
           <input
             type="search"
             class="form-control rounded"
@@ -79,7 +79,7 @@
           <span class="input-group-text text-white border-0" id="search-addon">
             <i class="fas fa-search"></i>
           </span>
-        </form>
+        </form> -->
 
         
           <div class="dropdown d-flex profile_section">

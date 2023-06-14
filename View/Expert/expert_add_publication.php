@@ -7,7 +7,7 @@
     ?>
         <script>
             alert("Access denied !!!")
-            window.location = "../Module 1/Login/General User Login/userLogin.php";
+            window.location = "../Module1/Login/GeneralUserLogin/userLogin.php";
         </script>
     <?php
     
