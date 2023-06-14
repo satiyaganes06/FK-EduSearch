@@ -13,8 +13,24 @@
 
   }else{
     include("../../../Config/database_con.php");
+     $query2 = "SELECT * FROM user_profile";
+    $result2 = $conn->query($query2);
+    
+    $numberOfTotalUsers = $result2->num_rows;
 
-  
+    $query3 = "SELECT * FROM account WHERE acc_role = 'User'";
+    $result3 = $conn->query($query3);
+
+    $numberOfUsers = $result3->num_rows;
+    $query4 = "SELECT * FROM account WHERE acc_role = 'Staff'";
+    $result4 = $conn->query($query4);
+
+    $numberOfStaff = $result4->num_rows;
+
+    $query5 = "SELECT * FROM account WHERE acc_role = 'Expert'";
+    $result5 = $conn->query($query5);
+
+    $numberOfExpert = $result5->num_rows;
 
   }
 ?>
@@ -112,7 +128,7 @@
       <h2 class="section-heading">Profile</h2>
       <ul class="nav-list">
         <li>
-          <a href="#">
+          <a href="adminProfile.php">
             <i class="fa-solid fa-user"></i>
             <span class="links_name">View Profile</span>
           </a>
@@ -134,20 +150,57 @@
     <div class="container-fluid p-0">
       <div class="main-section">
         <!--Tulis coding kat sini-->
+        <?php
+        
+              $sql = "SELECT rating, COUNT(*) as count FROM rating GROUP BY rating";
+              $result = $conn->query($sql);
+              
+              // Initialize an array to store the ratings
+              $ratings = array(
+                "1" => 0,
+                "2" => 0,
+                "3" => 0,
+                "4" => 0,
+                "5" => 0
+              );
+              
+              // Calculate the number of ratings for each star value
+              if ($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                  $ratings[$row["rating"]] = $row["count"];
+                }
+              }
+              ?>
           <div class="card h-100">
           <div class="card-body">
             <h5 class="card-title fw-bold text-center">User List</h5>
-            <div class="d-flex w-100 justify-content-center align-items-center">
+            <div class="d-flex w-100 justify-content-around align-items-center mb-5">
               <canvas id="myChart" style="width:100%;max-width:600px"></canvas>
-              <div class="totalusers">
+              <div class="totalusers me-5">
                 <h4>Total Users</h4>
-                <p>556</p>
+               
+                <p><?php echo $numberOfTotalUsers; ?></p>
               </div>
               
+              <div class="container w-25">
+                <h3>Ratings Report</h3>
+                <?php
+                $max_limit = 20;
+                foreach ($ratings as $key => $value) {
+                  $percentage = ($value / $max_limit) * 100;
+                ?>
+                
+                <?php echo $key; ?> stars: 
+                  <div class="progress mb-3 h-100" style="border-radius:20px;">
+                    <div class="progress-bar h-100" role="progressbar" style="background-color:#2C5864; width: <?php echo $percentage; ?>%" aria-valuenow="<?php echo $value; ?>" aria-valuemin="0" aria-valuemax="<?php echo $max_limit; ?>"><?php echo $value; ?></div>
+                  </div>
+                <?php } ?>
+            </div>
+
             </div>
             <div class="input-group d-flex w-25">
               <div class="form-outline d-flex">
-                <input type="search" id="form1" class="form-control rounded" style="border-radius: 25px;" />
+                <input type="search" id="form1" class="form-control rounded" style="border-radius: 25px;" onkeyup="myFunction()"/>
                 <label class="form-label" for="form1">Search</label>
                 <button type="button" class="btn" style="background-color:rgba(44, 88, 100, 1); color: white;">
                   <i class="fas fa-search"></i>
@@ -206,14 +259,20 @@
                     </td>
                     <td> <p class="fw-normal mb-1"><?php echo $row['user_id']; ?></p></td>
                     <td>
+                      
                     <span class="badge badge-success rounded-pill d-inline"><?php echo $row2['acc_role']; ?></span>
                     </td>
                    
                     <td>
                       <div class="btn-group shadow-0" role="group">
-                        <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminViewUserProfile.html'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
-                        <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminEditUserProfile.php?user_id=<?php echo $userID ?>'"><i class="fa-regular fa-pen-to-square" style="color: #624de3; font-size: 20px;"></i></button>
-                        <button type="button" class="btn btn-link" data-mdb-color="dark"><i class="fa-regular fa-trash-can" style="color: #a30d11; font-size: 20px;"></i></button>
+                        <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminViewUserProfile.php?user_id=<?php echo $userID; ?>'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
+                        <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminEditUserProfile.php?user_id=<?php echo $userID; ?>'"><i class="fa-regular fa-pen-to-square" style="color: #624de3; font-size: 20px;"></i></button>
+                        <button type="button" class="btn btn-link" data-mdb-color="dark" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-user-id="<?php echo $userID; ?>" onclick="setDeleteUserId(this)"><i class="fa-regular fa-trash-can" style="color: #a30d11; font-size: 20px;"></i></button>
+
+
+
+                        <!-- Modal -->
+                      
                       </div>
                     </td>
                   </tr>
@@ -227,11 +286,28 @@
         </div>
       </div>
 
-     
+
       
     </div>
       
   </section>
+
+       <!-- Modal -->
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel">Are You Sure You Want to Delete This User?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+    
+      <div class="modal-footer d-flex justify-content-center">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+        <button type="button" class="btn btn-danger" id="confirmDelete">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>
   <footer class="text-center text-white fixed-bottom overflow-hidden" style="background-color: #21081a; margin-top: 20px;">
         
       
@@ -244,6 +320,7 @@
     </div>
     <!-- Copyright -->
   </footer>
+
 
 
 
@@ -284,7 +361,7 @@
   <script>
 
 var xValues = ["User", "Expert", "Staff"];
-var yValues = [55, 49, 44];
+var yValues = [<?php echo $numberOfUsers; ?>, <?php echo $numberOfStaff; ?>, <?php echo $numberOfExpert; ?>];
 var barColors = [
   "#b91d47",
   "#00aba9",
@@ -305,6 +382,37 @@ new Chart("myChart", {
       display: true,
       text: "List of Users"
     }
+  }
+});
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("form1");
+  filter = input.value.toUpperCase();
+  table = document.getElementsByTagName("table")[0];
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1]; // Change index to match the column you want to search
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+let deleteUserId;
+
+function setDeleteUserId(button) {
+  deleteUserId = button.getAttribute('data-user-id');
+}
+
+
+document.getElementById('confirmDelete').addEventListener('click', function() {
+  if (typeof deleteUserId !== 'undefined') {
+    location.href = '../../../Model/Admin/adminDeleteUser.php?user_id=' + deleteUserId;
   }
 });
 

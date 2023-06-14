@@ -3,21 +3,28 @@
   $researchArea = $_GET["researchArea"];
 
   if(!isset( $_SESSION["Current_user_id"] )) {
-
     ?>
         <script>
             alert("Access denied !!!")
             window.location = "../Module1/Login/GeneralUserLogin/userLogin.php";
         </script>
     <?php
-
     }
 
   include("../../Config/database_con.php");
 
-  $sql = "SELECT * FROM posting INNER JOIN user_profile 
-            ON posting.user_id=user_profile.user_id WHERE posting_course='$researchArea'";
+  $sql = "SELECT * FROM user_profile 
+            INNER JOIN posting ON user_profile.user_id = posting.user_id
+            WHERE posting_course='$researchArea'";
   $result = mysqli_query($conn,$sql) or die ("Could not execute query in view");
+
+  $posting_id = mysqli_fetch_assoc(mysqli_query($conn,$sql5))['posting_id'];
+
+  $sql2 = "SELECT * FROM discussion 
+            INNER JOIN posting ON  discussion.posting_id=posting.posting_id 
+            INNER JOIN user_profile ON discussion.user_id=user_profile.user_id
+            WHERE discussion.posting_id='$posting_id'";
+  $result2 = mysqli_query($conn,$sql2) or die ("Could not execute query in view");
   //$row = mysqli_fetch_assoc($result);
 
 ?>
@@ -65,6 +72,7 @@
             </p>
             <select class="form-select" aria-label="questionForm" id="categoriesDropdown">
                 <option disabled selected>Select your categories</option>
+                <option value="all">All Categories</option>
             </select>
             <div class=box1> <button> <i class="fa-solid fa-filter" style="color: #757D8A;"></i></button></div>
         </div>
@@ -116,13 +124,13 @@
                             <!-- icon section -->
                             <div class="d-flex pt-1 pb-1">
                                 <div id="like">
-                                    <i id="iconLike" class="fa-regular fa-heart fa-l"></i>
+                                    <i id="likeButton" class="fa-regular fa-heart fa-l"></i>
                                 </div>
                                 <div class="likeCounter">
                                     <p><?php echo $row['posting_like']; ?> Like</p>
                                 </div>
                                 <div class="views">
-                                    <i class="fa-solid fa-eye fa-l"></i>
+                                    <i id="viewButton" class="fa-solid fa-eye fa-l"></i>
                                 </div>
                                 <div class="viewCounter">
                                     <p><?php echo $row['posting_view']; ?> View</p>
@@ -133,12 +141,16 @@
                                 <div class="commentCounter">
                                     <p>Comment</p>
                                 </div>
+                                <?php 
+                                  if ($status == "Completed"){
+                                ?>
                                 <div class="rates">
                                     <i id="iconRate" class="fa-regular fa-star fa-l"></i>
                                 </div>
                                 <div class="rateCounter">
-                                    <p>Rates</p>
+                                    <p><?php echo $row['posting_rating']; ?> Rates</p>
                                 </div>
+                                <?php } ?>
                                 <div class="ml-auto">
                                     <p><?php echo $row['posting_date']; ?></p>
                                 </div>
@@ -149,12 +161,17 @@
                             <div class="py-4">
                                 <strong>Comments</strong>
                             </div>
+                            
+                            <?php
+                            if ($result2->num_rows > 0) {
+                                while($row2 = mysqli_fetch_assoc($result2)){
+                            ?>
                             <div class="d-flex flex-column pl-5">
                                 <div class="d-flex pb-3">
                                     <div class="profileImg">
                                         <!-- Image -->
                                         <img
-                                            src= "../../../Asset/pp.jpg"
+                                            src= <?php echo $row2['user_profile_img']; ?>
                                             class="rounded-circle shadow"
                                             height="40"
                                             width= "40";
@@ -163,12 +180,17 @@
                                             />
                                     </div>
                                     <div class="d-flex flex-column pl-2">
-                                        <strong>James Cooper</strong>
-                                        <p>This is the additional container below the left side.</p>
+                                        <strong><?php echo $row2['user_name']; ?></strong>
+                                        <p><?php echo $row2['discussion_content']; ?></p>
                                     </div>
                                 </div>
                                 <textarea id="textareaComment" placeholder="Enter your text..."></textarea>
                             </div>
+                            <?php }}else { ?>
+                                <div class="text-center pb-2" >
+                                    <p><?php echo "No comment.";?></p>
+                                </div>
+                            <?php } ?>
                         </div>
                     </div>
                     <?php }}else {
@@ -200,7 +222,7 @@
 
 
   <!-- MDB -->
-  <script src="../../js/profile.js"></script>
+  <script src="../../js/interaction.js"></script>
   <script src="../../js/posting.js"></script>
   <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
   <!--Bootstrap 4 & 5 & jQuery Script-->

@@ -92,14 +92,14 @@
             <span class="tooltip">Dashboard</span>
           </li>
           <li>
-            <a href="adminViewUserList.html" class="active">
+            <a href="adminViewUserList.php" class="active">
               <i class="fa-solid fa-user-group"></i>
               <span class="links_name">User List</span>
             </a>
             <span class="tooltip">User List</span>
           </li>
           <li>
-            <a href="adminUserApprovalList.html">
+            <a href="adminUserApprovalList.php">
               <i class="fa-solid fa-user-check"></i>
               <span class="links_name">Approval List</span>
             </a>
@@ -121,14 +121,14 @@
         <h2 class="section-heading">Profile</h2>
         <ul class="nav-list">
           <li>
-            <a href="#">
+            <a href="adminProfile.php">
               <i class="fa-solid fa-user"></i>
               <span class="links_name">View Profile</span>
             </a>
             <span class="tooltip">View Profile</span>
           </li>
           <li style="margin-top: 10px">
-            <a href="#">
+            <a href="../../../Config/adminlogout.php">
               <i class="fa-solid fa-right-from-bracket"></i>
               <span class="links_name">Logout</span>
             </a>
@@ -169,11 +169,8 @@
                 <div class="profile_content">
                   <div class="d-flex justify-content-between">
                     <div class="d-flex">
-                      <h2><strong>SHATTHIYA GANES</strong></h2>
-                      <i
-                        class="fas fa-circle-check fa-2x ml-3"
-                        style="color: #00ff00"
-                      ></i>
+                      <h2><strong><?php echo $row['user_name']; ?></strong></h2>
+                    
                     </div>
 
                  
@@ -196,7 +193,7 @@
                       <input type="text" class="form-control text-truncate w-75" value="<?php echo $row['user_academicStatus']; ?>" id="academiclvl" name="academiclvl">
                     </div>
                     <div class="input-group w-50">
-                        <p class="w-50 text-truncate">Last Seen : 05-06-2023</p>
+                        
                     </div>
                 </div>
 
@@ -217,19 +214,7 @@
                         color: white;
                       "
                     >
-                      Cloud Computing
-                    </p>
-                    <p
-                      class="ml-2 bg-secondary rounded-6"
-                      style="
-                        font-size: 12px;
-                        padding-top: 2px;
-                        padding-right: 10px;
-                        padding-left: 10px;
-                        color: white;
-                      "
-                    >
-                      Autonomic Computing
+                    <?php echo $row['user_researchArea']; ?>
                     </p>
                     
                   </div>

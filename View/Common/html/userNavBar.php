@@ -64,7 +64,7 @@
         <!-- Left links -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item <?php echo $home?>">
-            <a class="nav-link ml-2" href="../../../View/User/dashboard.php"><strong>RESEARCH</strong></a>
+            <a class="nav-link ml-2" href="../../View/User/dashboard.php"><strong>RESEARCH</strong></a>
           </li>
           <li class="nav-item <?php echo $complaint?>">
             <a class="nav-link ml-2" href="../../View/Complaint/userViewComplaint.php"><strong>COMPLAINT</strong></a>
@@ -73,7 +73,7 @@
             <a class="nav-link ml-2" href="../../View/User/question.php"><strong>QUESTION</strong></a>
           </li>
           <li class="nav-item <?php echo $rating?>">
-            <a  class="nav-link ml-2" href="../../../View/User/test2.php"><strong>RATING</strong></a>
+            <a  class="nav-link ml-2" href="../../../View/User/rating.php"><strong>RATING</strong></a>
           </li>
         </ul>
       </div>
@@ -112,8 +112,8 @@
             />
             <div class="dropdown-content">
               <!-- Dropdown content here -->
-              <a href="../../../View/User/profile.php">Profile</a>
-              <a href="../../../Config/logout.php">Logout</a>
+              <a href="../../View/User/profile.php">Profile</a>
+              <a href="../../Config/logout.php">Logout</a>
             </div>
           </div>
           

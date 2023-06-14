@@ -5,12 +5,14 @@
   $userID = $_REQUEST['userID'];
   $username = $_REQUEST['username'];
   $userPassword = $_REQUEST['password'];
+  $image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhJLRPWYOASOmvpCMobRDM2hVldrvApmgCSY-vNCYVWbuUM6dErtEZNGAo6-XvF8K-y0k&usqp=CAU";
 
   $sql = "INSERT INTO account (user_id, acc_password, acc_role, first_login)
   VALUES ('$userID', '$userPassword', '$role', '1')";
 
-  $sql2 = "INSERT INTO user_profile (user_id, admin_id, user_name)
-  VALUES ('$userID' , '0' , '$username')";
+  $sql2 = "INSERT INTO user_profile (user_id, admin_id, user_name, user_profile_img)
+  VALUES ('$userID' , '0' , '$username', '$image')";
+
 
   if(mysqli_query($conn, $sql)){
     (mysqli_query($conn, $sql2));

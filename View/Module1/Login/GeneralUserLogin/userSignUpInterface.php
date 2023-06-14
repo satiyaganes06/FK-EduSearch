@@ -32,10 +32,10 @@
     <!--CSS-->
     <link
       rel="stylesheet"
-      href="/View/Module1/Login/GeneralUserLogin/userSignUpInterface.css"
+      href="../GeneralUserLogin/userSignUpInterface.css"
     />
     <!-- Icon -->
-    <link rel="shortcut icon" type="image/jpg" href="/Asset/icon_logo.png" />
+    <link rel="shortcut icon" type="image/jpg" href="../../../../Asset/icon_logo.png" />
   </head>
   <body>
     <div class="container-fluid p-0">
@@ -43,7 +43,7 @@
         class="d-flex justify-content-space bg-light w-100 h-100 mw-100 mh-100 overflow-hidden"
       >
         <div class="content">
-          <div class="logo text-center"><img src="/Asset/Logo Login.png" alt="Logo" /></div>
+          <div class="logo text-center"><img src="../../../../Asset/Logo Login.png" alt="Logo" /></div>
           <div class="loginform mt-5">
             <div class="title text-center text-dark">
               <h2><b>Sign Up</b></h2>
@@ -83,14 +83,14 @@
                 </div>
             
                 <div class="signuptxt">
-                  <p>Have an account?<a href="userLogin.html">Login Here</a></p>
+                  <p>Have an account?<a href="userLogin.php">Login Here</a></p>
                 </div>
               </form>
           </div>
         </div>
         <div class="w-50 backgroundImg">
           <img
-            src="/Asset/userLoginbackground.jpg"
+            src="../../../../Asset/userLoginbackground.jpg"
             alt="user login background"
             style="width: 820px; height: 688px; object-fit: fill"
           />

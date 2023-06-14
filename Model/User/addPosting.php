@@ -13,11 +13,11 @@
 
   }else{
     include("../../Config/database_con.php");
-    try{
+    
       $user_id = $_SESSION['Current_user_id'];
       $posting_content = $_POST['question'];
-      $posting_categories = $_POST['researchArea'];
-      $posting_course = $_POST['categories'];
+      $posting_categories = $_POST['categories'];
+      $posting_course = $_POST['researchArea'];
       $posting_like = 0;
       $posting_view = 0;
       $posting_status = 'Assign';
@@ -44,9 +44,6 @@
         '$posting_status',
         '$posting_rating',
         '$posting_date')";
-    } catch(PDOException $e) {
-      echo "Error: " . $e->getMessage();
-    }
 
     if(!mysqli_query($conn,$sql)){
       echo'not inserted';
