@@ -99,7 +99,7 @@ if (!isset($_SESSION["Current_admin_id"])) {
             <h2 class="section-heading">Profile</h2>
             <ul class="nav-list">
                 <li>
-                    <a href="#">
+                    <a href="adminProfile.php">
                         <i class="fa-solid fa-user"></i>
                         <span class="links_name">View Profile</span>
                     </a>

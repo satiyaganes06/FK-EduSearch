@@ -1,3 +1,29 @@
+<?php
+session_start();
+  
+//If the user is not logged in send him/her to the login form
+if(!isset( $_SESSION["Current_admin_id"] )) {
+
+    ?>
+        <script>
+            alert("Access denied !!!")
+            window.location = "../Login/Admin%20Login/adminLogin.php";
+        </script>
+    <?php
+
+}else{
+  include("../../../Config/database_con.php");
+
+  $user_id = $_GET['user_id'];
+
+  $query = "SELECT * FROM user_profile WHERE user_id = '$user_id'";
+  $result = mysqli_query($conn, $query);
+  $row = mysqli_fetch_assoc($result);
+
+}
+
+?>
+
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -68,14 +94,14 @@
             <span class="tooltip">Dashboard</span>
           </li>
           <li>
-            <a href="adminViewUserList.html" class="active">
+            <a href="adminViewUserList.php" class="active">
               <i class="fa-solid fa-user-group"></i>
               <span class="links_name">User List</span>
             </a>
             <span class="tooltip">User List</span>
           </li>
           <li>
-            <a href="adminUserApprovalList.html">
+            <a href="adminUserApprovalList.php">
               <i class="fa-solid fa-user-check"></i>
               <span class="links_name">Approval List</span>
             </a>
@@ -97,14 +123,14 @@
         <h2 class="section-heading">Profile</h2>
         <ul class="nav-list">
           <li>
-            <a href="#">
+            <a href="adminProfile.php">
               <i class="fa-solid fa-user"></i>
               <span class="links_name">View Profile</span>
             </a>
             <span class="tooltip">View Profile</span>
           </li>
           <li style="margin-top: 10px">
-            <a href="#">
+            <a href="../../../Config/adminlogout.php">
               <i class="fa-solid fa-right-from-bracket"></i>
               <span class="links_name">Logout</span>
             </a>
@@ -145,7 +171,7 @@
                 <div class="profile_content">
                   <div class="d-flex justify-content-between">
                     <div class="d-flex">
-                      <h2><strong>SHATTHIYA GANES</strong></h2>
+                      <h2><strong><?php echo $row['user_fullName']; ?></strong></h2>
                       <i
                         class="fas fa-circle-check fa-2x ml-3"
                         style="color: #00ff00"
@@ -156,23 +182,21 @@
                   </div>
 
                   <div class="d-flex justify-content-start mt-3">
-                    <p class="w-50 text-truncate mr-3">satiyaganes@gmail.com</p>
-                    <p class="w-50 text-truncate">Age : 28</p>
+                    <p class="w-50 text-truncate mr-3"><?php echo $row['user_email']; ?></p>
+                    <p class="w-50 text-truncate">Age : <?php echo $row['user_age']; ?></p>
                   </div>
 
                   <div class="d-flex justify-content-start">
                     <p class="w-50 text-truncate mr-3">
-                      Academic Level : Master & PHD
+                      Academic Level : <?php echo $row['user_academicStatus']; ?>
                     </p>
-                    <p class="w-50 text-truncate">Last Seen : 05-06-2023</p>
+                   
                   </div>
 
                   <p class="w-50 text-truncate mr-3">
                     Social Media :
                     <a
-                      href="https://www.instagram.com/satiyaganes06/"
-                      target="_blank"
-                      >@satiyaganes</a
+                      ><?php echo $row['user_socialMedia']; ?></a
                     >
                   </p>
 
@@ -188,32 +212,17 @@
                         color: white;
                       "
                     >
-                      Cloud Computing
-                    </p>
-                    <p
-                      class="ml-2 bg-secondary rounded-6"
-                      style="
-                        font-size: 12px;
-                        padding-top: 2px;
-                        padding-right: 10px;
-                        padding-left: 10px;
-                        color: white;
-                      "
-                    >
-                      Autonomic Computing
+                    <?php echo $row['user_researchArea']; ?>
                     </p>
                   </div>
                 </div>
               </div>
               <div class="d-flex justify-content-between">
                 <div class="text-start">
-                <button type="button" class="btn btn-info me-2" >View CV</button>
+              
                  </div>
 
-                <div class="text-end">
-                  <button type="button" class="btn btn-warning me-2" >Edit</button>
-                  <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Delete</button>
-                </div>
+          
               </div>
               
             </div>
