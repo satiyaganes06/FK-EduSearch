@@ -18,11 +18,11 @@
             WHERE posting_course='$researchArea'";
   $result = mysqli_query($conn,$sql) or die ("Could not execute query in view");
 
-  $posting_id = mysqli_fetch_assoc(mysqli_query($conn,$sql))['posting_id'];
+  $posting_id = mysqli_fetch_assoc(mysqli_query($conn,$sql5))['posting_id'];
 
   $sql2 = "SELECT * FROM discussion 
             INNER JOIN posting ON  discussion.posting_id=posting.posting_id 
-            INNER JOIN user_profile ON posting.user_id=user_profile.user_id
+            INNER JOIN user_profile ON discussion.user_id=user_profile.user_id
             WHERE discussion.posting_id='$posting_id'";
   $result2 = mysqli_query($conn,$sql2) or die ("Could not execute query in view");
   //$row = mysqli_fetch_assoc($result);

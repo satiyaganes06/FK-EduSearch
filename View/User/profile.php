@@ -19,6 +19,14 @@
 
     $sql2 = "SELECT * FROM posting WHERE user_id ='$user_id' ORDER BY posting_date DESC";
     $result2 = mysqli_query($conn,$sql2) or die ("Could not execute query in view");
+
+    $posting_id = mysqli_fetch_assoc(mysqli_query($conn,$sql2))['posting_id'];
+
+    $sql3 = "SELECT * FROM discussion 
+              INNER JOIN posting ON  discussion.posting_id=posting.posting_id 
+              INNER JOIN user_profile ON discussion.user_id=user_profile.user_id
+              WHERE discussion.posting_id='$posting_id'";
+    $result3 = mysqli_query($conn,$sql3) or die ("Could not execute query in view");
   ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -202,26 +210,35 @@ include_once('../Common/html/userNavBar.php');
                         <div class="py-4">
                             <strong>Comments</strong>
                         </div>
-                        <div class="d-flex flex-column pl-5">
-                            <div class="d-flex pb-3">
-                                <div class="profileImg">
-                                    <!-- Image -->
-                                    <img
-                                        src= "../../../Asset/pp.jpg"
-                                        class="rounded-circle shadow"
-                                        height="40"
-                                        width= "40";
-                                        alt="Black and White Portrait of a Man"
-                                        loading="lazy"
-                                        />
+                        <?php
+                            if ($result3->num_rows > 0) {
+                                while($row3 = mysqli_fetch_assoc($result3)){
+                            ?>
+                            <div class="d-flex flex-column pl-5">
+                                <div class="d-flex pb-3">
+                                    <div class="profileImg">
+                                        <!-- Image -->
+                                        <img
+                                            src= <?php echo $row3['user_profile_img']; ?>
+                                            class="rounded-circle shadow"
+                                            height="40"
+                                            width= "40";
+                                            alt="Black and White Portrait of a Man"
+                                            loading="lazy"
+                                            />
+                                    </div>
+                                    <div class="d-flex flex-column pl-2">
+                                        <strong><?php echo $row3['user_name']; ?></strong>
+                                        <p><?php echo $row3['discussion_content']; ?></p>
+                                    </div>
                                 </div>
-                                <div class="d-flex flex-column pl-2">
-                                    <strong>James Cooper</strong>
-                                    <p>This is the additional container below the left side.</p>
-                                </div>
+                                <textarea id="textareaComment" placeholder="Enter your text..."></textarea>
                             </div>
-                            <textarea id="textareaComment" placeholder="Enter your text..."></textarea>
-                        </div>
+                            <?php }}else { ?>
+                                <div class="text-center pb-2" >
+                                    <p><?php echo "No comment.";?></p>
+                                </div>
+                            <?php } ?>
                     </div>
                 </div>
                 <?php }}else {
