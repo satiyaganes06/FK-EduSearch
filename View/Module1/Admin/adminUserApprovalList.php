@@ -293,7 +293,7 @@
               <table class="table align-middle mb-0 bg-white mt-2 table-responsive-sm table-hover">
                 <thead>
                   <tr>
-                    <th class="firstcol">No</th>
+                    <th >No</th>
                     <th>Posting Content</th>
                     <th>Posting Categories</th>
                     <th>Author ID</th>
@@ -308,6 +308,9 @@
 
                           $sql3 = "SELECT * FROM posting WHERE posting_status = 'Assign'";
                           $result3 = mysqli_query($conn,$sql3);
+
+                          $expertSQL = "SELECT * FROM expert";
+                          $expertResult = mysqli_query($conn,$expertSQL);
                           
 
                           while ($row3 = mysqli_fetch_assoc($result3)){
@@ -317,7 +320,7 @@
                             <td>
                               <div class="d-flex align-items-center">
                                 
-                                <div class="ms-3">
+                                <div class="ms-3" >
                                   <p class="fw-bold mb-1"> <?php echo ++$bilNum; ?></p>
                                  
                                   
@@ -335,10 +338,26 @@
                               <span class="badge badge-success rounded-pill d-inline"><?php echo $row3['user_id']; ?></span>
                             </td>
                            
-                            <td>
-                              <div class="btn-group shadow-0" role="group">
-                                <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminApprovePublication.php?posting_id=<?php echo $id ?>'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
-                                
+                            <td style="padding-left: 10px; padding-right:10px;">
+                              <div class="d-flex">
+                                <select class="form-select" id="expertSelect" aria-label="Expert Assign">
+                                  <option selected>Expert Assign</option>
+                                  <?php while ($row4 = mysqli_fetch_assoc($expertResult)){
+                                    $expertid = $row4["expert_id"];
+                                    $userid = $row4['user_id'];
+
+
+                                    $user = "SELECT * FROM user_profile WHERE user_id = '$userid'";
+                                    $userDetails = mysqli_query($conn,$user);
+                                    $row5 = mysqli_fetch_assoc($userDetails);
+                                    ?>
+                                    
+                                    <option value="<?php echo $expertid; ?>"><?php echo $row5['user_name']; ?></option>
+
+                                  <?php } ?>
+                                </select>
+
+                                <a id="assignExpertLink" href="#"><button type="submit" class="pl-3 pr-3 btn"><i class="fas fa-circle-check fa-2x"></i></button></a>
                               </div>
                             </td>
                           </tr>
@@ -373,6 +392,14 @@
     <!-- Copyright -->
   </footer>
 
+  <script>
+      document.getElementById('expertSelect').addEventListener('change', function() {
+          var selectedExpertId = this.value;
+          var postingId = '<?php echo $postingid ?>';
+          var assignExpertUrl = '../../../Model/expert/assignExpert.php?post_id=' + postingId + '&expert_id=' + selectedExpertId;
+          document.getElementById('assignExpertLink').setAttribute('href', assignExpertUrl);
+      });
+  </script>
 
 
    <!-- MDB -->

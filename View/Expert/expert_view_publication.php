@@ -180,7 +180,7 @@
           </div>
 
           <button class="button_View btn-dark btn btn-block text-white" onClick="javascript:window.open('<?php echo $row["publication_link"]; ?>', '_blank');" data-mdb-ripple-color="dark"><strong>View</strong></button>
-
+          
         </div>
     </div>
 

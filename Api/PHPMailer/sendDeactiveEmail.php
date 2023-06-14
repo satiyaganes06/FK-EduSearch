@@ -30,7 +30,7 @@
         $mail->isHTML(true);
         // Set the email subject and body
         $mail->Subject = 'Account Deactivation';
-        $mail->Body = "Dear Sir, your account has been deactivated due to inactivity.";
+        $mail->Body = "Dear Sir, your account has been deactivated due to inactivity more then 31 days.";
 
         if($mail->send()){
             
