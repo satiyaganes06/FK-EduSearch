@@ -111,7 +111,7 @@
       <h2 class="section-heading">Profile</h2>
       <ul class="nav-list">
         <li>
-          <a href="#">
+          <a href="adminProfile.php">
             <i class="fa-solid fa-user"></i>
             <span class="links_name">View Profile</span>
           </a>
@@ -140,17 +140,7 @@
             <div class="tabletitle">
                 <h4>Approval for Update Profile</h4>
             </div>
-            
-            <div class="input-group d-flex w-25">
-                <div class="form-outline d-flex">
-                  <input type="search" id="form1" class="form-control rounded" style="border-radius: 25px;" />
-                  <label class="form-label" for="form1">Search</label>
-                  <button type="button" class="btn" style="background-color:rgba(44, 88, 100, 1); color: white;">
-                    <i class="fas fa-search"></i>
-                  </button>
-                </div>
-                
-              </div>
+           
             <div>
                
               <table class="table align-middle mb-0 bg-white mt-2 table-responsive-sm table-hover">
@@ -222,7 +212,7 @@
                 <h4>Approval for Publication</h4>
             </div>
             
-            <div class="input-group d-flex w-25">
+            <!-- <div class="input-group d-flex w-25">
                 <div class="form-outline d-flex">
                   <input type="search" id="form1" class="form-control rounded" style="border-radius: 25px;" />
                   <label class="form-label" for="form1">Search</label>
@@ -231,7 +221,7 @@
                   </button>
                 </div>
                 
-              </div>
+              </div> -->
             <div>
                
               <table class="table align-middle mb-0 bg-white mt-2 table-responsive-sm table-hover">
@@ -277,6 +267,72 @@
                             </td>
                             <td>
                               <span class="badge badge-success rounded-pill d-inline"><?php echo $row['publication_author']; ?></span>
+                            </td>
+                           
+                            <td>
+                              <div class="btn-group shadow-0" role="group">
+                                <button type="button" class="btn btn-link" data-mdb-color="dark" onclick="location.href='adminApprovePublication.php?posting_id=<?php echo $id ?>'"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></button>
+                                
+                              </div>
+                            </td>
+                          </tr>
+                       <?php   }
+
+                            ?>
+                 
+                 
+                </tbody>
+              </table>
+            </div>
+            <div class="tabletitle2">
+                <h4>Assign Posting</h4>
+            </div>
+            
+            <div>
+               
+              <table class="table align-middle mb-0 bg-white mt-2 table-responsive-sm table-hover">
+                <thead>
+                  <tr>
+                    <th class="firstcol">No</th>
+                    <th>Posting Content</th>
+                    <th>Posting Categories</th>
+                    <th>Author ID</th>
+                    <th class="lastcol">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <?php
+                          include("../../../Config/database_con.php");
+                          $bilNum = 0;
+                          
+
+                          $sql3 = "SELECT * FROM posting WHERE posting_status = 'Assign'";
+                          $result3 = mysqli_query($conn,$sql3);
+                          
+
+                          while ($row3 = mysqli_fetch_assoc($result3)){
+                            $postingid = $row3["posting_id"];
+                            ?>
+                            <tr>
+                            <td>
+                              <div class="d-flex align-items-center">
+                                
+                                <div class="ms-3">
+                                  <p class="fw-bold mb-1"> <?php echo ++$bilNum; ?></p>
+                                 
+                                  
+                                </div>
+                              </div>
+                            </td>
+                            <td>
+                              <p class="fw-normal mb-1 text-truncate"><?php echo $row3['posting_content']; ?></p>
+                             
+                            </td>
+                            <td>
+                              <p class="fw-normal mb-1"><?php echo $row3['posting_categories']; ?></p>
+                            </td>
+                            <td>
+                              <span class="badge badge-success rounded-pill d-inline"><?php echo $row3['user_id']; ?></span>
                             </td>
                            
                             <td>

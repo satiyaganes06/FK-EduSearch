@@ -1,6 +1,18 @@
 <?php
 session_start();
-$_SESSION["user_route"] = "rating";
+//If the user is not logged in send him/her to the login form
+  if(!isset( $_SESSION["Current_user_id"] )) {
+
+  ?>
+      <script>
+          alert("Access denied !!!")
+          window.location = "../Module 1/Login/General User Login/userLogin.php";
+      </script>
+  <?php
+}else{
+  $_SESSION["user_route"] = "rating";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +24,8 @@ $_SESSION["user_route"] = "rating";
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/6en8XCp+HHAAK5GSLf2xlYtvJ8U2Q4U+9cuEnJoa3" crossorigin="anonymous">
+
 
     <!--Bootstrap Script-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -30,7 +44,7 @@ $_SESSION["user_route"] = "rating";
     <link rel="shortcut icon" type="image/jpg" href="../../Asset/icon_logo.png" />   
  
   
-  <style>
+    <style>
     .rating {
       display: inline-flex;
       flex-direction: row-reverse;
@@ -46,11 +60,11 @@ $_SESSION["user_route"] = "rating";
       color: lightgray;
       cursor: pointer;
     }
-    
+
     .rating input[type="radio"]:checked ~ label {
       color: gold;
     }
-    </style>
+  </style>
     
 </head>
 <body>
@@ -58,27 +72,27 @@ $_SESSION["user_route"] = "rating";
     <?php
         include_once('../Common/html/userNavBar.php');
     ?>
-  <section>
-      <div class="container text-center pt-4 pb-3">
-        <div class="col">
-          <h1>Star Rating</h1>
-          <form action="save_rating.php" method="post">
-              <div class="rating col">
-                <input type="radio" name="rating" value="5" id="5">
-                <label for="5">☆</label>
-                <input type="radio" name="rating" value="4" id="4">
-                <label for="4">☆</label>
-                <input type="radio" name="rating" value="3" id="3">
-                <label for="3">☆</label>
-                <input type="radio" name="rating" value="2" id="2">
-                <label for="2">☆</label>
-                <input type="radio" name="rating" value="1" id="1">
-                <label for="1">☆</label>
-              </div>
-          <button type="submit" id="submitRating" class="btn btn-primary fw-bold" >Submit Rating</button>
-          </form>
-        </div>
+    <section>
+    <div class="container text-center pt-4 pb-3 bg-white">
+      <div class="col">
+        <h1>Star Rating</h1>
+        <form action="save_rating.php" method="post">
+          <div class="rating col">
+            <input type="radio" name="rating" value="5" id="5">
+            <label for="5"><i class="fa-solid fa-star"></i></label>
+            <input type="radio" name="rating" value="4" id="4">
+            <label for="4"><i class="fa-solid fa-star"></i></label>
+            <input type="radio" name="rating" value="3" id="3">
+            <label for="3"><i class="fa-solid fa-star"></i></label>
+            <input type="radio" name="rating" value="2" id="2">
+            <label for="2"><i class="fa-solid fa-star"></i></label>
+            <input type="radio" name="rating" value="1" id="1">
+            <label for="1"><i class="fa-solid fa-star"></i></label>
+          </div>
+          <button type="submit" id="submitRating" class="btn btn-primary fw-bold">Submit Rating</button>
+        </form>
       </div>
+    </div>
   </section>
     
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

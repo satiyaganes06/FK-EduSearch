@@ -14,10 +14,15 @@ $user_id = $_SESSION["Current_user_id"];
 $rating = isset($_POST['rating']) ? $_POST['rating'] : null;
 
 if ($rating === null) {
-  echo "Error: Rating is not provided";
+  ?>
+        <script>
+          alert("Rating is not provided");
+          window.location='../../../View/User/rating.php';
+        </script>
+          <?php
   exit;
 }else{
-  $sql_retrieve = "SELECT * FROM temp_user_profile";
+  $sql_retrieve = "SELECT * FROM rating";
   $result = mysqli_query($conn,$sql_retrieve) or die ("Could not execute query in view");
   //$row = mysqli_fetch_assoc($result);
 
@@ -33,7 +38,7 @@ if ($rating === null) {
   if ($conn->query($sql) === TRUE) {
     ?>
         <script>
-          alert("New record created successfully");
+          alert("Rating Successfully Submitted! Thank You For Your Feedback!");
           window.location='../../../View/User/rating.php';
         </script>
           <?php
