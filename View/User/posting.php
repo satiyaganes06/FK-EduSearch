@@ -18,7 +18,7 @@
             WHERE posting_course='$researchArea'";
   $result = mysqli_query($conn,$sql) or die ("Could not execute query in view");
 
-  $posting_id = mysqli_fetch_assoc(mysqli_query($conn,$sql5))['posting_id'];
+  $posting_id = mysqli_fetch_assoc(mysqli_query($conn,$sql))['posting_id'];
 
   $sql2 = "SELECT * FROM discussion 
             INNER JOIN posting ON  discussion.posting_id=posting.posting_id 
