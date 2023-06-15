@@ -1,5 +1,3 @@
-
-
 if (valueResearch == "Software Engineering"){
     var categoriesData = ["Human Computer Interaction", "Web Engineering", 
     "Software Maintenance & Evolution", "Software Testing", "Formal Method", "Software Quality Assurance"]
@@ -30,3 +28,12 @@ for(var i=0; i<categoriesData.length; i++){
     option.text = categoriesData[i];
     x.add(option);
 }
+
+var dropdownCate = document.getElementById("categoriesDropdown").selectedIndex;
+  var selectedValue = dropdownCate.value;
+  
+  if (dropdownCate == 0) {
+    
+  } else {
+    document.getElementById("output").innerHTML = "sdsfgh";
+  }

@@ -104,7 +104,7 @@
 
           <div class="dropdown">
             <img
-              src=<?php echo $row0['user_profile_img']; ?>
+              src="data:image/jpeg;base64,<?php echo base64_encode($row['user_profile_img']); ?>"
               class="rounded-circle shadow"
               height="40"
               alt="Black and White Portrait of a Man"

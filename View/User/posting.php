@@ -14,11 +14,12 @@
   include("../../Config/database_con.php");
 
   $sql = "SELECT * FROM user_profile 
-            INNER JOIN posting ON user_profile.user_id = posting.user_id
-            WHERE posting_course='$researchArea'";
-  $result = mysqli_query($conn,$sql) or die ("Could not execute query in view");
+        INNER JOIN posting ON user_profile.user_id = posting.user_id
+        WHERE posting_course='$researchArea'";
+$result = mysqli_query($conn, $sql) or die("Could not execute query in view");
 
   $posting_id = mysqli_fetch_assoc(mysqli_query($conn,$sql))['posting_id'];
+  $posting_categories = mysqli_fetch_assoc(mysqli_query($conn,$sql))['posting_categories'];
 
   $sql2 = "SELECT * FROM discussion 
             INNER JOIN posting ON  discussion.posting_id=posting.posting_id 
@@ -69,11 +70,11 @@
                 <?php 
                     echo $researchArea;
                 ?>
-            </p>
-            <select class="form-select" aria-label="questionForm" id="categoriesDropdown">
-                <option disabled selected>Select your categories</option>
-                <option value="all">All Categories</option>
-            </select>
+            </p> <!--
+            <select onchange="myFunction()" class="form-select" aria-label="questionForm" id="categoriesDropdown">
+                <option value="all" selected>All Categories</option>
+            </select>-->
+            <?php //include_once('../../Model/User/dropdownPosting.php'); ?>
             <div class=box1> <button> <i class="fa-solid fa-filter" style="color: #757D8A;"></i></button></div>
         </div>
 
@@ -92,7 +93,7 @@
                                 <!-- Image -->
                                 <div class="profileImg" >
                                     <img
-                                        src= <?php echo $row['user_profile_img']; ?>
+                                        src= "data:image/jpeg;base64,<?php echo base64_encode($row['user_profile_img']); ?>"
                                         class="rounded-circle shadow"
                                         height="50"
                                         width= "50";
@@ -171,7 +172,7 @@
                                     <div class="profileImg">
                                         <!-- Image -->
                                         <img
-                                            src= <?php echo $row2['user_profile_img']; ?>
+                                            src= "data:image/jpeg;base64,<?php echo base64_encode($row2['user_profile_img']); ?>"
                                             class="rounded-circle shadow"
                                             height="40"
                                             width= "40";
