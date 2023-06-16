@@ -51,6 +51,7 @@ if (!isset($_SESSION['Current_user_id'])) {
 
     <!-- MDB -->
     <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
+    
     <!--Bootstrap 4 & 5 & jQuery Script-->
     <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
@@ -166,6 +167,7 @@ if (!isset($_SESSION['Current_user_id'])) {
     <?php
     include_once('../Common/html/footer.html');
     ?>
+    
     <script>
         $(document).ready(function() {
             $('#myTable').DataTable();

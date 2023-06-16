@@ -50,10 +50,10 @@ if(!isset( $_SESSION["Current_user_id"] )) {
 </head>
 <body>
   
-  <!-- Navbar -->
-  <?php
+    <!-- Navbar -->
+    <?php
     include_once('../Common/html/userNavBar.php');
-  ?>
+    ?>
 
   <section>
     <table class="allContent">

@@ -14,20 +14,6 @@ iconLike.addEventListener("click", function() {
   }
 });*/
 
-// Get the icon rate element
-const iconRate = document.getElementById("iconRate");
-
-// Add event listener to the icon
-iconRate.addEventListener("click", function() {
-  // Toggle the icon class or update the icon source
-  if (iconRate.classList.contains("fa-regular")) {
-    iconRate.classList.remove("fa-regular");
-    iconRate.classList.add("fa-solid", "yellow");
-  } else {
-    iconRate.classList.remove("fa-solid", "yellow");
-    iconRate.classList.add("fa-regular");
-  }
-});
 
 // Get the icon element and textarea element
 const iconComment = document.getElementById("iconComment");
