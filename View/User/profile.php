@@ -131,7 +131,8 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
                             $sql3 = "SELECT * FROM discussion 
                                 INNER JOIN posting ON  discussion.posting_id=posting.posting_id 
                                 INNER JOIN user_profile ON discussion.user_id=user_profile.user_id
-                                WHERE discussion.posting_id='$posting_id'";
+                                WHERE discussion.posting_id='$posting_id'
+                                ORDER BY discussion.discussion_date, discussion.discussion_time ASC";
                             $result3 = mysqli_query($conn, $sql3) or die("Could not execute query in view");
                     ?>
                             <div class="pb-2">
@@ -158,8 +159,18 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
                                             $colorStatus = "84D17E";
                                         }
                                         ?>
-                                        <div class="status" id="status">
+                                        <div class="ml-auto d-flex text-center" id="status">
                                             <div class="circle1" style="background-color: #<?php echo $colorStatus; ?>;"></div>
+                                            <div class="dropdown">
+                                                <button class="dropdown-toggle" data-toggle="dropdown">
+                                                <i class="pt-3 pl-2 fa-solid fa-ellipsis-vertical fa-2xl"></i>
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li><a class="dropdown-item" href="#">Close Case</a></li>
+                                                    <li><a class="dropdown-item" href="#">Delete Question</a></li>
+                                                    <?php include('popup.php'); ?>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- icon section -->

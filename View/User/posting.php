@@ -1,27 +1,28 @@
 <?php
-  session_start();
-  $researchArea = $_GET["researchArea"];
+session_start();
+$researchArea = $_GET["researchArea"];
 
-  if(!isset( $_SESSION["Current_user_id"] )) {
-    ?>
-        <script>
-            alert("Access denied !!!")
-            window.location = "../Module1/Login/GeneralUserLogin/userLogin.php";
-        </script>
-    <?php
-    }
+if (!isset($_SESSION["Current_user_id"])) {
+?>
+    <script>
+        alert("Access denied !!!")
+        window.location = "../Module1/Login/GeneralUserLogin/userLogin.php";
+    </script>
+<?php
+}
 
-  include("../../Config/database_con.php");
+include("../../Config/database_con.php");
 
-  $sql = "SELECT * FROM user_profile 
+$sql = "SELECT * FROM user_profile 
         INNER JOIN posting ON user_profile.user_id = posting.user_id
         WHERE posting_course='$researchArea'";
 $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
-  //$row = mysqli_fetch_assoc($result);
+//$row = mysqli_fetch_assoc($result);
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -43,192 +44,196 @@ $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
     <link rel="stylesheet" href="css/posting.css">
     <link rel="stylesheet" href="../Common//css/navbar.css">
     <link rel="stylesheet" href="../Common//css/footer.css">
-    
+
     <!-- Icon -->
     <link rel="shortcut icon" type="image/jpg" href="../../Asset/icon_logo.png" />
 </head>
-<body>
-  <!-- Navbar -->
-  <?php
-    include_once('../Common/html/userNavBar.php');
-  ?>
 
-<section>
+<body>
+    <!-- Navbar -->
+    <?php
+    include_once('../Common/html/userNavBar.php');
+    ?>
+
+    <section>
         <!-- Title Posting -->
         <div class="titlePosting">
-            <script> var valueResearch = '<?php echo $researchArea; ?>';</script>
+            <script>
+                var valueResearch = '<?php echo $researchArea; ?>';
+            </script>
             <p class="title">
-                <?php 
-                    echo $researchArea;
+                <?php
+                echo $researchArea;
                 ?>
             </p> <!--
             <select onchange="myFunction()" class="form-select" aria-label="questionForm" id="categoriesDropdown">
                 <option value="all" selected>All Categories</option>
             </select>-->
-            <?php //include_once('../../Model/User/dropdownPosting.php'); ?>
+            <?php //include_once('../../Model/User/dropdownPosting.php'); 
+            ?>
             <div class=box1> <button> <i class="fa-solid fa-filter" style="color: #757D8A;"></i></button></div>
         </div>
 
         <!-- Lower section -->
         <div class="container-fluid d-flex">
-            <div class="col-10" >
+            <div class="col-10">
                 <!-- Posting section -->
-                <div class="d-flex flex-column" >
+                <div class="d-flex flex-column">
                     <?php
                     if ($result->num_rows > 0) {
-                        while($row = mysqli_fetch_assoc($result)){
+                        while ($row = mysqli_fetch_assoc($result)) {
                             $posting_id = $row['posting_id'];
                     ?>
-                    <div class="pb-2" >
-                        <div class="question" >
-                            <div class="d-flex pb-3" >
-                                <!-- Image -->
-                                <div class="profileImg" >
-                                    <img
-                                        src= "data:image/jpeg;base64,<?php echo base64_encode($row['user_profile_img']); ?>"
-                                        class="rounded-circle shadow"
-                                        height="50"
-                                        width= "50";
-                                        alt="Black and White Portrait of a Man"
-                                        loading="lazy"
-                                        />
-                                </div>
-                                <div class="d-flex flex-column pl-2">
-                                    <strong><?php echo $row['user_name']; ?></strong>
-                                    <p><?php echo $row['posting_content']; ?></p>
-                                </div>
-                                <!-- Determine the color of status -->
-                                <?php
-                                $status = $row['posting_status'];
-                                if($status == "Assign"){
-                                    $colorStatus = "FFFFFF";
-                                }else if($status == "Accepted"){
-                                    $colorStatus = "3E9BA8";
-                                }else if($status == "Revised"){
-                                    $colorStatus = "DFF45C";
-                                }else if($status == "Completed"){
-                                    $colorStatus = "84D17E";
-                                }
-                                ?>
-                                <div class="status" id="status">
-                                    <div class="circle1" style="background-color: #<?php echo $colorStatus;?>;"></div>
-                                </div>
-                            </div>
-                            <!-- icon section -->
-                            <div class="d-flex pt-1 pb-1">
-                                <div id="like">
-                                    <i id="likeButton" class="fa-regular fa-heart fa-l"></i>
-                                </div>
-                                <div class="likeCounter">
-                                    <p><?php echo $row['posting_like']; ?> Like</p>
-                                </div>
-                                <div class="views">
-                                    <i id="viewButton" class="fa-solid fa-eye fa-l"></i>
-                                </div>
-                                <div class="viewCounter">
-                                    <p><?php echo $row['posting_view']; ?> View</p>
-                                </div>
-                                <div class="comment">
-                                    <i id="iconComment" class="fa-regular fa-comment fa-l"></i>
-                                </div>
-                                <div class="commentCounter">
-                                    <p>Comment</p>
-                                </div>
-                                <?php 
-                                  if ($status == "Completed"){
-                                ?>
-                                <div class="rates">
-                                    <i id="iconRate" class="fa-regular fa-star fa-l"></i>
-                                </div>
-                                <div class="rateCounter">
-                                    <p><?php echo $row['posting_rating']; ?> Rates</p>
-                                </div>
-                                <?php } ?>
-                                <div class="ml-auto">
-                                    <p><?php echo $row['posting_date']; ?></p>
-                                </div>
-                            </div>
+                            <div class="pb-2">
+                                <div class="question">
+                                    <div class="d-flex pb-3">
+                                        <!-- Image -->
+                                        <div class="profileImg">
+                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($row['user_profile_img']); ?>" class="rounded-circle shadow" height="50" width="50" ; alt="Black and White Portrait of a Man" loading="lazy" />
+                                        </div>
+                                        <div class="d-flex flex-column pl-2">
+                                            <strong><?php echo $row['user_name']; ?></strong>
+                                            <p><?php echo $row['posting_content']; ?></p>
+                                        </div>
+                                        <!-- Determine the color of status -->
+                                        <?php
+                                        $status = $row['posting_status'];
+                                        if ($status == "Assign") {
+                                            $colorStatus = "FFFFFF";
+                                        } else if ($status == "Accepted") {
+                                            $colorStatus = "3E9BA8";
+                                        } else if ($status == "Revised") {
+                                            $colorStatus = "DFF45C";
+                                        } else if ($status == "Completed") {
+                                            $colorStatus = "84D17E";
+                                        }
+                                        ?>
+                                        <div class="ml-auto d-flex text-center" id="status">
+                                            <div class="circle1" style="background-color: #<?php echo $colorStatus; ?>;"></div>
+                                                    <?php if ($status == "Revised") { ?>
+                                            <a class="dropdown-item" href="#closeCase"><i class="pt-3 fas fa-edit fa-xl"></i></a>
+                                                    <?php } ?>
+                                            <a class="dropdown-item" href="#deleteQues<?php echo $posting_id ?>" data-toggle="modal"><i class="pt-3 fas fa-trash fa-xl"></i></a>
+                                            <?php include('popup.php'); ?>
 
-                            <!-- Comment section -->
-                            <hr class="solid" >
-                            <div class="py-4">
-                                <strong>Comments</strong>
-                            </div>
-                            
-                            <?php
-                            $sql2 = "SELECT * FROM discussion 
+                                        </div>
+                                    </div>
+                                    <!-- icon section -->
+                                    <div class="d-flex pt-1 pb-1">
+                                        <div id="like">
+                                            <i id="likeButton" class="fa-regular fa-heart fa-l"></i>
+                                        </div>
+                                        <div class="likeCounter">
+                                            <p><?php echo $row['posting_like']; ?> Like</p>
+                                        </div>
+                                        <div class="views">
+                                            <i id="viewButton" class="fa-solid fa-eye fa-l"></i>
+                                        </div>
+                                        <div class="viewCounter">
+                                            <p><?php echo $row['posting_view']; ?> View</p>
+                                        </div>
+                                        <div class="comment">
+                                            <i id="iconComment" class="fa-regular fa-comment fa-l"></i>
+                                        </div>
+                                        <div class="commentCounter">
+                                            <p>Comment</p>
+                                        </div>
+                                        <?php
+                                        if ($status == "Completed") {
+                                        ?>
+                                            <div class="rates">
+                                                <i id="iconRate" class="fa-regular fa-star fa-l"></i>
+                                            </div>
+                                            <div class="rateCounter">
+                                                <p><?php echo $row['posting_rating']; ?> Rates</p>
+                                            </div>
+                                        <?php } ?>
+                                        <div class="ml-auto">
+                                            <p><?php echo $row['posting_date']; ?></p>
+                                        </div>
+                                    </div>
+
+                                    <!-- Comment section -->
+                                    <hr class="solid">
+                                    <div class="py-4">
+                                        <strong>Comments</strong>
+                                    </div>
+
+                                    <?php
+                                    $sql2 = "SELECT * FROM discussion 
                                         INNER JOIN posting ON  discussion.posting_id=posting.posting_id 
                                         INNER JOIN user_profile ON discussion.user_id=user_profile.user_id
-                                        WHERE discussion.posting_id='$posting_id'";
-                            $result2 = mysqli_query($conn,$sql2) or die ("Could not execute query in view");
-                            if ($result2->num_rows > 0) {
-                                while($row2 = mysqli_fetch_assoc($result2)){
-                            ?>
-                            <div class="d-flex flex-column pl-5">
-                                <div class="d-flex pb-3">
-                                    <div class="profileImg">
-                                        <!-- Image -->
-                                        <img
-                                            src= "data:image/jpeg;base64,<?php echo base64_encode($row2['user_profile_img']); ?>"
-                                            class="rounded-circle shadow"
-                                            height="40"
-                                            width= "40";
-                                            alt="Black and White Portrait of a Man"
-                                            loading="lazy"
-                                            />
-                                    </div>
-                                    <div class="d-flex flex-column pl-2">
-                                        <strong><?php echo $row2['user_name']; ?></strong>
-                                        <p><?php echo $row2['discussion_content']; ?></p>
-                                    </div>
+                                        WHERE discussion.posting_id='$posting_id'
+                                        ORDER BY discussion.discussion_date, discussion.discussion_time ASC";
+                                    $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
+                                    if ($result2->num_rows > 0) {
+                                        while ($row2 = mysqli_fetch_assoc($result2)) {
+                                    ?>
+                                            <div class="d-flex flex-column pl-5">
+                                                <div class="d-flex pb-3">
+                                                    <div class="profileImg">
+                                                        <!-- Image -->
+                                                        <img src="data:image/jpeg;base64,<?php echo base64_encode($row2['user_profile_img']); ?>" class="rounded-circle shadow" height="40" width="40" ; alt="Black and White Portrait of a Man" loading="lazy" />
+                                                    </div>
+                                                    <div class="d-flex flex-column pl-2">
+                                                        <strong><?php echo $row2['user_name']; ?></strong>
+                                                        <p><?php echo $row2['discussion_content']; ?></p>
+                                                    </div>
+                                                </div>
+                                                <textarea id="textareaComment" placeholder="Enter your text..."></textarea>
+                                            </div>
+                                        <?php }
+                                    } else { ?>
+                                        <div class="text-center pb-2">
+                                            <p><?php echo "No comment."; ?></p>
+                                        </div>
+                                    <?php } ?>
                                 </div>
-                                <textarea id="textareaComment" placeholder="Enter your text..."></textarea>
                             </div>
-                            <?php }}else { ?>
-                                <div class="text-center pb-2" >
-                                    <p><?php echo "No comment.";?></p>
-                                </div>
-                            <?php } ?>
-                        </div>
-                    </div>
-                    <?php }}else {
+                        <?php }
+                    } else {
                         ?>
-                            <div class="text-center" style="height: 200px; margin:100px">
-                                <p><?php echo "No post found.";?></p>
-                            </div>
-                        <?php
-                } ?>
+                        <div class="text-center" style="height: 200px; margin:100px">
+                            <p><?php echo "No post found."; ?></p>
+                        </div>
+                    <?php
+                    } ?>
                 </div>
             </div>
-            <div class="col-2" >
-            <!-- Info Status -->
-                <div class="infoBoard" >
+            <div class="col-2">
+                <!-- Info Status -->
+                <div class="infoBoard">
                     <p><strong>Info Status</strong></p>
-                    <p><div class="circle" style="background-color: #84D17E;"></div> Completed</p>
-                    <p><div class="circle" style="background-color: #DFF45C;"></div>Revised</p>
-                    <p><div class="circle" style="background-color: #3E9BA8;"></div>Accepted</p>
-                    <p><div class="circle" style="background-color: #FFFFFF;"></div>Assign</p>
+                    <p>
+                    <div class="circle" style="background-color: #84D17E;"></div> Completed</p>
+                    <p>
+                    <div class="circle" style="background-color: #DFF45C;"></div>Revised</p>
+                    <p>
+                    <div class="circle" style="background-color: #3E9BA8;"></div>Accepted</p>
+                    <p>
+                    <div class="circle" style="background-color: #FFFFFF;"></div>Assign</p>
                 </div>
             </div>
         </div>
-</section>
+    </section>
 
     <!-- Footer -->
     <?php
     include_once('../Common/html/footer.html');
-  ?>
+    ?>
 
 
-  <!-- MDB -->
-  <script src="../../js/interaction.js"></script>
-  <script src="../../js/posting.js"></script>
-  <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
-  <!--Bootstrap 4 & 5 & jQuery Script-->
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- MDB -->
+    <script src="../../js/interaction.js"></script>
+    <script src="../../js/posting.js"></script>
+    <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
+    <!--Bootstrap 4 & 5 & jQuery Script-->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 <?php
 session_abort();
 ?>
+
 </html>

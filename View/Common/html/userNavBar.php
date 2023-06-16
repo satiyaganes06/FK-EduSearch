@@ -73,13 +73,16 @@ if ($user_route == 'home') {
           <h6 id="navName"><strong><?php echo $row0['user_name']; ?></strong></h6>
           <h6 id="navUsername">@<?php echo $row0['user_name']; ?></h6>
         </div>
-        <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-          <img src="data:image/jpeg;base64,<?php echo base64_encode($row['user_profile_img']); ?>" class="rounded-circle shadow" height="40" alt="Black and White Portrait of a Man" loading="lazy" /></a>
-
-        <div class="dropdown-menu dropdown-menu-end dropdown-content">
-          <!-- Dropdown content here -->
-          <a class="dropdown-item" href="../../View/User/profile.php">Profile</a>
-          <a class="dropdown-item" href="../../Config/logout.php">Logout</a>
+        <div class="dropdown">
+          <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+            <img src="data:image/jpeg;base64,<?php echo base64_encode($row['user_profile_img']); ?>" class="rounded-circle shadow" height="40" alt="Black and White Portrait of a Man" loading="lazy" />
+          </a>
+          
+          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
+            <!-- Dropdown content here -->
+            <a class="dropdown-item" href="../../View/User/profile.php">Profile</a>
+            <a class="dropdown-item" href="../../Config/logout.php">Logout</a>
+          </div>
         </div>
       </div>
 
