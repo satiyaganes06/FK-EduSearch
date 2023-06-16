@@ -96,12 +96,14 @@ hr.solid {
   margin-right: 10px;
 }
 .circle1 {
-  width: 60px;
+  width: 35px;
   height: 35px;
   border-radius: 50%;
   margin-right: 5px;
 }
-
+.right{
+  margin-right: -25px;
+}
 
 /* interaction */
 #like, .comment, .views, .rates{

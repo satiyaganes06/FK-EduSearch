@@ -3,12 +3,13 @@ session_start();
 
 include("../../Config/database_con.php");
 
-if (isset($_POST['delete'])) {
+if (isset($_POST['confirm'])) {
     $id = $_POST['posting_id'];
+    $status = "Completed";
 
-    $sql = "DELETE posting, discussion FROM posting
-            INNER JOIN discussion ON posting.posting_id = discussion.posting_id
-            WHERE posting.posting_id = '$id'";
+    $sql = "UPDATE posting SET
+                posting_status = '$status'
+                WHERE posting_id = '$id'";
 
     if (!$result = mysqli_query($conn, $sql)) {
         echo 'Not deleted';
@@ -17,7 +18,7 @@ if (isset($_POST['delete'])) {
         mysqli_close($conn);
 ?>
         <script>
-            alert("The Data was Deleted Successfully");
+            alert("The Posting Close Case Successfully");
             window.history.back();
         </script>
 <?php

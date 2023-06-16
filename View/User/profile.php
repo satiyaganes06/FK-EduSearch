@@ -161,16 +161,12 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
                                         ?>
                                         <div class="ml-auto d-flex text-center" id="status">
                                             <div class="circle1" style="background-color: #<?php echo $colorStatus; ?>;"></div>
-                                            <div class="dropdown">
-                                                <button class="dropdown-toggle" data-toggle="dropdown">
-                                                <i class="pt-3 pl-2 fa-solid fa-ellipsis-vertical fa-2xl"></i>
-                                                </button>
-                                                <ul class="dropdown-menu">
-                                                    <li><a class="dropdown-item" href="#">Close Case</a></li>
-                                                    <li><a class="dropdown-item" href="#">Delete Question</a></li>
-                                                    <?php include('popup.php'); ?>
-                                                </ul>
-                                            </div>
+                                                    <?php if ($status == "Revised") { ?>
+                                            <a class="dropdown-item" href="#closeCase"><i class="pt-3 fas fa-edit fa-xl"></i></a>
+                                                    <?php } ?>
+                                            <a class="dropdown-item" href="#deleteQues<?php echo $posting_id ?>" data-toggle="modal"><i class="pt-3 fas fa-trash fa-xl"></i></a>
+                                            <?php include('popup.php'); ?>
+
                                         </div>
                                     </div>
                                     <!-- icon section -->

@@ -41,30 +41,7 @@ session_start();
     <link rel="stylesheet" href="../Common//css/footer.css">
     
     <!-- Icon -->
-    <link rel="shortcut icon" type="image/jpg" href="../../Asset/icon_logo.png" />   
- 
-  
-    <style>
-    .rating {
-      display: inline-flex;
-      flex-direction: row-reverse;
-      justify-content: center;
-    }
-    
-    .rating input[type="radio"] {
-      display: none;
-    }
-    
-    .rating label {
-      font-size: 2rem;
-      color: lightgray;
-      cursor: pointer;
-    }
-
-    .rating input[type="radio"]:checked ~ label {
-      color: gold;
-    }
-  </style>
+    <link rel="shortcut icon" type="image/jpg" href="../../Asset/icon_logo.png" /> 
     
 </head>
 <body>
@@ -76,7 +53,7 @@ session_start();
     <div class="container text-center pt-4 pb-3 bg-white">
       <div class="col">
         <h1>Star Rating</h1>
-        <form action="save_rating.php" method="post">
+        <form action="../../Model/User/save_rating.php" method="post">
           <div class="rating col">
             <input type="radio" name="rating" value="5" id="5">
             <label for="5"><i class="fa-solid fa-star"></i></label>
@@ -95,7 +72,7 @@ session_start();
     </div>
   </section>
     
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

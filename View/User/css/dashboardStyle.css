@@ -1,14 +1,14 @@
   @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,900&display=swap');
 
-  body{
-      background-color: #F5F5F5;
-      font-family: 'Montserrat', sans-serif;
+  body {
+    background-color: #F5F5F5;
+    font-family: 'Montserrat', sans-serif;
   }
 
   section {
-      padding: 20px;
-      background-color: #f2f2f2;
-    }
+    padding: 20px;
+    background-color: #f2f2f2;
+  }
 
   /* Styles for the container */
   .container {
@@ -16,31 +16,32 @@
     border-radius: 8px;
   }
 
-  .container h4{
+  .container h4 {
     font-weight: bold;
     margin-bottom: 15px;
   }
 
-  .box{
-  border: 0px;
-  margin-left: 20px;
-  text-align:center;
+  .box {
+    border: 0px;
+    margin-left: 20px;
+    text-align: center;
   }
 
-  p.box{
-  font-size: 40px;
-  font-weight:600;
+  p.box {
+    font-size: 40px;
+    font-weight: 600;
   }
 
- .box a:link{
+  .box a:link {
     text-decoration: underline;
   }
 
   /* Styles table */
-  .allContent{
+  .allContent {
     margin: auto;
   }
-  h2{
+
+  h2 {
     float: right;
     font-size: -webkit-xxx-large;
   }
@@ -50,24 +51,46 @@
     margin-right: auto;
   }
 
-  table, td, th{
+  table,
+  td,
+  th {
     padding: 10px;
   }
 
   /* Styles for image */
-  .imageDashboard{
+  .imageDashboard {
     content: url("../../../Asset/imageDashboard.png");
     height: 150px;
   }
 
   /* Styles for responsive layout */
   @media (max-width: 767px) {
-  section {
-    padding: 10px;
+    section {
+      padding: 10px;
+    }
+
+    .container {
+      max-width: 100%;
+      padding: 0 10px;
+    }
   }
 
-  .container {
-    max-width: 100%;
-    padding: 0 10px;
+  .rating {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    justify-content: center;
   }
+
+  .rating input[type="radio"] {
+    display: none;
+  }
+
+  .rating label {
+    font-size: 2rem;
+    color: lightgray;
+    cursor: pointer;
+  }
+
+  .rating input[type="radio"]:checked~label {
+    color: gold;
   }

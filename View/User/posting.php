@@ -12,12 +12,13 @@ if (!isset($_SESSION["Current_user_id"])) {
 }
 
 include("../../Config/database_con.php");
-
-$sql = "SELECT * FROM user_profile 
+$id = $_SESSION["Current_user_id"];
+$sql = "SELECT user_profile.*, posting.* FROM user_profile 
         INNER JOIN posting ON user_profile.user_id = posting.user_id
         WHERE posting_course='$researchArea'";
 $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
 //$row = mysqli_fetch_assoc($result);
+
 
 ?>
 <!DOCTYPE html>
@@ -83,6 +84,7 @@ $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
                     if ($result->num_rows > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
                             $posting_id = $row['posting_id'];
+                            $user_id = $row['user_id'];
                     ?>
                             <div class="pb-2">
                                 <div class="question">
@@ -108,13 +110,24 @@ $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
                                             $colorStatus = "84D17E";
                                         }
                                         ?>
-                                        <div class="ml-auto d-flex text-center" id="status">
-                                            <div class="circle1" style="background-color: #<?php echo $colorStatus; ?>;"></div>
-                                                    <?php if ($status == "Revised") { ?>
-                                            <a class="dropdown-item" href="#closeCase"><i class="pt-3 fas fa-edit fa-xl"></i></a>
+                                        <div class="right ml-auto d-flex text-center" id="status">
+                                            <?php if ($user_id == $id) { ?>
+                                                <div class="col-1">
+                                                    <?php
+                                                    if ($status == "Completed" && $row['posting_rating'] == 0) { ?>
+                                                        <a class="dropdown-item" href="#ratePosting<?php echo $posting_id ?>" data-toggle="modal"><i class="pt-3 fa-solid fa-star fa-xl"></i></a>
+                                                    <?php } else if ($status == "Revised") { ?>
+                                                        <a class="dropdown-item" href="#closeCase<?php echo $posting_id ?>" data-toggle="modal"><i class="pt-3 fas fa-edit fa-xl"></i></a>
                                                     <?php } ?>
-                                            <a class="dropdown-item" href="#deleteQues<?php echo $posting_id ?>" data-toggle="modal"><i class="pt-3 fas fa-trash fa-xl"></i></a>
-                                            <?php include('popup.php'); ?>
+                                                </div>
+                                                <div class="col-1">
+                                                    <a class="dropdown-item" href="#deleteQues<?php echo $posting_id ?>" data-toggle="modal"><i class="pt-3 fas fa-trash fa-xl"></i></a>
+                                                    <?php include('popup.php'); ?>
+                                                </div>
+                                            <?php } ?>
+                                            <div class="col-1">
+                                                <div class="circle1" style="background-color: #<?php echo $colorStatus; ?>;"></div>
+                                            </div>
 
                                         </div>
                                     </div>
@@ -152,7 +165,18 @@ $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
                                             <p><?php echo $row['posting_date']; ?></p>
                                         </div>
                                     </div>
-
+                                    <?php if ($user_id == $id && $status == 'Accepted' || $status == 'Revised') {
+                                    ?>
+                                        <form id="comment-form" action="../../Model/User/addComment.php" method="POST">
+                                            <div class="input-group mb-4 mt-3">
+                                                <textarea name="reply" id="reply" class="form-control" id="exampleFormControlTextarea1" placeholder="Reply" required="text"></textarea>
+                                                <input type="hidden" name="posting_id" value="<?php echo $posting_id; ?>">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-primary" type="submit"><i class="fas fa-paper-plane"></i></button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    <?php } ?>
                                     <!-- Comment section -->
                                     <hr class="solid">
                                     <div class="py-4">
@@ -161,10 +185,10 @@ $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
 
                                     <?php
                                     $sql2 = "SELECT * FROM discussion 
-                                        INNER JOIN posting ON  discussion.posting_id=posting.posting_id 
-                                        INNER JOIN user_profile ON discussion.user_id=user_profile.user_id
-                                        WHERE discussion.posting_id='$posting_id'
-                                        ORDER BY discussion.discussion_date, discussion.discussion_time ASC";
+                                INNER JOIN posting ON  discussion.posting_id=posting.posting_id 
+                                INNER JOIN user_profile ON discussion.user_id=user_profile.user_id
+                                WHERE discussion.posting_id='$posting_id'
+                                ORDER BY discussion.discussion_date, discussion.discussion_time ASC";
                                     $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
                                     if ($result2->num_rows > 0) {
                                         while ($row2 = mysqli_fetch_assoc($result2)) {
@@ -180,7 +204,6 @@ $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
                                                         <p><?php echo $row2['discussion_content']; ?></p>
                                                     </div>
                                                 </div>
-                                                <textarea id="textareaComment" placeholder="Enter your text..."></textarea>
                                             </div>
                                         <?php }
                                     } else { ?>
