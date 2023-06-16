@@ -17,15 +17,6 @@
         INNER JOIN posting ON user_profile.user_id = posting.user_id
         WHERE posting_course='$researchArea'";
 $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
-
-  $posting_id = mysqli_fetch_assoc(mysqli_query($conn,$sql))['posting_id'];
-  $posting_categories = mysqli_fetch_assoc(mysqli_query($conn,$sql))['posting_categories'];
-
-  $sql2 = "SELECT * FROM discussion 
-            INNER JOIN posting ON  discussion.posting_id=posting.posting_id 
-            INNER JOIN user_profile ON discussion.user_id=user_profile.user_id
-            WHERE discussion.posting_id='$posting_id'";
-  $result2 = mysqli_query($conn,$sql2) or die ("Could not execute query in view");
   //$row = mysqli_fetch_assoc($result);
 
 ?>
@@ -86,6 +77,7 @@ $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
                     <?php
                     if ($result->num_rows > 0) {
                         while($row = mysqli_fetch_assoc($result)){
+                            $posting_id = $row['posting_id'];
                     ?>
                     <div class="pb-2" >
                         <div class="question" >
@@ -164,6 +156,11 @@ $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
                             </div>
                             
                             <?php
+                            $sql2 = "SELECT * FROM discussion 
+                                        INNER JOIN posting ON  discussion.posting_id=posting.posting_id 
+                                        INNER JOIN user_profile ON discussion.user_id=user_profile.user_id
+                                        WHERE discussion.posting_id='$posting_id'";
+                            $result2 = mysqli_query($conn,$sql2) or die ("Could not execute query in view");
                             if ($result2->num_rows > 0) {
                                 while($row2 = mysqli_fetch_assoc($result2)){
                             ?>
