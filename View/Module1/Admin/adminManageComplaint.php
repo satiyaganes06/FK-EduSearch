@@ -13,29 +13,6 @@ if (!isset($_SESSION["Current_admin_id"])) {
 
 } else {
     include("../../../Config/database_con.php");
-    $query2 = "SELECT * FROM user_profile";
-    $result2 = $conn->query($query2);
-
-    $numberOfTotalUsers = $result2->num_rows;
-
-    $query3 = "SELECT * FROM account WHERE acc_role = 'User'";
-    $result3 = $conn->query($query3);
-
-    $numberOfUsers = $result3->num_rows;
-    $query4 = "SELECT * FROM account WHERE acc_role = 'Staff'";
-    $result4 = $conn->query($query4);
-
-    $numberOfStaff = $result4->num_rows;
-
-    $query5 = "SELECT * FROM account WHERE acc_role = 'Expert'";
-    $result5 = $conn->query($query5);
-
-    $numberOfExpert = $result5->num_rows;
-
-    $query6 = "SELECT * FROM complaint";
-    $result6 = $conn->query($query6);
-
-    $numberOfComplaint = $result6->num_rows;
 }
 ?>
 <!DOCTYPE html>
@@ -289,6 +266,8 @@ if (!isset($_SESSION["Current_admin_id"])) {
                                             </td>
                                         </tr>
                                 <?php  }
+                                } else {
+                                    echo 'No complaint was made.';
                                 } ?>
 
                             </tbody>
@@ -300,16 +279,12 @@ if (!isset($_SESSION["Current_admin_id"])) {
         </div>
         </section>
         <footer class="text-center text-white fixed-bottom overflow-hidden" style="background-color: #21081a; margin-top: 20px;">
-
-
             <!-- Copyright -->
             <div class="text-center text-white p-3" style="background-color: rgba(44, 88, 100, 1)">
                 © 2019 2023. FK-EDU SEARCH
             </div>
             <!-- Copyright -->
         </footer>
-
-
 
         <!-- MDB -->
         <script type="text/javascript" src="../../../Bootstrap/mdb.min.js"></script>
@@ -363,32 +338,6 @@ if (!isset($_SESSION["Current_admin_id"])) {
                     }
                 }
             }
-        </script>
-        <script>
-            var xValues = ["User", "Expert", "Staff"];
-            var yValues = [55, 49, 44];
-            var barColors = [
-                "#b91d47",
-                "#00aba9",
-                "#2b5797"
-            ];
-
-            new Chart("myChart", {
-                type: "doughnut",
-                data: {
-                    labels: xValues,
-                    datasets: [{
-                        backgroundColor: barColors,
-                        data: yValues
-                    }]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: "List of Users"
-                    }
-                }
-            });
         </script>
 </body>
 
