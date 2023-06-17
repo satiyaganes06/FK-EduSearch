@@ -21,6 +21,8 @@
             color: gold;
         }
     </style>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 
 <body>
@@ -110,23 +112,23 @@
                                     </button>
                                 </div>
                             </div>
-                            <p class="font-weight-bold mb-2">Rate for satisfaction of expert answer your question</p>
-                            <div class="rating col">
-                                <input type="radio" name="rating" value="5" id="5">
-                                <label for="5"><i class="fas fa-star"></i></label>
-                                <input type="radio" name="rating" value="4" id="4">
-                                <label for="4"><i class="fas fa-star"></i></label>
-                                <input type="radio" name="rating" value="3" id="3">
-                                <label for="3"><i class="fas fa-star"></i></label>
-                                <input type="radio" name="rating" value="2" id="2">
-                                <label for="2"><i class="fas fa-star"></i></label>
-                                <input type="radio" name="rating" value="1" id="1">
-                                <label for="1"><i class="fas fa-star"></i></label>
-                            </div>
                         </div>
                         <div class="card-body px-sm-4 mb-2 pt-1 pb-0">
                             <form action="../../Model/User/ratePosting.php" method="POST">
                                 <input type="hidden" name="posting_id" value="<?php echo $posting_id ?>" />
+                                <p class="font-weight-bold mb-2">Rate for satisfaction of expert answer your question</p>
+                                <div class="rating col">
+                                    <input type="radio" name="rating" value="5" id="5">
+                                    <label for="5"><i class="fas fa-star"></i></label>
+                                    <input type="radio" name="rating" value="4" id="4">
+                                    <label for="4"><i class="fas fa-star"></i></label>
+                                    <input type="radio" name="rating" value="3" id="3">
+                                    <label for="3"><i class="fas fa-star"></i></label>
+                                    <input type="radio" name="rating" value="2" id="2">
+                                    <label for="2"><i class="fas fa-star"></i></label>
+                                    <input type="radio" name="rating" value="1" id="1">
+                                    <label for="1"><i class="fas fa-star"></i></label>
+                                </div>
                                 <div class="row justify-content-end no-gutters">
                                     <div class="col-auto">
                                         <button type="button" class="btn btn-light text-muted mr-2" data-dismiss="modal">Cancel</button>
@@ -142,6 +144,4 @@
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>

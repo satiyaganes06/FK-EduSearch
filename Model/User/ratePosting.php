@@ -18,7 +18,7 @@ if (isset($_POST['rate'])) {
     }
 
     $sql = "UPDATE posting SET
-                posting_rate = '$rating'
+                posting_rating = '$rating'
                 WHERE posting_id = '$id'";
 
     if (!$result = mysqli_query($conn, $sql)) {

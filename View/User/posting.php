@@ -42,6 +42,7 @@ $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
     <link rel="stylesheet" href="../../Bootstrap/mdb.min.css" />
 
     <!--CSS-->
+    <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/posting.css">
     <link rel="stylesheet" href="../Common//css/navbar.css">
     <link rel="stylesheet" href="../Common//css/footer.css">
@@ -133,24 +134,7 @@ $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
                                     </div>
                                     <!-- icon section -->
                                     <div class="d-flex pt-1 pb-1">
-                                        <div id="like">
-                                            <i id="likeButton" class="fa-regular fa-heart fa-l"></i>
-                                        </div>
-                                        <div class="likeCounter">
-                                            <p><?php echo $row['posting_like']; ?> Like</p>
-                                        </div>
-                                        <div class="views">
-                                            <i id="viewButton" class="fa-solid fa-eye fa-l"></i>
-                                        </div>
-                                        <div class="viewCounter">
-                                            <p><?php echo $row['posting_view']; ?> View</p>
-                                        </div>
-                                        <div class="comment">
-                                            <i id="iconComment" class="fa-regular fa-comment fa-l"></i>
-                                        </div>
-                                        <div class="commentCounter">
-                                            <p>Comment</p>
-                                        </div>
+                                        <?php include("interaction.php") ?>
                                         <?php
                                         if ($status == "Completed") {
                                         ?>
@@ -165,30 +149,31 @@ $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
                                             <p><?php echo $row['posting_date']; ?></p>
                                         </div>
                                     </div>
-                                    <?php if ($user_id == $id && $status == 'Accepted' || $status == 'Revised') {
-                                    ?>
-                                        <form id="comment-form" action="../../Model/User/addComment.php" method="POST">
-                                            <div class="input-group mb-4 mt-3">
-                                                <textarea name="reply" id="reply" class="form-control" id="exampleFormControlTextarea1" placeholder="Reply" required="text"></textarea>
-                                                <input type="hidden" name="posting_id" value="<?php echo $posting_id; ?>">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-primary" type="submit"><i class="fas fa-paper-plane"></i></button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    <?php } ?>
                                     <!-- Comment section -->
                                     <hr class="solid">
                                     <div class="py-4">
                                         <strong>Comments</strong>
                                     </div>
-
+                                    <?php if ($user_id == $id) {
+                                        if ($status == 'Revised') {
+                                    ?>
+                                            <form id="comment-form" action="../../Model/User/addComment.php" method="POST">
+                                                <div class="input-group mb-4 mt-3">
+                                                    <textarea name="reply" id="reply" class="form-control" id="exampleFormControlTextarea1" placeholder="Reply" required="text"></textarea>
+                                                    <input type="hidden" name="posting_id" value="<?php echo $posting_id; ?>">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-primary" type="submit"><i class="fas fa-paper-plane"></i></button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                    <?php }
+                                    } ?>
                                     <?php
                                     $sql2 = "SELECT * FROM discussion 
-                                INNER JOIN posting ON  discussion.posting_id=posting.posting_id 
-                                INNER JOIN user_profile ON discussion.user_id=user_profile.user_id
-                                WHERE discussion.posting_id='$posting_id'
-                                ORDER BY discussion.discussion_date, discussion.discussion_time ASC";
+                                                INNER JOIN posting ON  discussion.posting_id=posting.posting_id 
+                                                INNER JOIN user_profile ON discussion.user_id=user_profile.user_id
+                                                WHERE discussion.posting_id='$posting_id'
+                                                ORDER BY discussion.discussion_date, discussion.discussion_time ASC";
                                     $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
                                     if ($result2->num_rows > 0) {
                                         while ($row2 = mysqli_fetch_assoc($result2)) {
@@ -247,7 +232,6 @@ $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
 
 
     <!-- MDB -->
-    <script src="../../js/interaction.js"></script>
     <script src="../../js/posting.js"></script>
     <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
     <!--Bootstrap 4 & 5 & jQuery Script-->

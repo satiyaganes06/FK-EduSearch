@@ -111,8 +111,26 @@ hr.solid {
   border: none;
   cursor: pointer;
 }
-.likeCounter, .commentCounter, .viewCounter, .rateCounter{
+.likeCounter, .viewCounter, .rateCounter{
   padding-right: 30px;
+}
+@keyframes likeAnimation {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+.like-animation {
+  animation-name: likeAnimation;
+  animation-duration: 0.5s;
+}
+
+.like-button:hover {
+  cursor: pointer;
+}
+
+/* Additional styles for color change */
+.like-button {
+  transition: background-color 0.3s ease;
 }
 
 /* status */

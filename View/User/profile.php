@@ -41,6 +41,7 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
     <link rel="stylesheet" href="../../Bootstrap/mdb.min.css" />
 
     <!--CSS-->
+    <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="../Common//css/navbar.css">
     <link rel="stylesheet" href="../Common//css/footer.css">
@@ -66,27 +67,13 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
                         if ($row['user_profile_bg'] == "") { ?>
                             <p class="text-center">Insert backround picture</p>
                         <?php } else { ?>
-                        <img
-                            src= "data:image/jpeg;base64,<?php echo base64_encode($row['user_profile_bg']); ?>"
-                            class="shadows"
-                            width="100%"
-                            height="100%"
-                            alt="Black profile background"
-                            loading="lazy"
-                        />
+                            <img src="data:image/jpeg;base64,<?php echo base64_encode($row['user_profile_bg']); ?>" class="shadows" width="100%" height="100%" alt="Black profile background" loading="lazy" />
                         <?php } ?>
                     </div>
                     <div class="pictureProfile">
                         <hr class="solid">
                         <div class="centered">
-                        <img 
-                            id="profile-background-pic"
-                            src= "data:image/jpeg;base64,<?php echo base64_encode($row['user_profile_img']); ?>"
-                            class="rounded-circle"
-                            height="100"
-                            width= "100"
-                            alt="Black and White Portrait of a Man"
-                        />
+                            <img id="profile-background-pic" src="data:image/jpeg;base64,<?php echo base64_encode($row['user_profile_img']); ?>" class="rounded-circle" height="100" width="100" alt="Black and White Portrait of a Man" />
                         </div>
                     </div>
                     <div class="infoUser">
@@ -107,16 +94,17 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
                             <p>Email: <?php echo $row['user_email']; ?></p>
                             <p>Academic Level: <?php echo $row['user_academicStatus']; ?></p>
                             <p>Social Media: <?php echo $row['user_socialMedia']; ?></p>
-                            <p>Research Area: <br> <?php
-                                                    $user_researchArea = $row['user_researchArea'];
-                                                    // Explode the comma-separated string into an array
-                                                    $researchAreas = explode(",", $user_researchArea);
+                            <p>Research Area: <br>
+                                <?php
+                                $user_researchArea = $row['user_researchArea'];
+                                // Explode the comma-separated string into an array
+                                $researchAreas = explode(",", $user_researchArea);
 
-                                                    // Display the research areas with line breaks
-                                                    foreach ($researchAreas as $area) {
-                                                        echo $area . "<br>";
-                                                    }
-                                                    ?></p>
+                                // Display the research areas with line breaks
+                                foreach ($researchAreas as $area) {
+                                    echo $area . "<br>";
+                                }
+                                ?></p>
                         <?php } ?>
                     </div>
                 </div>
@@ -160,13 +148,23 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
                                         }
                                         ?>
                                         <div class="ml-auto d-flex text-center" id="status">
-                                            <div class="circle1" style="background-color: #<?php echo $colorStatus; ?>;"></div>
-                                                    <?php if ($status == "Revised") { ?>
-                                            <a class="dropdown-item" href="#closeCase"><i class="pt-3 fas fa-edit fa-xl"></i></a>
+                                            <?php if ($user_id == $id) { ?>
+                                                <div class="col-1">
+                                                    <?php
+                                                    if ($status == "Completed" && $row2['posting_rating'] == 0) { ?>
+                                                        <a class="dropdown-item" href="#ratePosting<?php echo $posting_id ?>" data-toggle="modal"><i class="pt-3 fa-solid fa-star fa-xl"></i></a>
+                                                    <?php } else if ($status == "Revised") { ?>
+                                                        <a class="dropdown-item" href="#closeCase<?php echo $posting_id ?>" data-toggle="modal"><i class="pt-3 fas fa-edit fa-xl"></i></a>
                                                     <?php } ?>
-                                            <a class="dropdown-item" href="#deleteQues<?php echo $posting_id ?>" data-toggle="modal"><i class="pt-3 fas fa-trash fa-xl"></i></a>
-                                            <?php include('popup.php'); ?>
-
+                                                </div>
+                                                <div class="col-1">
+                                                    <a class="dropdown-item" href="#deleteQues<?php echo $posting_id ?>" data-toggle="modal"><i class="pt-3 fas fa-trash fa-xl"></i></a>
+                                                    <?php include('popup.php'); ?>
+                                                </div>
+                                            <?php } ?>
+                                            <div class="col-1">
+                                                <div class="circle1" style="background-color: #<?php echo $colorStatus; ?>;"></div>
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- icon section -->
@@ -209,6 +207,18 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
                                     <div class="py-4">
                                         <strong>Comments</strong>
                                     </div>
+                                    <?php if ($status == 'Revised') {
+                                    ?>
+                                        <form id="comment-form" action="../../Model/User/addComment.php" method="POST">
+                                            <div class="input-group mb-4 mt-3">
+                                                <textarea name="reply" id="reply" class="form-control" id="exampleFormControlTextarea1" placeholder="Reply" required="text"></textarea>
+                                                <input type="hidden" name="posting_id" value="<?php echo $posting_id; ?>">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-primary" type="submit"><i class="fas fa-paper-plane"></i></button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    <?php } ?>
                                     <?php
                                     if ($result3->num_rows > 0) {
                                         while ($row3 = mysqli_fetch_assoc($result3)) {
@@ -220,7 +230,11 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
                                                         <img src="data:image/jpeg;base64,<?php echo base64_encode($row3['user_profile_img']); ?>" class="rounded-circle shadow" height="40" width="40" ; alt="Black and White Portrait of a Man" loading="lazy" />
                                                     </div>
                                                     <div class="d-flex flex-column pl-2">
-                                                        <strong><?php echo $row3['user_name']; ?></strong>
+                                                        <div class="d-flex">
+                                                            <strong><?php echo $row3['user_name']; ?></strong>
+                                                            <p style="font-size:small" class="pl-2 pt-1" >  (<?php echo $row3['discussion_date'] . " " . $row3['discussion_time']; ?>)</p>
+                                                        </div>
+
                                                         <p><?php echo $row3['discussion_content']; ?></p>
                                                     </div>
                                                 </div>
@@ -254,7 +268,6 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
 
 
     <!-- MDB -->
-    <script src="../../js/interaction.js"></script>
     <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
     <!--Bootstrap 4 & 5 & jQuery Script-->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
