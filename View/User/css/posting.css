@@ -114,19 +114,7 @@ hr.solid {
 .likeCounter, .viewCounter, .rateCounter{
   padding-right: 30px;
 }
-@keyframes likeAnimation {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
-}
-.like-animation {
-  animation-name: likeAnimation;
-  animation-duration: 0.5s;
-}
 
-.like-button:hover {
-  cursor: pointer;
-}
 
 /* Additional styles for color change */
 .like-button {
@@ -134,16 +122,22 @@ hr.solid {
 }
 
 /* status */
-.circle {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  margin-right: 10px;
-  float: left;
+.input-group {
+  position: relative;
 }
-p.infoBoard{
-  text-align: center;
+
+.form-control {
+  padding-left: 30px; /* Add padding to the left to make space for the icon */
 }
+
+.form-control i {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+
 
 /* color */
 .yellow{

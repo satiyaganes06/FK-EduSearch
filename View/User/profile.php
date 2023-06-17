@@ -147,14 +147,18 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
                                             $colorStatus = "84D17E";
                                         }
                                         ?>
-                                        <div class="ml-auto d-flex text-center" id="status">
+                                        <div class="right ml-auto d-flex text-center" id="status">
                                             <?php if ($user_id == $id) { ?>
                                                 <div class="col-1">
                                                     <?php
-                                                    if ($status == "Completed" && $row2['posting_rating'] == 0) { ?>
+                                                    if ($status == "Completed" && $row2['posting_rating'] == 0) {
+                                                    ?>
                                                         <a class="dropdown-item" href="#ratePosting<?php echo $posting_id ?>" data-toggle="modal"><i class="pt-3 fa-solid fa-star fa-xl"></i></a>
-                                                    <?php } else if ($status == "Revised") { ?>
+                                                    <?php
+                                                    } else if ($status == "Revised") { ?>
                                                         <a class="dropdown-item" href="#closeCase<?php echo $posting_id ?>" data-toggle="modal"><i class="pt-3 fas fa-edit fa-xl"></i></a>
+                                                    <?php } else if ($status == "Assign") { ?>
+                                                        <a class="dropdown-item" href="#editQues<?php echo $posting_id ?>" data-toggle="modal"><i class="pt-3 fas fa-edit fa-xl"></i></a>
                                                     <?php } ?>
                                                 </div>
                                                 <div class="col-1">
@@ -232,7 +236,7 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
                                                     <div class="d-flex flex-column pl-2">
                                                         <div class="d-flex">
                                                             <strong><?php echo $row3['user_name']; ?></strong>
-                                                            <p style="font-size:small" class="pl-2 pt-1" >  (<?php echo $row3['discussion_date'] . " " . $row3['discussion_time']; ?>)</p>
+                                                            <p style="font-size:small" class="pl-2 pt-1"> (<?php echo $row3['discussion_date'] . " " . $row3['discussion_time']; ?>)</p>
                                                         </div>
 
                                                         <p><?php echo $row3['discussion_content']; ?></p>

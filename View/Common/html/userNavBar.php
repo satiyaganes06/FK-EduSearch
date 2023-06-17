@@ -51,19 +51,19 @@ if ($user_route == 'home') {
           <a class="nav-link ml-2" href="../../View/User/question.php"><strong>QUESTION</strong></a>
         </li>
         <li class="nav-item <?php echo $rating ?>">
-          <a class="nav-link ml-2" href="../../../View/User/rating.php"><strong>RATING</strong></a>
+          <a class="nav-link ml-2" href="../../View/User/rating.php"><strong>RATING</strong></a>
         </li>
       </ul>
     </div>
 
     <!-- Right elements -->
     <div class="d-flex align-items-center search_Section">
-      <form class="d-flex input-group w-auto">
+      <!--<form class="d-flex input-group w-auto">
         <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
         <span class="input-group-text text-white border-0" id="search-addon">
           <i class="fas fa-search"></i>
         </span>
-      </form>
+      </form>-->
 
 
       <!-- Profile Avatar -->

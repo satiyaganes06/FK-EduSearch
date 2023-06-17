@@ -1,3 +1,4 @@
+
 <?php
 include("../../Config/database_con.php");
 ?>
@@ -38,16 +39,6 @@ include("../../Config/database_con.php");
         <p id="out<?php echo $posting_id; ?>"></p>
     </div>
 </div>
-
-<?php
-if (isset($_POST['buttonlike' . $posting_id])) {
-    $sql5 = "INSERT INTO posting_like (user_id, posting_id) VALUES ('$id', '$posting_id')";
-    if (!$result5 = mysqli_query($conn, $sql5)) {
-        echo 'Not inserted';
-        echo "Error: " . mysqli_error($conn);
-    }
-}
-?>
 
 <!-- TRACK VIEW INSIGHT -->
 

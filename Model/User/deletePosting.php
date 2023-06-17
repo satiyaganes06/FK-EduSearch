@@ -3,7 +3,7 @@ session_start();
 
 include("../../Config/database_con.php");
 
-if (isset($_POST['delete'])) {
+if (isset($_POST['filter'])) {
     $id = $_POST['posting_id'];
 
     $sql = "DELETE posting, discussion FROM posting

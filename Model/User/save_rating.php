@@ -17,7 +17,7 @@ if ($rating === null) {
   ?>
         <script>
           alert("Rating is not provided");
-          window.location='../../../View/User/rating.php';
+          window.location='../../View/User/rating.php';
         </script>
           <?php
   exit;
@@ -39,7 +39,7 @@ if ($rating === null) {
     ?>
         <script>
           alert("Rating Successfully Submitted! Thank You For Your Feedback!");
-          window.location='../../../View/User/rating.php';
+          window.location='../../View/User/rating.php';
         </script>
           <?php
   } else {

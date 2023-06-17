@@ -124,7 +124,7 @@ if (!isset($_SESSION["Current_user_id"])) {
         ?>
         <script>
             alert("The Data was updated successfully");
-            window.location = '../../../View/User/profile.php';
+            window.location = '../../View/User/profile.php';
         </script>
         <?php
     }
