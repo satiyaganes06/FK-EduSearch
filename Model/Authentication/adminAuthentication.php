@@ -42,10 +42,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // Authentication successful, redirect the user
        session_start();
        $_SESSION["Current_admin_id"] = $userID;
-            header('Location: ../../../../../FK-eduSearch/View/Module1/Admin/adminDashboard.php');
+            header('Location: ../../View/Module1/Admin/adminDashboard.php');
             exit();
-        
-        
         
       } else {
         // Authentication failed, handle accordingly

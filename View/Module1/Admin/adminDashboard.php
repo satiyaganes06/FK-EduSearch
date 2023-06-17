@@ -1,3 +1,60 @@
+<?php
+session_start();
+
+//If the user is not logged in, send them to the login form
+if (!isset($_SESSION["Current_admin_id"])) {
+?>
+  <script>
+    alert("Access denied !!!")
+    window.location = "../Login/Admin%20Login/adminLogin.php";
+  </script>
+<?php
+} else {
+  include("../../../Config/database_con.php");
+  $query2 = "SELECT * FROM user_profile";
+  $result2 = $conn->query($query2);
+
+  $numberOfTotalUsers = $result2->num_rows;
+
+  $query3 = "SELECT * FROM account WHERE acc_role = 'User'";
+  $result3 = $conn->query($query3);
+
+
+
+
+
+  $query6 = "SELECT * FROM complaint";
+  $result6 = $conn->query($query6);
+
+  $numberOfComplaint = $result6->num_rows;
+
+  $academicLevel = "SELECT * FROM user_profile WHERE user_academicStatus = 'Diploma'";
+  $result7 = $conn->query($academicLevel);
+
+  $diploma = $result7->num_rows;
+
+  $academicLevel1 = "SELECT * FROM user_profile WHERE user_academicStatus = 'Degree'";
+  $result8 = $conn->query($academicLevel1);
+
+  $degree = $result8->num_rows;
+
+  $academicLeve3 = "SELECT * FROM user_profile WHERE user_academicStatus = 'Master'";
+  $result9 = $conn->query($academicLeve3);
+
+  $master = $result9->num_rows;
+
+  $academicLevel4 = "SELECT * FROM user_profile WHERE user_academicStatus = 'PHD'";
+  $result10 = $conn->query($academicLevel4);
+
+  $phd = $result10->num_rows;
+
+  $totalPosts = "SELECT COUNT(*) AS total, 
+  SUM(posting_view) AS view
+  FROM posting";
+  $result4 = $conn->query($totalPosts);
+}
+?>
+
 <!DOCTYPE html>
 
 <html lang="en" dir="ltr">
@@ -26,6 +83,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <link rel="shortcut icon" type="image/jpg" href="/Asset/icon_logo.png" />
+
 </head>
 
 <body>
@@ -117,64 +175,82 @@
 
   <div class="container-fluid p-0">
     <div class="main-section">
-      <!--Tulis coding kat sini-->
-      <div class="card">
-        <div class="card-body">
-          <div class="row">
-            <div class="column">
-              <div class="title">
-                All <br>Department
-              </div>
-            </div>
-            <div class="column">
-              <div class="activity-title">
-                Total Posts
-                <h5 class="total-number">85</h5>
-                <div class="container">
-                  <div class="left">
-                    <span>17 %</span>
-                  </div>
-                  <div class="right">
-                    <span>than last week</span>
-                  </div>
-                </div>
-                <div class="vl"></div>
-              </div>
-            </div>
 
-            <div class="column">
-              <div class="activity-title">
-                Total Likes
-                <h5 class="total-number">85</h5>
-                <div class="container">
-                  <div class="left">
-                    <span>17 %</span>
-                  </div>
-                  <div class="right">
-                    <span>than last week</span>
-                  </div>
-                </div>
-                <div class="vl" style="left:75%;"></div>
-              </div>
-            </div>
+      <?php
 
-            <div class="column">
-              <div class="activity-title">
-                Total Comments
-                <h5 class="total-number">85</h5>
-                <div class="container">
-                  <div class="left">
-                    <span>17 %</span>
+      $posts = "SELECT (SELECT COUNT(*) FROM complaint) AS total_posts, (SELECT COUNT(*) FROM discussion) AS total_likes";
+      $total = mysqli_query($conn, $posts);
+
+      if ($total) {
+        $row = mysqli_fetch_assoc($total);
+        $totalPosts = $row['total_posts'];
+        $totalLikes = $row['total_likes'];
+
+      ?>
+
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="column">
+                <div class="title">
+                  All <br>Department
+                </div>
+              </div>
+              <div class="column">
+                <div class="activity-title">
+                  Total Posts
+                  <h5 class="total-number"><?php echo $totalPosts; ?></h5>
+                  <div class="container">
+                    <div class="left">
+                      <span>17 %</span>
+                    </div>
+                    <div class="right">
+                      <span>than last week</span>
+                    </div>
                   </div>
-                  <div class="right">
-                    <span>than last week</span>
+                  <div class="vl"></div>
+                </div>
+              </div>
+
+              <div class="column">
+                <div class="activity-title">
+                  Total Likes
+                  <h5 class="total-number">78</h5>
+                  <div class="container">
+                    <div class="left">
+                      <span>17 %</span>
+                    </div>
+                    <div class="right">
+                      <span>than last week</span>
+                    </div>
+                  </div>
+                  <div class="vl" style="left:75%;"></div>
+                </div>
+              </div>
+
+              <div class="column">
+                <div class="activity-title">
+                  Total Comments
+                  <h5 class="total-number"><?php echo $totalLikes; ?></h5>
+                  <div class="container">
+                    <div class="left">
+                      <span>17 %</span>
+                    </div>
+                    <div class="right">
+                      <span>than last week</span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      <?php } else {
+        echo "Error retrieving total number of complaints: " . mysqli_error($conn);
+      }
+
+      mysqli_close($conn);
+      ?>
     </div>
 
 
@@ -184,7 +260,32 @@
           <!--Tulis coding kat sini-->
           <div class="card">
             <div class="card-body">
-              <canvas id="lineChart" style="width:100%;max-width:600px"></canvas>
+              <label for="filter">Select Filter:</label>
+              <select id="filter" onchange="filterChart()">
+                <option value="date">By Date</option>
+                <option value="week">By Week</option>
+                <option value="month">By Month</option>
+              </select>
+              <div class="container">
+                <div class="left" style="padding-right:50px;">
+                  <canvas id="lineChart" style="width:100%;width:600px"></canvas>
+                </div>
+                <div class="right" style="text-align:left;">
+                  <span>
+                  <div class="status">
+                    <p><strong>Info Status</strong></p>
+                    <p>
+                    <div class="circle" style="background-color: red;"></div> Engagement Rate</p>
+                    <p>
+                    <div class="circle" style="background-color: blue;"></div>User Satisfaction</p>
+                </div>
+
+
+                </div>
+              </div>
+
+
+
             </div>
           </div>
         </div>
@@ -194,7 +295,7 @@
           <!--Tulis coding kat sini-->
           <div class="card">
             <div class="card-body">
-            <canvas id="pieChart" style="width:100%;max-width:600px"></canvas>
+              <canvas id="pieChart" style="width:100%;max-width:600px"></canvas>
             </div>
           </div>
         </div>
@@ -214,28 +315,50 @@
       <!-- Copyright -->
     </footer>
   </div>
-
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
   <!-- Graph Line Script -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
   <script>
-    const xValues = [100, 200, 300, 400, 500, 600, 700, 800, 900, 1000];
+    var currentDate = new Date();
+
+    var day = currentDate.getDate();
+    console.log("Day: " + day);
+
+    var month = currentDate.getMonth() + 1; // Months are zero-based, so add 1
+    console.log("Month: " + month);
+
+    var year = currentDate.getFullYear();
+    console.log("Year: " + year);
+
+    // Assuming you have the number of posts for the current week and the previous week
+    var currentWeekPosts = 75;
+    var previousWeekPosts = 50;
+
+    // Calculate the percentage difference
+    var percentageDifference = ((currentWeekPosts - previousWeekPosts) / previousWeekPosts) * 100;
+
+    // Round the percentage to two decimal places
+    percentageDifference = Math.round(percentageDifference * 100) / 100;
+
+    // Display the result
+    console.log("Percentage Difference: " + percentageDifference + "%");
+  </script>
+
+  <!-- Graph Line Script -->
+  <script>
+    const xValues = ['Jan', 'Feb', 'Mac', 'April', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
 
     new Chart("lineChart", {
       type: "line",
       data: {
         labels: xValues,
         datasets: [{
-          data: [860, 1140, 1060, 1060, 1070, 1110, 1330, 2210, 7830, 2478],
+
+          data: [86, 114, 60, 160, 170, 111, 133, 221, 83, 78],
           borderColor: "red",
           fill: false
         }, {
-          data: [1600, 1700, 1700, 1900, 2000, 2700, 4000, 5000, 6000, 7000],
-          borderColor: "green",
-          fill: false
-        }, {
-          data: [300, 700, 2000, 5000, 6000, 4000, 2000, 1000, 200, 100],
+          data: [30, 70, 20, 50, 60, 40, 20, 10, 200, 100],
           borderColor: "blue",
           fill: false
         }]
@@ -247,16 +370,18 @@
       }
     });
   </script>
+
+
   <!-- Pie Chart -->
+
   <script>
-    var zValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-    var yValues = [55, 49, 44, 24, 15];
+    var zValues = ["Diploma", "Degree", "Master", "PHD"];
+    var yValues = [<?php echo $diploma; ?>, <?php echo $degree; ?>, <?php echo $master; ?>, <?php echo $phd; ?>];
     var barColors = [
       "#b91d47",
       "#00aba9",
       "#2b5797",
-      "#e8c3b9",
-      "#1e7145"
+      "#e8c3b9"
     ];
 
     new Chart("pieChart", {
@@ -271,7 +396,7 @@
       options: {
         title: {
           display: true,
-          text: "World Wide Wine Production 2018"
+          text: "User Academic Level"
         }
       }
     });
