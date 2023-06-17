@@ -22,17 +22,14 @@ if ($rating === null) {
           <?php
   exit;
 }else{
-  $sql_retrieve = "SELECT * FROM rating";
+  $sql_retrieve = "SELECT * FROM rating WHERE user_id = '$user_id'";
   $result = mysqli_query($conn,$sql_retrieve) or die ("Could not execute query in view");
-  //$row = mysqli_fetch_assoc($result);
+  $row = mysqli_fetch_assoc($result);
 
-  while ($row = mysqli_fetch_assoc($result)){
-    if ($row['user_id'] != $user_id){
+  if (mysqli_num_rows($result) > 0){
+    $sql = "UPDATE rating SET user_id = '$user_id', rating = '$rating' where user_id = '$user_id'";
+  }else{
       $sql = "INSERT INTO rating (user_id, rating) VALUES ('$user_id', '$rating')";
-
-    } else{
-      $sql = "UPDATE rating SET user_id = '$user_id', rating = '$rating' where user_id = '$user_id'";
-    }
   }
 
   if ($conn->query($sql) === TRUE) {

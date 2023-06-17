@@ -75,7 +75,7 @@ if ($user_route == 'home') {
         </div>
         <div class="dropdown">
           <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-            <img src="data:image/jpeg;base64,<?php echo base64_encode($row['user_profile_img']); ?>" class="rounded-circle shadow" height="40" alt="Black and White Portrait of a Man" loading="lazy" />
+            <img src="data:image/jpeg;base64,<?php echo base64_encode($row0['user_profile_img']); ?>" class="rounded-circle shadow" height="40" alt="Black and White Portrait of a Man" loading="lazy" />
           </a>
           
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
