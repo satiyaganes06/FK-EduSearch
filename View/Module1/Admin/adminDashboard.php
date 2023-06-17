@@ -11,41 +11,21 @@ if (!isset($_SESSION["Current_admin_id"])) {
 <?php
 } else {
   include("../../../Config/database_con.php");
-  $query2 = "SELECT * FROM user_profile";
-  $result2 = $conn->query($query2);
 
-  $numberOfTotalUsers = $result2->num_rows;
-
-  $query3 = "SELECT * FROM account WHERE acc_role = 'User'";
-  $result3 = $conn->query($query3);
-
-
-
-
-
-  $query6 = "SELECT * FROM complaint";
-  $result6 = $conn->query($query6);
-
-  $numberOfComplaint = $result6->num_rows;
-
-  $academicLevel = "SELECT * FROM user_profile WHERE user_academicStatus = 'Diploma'";
-  $result7 = $conn->query($academicLevel);
-
+  $acaDiploma = "SELECT * FROM user_profile WHERE user_academicStatus = 'Diploma'";
+  $result1 = $conn->query($acaDiploma);
   $diploma = $result7->num_rows;
 
-  $academicLevel1 = "SELECT * FROM user_profile WHERE user_academicStatus = 'Degree'";
-  $result8 = $conn->query($academicLevel1);
-
+  $acaDegree = "SELECT * FROM user_profile WHERE user_academicStatus = 'Degree'";
+  $result2 = $conn->query($acaDegree);
   $degree = $result8->num_rows;
 
-  $academicLeve3 = "SELECT * FROM user_profile WHERE user_academicStatus = 'Master'";
-  $result9 = $conn->query($academicLeve3);
-
+  $acaMaster = "SELECT * FROM user_profile WHERE user_academicStatus = 'Master'";
+  $result3 = $conn->query($acaMaster);
   $master = $result9->num_rows;
 
-  $academicLevel4 = "SELECT * FROM user_profile WHERE user_academicStatus = 'PHD'";
-  $result10 = $conn->query($academicLevel4);
-
+  $acaPHD = "SELECT * FROM user_profile WHERE user_academicStatus = 'PHD'";
+  $result4 = $conn->query($acaPHD);
   $phd = $result10->num_rows;
 
   $totalPosts = "SELECT COUNT(*) AS total, 
