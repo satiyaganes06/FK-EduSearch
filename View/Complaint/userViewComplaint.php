@@ -49,13 +49,6 @@ if (!isset($_SESSION['Current_user_id'])) {
     <!-- Pie Chart -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
 
-    <!-- MDB -->
-    <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
-    
-    <!--Bootstrap 4 & 5 & jQuery Script-->
-    <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>-->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
 </head>
 
@@ -206,6 +199,13 @@ if (!isset($_SESSION['Current_user_id'])) {
 
         });
     </script>
+    <!-- MDB -->
+    <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
+    
+    <!--Bootstrap 4 & 5 & jQuery Script-->
+    <!--<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

@@ -146,6 +146,55 @@
             </div>
         </div>
     </div>
+ 
+    <!-- Edit Post -->
+    <div id="editPost<?php echo $posting_id ?>" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content border-0">
+                <div class="modal-body p-0">
+                    <div class="card border-0 p-sm-3 p-2 justify-content-center">
+                        <div class="card-header pb-0 bg-white border-0 ">
+                            <div class="row">
+                                <div class="col ml-auto">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <p class="font-weight-bold mb-2">Edit question</p>
+                        </div>
+                        <div class="card-body px-sm-4 mb-2 pt-1 pb-0">
+                            <form action="../../Model/User/updatePosting.php" method="POST">
+                                <input type="hidden" name="posting_id" value="<?php echo $posting_id ?>" />
+
+                                <div class="form-group">
+                                    <label class="form-label" for="course">Research Area</label>
+                                    <input type="text" name="posting_course" class="form-control" readonly value="<?php echo $row2['posting_course']?>" disabled/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="complaintType">Categories Subject</label>
+                                    <input type="text" name="posting_categories" class="form-control" readonly value="<?php echo $row2['posting_categories'] ?>" disabled/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="form-label" for="desc">Question</label>
+                                    <textarea class="form-control" name="posting_content" rows="4"><?php echo $row2['posting_content']; ?></textarea>
+                                </div>
+                                <div class="row justify-content-end no-gutters">
+                                    <div class="col-auto">
+                                        <button type="button" class="btn btn-light text-muted mr-2" data-dismiss="modal">Cancel</button>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="submit" name="confirm" class="btn btn-danger px-4">Apply Edit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>   
+    
     <!-- Rate Posting -->
     <div id="ratePosting<?php echo $posting_id ?>" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
