@@ -16,7 +16,7 @@ $id = $_SESSION["Current_user_id"];
 //$row = mysqli_fetch_assoc($result);
 
 $sql_modal = "SELECT user_profile.*, posting.* FROM user_profile 
-        INNER JOIN posting ON user_profile.user_id = posting.user_id
+        RIGHT JOIN posting ON user_profile.user_id = posting.user_id
         WHERE posting_course='$researchArea'";
 $result_modal = mysqli_query($conn, $sql_modal) or die("Could not execute query in view");
 $row_modal = mysqli_fetch_assoc($result_modal);
@@ -79,7 +79,7 @@ $row_modal = mysqli_fetch_assoc($result_modal);
                 $searchq = preg_replace("#[^0-9a-z]#i", "", $searchq);
                 
                 $sql = "SELECT user_profile.*, posting.* FROM user_profile 
-                INNER JOIN posting ON user_profile.user_id = posting.user_id
+                RIGHT JOIN posting ON user_profile.user_id = posting.user_id
                 WHERE posting_course='$researchArea' AND posting_content LIKE '%$searchq%'";
         
                 $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
@@ -94,7 +94,7 @@ $row_modal = mysqli_fetch_assoc($result_modal);
             <?php
             }}else{
                 $sql = "SELECT user_profile.*, posting.* FROM user_profile 
-                        INNER JOIN posting ON user_profile.user_id = posting.user_id
+                        RIGHT JOIN posting ON user_profile.user_id = posting.user_id
                         WHERE posting_course='$researchArea'";
                 $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
             }

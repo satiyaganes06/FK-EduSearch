@@ -111,10 +111,12 @@ hr.solid {
   border: none;
   cursor: pointer;
 }
-.likeCounter, .viewCounter, .rateCounter{
+.like_count, .viewCounter, .rateCounter{
   padding-right: 30px;
 }
-
+.hide {
+	display: none;
+}
 
 /* Additional styles for color change */
 .like-button {

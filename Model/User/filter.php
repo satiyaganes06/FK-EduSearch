@@ -101,7 +101,7 @@ if (isset($_POST['filter'])) {
     $status = $_POST['status'];
     if(!empty($_POST['status'])) {
         $sql = "SELECT user_profile.*, posting.* FROM user_profile 
-                INNER JOIN posting ON user_profile.user_id = posting.user_id
+                RIGHT JOIN posting ON user_profile.user_id = posting.user_id
                 WHERE posting_course='$researchArea' AND posting_status = '$status'";
         $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
     } else {
@@ -117,7 +117,7 @@ if (isset($_POST['clear'])) {
 
     $id = $_POST['posting_id'];
     $sql = "SELECT user_profile.*, posting.* FROM user_profile 
-            INNER JOIN posting ON user_profile.user_id = posting.user_id
+            RIGHT JOIN posting ON user_profile.user_id = posting.user_id
             WHERE posting_course='$researchArea'";
     $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
 }
