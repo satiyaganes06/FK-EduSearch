@@ -77,8 +77,8 @@
                                 <div class="col-auto">
                                     <button type="button" class="btn btn-light text-muted mr-2" data-dismiss="modal">Cancel</button>
                                 </div>
-                                <div class="col-auto">
-                                    <button type="submit" name="clear" class="btn btn-light px-4" data-dismiss="modal">Clear</button>
+                                <div class="col-auto pr-2">
+                                    <button type="submit" name="clear" class="btn btn-light px-4">Clear</button>
                                 </div>
                                 <div class="col-auto">
                                     <button type="submit" name="filter" class="btn btn-danger px-4">Apply Filter</button>

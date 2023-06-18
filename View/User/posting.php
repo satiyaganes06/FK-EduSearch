@@ -1,6 +1,5 @@
 <?php
 session_start();
-$researchArea = $_GET["researchArea"];
 
 if (!isset($_SESSION["Current_user_id"])) {
 ?>
@@ -13,6 +12,32 @@ if (!isset($_SESSION["Current_user_id"])) {
 
 include("../../Config/database_con.php");
 $id = $_SESSION["Current_user_id"];
+
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $postID = $_POST['postID'];
+    $resultLike = mysqli_query($conn, "SELECT * FROM posting WHERE posting_id = '$postID'");
+    $rowLike = mysqli_fetch_array($resultLike);
+    $n = $rowLike['posting_like'];
+
+    if (isset($_POST['like'])) {
+        mysqli_query($conn, "UPDATE posting SET posting_like = $n+1 WHERE posting_id = '$postID'");
+        mysqli_query($conn, "INSERT INTO posting_like (user_id, posting_id) VALUES ('$id', '$postID')");
+    }
+
+    if (isset($_POST['unlike'])) {
+        mysqli_query($conn, "UPDATE posting SET posting_like = $n-1 WHERE posting_id = '$postID'");
+        mysqli_query($conn, "DELETE FROM posting_like WHERE user_id = '$id' AND posting_id = '$postID'");
+    }
+
+    if (empty($_GET["researchArea"])) {
+        $researchArea = $rowLike['posting_course'];
+    } 
+}else {
+    $researchArea = $_GET["researchArea"];
+}
+
+
 //$row = mysqli_fetch_assoc($result);
 
 $sql_modal = "SELECT user_profile.*, posting.* FROM user_profile 
@@ -20,6 +45,7 @@ $sql_modal = "SELECT user_profile.*, posting.* FROM user_profile
         WHERE posting_course='$researchArea'";
 $result_modal = mysqli_query($conn, $sql_modal) or die("Could not execute query in view");
 $row_modal = mysqli_fetch_assoc($result_modal);
+
 
 ?>
 <!DOCTYPE html>
@@ -77,22 +103,23 @@ $row_modal = mysqli_fetch_assoc($result_modal);
             if (isset($_POST['search'])) {
                 $searchq = $_POST['search'];
                 $searchq = preg_replace("#[^0-9a-z]#i", "", $searchq);
-                
+
                 $sql = "SELECT user_profile.*, posting.* FROM user_profile 
                 RIGHT JOIN posting ON user_profile.user_id = posting.user_id
                 WHERE posting_course='$researchArea' AND posting_content LIKE '%$searchq%'";
-        
+
                 $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
                 $count = mysqli_num_rows($result);
 
-                if($count == 0){
+                if ($count == 0) {
             ?>
-                <script>
-                    alert("There was no search result!");
-                    window.history.back();
-                </script>
+                    <script>
+                        alert("There was no search result!");
+                        window.history.back();
+                    </script>
             <?php
-            }}else{
+                }
+            } else {
                 $sql = "SELECT user_profile.*, posting.* FROM user_profile 
                         RIGHT JOIN posting ON user_profile.user_id = posting.user_id
                         WHERE posting_course='$researchArea'";
@@ -120,6 +147,9 @@ $row_modal = mysqli_fetch_assoc($result_modal);
                         while ($row = mysqli_fetch_assoc($result)) {
                             $posting_id = $row['posting_id'];
                             $user_id = $row['user_id'];
+
+                            $sql_retrieve = "SELECT * FROM posting_like WHERE user_id = '$id' AND posting_id = '$posting_id'";
+                            $result_retrieve = mysqli_query($conn, $sql_retrieve);
                     ?>
                             <div class="pb-2">
                                 <div class="question">
@@ -169,7 +199,7 @@ $row_modal = mysqli_fetch_assoc($result_modal);
                                     </div>
                                     <!-- icon section -->
                                     <div class="d-flex pt-1 pb-1">
-                                        <?php include("interaction.php") ?>
+                                        <?php include("interactionPosting.php") ?>
                                         <?php
                                         if ($status == "Completed") {
                                         ?>
@@ -274,7 +304,7 @@ $row_modal = mysqli_fetch_assoc($result_modal);
     <script src="../../js/posting.js"></script>
     <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
     <!--Bootstrap 4 & 5 & jQuery Script-->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

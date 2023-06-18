@@ -54,6 +54,7 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
 
     <!-- Navbar -->
     <?php
+    include("../../Config/database_con.php");
     include_once('../Common/html/userNavBar.php');
     ?>
 
@@ -173,24 +174,7 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
                                     </div>
                                     <!-- icon section -->
                                     <div class="d-flex pt-1 pb-1">
-                                        <div id="like">
-                                            <i id="iconLike" class="fa-regular fa-heart fa-l"></i>
-                                        </div>
-                                        <div class="likeCounter">
-                                            <p><?php echo $row2['posting_like']; ?> Like</p>
-                                        </div>
-                                        <div class="views">
-                                            <i class="fa-solid fa-eye fa-l"></i>
-                                        </div>
-                                        <div class="viewCounter">
-                                            <p><?php echo $row2['posting_view']; ?> View</p>
-                                        </div>
-                                        <div class="comment">
-                                            <i id="iconComment" class="fa-regular fa-comment fa-l"></i>
-                                        </div>
-                                        <div class="commentCounter">
-                                            <p>Comment</p>
-                                        </div>
+                                        <?php include("interactionProfile.php") ?>
                                         <?php
                                         if ($status == "Completed") {
                                         ?>
@@ -274,7 +258,7 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
     <!-- MDB -->
     <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
     <!--Bootstrap 4 & 5 & jQuery Script-->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
