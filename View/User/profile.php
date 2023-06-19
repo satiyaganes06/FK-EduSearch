@@ -19,6 +19,10 @@ $row = mysqli_fetch_assoc($result);
 
 $sql2 = "SELECT * FROM posting WHERE user_id ='$user_id' ORDER BY posting_date DESC";
 $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
+
+$sql3 = "SELECT * FROM account WHERE user_id ='$user_id'";
+$result3 = mysqli_query($conn, $sql3) or die("Could not execute query in view");
+$row3 = mysqli_fetch_assoc($result3);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -82,6 +86,14 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
                             <strong><?php echo $row['user_name']; ?></strong>
                             <a href="updateInfo.php"><i class="fa-solid fa-gear" style="color: #8d9096;"></i></a>
                         </h4>
+                        <?php
+                            if($row3['acc_role'] == "Staff"){
+                                ?>
+                                    <a href="../../Model/Expert/expertReq.php"><button class="btn btn-dark ml-4">Request for Expert</button></a>
+
+                                <?php
+                            }
+                        ?>
                         <?php
                         if ($row['user_fullName'] == "") { ?>
                             <p class="text-center">Update your profile!</p>

@@ -80,21 +80,25 @@
                         <div class="post">
                             <div class="d-flex">
                                 <!-- Image -->
-                                
-                                <img
-                                    src= <?php echo $row2['user_profile_img']; ?>
-                                    class="rounded-circle shadow"
-                                    height="60"
+                                <?php if(empty($row2['user_profile_img'])){
+                                echo '<img class="rounded-circle " src="' . "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541" . '" height="60"
+                                alt="Black and White Portrait of a Man"
+                                loading="lazy"">';
+                                }else{
+                                echo '<img class="rounded-circle shadow" src="data:image/jpeg;base64,' . base64_encode($row2['user_profile_img']) . '" height="60"
                                     alt="Black and White Portrait of a Man"
-                                    loading="lazy"
-                                />
+                                    loading="lazy"">';
+                                } ?>
+                                
                     
                                 <!-- Content -->
                                 <div class="w-100 pl-3">
                     
                                     <div class="d-flex justify-content-between">
 
-                                        <div></div>
+                                        <div>
+                                            <strong><?php echo $row['posting_title']; ?></strong>
+                                        </div>
                                         
                                         <div class="d-flex">
                                             <p id="datetime_text" class="pr-1"><?php echo $row['posting_date']; ?></p>
@@ -118,7 +122,7 @@
 
                                 <div class="d-flex align-items-center">
                                     <i class="fas fa-star text-warning"></i>
-                                    <p class="likeRate_text">15 Likes</p>
+                                    <p class="likeRate_text"><?php echo $row['posting_like']; ?> View</p>
                                 </div>
                                 
                                 

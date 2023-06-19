@@ -80,19 +80,21 @@
                         <div class="post">
                             <div class="d-flex">
                                 <!-- Image -->
-                                <img
-                                    src=<?php echo $row2['user_profile_img']; ?>
-                                    class="rounded-circle shadow"
-                                    height="60"
+                                <?php if(empty($row2['user_profile_img'])){
+                                echo '<img class="rounded-circle " src="' . "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541" . '" height="60"
+                                alt="Black and White Portrait of a Man"
+                                loading="lazy"">';
+                                }else{
+                                echo '<img class="rounded-circle shadow" src="data:image/jpeg;base64,' . base64_encode($row2['user_profile_img']) . '" height="60"
                                     alt="Black and White Portrait of a Man"
-                                    loading="lazy"
-                                />
+                                    loading="lazy"">';
+                                } ?>
                     
                                 <!-- Content -->
                                 <div class="w-100 pl-3">
                                 
                                     <div class="d-flex justify-content-between">
-                                        <h6><strong><?php echo $row2['user_name']; ?></strong></h6>
+                                        <h6><strong><?php echo $row['posting_title']; ?></strong></h6>
                                         
                                         <div class="d-flex">
                                             <p id="datetime_text" class="pr-1"><?php echo $row['posting_date']; ?></p>
