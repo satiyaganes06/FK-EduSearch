@@ -15,16 +15,16 @@ if (!isset($_SESSION["Current_admin_id"])) {
     include("../../../Config/database_con.php");
     // Display percentage total
     // current month
-    $currentPostQuery = "SELECT SUM(complaint_id) AS discuss FROM complaint WHERE MONTH(complaint_date) = MONTH(CURRENT_DATE)";
+    $currentPostQuery = "SELECT COUNT(*) AS complaint FROM complaint WHERE MONTH(complaint_date) = MONTH(CURRENT_DATE)";
     $resultCurrentPost = mysqli_query($conn, $currentPostQuery);
     $rowCurrentMonth = mysqli_fetch_assoc($resultCurrentPost);
-    $currentPost = $rowCurrentMonth['discuss'];
+    $currentPost = $rowCurrentMonth['complaint'];
 
     // previous month
-    $previousPostQuery = "SELECT SUM(complaint_id) AS view FROM complaint WHERE MONTH(complaint_date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)";
+    $previousPostQuery = "SELECT COUNT(*) AS complaint FROM complaint WHERE MONTH(complaint_date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)";
     $resultPreviousPost = mysqli_query($conn, $previousPostQuery);
     $rowPreviousPost = mysqli_fetch_assoc($resultPreviousPost);
-    $previousPost = $rowPreviousPost['view'];
+    $previousPost = $rowPreviousPost['complaint'];
 
     // Calculate percentage difference
     if ($previousPost != 0) {
