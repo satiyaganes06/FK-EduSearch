@@ -9,7 +9,7 @@ if (!isset($_SESSION['Current_user_id'])) {
   include("../../Config/database_con.php");
 
   $id = $_SESSION["Current_user_id"];
-  $sql = "SELECT * FROM user_profile WHERE user_id  = '$id'";
+  $sql = "SELECT * FROM user_profile  WHERE user_id  = '$id'";
   $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
   $row = mysqli_fetch_assoc($result);
 
@@ -81,8 +81,8 @@ if (!isset($_SESSION['Current_user_id'])) {
 
           <div class="mb-3">
             <label class="form-label" for="type">Choose Post Title<span style="color: red;"> *</span></label>
-            <select class="form-select" name="typePost" required="required">
-              <option selected>Please Select...</option>
+            <select class="form-select" name="typePost" required>
+              <option value="">Please Select...</option>
               <?php while ($row2 = mysqli_fetch_assoc($result2)) { ?>
                 <option value="<?php echo $row2['posting_id']; ?>"><?php echo $row2['posting_title']; ?></option>
               <?php } ?>
@@ -91,8 +91,8 @@ if (!isset($_SESSION['Current_user_id'])) {
 
           <div class="mb-3">
             <label class="form-label" for="type">Type of Complaints<span style="color: red;"> *</span></label>
-            <select class="form-select" name="typeComplaint" required="required">
-              <option selected>Please Select...</option>
+            <select class="form-select" name="typeComplaint" required>
+              <option value="">Please Select...</option>
               <option value="1">Unsatisfied Expert's Feedback</option>
               <option value="2">Wrongly Assigned Research Area</option>
             </select>
@@ -119,7 +119,7 @@ if (!isset($_SESSION['Current_user_id'])) {
   <?php
   include_once('../Common/html/footer.html');
   ?>
-
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script>
     var date = new Date();
 
@@ -139,7 +139,6 @@ if (!isset($_SESSION['Current_user_id'])) {
 
     document.getElementById('date').value = today;
     document.getElementById("time").value = displayTime;
-
   </script>
 
   <!-- MDB -->
