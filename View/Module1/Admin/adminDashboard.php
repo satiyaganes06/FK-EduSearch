@@ -42,14 +42,14 @@ if (!isset($_SESSION["Current_admin_id"])) {
 
   //Dispaly total post percentage
   // current month
-  $currentPostQuery = "SELECT SUM(posting_id) AS post FROM posting WHERE MONTH(posting_date) = MONTH(CURRENT_DATE)";
+  $currentPostQuery = "SELECT COUNT(posting_id) AS post FROM posting WHERE MONTH(posting_date) = MONTH(CURRENT_DATE)";
   $resultCurrentPost = mysqli_query($conn, $currentPostQuery);
   $rowCurrentPost = mysqli_fetch_assoc($resultCurrentPost);
   $currentPost = $rowCurrentPost['post'];
   
 
   // Retrieve previous month's value
-  $previousPosthQuery = "SELECT SUM(posting_id) AS post FROM posting WHERE MONTH(posting_date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)";
+  $previousPosthQuery = "SELECT COUNT(posting_id) AS post FROM posting WHERE MONTH(posting_date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)";
   $resultPreviousPost = mysqli_query($conn, $previousPosthQuery);
   $rowPreviousPost = mysqli_fetch_assoc($resultPreviousPost);
   $previousPost = $rowPreviousPost["post"];
@@ -66,7 +66,7 @@ if (!isset($_SESSION["Current_admin_id"])) {
 
   //Dispaly total like percentage
   // current month
-  $currentLikeQuery = "SELECT COUNt(*) AS likes FROM posting_like WHERE MONTH(date) = MONTH(CURRENT_DATE)";
+  $currentLikeQuery = "SELECT COUNT(*) AS likes FROM posting_like WHERE MONTH(date) = MONTH(CURRENT_DATE)";
   $resultCurrentLike = mysqli_query($conn, $currentLikeQuery);
   $rowCurrentLike = mysqli_fetch_assoc($resultCurrentLike);
   $currentLike = $rowCurrentLike["likes"];
@@ -393,11 +393,16 @@ if (!isset($_SESSION["Current_admin_id"])) {
 
 
     const month = [
-      {x: Date.parse('2023-5-01 00:00:00 GMT+0800'), y: 25},
-      {x: Date.parse('2023-6-01 00:00:00 GMT+0800'),y: 10},
-      {x: Date.parse('2023-7-01 00:00:00 GMT+0800'),y: 50},
-      {x: Date.parse('2023-8-01 00:00:00 GMT+0800'),y: 20,},
-      {x: Date.parse('2023-9-01 00:00:00 GMT+0800'), y: 20},
+      {x: Date.parse('2023-1-01 00:00:00 GMT+0800'), y: 25},
+      {x: Date.parse('2023-2-01 00:00:00 GMT+0800'),y: 10},
+      {x: Date.parse('2023-3-01 00:00:00 GMT+0800'),y: 50},
+      {x: Date.parse('2023-4-01 00:00:00 GMT+0800'),y: 20,},
+      {x: Date.parse('2023-5-01 00:00:00 GMT+0800'), y: 20},
+      {x: Date.parse('2023-6-01 00:00:00 GMT+0800'), y: 25},
+      {x: Date.parse('2023-7-01 00:00:00 GMT+0800'),y: 10},
+      {x: Date.parse('2023-8-01 00:00:00 GMT+0800'),y: 50},
+      {x: Date.parse('2023-9-01 00:00:00 GMT+0800'),y: 20,},
+      {x: Date.parse('2023-10-01 00:00:00 GMT+0800'), y: 20},
     ];
 
     // setup 
