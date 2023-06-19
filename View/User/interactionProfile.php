@@ -42,14 +42,14 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         if (mysqli_num_rows($likedResult) == 1) { ?>
 
             <!-- user already likes post -->
-            <span class="unlike fa-solid fa-heart fa-l" data-id="<?php echo $posting_id; ?>" style="color: red;"></span>
-            <span class="like hide fa-solid fa-heart fa-l" data-id="<?php echo $posting_id; ?>" style="color: grey;"></span>
+            <span class="unlike fa-solid fa-heart fa-l" data-id="<?php echo $posting_id; ?>" style="color: red;" onClick="location.reload();"></span>
+            <span class="like hide fa-solid fa-heart fa-l" data-id="<?php echo $posting_id; ?>" style="color: grey;" onClick="location.reload();"></span>
 
         <?php } else { ?>
 
             <!-- user has not yet liked post -->
-            <span class="like fa-solid fa-heart fa-l" data-id="<?php echo $posting_id; ?>" style="color: grey;"></span>
-            <span class="unlike hide fa-solid fa-heart fa-l" data-id="<?php echo $posting_id; ?>" style="color: red;"></span>
+            <span class="like fa-solid fa-heart fa-l" data-id="<?php echo $posting_id; ?>" style="color: grey;" onClick="location.reload();"></span>
+            <span class="unlike hide fa-solid fa-heart fa-l" data-id="<?php echo $posting_id; ?>" style="color: red;" onClick="location.reload();"></span>
 
         <?php } ?>
     </div>
