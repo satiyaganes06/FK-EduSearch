@@ -27,9 +27,13 @@ if (!isset($_SESSION['Current_user_id'])) {
     <!--Bootstrap Script-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    
-    
+
+    <!-- Datatable -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap4.min.js"></script>
 
     <!-- MDB -->
     <link rel="stylesheet" href="../../Bootstrap/mdb.min.css" />
@@ -118,7 +122,7 @@ if (!isset($_SESSION['Current_user_id'])) {
                         <tbody>
                             <?php
                             $sql = "SELECT * FROM complaint AS A JOIN user_profile AS B ON A.user_id = B.user_id 
-                            JOIN posting AS C ON A.posting_id = C.posting_id WHERE A.user_id = '$id'";
+                            JOIN posting AS C ON A.posting_id = C.posting_id WHERE A.user_id = '$id' ORDER BY A.complaint_status";
                             $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
                             $row = mysqli_num_rows($result);
                             $cnt = 1;
@@ -140,9 +144,11 @@ if (!isset($_SESSION['Current_user_id'])) {
                                         }
                                         ?>
                                         <td>
+                                        <a href="#viewModal<?php echo $row['user_id'] ?><?php echo $row['complaint_id'] ?>" data-toggle="modal"><i class="fas fa-eye" style="padding-right:15px;color:green"></i></a>
+                                            <?php if($row['complaint_status'] === 'In Investigation' || $row['complaint_status'] === 'On Hold') {?>
                                             <a href="#editModal<?php echo $row['complaint_id'] ?>" data-toggle="modal"><i class="fas fa-edit" style="padding-right:15px;color:blue"></i></a>
-                                            <a href="#viewModal<?php echo $row['user_id'] ?><?php echo $row['complaint_id'] ?>" data-toggle="modal"><i class="fas fa-eye" style="padding-right:15px;color:green"></i></a>
                                             <a href="#deleteModal<?php echo $row['complaint_id'] ?>" data-toggle="modal"><i class="fas fa-trash" style="padding-right:15px;color:rgb(255, 5, 5)"></i></a>
+                                            <?php }?>
                                             <?php include('modal.php'); ?>
                                         </td>
                                     </tr>
