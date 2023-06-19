@@ -76,15 +76,15 @@ if (!isset($_SESSION['Current_user_id'])) {
           </div>
           <div class="mb-2">
             <label class="form-label" for="phoneNum">Phone Number</label>
-            <input type="tel" id="phoneNum" class="form-control" value="<?php echo $row['user_phoneNum']; ?>" disabled/>
+            <input type="tel" id="phoneNum" class="form-control" value="<?php echo $row['user_phoneNum']; ?>" disabled />
           </div>
 
           <div class="mb-3">
-            <label class="form-label" for="type">Choose Post<span style="color: red;"> *</span></label>
+            <label class="form-label" for="type">Choose Post Title<span style="color: red;"> *</span></label>
             <select class="form-select" name="typePost" required="required">
-              <option disabled selected>Please Select...</option>
+              <option selected>Please Select...</option>
               <?php while ($row2 = mysqli_fetch_assoc($result2)) { ?>
-                <option value="<?php echo $row2['posting_id']; ?>"><?php echo $row2['posting_content']; ?></option>
+                <option value="<?php echo $row2['posting_id']; ?>"><?php echo $row2['posting_title']; ?></option>
               <?php } ?>
             </select>
           </div>
@@ -92,7 +92,7 @@ if (!isset($_SESSION['Current_user_id'])) {
           <div class="mb-3">
             <label class="form-label" for="type">Type of Complaints<span style="color: red;"> *</span></label>
             <select class="form-select" name="typeComplaint" required="required">
-              <option disabled selected>Please Select...</option>
+              <option selected>Please Select...</option>
               <option value="1">Unsatisfied Expert's Feedback</option>
               <option value="2">Wrongly Assigned Research Area</option>
             </select>
@@ -139,6 +139,7 @@ if (!isset($_SESSION['Current_user_id'])) {
 
     document.getElementById('date').value = today;
     document.getElementById("time").value = displayTime;
+
   </script>
 
   <!-- MDB -->
