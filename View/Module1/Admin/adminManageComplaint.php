@@ -30,7 +30,7 @@ if (!isset($_SESSION["Current_admin_id"])) {
     if ($previousPost != 0) {
         $percentageD = (($currentPost - $previousPost) / $previousPost) * 100;
     } else {
-        $percentageD = 0; 
+        $percentageD = 0;
     }
     $percentage = number_format($percentageD, 2);
 }
@@ -251,7 +251,7 @@ if (!isset($_SESSION["Current_admin_id"])) {
 
                                 $sql = "SELECT * FROM complaint
                                         INNER JOIN user_profile ON complaint.user_id=user_profile.user_id
-                                        INNER JOIN posting ON complaint.user_id=posting.user_id";
+                                        INNER JOIN posting ON complaint.posting_id=posting.posting_id";
                                 $result = mysqli_query($conn, $sql);
 
 

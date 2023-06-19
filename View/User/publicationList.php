@@ -76,7 +76,7 @@ include("../../Config/database_con.php");
                         </thead>
                         <tbody>
                             <?php
-                                $sql = "SELECT * FROM publication WHERE publication_status = 'Approve'";
+                                $sql = "SELECT * FROM publication WHERE publication_status = 'Accept'";
                                 $result = mysqli_query($conn, $sql)or die("Could not execute query in publication list");
                                 $countResult = mysqli_num_rows($result);
                                 $count = 1;

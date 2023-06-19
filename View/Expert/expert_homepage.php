@@ -105,7 +105,7 @@
                     <div class="w-100 pl-3">
         
                       <div class="d-flex justify-content-between">
-                        <h6><strong><?php echo $row['publication_title'];?></strong></h6>
+                        <h6 style="width: 550px;"><strong><?php echo $row['publication_title'];?></strong></h6>
                         
                         <div class="d-flex align-items-center">
                           <i class="far fa-eye mr-1 fa-sm text-center" style="margin-bottom: 1em; color: #7C7C7C;"></i>

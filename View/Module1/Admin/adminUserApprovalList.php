@@ -55,7 +55,7 @@
           
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-          <link rel="shortcut icon" type="image/jpg" href="/Asset/icon_logo.png" />
+          <link rel="shortcut icon" type="image/jpg" href="../../../Asset/icon_logo.png" />
    </head>
 <body>
 
@@ -208,6 +208,9 @@
                 </tbody>
               </table>
             </div>
+
+            
+
             <div class="tabletitle2">
                 <h4>Approval for Publication</h4>
             </div>
@@ -396,7 +399,7 @@
       document.getElementById('expertSelect').addEventListener('change', function() {
           var selectedExpertId = this.value;
           var postingId = '<?php echo $postingid ?>';
-          var assignExpertUrl = '../../../Model/expert/assignExpert.php?post_id=' + postingId + '&expert_id=' + selectedExpertId;
+          var assignExpertUrl = '../../../Model/expert/adminAssignExpert.php?post_id=' + postingId + '&expert_id=' + selectedExpertId;
           document.getElementById('assignExpertLink').setAttribute('href', assignExpertUrl);
       });
   </script>
