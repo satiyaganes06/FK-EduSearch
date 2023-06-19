@@ -53,9 +53,11 @@ if (!isset($_SESSION["Current_user_id"])) {
 
 
   <section>
-    <div class="container text-center pt-4 pb-3 bg-white">
+  <div class="container text-center pt-3 pb-2"> 
+      <h4>Rate For System</h4>
+      <p>Please take a moment to rate our system. Your feedback is important to us.</p>
+      <div class="container text-center pt-3 pb-2">
       <div class="col">
-        <h1>Star Rating</h1>
         <form action="../../Model/User/save_rating.php" method="post">
           <div class="rating col">
             <input type="radio" name="rating" value="5" id="5">
@@ -73,6 +75,8 @@ if (!isset($_SESSION["Current_user_id"])) {
         </form>
       </div>
     </div>
+    </div>
+    
   </section>
 
   <!-- MDB -->

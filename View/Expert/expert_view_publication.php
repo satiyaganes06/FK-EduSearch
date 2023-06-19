@@ -123,10 +123,6 @@
                   }
                 }
                 ?>
-                
-
-                  
-                
 
                   <tr>
                     <th scope="row"><strong>Title :</strong></th>
