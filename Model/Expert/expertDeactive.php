@@ -1,6 +1,6 @@
 <?php
-    include_once("../../Config/database_con.php");
-    
+	include_once("../../Config/database_con.php");
+
     //Expert Info
     $sql = "SELECT * FROM expert";
     $result = mysqli_query($conn,$sql) or die("ERROR 401");
@@ -21,7 +21,7 @@
             
 
         // } else
-        
+        echo "Its working <br>";
         if($last_interaction_date->diff($current_date)->days > 30){
 
             // Deactivate the expert's account
@@ -34,7 +34,6 @@
             $sql3 = "DELETE FROM expert WHERE expert_id = '$expert_id'";
             $result3 = mysqli_query($conn,$sql3) or die ("Error 404");
 
-            echo $user_id . "<br>" . $expert_id;
            // $user_email = $row3['user_email'];
 
          //   header('Location: ../../Api/PHPMailer/sendDeactiveEmail.php?user_id=' . $userID . '&user_email=' . $user_email .'&expert_id=' . $expert_id);

@@ -1,80 +1,50 @@
 <?php
-
-include_once("../../Config/database_con.php");
-
-$post_id = $_GET['post_id'];
-$expert_id = $_GET['expert_id'];
-
-$sql = "UPDATE posting set expert_id = '$expert_id', posting_status = 'Assigned' WHERE posting_id = '$post_id'";
-
-
-$result = mysqli_query($conn, $sql);
-
-
-if (!$result) {
-    echo "Error 404";
-    echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-} else {
-    ?>
-    <script>
-        alert("Assign Sucessfully!!!");
-        window.location = '../../../View/Module1/Admin/adminUserApprovalList.php';
-    </script>
-    <?php
-    $conn->close();
-
-} 
-
-
-
-
-?>
-
-<?php
     include_once("../../Config/database_con.php");
-    
-    //Expert Info
-    $sql = "SELECT * FROM expert";
-    $result = mysqli_query($conn,$sql) or die("ERROR 401");
-     
-    while ($row = mysqli_fetch_assoc($result)){
-        //Deactive Check
-        $user_id = $row['user_id'];
-        $expert_id = $row['expert_id'];
-        $last_interaction = $row['lastUse_Date'];
-        $current_date = new DateTime();
-        //$days_since_last_interaction = floor(($current_date - $last_interaction) / (60 * 60 * 24));
-        $last_interaction_date = new DateTime($last_interaction);
 
+    // Get current time
+    $currentTime = date("Y-m-d H:i:s");
 
-        // if ($last_interaction_date->diff($current_date)->days == 30) {
+    // First, check the postings with status "Assign" and assign them to a random expert
+    $sql = "SELECT posting_id FROM posting WHERE posting_status = 'Assign'";
+    $result = $conn->query($sql);
 
-        //     header('Location: ../../Api/PHPMailer/sendDeactiveWarningEmail.php?user_id=' . $userID . '&user_email=' . $user_email .'&expert_id=' . $expert_id);
-            
+    if ($result->num_rows > 0) {
+        // Get all experts
+        $experts = $conn->query("SELECT expert_id FROM expert");
+        $expert_ids = [];
+        while($row = $experts->fetch_assoc()) {
+            array_push($expert_ids, $row['expert_id']);
+        }
 
-        // } else
-        
-        if($last_interaction_date->diff($current_date)->days > 30){
-
-            // Deactivate the expert's account
-            $sql1 = "DELETE FROM account WHERE user_id = '$user_id'";
-            $result1 = mysqli_query($conn,$sql1) or die ("Error 404");
-
-            $sql2 = "DELETE FROM user_profile WHERE user_id = '$user_id'";
-            $result2 = mysqli_query($conn,$sql2) or die ("Error 404");
-
-            $sql3 = "DELETE FROM expert WHERE expert_id = '$expert_id'";
-            $result3 = mysqli_query($conn,$sql3) or die ("Error 404");
-
-            echo $user_id . "<br>" . $expert_id;
-           // $user_email = $row3['user_email'];
-
-         //   header('Location: ../../Api/PHPMailer/sendDeactiveEmail.php?user_id=' . $userID . '&user_email=' . $user_email .'&expert_id=' . $expert_id);
-
+        while($row = $result->fetch_assoc()) {
+            // Assign a random expert to the post
+            $randomExpert = $expert_ids[array_rand($expert_ids)];
+            $assignTime = date("H:i:s");
+            $conn->query("UPDATE posting SET expert_id = '$randomExpert', posting_status = 'Assigned', posting_assign_time = '$assignTime' WHERE posting_id = " . $row["posting_id"]);
+           
         }
     }
 
-    
+    // Check the postings assigned more than an hour ago and assign them to a new random expert
+    $sql = "SELECT posting_id FROM posting WHERE posting_status = 'Assigned' AND TIMEDIFF('$currentTime', CONCAT(CURDATE(), ' ', posting_assign_time)) >= '00:01:00'";
+    $result = $conn->query($sql);
 
+    if ($result->num_rows > 0) {
+        // Get all experts
+        $experts = $conn->query("SELECT expert_id FROM expert");
+        $expert_ids = [];
+        while($row = $experts->fetch_assoc()) {
+            array_push($expert_ids, $row['expert_id']);
+        }
 
+        while($row = $result->fetch_assoc()) {
+            // Assign a random expert to the post
+            $randomExpert = $expert_ids[array_rand($expert_ids)];
+            $assignTime = date("H:i:s");
+            $conn->query("UPDATE posting SET expert_id = '$randomExpert', posting_assign_time = '$assignTime' WHERE posting_id = " . $row["posting_id"]);
+           
+        }
+    }
+
+    $conn->close();
 ?>
