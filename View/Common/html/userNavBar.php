@@ -71,7 +71,7 @@ if ($user_route == 'home') {
 
         <div class="mr-3 profile_name_Section">
           <h6 id="navName"><strong><?php echo $row0['user_name']; ?></strong></h6>
-          <h6 id="navUsername">@<?php echo $row0['user_name']; ?></h6>
+          <h6 id="navUsername">@<?php echo $row0['user_id']; ?></h6>
         </div>
         <div class="dropdown">
           <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
