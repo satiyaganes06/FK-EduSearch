@@ -2,6 +2,7 @@
 include("../../Config/database_con.php");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $date = date("Y-m-d");
     
     if (isset($_POST['liked'])) {
         $postID = $_POST['postID'];
@@ -13,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         $likedResult = mysqli_query($conn, "SELECT * FROM posting_like WHERE user_id = '$user_id' AND posting_id = '$postID'");
         if (mysqli_num_rows($likedResult) == 0) {
             mysqli_query($conn, "UPDATE posting SET posting_like = $n+1 WHERE posting_id = '$postID'");
-            mysqli_query($conn, "INSERT INTO posting_like (user_id, posting_id) VALUES ('$user_id', '$postID')");
+            mysqli_query($conn, "INSERT INTO posting_like (user_id, posting_id, date) VALUES ('$user_id', '$postID', '$date')");
         }
     }
     

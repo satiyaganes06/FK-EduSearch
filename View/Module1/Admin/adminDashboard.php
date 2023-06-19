@@ -59,19 +59,20 @@ if (!isset($_SESSION["Current_admin_id"])) {
     $post = (($currentPost - $previousPost) / $previousPost) * 100;
   } else {
     $previousPost = 0; // Avoid division by zero
+    $post = 0;
   }
   $percentagePost = number_format($post, 2);
 
 
   //Dispaly total like percentage
   // current month
-  $currentLikeQuery = "SELECT SUM(posting_like) AS likes FROM posting WHERE MONTH(posting_date) = MONTH(CURRENT_DATE)";
+  $currentLikeQuery = "SELECT COUNt(*) AS likes FROM posting_like WHERE MONTH(date) = MONTH(CURRENT_DATE)";
   $resultCurrentLike = mysqli_query($conn, $currentLikeQuery);
   $rowCurrentLike = mysqli_fetch_assoc($resultCurrentLike);
   $currentLike = $rowCurrentLike["likes"];
 
   // Retrieve previous month's value
-  $previousLikeQuery = "SELECT SUM(posting_like) AS likes FROM posting WHERE MONTH(posting_date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)";
+  $previousLikeQuery = "SELECT COUNT(*) AS likes FROM posting_like WHERE MONTH(date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)";
   $resultPreviousLike = mysqli_query($conn, $previousLikeQuery);
   $rowPreviousLike = mysqli_fetch_assoc($resultPreviousLike);
   $previousLike = $rowPreviousLike["likes"];
@@ -81,6 +82,7 @@ if (!isset($_SESSION["Current_admin_id"])) {
     $like = (($currentLike - $previousLike) / $previousLike) * 100;
   } else {
     $previousLike = 0; // Avoid division by zero
+    $like = 0;
   }
   $percentageLike = number_format($like, 2);
 
@@ -217,9 +219,9 @@ if (!isset($_SESSION["Current_admin_id"])) {
     <!-- Diplay total posts,likes & comment -->
       <?php
       include("../../../Config/database_con.php");
-      $posts = "SELECT (SELECT COUNT(*) FROM complaint) AS total_posts,  
+      $posts = "SELECT (SELECT COUNT(posting_id) FROM posting) AS total_posts,  
                 (SELECT COUNT(*) FROM discussion) AS total_dicusssion,
-                SUM(posting_like) AS total_likes FROM posting";
+                (SELECT COUNT(*) FROM posting_like) AS total_likes";
       $total = mysqli_query($conn, $posts);
       if ($total) {
         $row = mysqli_fetch_assoc($total);
