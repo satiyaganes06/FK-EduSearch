@@ -15,16 +15,16 @@ if (!isset($_SESSION["Current_admin_id"])) {
     include("../../../Config/database_con.php");
     // Display percentage total
     // current month
-    $currentPostQuery = "SELECT SUM(complaint_id) AS discuss FROM complaint WHERE MONTH(complaint_date) = MONTH(CURRENT_DATE)";
+    $currentPostQuery = "SELECT COUNT(*) AS complaint FROM complaint WHERE MONTH(complaint_date) = MONTH(CURRENT_DATE)";
     $resultCurrentPost = mysqli_query($conn, $currentPostQuery);
     $rowCurrentMonth = mysqli_fetch_assoc($resultCurrentPost);
-    $currentPost = $rowCurrentMonth['discuss'];
+    $currentPost = $rowCurrentMonth['complaint'];
 
     // previous month
-    $previousPostQuery = "SELECT SUM(complaint_id) AS view FROM complaint WHERE MONTH(complaint_date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)";
+    $previousPostQuery = "SELECT COUNT(*) AS complaint FROM complaint WHERE MONTH(complaint_date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)";
     $resultPreviousPost = mysqli_query($conn, $previousPostQuery);
     $rowPreviousPost = mysqli_fetch_assoc($resultPreviousPost);
-    $previousPost = $rowPreviousPost['view'];
+    $previousPost = $rowPreviousPost['complaint'];
 
     // Calculate percentage difference
     if ($previousPost != 0) {
@@ -236,7 +236,8 @@ if (!isset($_SESSION["Current_admin_id"])) {
                                 <tr>
                                     <th>Bil</th>
                                     <th>User ID</th>
-                                    <th>Complaint Type</th>
+                                    <th>Title Post</th>
+                                    <th>Complain Type</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -249,7 +250,8 @@ if (!isset($_SESSION["Current_admin_id"])) {
 
 
                                 $sql = "SELECT * FROM complaint
-                                        INNER JOIN user_profile ON complaint.user_id=user_profile.user_id";
+                                        INNER JOIN user_profile ON complaint.user_id=user_profile.user_id
+                                        INNER JOIN posting ON complaint.user_id=posting.user_id";
                                 $result = mysqli_query($conn, $sql);
 
 
@@ -261,6 +263,7 @@ if (!isset($_SESSION["Current_admin_id"])) {
                                         <tr>
                                             <td><?php echo ++$bilNum; ?></td>
                                             <td><?php echo $row['user_id']; ?></td>
+                                            <td><?php echo $row['posting_title']; ?></td>
                                             <td><?php echo $row['complaint_type']; ?></td>
 
                                             <?php

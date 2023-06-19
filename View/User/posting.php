@@ -1,5 +1,6 @@
 <?php
 session_start();
+$researchArea = $_GET["researchArea"];
 
 if (!isset($_SESSION["Current_user_id"])) {
 ?>
@@ -14,30 +15,6 @@ include("../../Config/database_con.php");
 $id = $_SESSION["Current_user_id"];
 
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $postID = $_POST['postID'];
-    $resultLike = mysqli_query($conn, "SELECT * FROM posting WHERE posting_id = '$postID'");
-    $rowLike = mysqli_fetch_array($resultLike);
-    $n = $rowLike['posting_like'];
-
-    if (isset($_POST['like'])) {
-        mysqli_query($conn, "UPDATE posting SET posting_like = $n+1 WHERE posting_id = '$postID'");
-        mysqli_query($conn, "INSERT INTO posting_like (user_id, posting_id) VALUES ('$id', '$postID')");
-    }
-
-    if (isset($_POST['unlike'])) {
-        mysqli_query($conn, "UPDATE posting SET posting_like = $n-1 WHERE posting_id = '$postID'");
-        mysqli_query($conn, "DELETE FROM posting_like WHERE user_id = '$id' AND posting_id = '$postID'");
-    }
-
-    if (empty($_GET["researchArea"])) {
-        $researchArea = $rowLike['posting_course'];
-    } 
-}else {
-    $researchArea = $_GET["researchArea"];
-}
-
-
 //$row = mysqli_fetch_assoc($result);
 
 $sql_modal = "SELECT user_profile.*, posting.* FROM user_profile 
@@ -46,7 +23,38 @@ $sql_modal = "SELECT user_profile.*, posting.* FROM user_profile
 $result_modal = mysqli_query($conn, $sql_modal) or die("Could not execute query in view");
 $row_modal = mysqli_fetch_assoc($result_modal);
 
-
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $date = date("Y-m-d");
+    
+    if (isset($_POST['liked'])) {
+        $postID = $_POST['postID'];
+        $resultLike = mysqli_query($conn, "SELECT * FROM posting WHERE posting_id = '$postID'");
+        $rowLike = mysqli_fetch_array($resultLike);
+        $n = $rowLike['posting_like'];
+    
+        // Check if the user has already liked the post
+        $likedResult = mysqli_query($conn, "SELECT * FROM posting_like WHERE user_id = '$id' AND posting_id = '$postID'");
+        if (mysqli_num_rows($likedResult) == 0) {
+            mysqli_query($conn, "UPDATE posting SET posting_like = $n+1 WHERE posting_id = '$postID'");
+            mysqli_query($conn, "INSERT INTO posting_like (user_id, posting_id, date) VALUES ('$id', '$postID', '$date')");
+        }
+    }
+    
+    
+    if (isset($_POST['unliked'])) {
+        $postID = $_POST['postID'];
+        $resultLike = mysqli_query($conn, "SELECT * FROM posting WHERE posting_id = '$postID'");
+        $rowLike = mysqli_fetch_array($resultLike);
+        $n = $rowLike['posting_like'];
+    
+        // Check if the user has previously liked the post
+        $likedResult = mysqli_query($conn, "SELECT * FROM posting_like WHERE user_id = '$id' AND posting_id = '$postID'");
+        if (mysqli_num_rows($likedResult) > 0) {
+            mysqli_query($conn, "UPDATE posting SET posting_like = $n-1 WHERE posting_id = '$postID'");
+            mysqli_query($conn, "DELETE FROM posting_like WHERE user_id = '$id' AND posting_id = '$postID'");
+        }
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -115,7 +123,7 @@ $row_modal = mysqli_fetch_assoc($result_modal);
             ?>
                     <script>
                         alert("There was no search result!");
-                        window.history.back();
+                        //window.history.back();
                     </script>
             <?php
                 }
@@ -148,18 +156,25 @@ $row_modal = mysqli_fetch_assoc($result_modal);
                             $posting_id = $row['posting_id'];
                             $user_id = $row['user_id'];
 
-                            $sql_retrieve = "SELECT * FROM posting_like WHERE user_id = '$id' AND posting_id = '$posting_id'";
-                            $result_retrieve = mysqli_query($conn, $sql_retrieve);
                     ?>
                             <div class="pb-2">
                                 <div class="question">
                                     <div class="d-flex pb-3">
                                         <!-- Image -->
                                         <div class="profileImg">
+                                            <?php if ($id != $row['user_id']) {?>
+                                        <a href="profileUser.php?user_id=<?php echo urlencode($row['user_id']); ?>">
                                             <img src="data:image/jpeg;base64,<?php echo base64_encode($row['user_profile_img']); ?>" class="rounded-circle shadow" height="50" width="50" ; alt="Black and White Portrait of a Man" loading="lazy" />
+                                            </a>
+                                            <?php } else { ?>
+                                        <a href="profile.php">
+                                            <img src="data:image/jpeg;base64,<?php echo base64_encode($row['user_profile_img']); ?>" class="rounded-circle shadow" height="50" width="50" ; alt="Black and White Portrait of a Man" loading="lazy" />
+                                            </a>
+                                            <?php } ?>
                                         </div>
                                         <div class="d-flex flex-column pl-2">
-                                            <strong><?php echo $row['user_name']; ?></strong>
+                                            <p class="font-weight-bold" ><?php echo $row['user_name']; ?></p>
+                                            <i class="pt-2"><?php echo $row['posting_title']; ?></i>
                                             <p><?php echo $row['posting_content']; ?></p>
                                         </div>
                                         <!-- Determine the color of status -->
@@ -217,7 +232,7 @@ $row_modal = mysqli_fetch_assoc($result_modal);
                                     <!-- Comment section -->
                                     <hr class="solid">
                                     <div class="py-4">
-                                        <strong>Comments</strong>
+                                        <p class="font-weight-bold" >Comments</p>
                                     </div>
                                     <?php if ($user_id == $id) {
                                         if ($status == 'Revised') {
@@ -251,7 +266,7 @@ $row_modal = mysqli_fetch_assoc($result_modal);
                                                     </div>
                                                     <div class="d-flex flex-column pl-2">
                                                         <div class="d-flex">
-                                                            <strong><?php echo $row2['user_name']; ?></strong>
+                                                            <p class="font-weight-bold" ><?php echo $row2['user_name']; ?></p>
                                                             <p style="font-size:small" class="pl-2 pt-1"> (<?php echo $row2['discussion_date'] . " " . $row2['discussion_time']; ?>)</p>
                                                         </div>
 
@@ -280,7 +295,7 @@ $row_modal = mysqli_fetch_assoc($result_modal);
             <div class="col-2">
                 <!-- Info Status -->
                 <div class="infoBoard">
-                    <p><strong>Info Status</strong></p>
+                    <p class="font-weight-bold" >Info Status</p>
                     <p>
                     <div class="rounded-circle mr-2 float-left" style="width:20px;height:20px;background-color: #84D17E;"></div> Completed</p>
                     <p>

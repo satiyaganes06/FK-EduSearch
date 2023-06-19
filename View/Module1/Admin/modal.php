@@ -46,6 +46,14 @@
                 </div>
                 <hr>
                 <div class="form-group">
+                    <label class="form-label" for="date">Title Post</label>
+                    <input type="text" id="date" class="form-control" value="<?php echo $row['posting_title'] ?>" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="date">Content Post</label>
+                    <textarea class="form-control" name="desc" rows="4" readonly><?php echo $row['posting_content']; ?></textarea>
+                </div>
+                <div class="form-group">
                     <label class="form-label" for="date">Date</label>
                     <input type="text" id="date" class="form-control" value="<?php echo $row['complaint_date'] ?>" readonly />
                 </div>
@@ -120,6 +128,14 @@ $complaint_id = $_GET['complaint_id'] ?? ''; ?>
                         <input type="tel" id="phoneNum" class="form-control" readonly value="<?php echo $row['user_phoneNum'] ?>" />
                     </div>
                     <hr>
+                <div class="form-group">
+                    <label class="form-label" for="date">Title Post</label>
+                    <input type="text" id="date" class="form-control" value="<?php echo $row['posting_title'] ?>" readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="date">Content Post</label>
+                    <textarea class="form-control" name="desc" rows="4" readonly><?php echo $row['posting_content']; ?></textarea>
+                </div>
                     <div class="form-group">
                         <label class="form-label" for="date">Date</label>
                         <input type="text" id="date" class="form-control" value="<?php echo $row['complaint_date'] ?>" readonly />

@@ -1,12 +1,45 @@
 <?php
 include("../../Config/database_con.php");
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $date = date("Y-m-d");
+    
+    if (isset($_POST['liked'])) {
+        $postID = $_POST['postID'];
+        $resultLike = mysqli_query($conn, "SELECT * FROM posting WHERE posting_id = '$postID'");
+        $rowLike = mysqli_fetch_array($resultLike);
+        $n = $rowLike['posting_like'];
+    
+        // Check if the user has already liked the post
+        $likedResult = mysqli_query($conn, "SELECT * FROM posting_like WHERE user_id = '$user_id' AND posting_id = '$postID'");
+        if (mysqli_num_rows($likedResult) == 0) {
+            mysqli_query($conn, "UPDATE posting SET posting_like = $n+1 WHERE posting_id = '$postID'");
+            mysqli_query($conn, "INSERT INTO posting_like (user_id, posting_id, date) VALUES ('$user_id', '$postID', '$date')");
+        }
+    }
+    
+    
+    if (isset($_POST['unliked'])) {
+        $postID = $_POST['postID'];
+        $resultLike = mysqli_query($conn, "SELECT * FROM posting WHERE posting_id = '$postID'");
+        $rowLike = mysqli_fetch_array($resultLike);
+        $n = $rowLike['posting_like'];
+    
+        // Check if the user has previously liked the post
+        $likedResult = mysqli_query($conn, "SELECT * FROM posting_like WHERE user_id = '$user_id' AND posting_id = '$postID'");
+        if (mysqli_num_rows($likedResult) > 0) {
+            mysqli_query($conn, "UPDATE posting SET posting_like = $n-1 WHERE posting_id = '$postID'");
+            mysqli_query($conn, "DELETE FROM posting_like WHERE user_id = '$user_id' AND posting_id = '$postID'");
+        }
+    }
+}
 ?>
 
 <!-- LIKE -->
 <div class="d-flex">
     <div id="like<?php echo $posting_id; ?>" class="like-button pr-2">
         <?php 
-        $likedResult = mysqli_query($conn, "SELECT * FROM posting_like WHERE user_id = '$id' AND posting_id = '$posting_id'");
+        $likedResult = mysqli_query($conn, "SELECT * FROM posting_like WHERE user_id = '$user_id' AND posting_id = '$posting_id'");
         if (mysqli_num_rows($likedResult) == 1) { ?>
 
             <!-- user already likes post -->
@@ -22,7 +55,7 @@ include("../../Config/database_con.php");
         <?php } ?>
     </div>
     <span class="likes_count">
-        <p><?php echo $row['posting_like'] ?> Like</p>
+        <p><?php echo $row2['posting_like'] ?> Like</p>
     </span>
 </div>
 
@@ -35,7 +68,7 @@ include("../../Config/database_con.php");
             $post = $(this);
 
             $.ajax({
-                url: 'posting.php',
+                url: 'profileUser.php',
                 type: 'POST',
                 data: {
                     liked: 1,
@@ -56,7 +89,7 @@ include("../../Config/database_con.php");
             $post = $(this);
 
             $.ajax({
-                url: 'posting.php',
+                url: 'profileUser.php',
                 type: 'POST',
                 data: {
                     unliked: 1,
@@ -77,9 +110,5 @@ include("../../Config/database_con.php");
     <i id="viewButton" class="pl-3 fa-solid fa-eye fa-l"></i>
 </div>
 <div class="viewCounter pr-3">
-    <p><?php echo $row['posting_view']; ?> View</p>
+    <p><?php echo $row2['posting_view']; ?> View</p>
 </div>
-<?php
-$sql6 = "UPDATE posting SET posting_view = posting_view + 1 WHERE posting_id = '$posting_id' AND user_id != '$id'";
-mysqli_query($conn, $sql6);
-?>

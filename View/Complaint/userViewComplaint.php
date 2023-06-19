@@ -113,7 +113,7 @@ if (!isset($_SESSION['Current_user_id'])) {
                             <tr>
                                 <th>Bil</th>
                                 <th>Date</th>
-                                <th>Post's Content</th>
+                                <th>Post's Title</th>
                                 <th>Complaint Type</th>
                                 <th>Status</th>
                                 <th>Actions</th>
@@ -122,7 +122,7 @@ if (!isset($_SESSION['Current_user_id'])) {
                         <tbody>
                             <?php
                             $sql = "SELECT * FROM complaint AS A JOIN user_profile AS B ON A.user_id = B.user_id 
-                            JOIN posting AS C ON A.posting_id = C.posting_id WHERE A.user_id = '$id'";
+                            JOIN posting AS C ON A.posting_id = C.posting_id WHERE A.user_id = '$id' ORDER BY A.complaint_status";
                             $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
                             $row = mysqli_num_rows($result);
                             $cnt = 1;
@@ -132,7 +132,7 @@ if (!isset($_SESSION['Current_user_id'])) {
                                     <tr>
                                         <td><?php echo $cnt ?></td>
                                         <td><?php echo $row['complaint_date'] ?></td>
-                                        <td><?php echo $row['posting_content'] ?></td>
+                                        <td><?php echo $row['posting_title'] ?></td>
                                         <td><?php echo $row['complaint_type'] ?></td>
                                         <?php
                                         if ($row['complaint_status'] === "In Investigation") {
@@ -144,9 +144,11 @@ if (!isset($_SESSION['Current_user_id'])) {
                                         }
                                         ?>
                                         <td>
-                                            <a href="#editModal<?php echo $row['complaint_id'] ?><?php echo $row['posting_content'] ?>" data-toggle="modal"><i class="fas fa-edit" style="padding-right:15px;color:blue"></i></a>
-                                            <a href="#viewModal<?php echo $row['user_id'] ?><?php echo $row['complaint_id'] ?><?php echo $row['posting_content'] ?>" data-toggle="modal"><i class="fas fa-eye" style="padding-right:15px;color:green"></i></a>
+                                        <a href="#viewModal<?php echo $row['user_id'] ?><?php echo $row['complaint_id'] ?>" data-toggle="modal"><i class="fas fa-eye" style="padding-right:15px;color:green"></i></a>
+                                            <?php if($row['complaint_status'] === 'In Investigation' || $row['complaint_status'] === 'On Hold') {?>
+                                            <a href="#editModal<?php echo $row['complaint_id'] ?>" data-toggle="modal"><i class="fas fa-edit" style="padding-right:15px;color:blue"></i></a>
                                             <a href="#deleteModal<?php echo $row['complaint_id'] ?>" data-toggle="modal"><i class="fas fa-trash" style="padding-right:15px;color:rgb(255, 5, 5)"></i></a>
+                                            <?php }?>
                                             <?php include('modal.php'); ?>
                                         </td>
                                     </tr>

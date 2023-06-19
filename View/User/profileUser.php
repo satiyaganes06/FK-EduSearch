@@ -9,7 +9,7 @@ if (!isset($_SESSION["Current_user_id"])) {
     </script>
 <?php
 }
-$user_id = $_SESSION["Current_user_id"];
+$user_id = $_GET["user_id"];
 
 include("../../Config/database_con.php");
 
@@ -66,7 +66,7 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
                     <div class="background">
                         <?php
                         if ($row['user_profile_bg'] == "") { ?>
-                            <p class="text-center">Insert backround picture</p>
+                            <p class="text-center">No background picture</p>
                         <?php } else { ?>
                             <img src="data:image/jpeg;base64,<?php echo base64_encode($row['user_profile_bg']); ?>" class="shadows" width="100%" height="100%" alt="Black profile background" loading="lazy" />
                         <?php } ?>
@@ -80,11 +80,10 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
                     <div class="infoUser">
                         <h4 class="userName">
                             <strong><?php echo $row['user_name']; ?></strong>
-                            <a href="updateInfo.php"><i class="fa-solid fa-gear" style="color: #8d9096;"></i></a>
                         </h4>
                         <?php
                         if ($row['user_fullName'] == "") { ?>
-                            <p class="text-center">Update your profile!</p>
+                            <p class="text-center">User not update profile yet</p>
                         <?php } else {
                         ?>
                             <div class="d-flex">
@@ -92,7 +91,7 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
                                     <p class="font-weight-bold">ID</p>
                                     <p>: <?php echo $row['user_id']; ?></p>
                                 </div>
-                                <div class="d-flex ml-auto pr-3" >
+                                <div class="d-flex ml-auto pr-3">
                                     <p class="font-weight-bold">Age</p>
                                     <p>: <?php echo $row['user_age']; ?></p>
                                 </div>
@@ -219,21 +218,6 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
 
                                     <!-- Comment section -->
                                     <hr class="solid">
-                                    <div class="py-4">
-                                        <strong>Comments</strong>
-                                    </div>
-                                    <?php if ($status == 'Revised') {
-                                    ?>
-                                        <form id="comment-form" action="../../Model/User/addComment.php" method="POST">
-                                            <div class="input-group mb-4 mt-3">
-                                                <textarea name="reply" id="reply" class="form-control" id="exampleFormControlTextarea1" placeholder="Reply" required="text"></textarea>
-                                                <input type="hidden" name="posting_id" value="<?php echo $posting_id; ?>">
-                                                <div class="input-group-append">
-                                                    <button class="btn btn-primary" type="submit"><i class="fas fa-paper-plane"></i></button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    <?php } ?>
                                     <?php
                                     if ($result3->num_rows > 0) {
                                         while ($row3 = mysqli_fetch_assoc($result3)) {
