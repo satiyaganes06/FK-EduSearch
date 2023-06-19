@@ -51,7 +51,7 @@ if ($user_route == 'home') {
           <a class="nav-link ml-2" href="../../View/User/question.php"><strong>QUESTION</strong></a>
         </li>
         <li class="nav-item <?php echo $rating ?>">
-          <a class="nav-link ml-2" href="../../View/User/rating.php"><strong>RATING</strong></a>
+          <a class="nav-link ml-2" href="../../../../FK-EduSearch/View/User/rating.php"><strong>RATING</strong></a>
         </li>
       </ul>
     </div>

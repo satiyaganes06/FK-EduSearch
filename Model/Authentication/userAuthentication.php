@@ -114,6 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }else{
 
             header('Location: ../../View/User/dashboard.php');
+         
             exit();
         }
         
@@ -122,7 +123,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         // ...
         echo '<script type="text/javascript">';
         echo 'alert("Login Fail, Please Check Your Role, User ID and Password Again.");';
-        echo 'window.location.href = "userLogin.php";';
+        echo 'window.location.href = "../../View/Module1/Login/GeneralUserLogin/userLogin.php";';
         echo '</script>';
       }
   

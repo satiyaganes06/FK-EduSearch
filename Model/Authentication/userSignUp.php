@@ -17,11 +17,15 @@
 
 
   if(mysqli_query($conn, $sql)){
-    (mysqli_query($conn, $sql2));
-  echo '<script type="text/javascript">';
-  echo 'alert("Sign up successful! Redirecting to login page.");';
-  echo 'window.location.href = "../../View/Module1/Login/GeneralUserLogin/userLogin.php";';
-  echo '</script>';
+    if(mysqli_query($conn, $sql2)){
+      echo '<script type="text/javascript">';
+      echo 'alert("Sign up successful! Redirecting to login page.");';
+      echo 'window.location.href = "../../View/Module1/Login/GeneralUserLogin/userLogin.php";';
+      echo '</script>';
+    }else{
+      echo "Error: " .$sql . "<br>" . mysqli_error($conn);
+    }
+ 
     
   }else{
     echo "Error: " .$sql . "<br>" . mysqli_error($conn);
