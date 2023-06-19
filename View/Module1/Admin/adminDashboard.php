@@ -11,27 +11,100 @@ if (!isset($_SESSION["Current_admin_id"])) {
 <?php
 } else {
   include("../../../Config/database_con.php");
-
+  //For pie chart to past value degrre, diploma, master, phd
   $acaDiploma = "SELECT * FROM user_profile WHERE user_academicStatus = 'Diploma'";
   $result1 = $conn->query($acaDiploma);
-  $diploma = $result7->num_rows;
+  $diploma = $result1->num_rows;
 
   $acaDegree = "SELECT * FROM user_profile WHERE user_academicStatus = 'Degree'";
   $result2 = $conn->query($acaDegree);
-  $degree = $result8->num_rows;
+  $degree = $result2->num_rows;
 
   $acaMaster = "SELECT * FROM user_profile WHERE user_academicStatus = 'Master'";
   $result3 = $conn->query($acaMaster);
-  $master = $result9->num_rows;
+  $master = $result3->num_rows;
 
   $acaPHD = "SELECT * FROM user_profile WHERE user_academicStatus = 'PHD'";
   $result4 = $conn->query($acaPHD);
-  $phd = $result10->num_rows;
+  $phd = $result4->num_rows;
 
-  $totalPosts = "SELECT COUNT(*) AS total, 
-  SUM(posting_view) AS view
-  FROM posting";
-  $result4 = $conn->query($totalPosts);
+  //For line graph value to past value view & like
+  $graph = "SELECT * FROM posting";
+  $result5 = $conn->query($graph);
+  if ($result5->num_rows > 0) {
+    $view = array();
+    $like = array();
+    while ($row = $result5->fetch_assoc()) {
+      $view[] = $row["posting_view"];
+      $like[] = $row["posting_like"];
+    }
+  }
+
+  //Dispaly total post percentage
+  // current month
+  $currentPostQuery = "SELECT SUM(posting_id) AS post FROM posting WHERE MONTH(posting_date) = MONTH(CURRENT_DATE)";
+  $resultCurrentPost = mysqli_query($conn, $currentPostQuery);
+  $rowCurrentPost = mysqli_fetch_assoc($resultCurrentPost);
+  $currentPost = $rowCurrentPost['post'];
+  
+
+  // Retrieve previous month's value
+  $previousPosthQuery = "SELECT SUM(posting_id) AS post FROM posting WHERE MONTH(posting_date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)";
+  $resultPreviousPost = mysqli_query($conn, $previousPosthQuery);
+  $rowPreviousPost = mysqli_fetch_assoc($resultPreviousPost);
+  $previousPost = $rowPreviousPost["post"];
+
+  // Calculate percentage difference
+  if ($previousPost != 0) {
+    $post = (($currentPost - $previousPost) / $previousPost) * 100;
+  } else {
+    $previousPost = 0; // Avoid division by zero
+  }
+  $percentagePost = number_format($post, 2);
+
+
+  //Dispaly total like percentage
+  // current month
+  $currentLikeQuery = "SELECT SUM(posting_like) AS likes FROM posting WHERE MONTH(posting_date) = MONTH(CURRENT_DATE)";
+  $resultCurrentLike = mysqli_query($conn, $currentLikeQuery);
+  $rowCurrentLike = mysqli_fetch_assoc($resultCurrentLike);
+  $currentLike = $rowCurrentLike["likes"];
+
+  // Retrieve previous month's value
+  $previousLikeQuery = "SELECT SUM(posting_like) AS likes FROM posting WHERE MONTH(posting_date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)";
+  $resultPreviousLike = mysqli_query($conn, $previousLikeQuery);
+  $rowPreviousLike = mysqli_fetch_assoc($resultPreviousLike);
+  $previousLike = $rowPreviousLike["likes"];
+
+  // Calculate percentage difference
+  if ($previousLike != 0) {
+    $like = (($currentLike - $previousLike) / $previousLike) * 100;
+  } else {
+    $previousLike = 0; // Avoid division by zero
+  }
+  $percentageLike = number_format($like, 2);
+
+  //Dispaly total comment percentage
+  // current month
+  $currentDQuery = "SELECT SUM(posting_id) AS discuss FROM posting WHERE MONTH(posting_date) = MONTH(CURRENT_DATE)";
+  $resultCurrentD = mysqli_query($conn, $currentDQuery);
+  $rowCurrentD= mysqli_fetch_assoc($resultCurrentD);
+  $currentD = $rowCurrentD["discuss"];
+
+  // Retrieve previous month's value
+  $previousDQuery = "SELECT SUM(discussion_id) AS discuss FROM discussion WHERE MONTH(discussion_date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)";
+  $resultPreviousD = mysqli_query($conn, $previousDQuery);
+  $rowPreviousD = mysqli_fetch_assoc($resultPreviousD);
+  $previousD = $rowPreviousD["discuss"];
+
+  // Calculate percentage difference
+  if ($previousD != 0) {
+    $discuss = (($currentD - $previousD) / $previousD) * 100;
+  } else {
+    $previousD = 0; // Avoid division by zero
+    $discuss = 0;
+  }
+  $percentageD = number_format($discuss, 2);
 }
 ?>
 
@@ -111,21 +184,6 @@ if (!isset($_SESSION["Current_admin_id"])) {
           </a>
           <span class="tooltip">Complain List</span>
         </li>
-        <!-- <li>
-          <a href="#">
-            <i class='bx bx-folder' ></i>
-            <span class="links_name">File Manager</span>
-          </a>
-          <span class="tooltip">Files</span>
-        </li>
-        <li>
-          <a href="#">
-            <i class='bx bx-cart-alt' ></i>
-            <span class="links_name">Order</span>
-          </a>
-          <span class="tooltip">Order</span>
-        </li> -->
-
       </ul>
     </div>
 
@@ -141,7 +199,7 @@ if (!isset($_SESSION["Current_admin_id"])) {
           <span class="tooltip">View Profile</span>
         </li>
         <li style="margin-top: 10px;">
-          <a href="#">
+          <a href="../../../Config/adminlogout.php">
             <i class="fa-solid fa-right-from-bracket"></i>
             <span class="links_name">Logout</span>
           </a>
@@ -156,18 +214,19 @@ if (!isset($_SESSION["Current_admin_id"])) {
   <div class="container-fluid p-0">
     <div class="main-section">
 
+    <!-- Diplay total posts,likes & comment -->
       <?php
-
-      $posts = "SELECT (SELECT COUNT(*) FROM complaint) AS total_posts, (SELECT COUNT(*) FROM discussion) AS total_likes";
+      include("../../../Config/database_con.php");
+      $posts = "SELECT (SELECT COUNT(*) FROM complaint) AS total_posts,  
+                (SELECT COUNT(*) FROM discussion) AS total_dicusssion,
+                SUM(posting_like) AS total_likes FROM posting";
       $total = mysqli_query($conn, $posts);
-
       if ($total) {
         $row = mysqli_fetch_assoc($total);
         $totalPosts = $row['total_posts'];
-        $totalLikes = $row['total_likes'];
-
+        $totalDiscussion = $row['total_dicusssion'];
+        $totalLike = $row['total_likes'];
       ?>
-
         <div class="card">
           <div class="card-body">
             <div class="row">
@@ -182,10 +241,10 @@ if (!isset($_SESSION["Current_admin_id"])) {
                   <h5 class="total-number"><?php echo $totalPosts; ?></h5>
                   <div class="container">
                     <div class="left">
-                      <span>17 %</span>
+                      <span><?php echo $percentagePost; ?>%</span>
                     </div>
                     <div class="right">
-                      <span>than last week</span>
+                      <span>than last month</span>
                     </div>
                   </div>
                   <div class="vl"></div>
@@ -195,13 +254,13 @@ if (!isset($_SESSION["Current_admin_id"])) {
               <div class="column">
                 <div class="activity-title">
                   Total Likes
-                  <h5 class="total-number">78</h5>
+                  <h5 class="total-number"><?php echo $totalLike; ?></h5>
                   <div class="container">
                     <div class="left">
-                      <span>17 %</span>
+                      <span><?php echo $percentageLike; ?>%</span>
                     </div>
                     <div class="right">
-                      <span>than last week</span>
+                      <span>than last month</span>
                     </div>
                   </div>
                   <div class="vl" style="left:75%;"></div>
@@ -211,13 +270,13 @@ if (!isset($_SESSION["Current_admin_id"])) {
               <div class="column">
                 <div class="activity-title">
                   Total Comments
-                  <h5 class="total-number"><?php echo $totalLikes; ?></h5>
+                  <h5 class="total-number"><?php echo $totalDiscussion; ?></h5>
                   <div class="container">
                     <div class="left">
-                      <span>17 %</span>
+                      <span><?php echo $percentageD; ?>%</span>
                     </div>
                     <div class="right">
-                      <span>than last week</span>
+                      <span>than last month</span>
                     </div>
                   </div>
                 </div>
@@ -233,57 +292,43 @@ if (!isset($_SESSION["Current_admin_id"])) {
       ?>
     </div>
 
-
+    <!--Line Chart dan Pie Chart-->
     <div class="clearfix">
       <div class="box" style="width: 65%;">
         <div class="second-section">
-          <!--Tulis coding kat sini-->
           <div class="card">
             <div class="card-body">
+            <div class="card-body title" style="padding:0;font-size:large">
+              <p>User Activity Statistics</p>
+            </div>
               <label for="filter">Select Filter:</label>
-              <select id="filter" onchange="filterChart()">
-                <option value="date">By Date</option>
+              <select id="filter" onchange="timeFrame(this)">
+                <option value="day">By Date</option>
                 <option value="week">By Week</option>
                 <option value="month">By Month</option>
               </select>
               <div class="container">
-                <div class="left" style="padding-right:50px;">
-                  <canvas id="lineChart" style="width:100%;width:600px"></canvas>
-                </div>
-                <div class="right" style="text-align:left;">
-                  <span>
-                  <div class="status">
-                    <p><strong>Info Status</strong></p>
-                    <p>
-                    <div class="circle" style="background-color: red;"></div> Engagement Rate</p>
-                    <p>
-                    <div class="circle" style="background-color: blue;"></div>User Satisfaction</p>
-                </div>
-
-
+                <div class="left" style="padding-left:100px;">
+                  <canvas id="myChart" style="width:100%;width:600px"></canvas>
                 </div>
               </div>
-
-
-
             </div>
           </div>
         </div>
       </div>
       <div class="box" style="width: 23%; margin-left: 2%;">
         <div class="second-section">
-          <!--Tulis coding kat sini-->
           <div class="card">
             <div class="card-body">
+            <div class="card-body title" style="padding:0;font-size:large">
+              <p>User Academic Level</p>
+            </div>
               <canvas id="pieChart" style="width:100%;max-width:600px"></canvas>
             </div>
           </div>
         </div>
       </div>
     </div>
-
-
-
 
     <footer class="text-center text-white fixed-bottom overflow-hidden" style="background-color: #21081a;">
 
@@ -295,65 +340,141 @@ if (!isset($_SESSION["Current_admin_id"])) {
       <!-- Copyright -->
     </footer>
   </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
-  <!-- Graph Line Script -->
+  <!-- script for line chart graph -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js"></script>
   <script>
-    var currentDate = new Date();
+    const today = new Date(); // Get the current date and time
+    const day1 = new Date(today); // Create a new date object with the value of today
+    const day2 = new Date(today);
+    const day3 = new Date(today);
+    const day4 = new Date(today);
+    const day5 = new Date(today);
+    const day6 = new Date(today);
 
-    var day = currentDate.getDate();
-    console.log("Day: " + day);
+    day1.setDate(today.getDate() - 1); // Subtract 1 day from the date
+    day2.setDate(today.getDate() - 2);
+    day3.setDate(today.getDate() - 3);
+    day4.setDate(today.getDate() - 4);
+    day5.setDate(today.getDate() - 5);
+    day6.setDate(today.getDate() - 6);
 
-    var month = currentDate.getMonth() + 1; // Months are zero-based, so add 1
-    console.log("Month: " + month);
+    const dayEngagement = [
+      {x: day6.getTime(),y: 0,view: 0},
+      {x: day5.getTime(),y: 0,view: 0},
+      {x: day4.getTime(),y: 0,view: 0},
+      {x: day3.getTime(),y: 0,view: 0},
+      {x: day2.getTime(), y: 0,view: 0},
+      {x: day1.getTime(),y: 0,view: 0},
+      {x: today.getTime(),y: 0,view: 0},
+    ];
 
-    var year = currentDate.getFullYear();
-    console.log("Year: " + year);
+    const daySatisfaction = [
+      {x: day6.getTime(), y: 0,like: 0},
+      {x: day5.getTime(),y: 0,like: 0},
+      {x: day4.getTime(),y: 0,like: 0},
+      {x: day3.getTime(),y: 0,like: 0},
+      {x: day2.getTime(),y: 0,like: 0},
+      {x: day1.getTime(),y: 0,like: 0},
+      {x: today.getTime(),y: 0,like: 0},
+    ];
 
-    // Assuming you have the number of posts for the current week and the previous week
-    var currentWeekPosts = 75;
-    var previousWeekPosts = 50;
 
-    // Calculate the percentage difference
-    var percentageDifference = ((currentWeekPosts - previousWeekPosts) / previousWeekPosts) * 100;
+    const week = [
+      {x: Date.parse('2023-6-4 00:00:00 GMT+0800'),y: 35},
+      {x: Date.parse('2023-6-11 00:00:00 GMT+0800'),y: 0 },
+      {x: Date.parse('2023-6-18 00:00:00 GMT+0800'), y: 70},
+      {x: Date.parse('2023-6-25 00:00:00 GMT+0800'),y: 60},
+      {x: Date.parse('2023-7-2 00:00:00 GMT+0800'),y: 50},
+    ];
 
-    // Round the percentage to two decimal places
-    percentageDifference = Math.round(percentageDifference * 100) / 100;
 
-    // Display the result
-    console.log("Percentage Difference: " + percentageDifference + "%");
-  </script>
+    const month = [
+      {x: Date.parse('2023-5-01 00:00:00 GMT+0800'), y: 25},
+      {x: Date.parse('2023-6-01 00:00:00 GMT+0800'),y: 10},
+      {x: Date.parse('2023-7-01 00:00:00 GMT+0800'),y: 50},
+      {x: Date.parse('2023-8-01 00:00:00 GMT+0800'),y: 20,},
+      {x: Date.parse('2023-9-01 00:00:00 GMT+0800'), y: 20},
+    ];
 
-  <!-- Graph Line Script -->
-  <script>
-    const xValues = ['Jan', 'Feb', 'Mac', 'April', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+    // setup 
+    const like = <?php echo json_encode($like); ?>;
+    const view = <?php echo json_encode($view); ?>;
 
-    new Chart("lineChart", {
-      type: "line",
-      data: {
-        labels: xValues,
-        datasets: [{
+    function updateDayData() {
+      view.forEach((dataPoint, index) => {
+        myChart.config.data.datasets[0].data[index].y = dataPoint;
+        myChart.config.data.datasets[0].data[index].view = view[index];
+        myChart.config.data.datasets[1].data[index].like = like[index];
+      });
+    }
 
-          data: [86, 114, 60, 160, 170, 111, 133, 221, 83, 78],
-          borderColor: "red",
-          fill: false
-        }, {
-          data: [30, 70, 20, 50, 60, 40, 20, 10, 200, 100],
-          borderColor: "blue",
-          fill: false
-        }]
-      },
+    const data = {
+      datasets: [{
+          label: 'Engagement Rate',
+          data: dayEngagement,
+          backgroundColor: 'blue',
+          borderColor: 'blue',
+          borderWidth: 1
+        },
+        {
+          label: 'User Satisfaction',
+          data: daySatisfaction,
+          backgroundColor: 'green',
+          borderColor: 'green',
+          borderWidth: 1
+        },
+      ]
+    };
+
+    // config 
+    const config = {
+      type: 'line',
+      data,
       options: {
-        legend: {
-          display: false
+        scales: {
+          x: {
+            type: 'time',
+            time: {
+              unit: 'day'
+            }
+          },
+          y: {
+            beginAtZero: true
+          }
         }
       }
-    });
+    };
+
+    // render init block
+    const myChart = new Chart(
+      document.getElementById('myChart'),
+      config
+    );
+
+    function timeFrame(period) {
+      console.log(period.value)
+      if (period.value == 'day') {
+        myChart.config.options.scales.x.time.unit = period.value;
+        updateDayData();
+      }
+      if (period.value == 'week') {
+        myChart.config.options.scales.x.time.unit = period.value;
+        myChart.config.data.datasets[0].data = week;
+      }
+      if (period.value == 'month') {
+        myChart.config.options.scales.x.time.unit = period.value;
+        myChart.config.data.datasets[0].data = month;
+      }
+      myChart.update();
+
+    }
   </script>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
 
   <!-- Pie Chart -->
-
   <script>
     var zValues = ["Diploma", "Degree", "Master", "PHD"];
     var yValues = [<?php echo $diploma; ?>, <?php echo $degree; ?>, <?php echo $master; ?>, <?php echo $phd; ?>];

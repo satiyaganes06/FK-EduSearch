@@ -17,6 +17,8 @@
 
                 <form action="../../../Model/manageComplaint/updateStatusComplaint.php" id="edit-form" method="POST">
                 <input type="hidden" name="complaint_id" value="<?php echo $row['complaint_id']; ?>" />
+                <input type="hidden" name="user_name" value="<?php echo $row['user_name']; ?>" />
+                <input type="hidden" name="user_id" value="<?php echo $row['user_id']; ?>" />
                     <div class="form-group">
                         <label class="form-label" name="type">Complaint Status<span style="color: red;"> *</span></label>
                         <select class="form-select" name="complaintStatus" required="required">

@@ -13,6 +13,26 @@ if (!isset($_SESSION["Current_admin_id"])) {
 
 } else {
     include("../../../Config/database_con.php");
+    // Display percentage total
+    // current month
+    $currentPostQuery = "SELECT SUM(complaint_id) AS discuss FROM complaint WHERE MONTH(complaint_date) = MONTH(CURRENT_DATE)";
+    $resultCurrentPost = mysqli_query($conn, $currentPostQuery);
+    $rowCurrentMonth = mysqli_fetch_assoc($resultCurrentPost);
+    $currentPost = $rowCurrentMonth['discuss'];
+
+    // previous month
+    $previousPostQuery = "SELECT SUM(complaint_id) AS view FROM complaint WHERE MONTH(complaint_date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)";
+    $resultPreviousPost = mysqli_query($conn, $previousPostQuery);
+    $rowPreviousPost = mysqli_fetch_assoc($resultPreviousPost);
+    $previousPost = $rowPreviousPost['view'];
+
+    // Calculate percentage difference
+    if ($previousPost != 0) {
+        $percentageD = (($currentPost - $previousPost) / $previousPost) * 100;
+    } else {
+        $percentageD = 0; 
+    }
+    $percentage = number_format($percentageD, 2);
 }
 ?>
 <!DOCTYPE html>
@@ -56,11 +76,6 @@ if (!isset($_SESSION["Current_admin_id"])) {
         <div class="menu-section">
             <h2 class="section-heading">Menu</h2>
             <ul class="nav-list">
-                <!-- <li>
-          <i class='bx bx-search' ></i>
-          <input type="text" placeholder="Search...">
-          <span class="tooltip">Search</span>
-        </li> -->
                 <li>
                     <a href="adminDashboard.php">
                         <i class='bx bx-grid-alt'></i>
@@ -119,8 +134,9 @@ if (!isset($_SESSION["Current_admin_id"])) {
 
     <div class="container-fluid p-0" style="  margin-bottom: 50px;">
         <div class="main-section">
-            <?php
 
+            <!-- Diplay total investigation,resolved & on hold -->
+            <?php
             $comp_status1 = "In Investigation";
             $comp_status2 = "On Hold";
             $comp_status3 = "Resolved";
@@ -132,14 +148,12 @@ if (!isset($_SESSION["Current_admin_id"])) {
                             FROM complaint";
 
             $total = mysqli_query($conn, $complaints);
-
             if ($total) {
                 $row = mysqli_fetch_assoc($total);
                 $totalComplaints = $row['total_complaints'];
                 $totalInvestigation = $row['total_investigation'];
                 $totalOnHold = $row['total_onHold'];
                 $totalResolved = $row['resolved'];
-
             ?>
                 <div class="card">
                     <div class="card-body">
@@ -151,10 +165,10 @@ if (!isset($_SESSION["Current_admin_id"])) {
                                     <h5 class="total-number"><?php echo $totalComplaints; ?></h5>
                                     <div class="container">
                                         <div class="left">
-                                            <span>17 %</span>
+                                            <span><?php echo $percentage; ?>%</span>
                                         </div>
-                                        <div class="right">
-                                            <span>than last week</span>
+                                        <div class="right" style="width:100%;">
+                                            <span>than last month</span>
                                         </div>
                                     </div>
                                     <div class="vl" style="left:40%;"></div>
@@ -228,6 +242,7 @@ if (!isset($_SESSION["Current_admin_id"])) {
                                 </tr>
                             </thead>
                             <tbody>
+                                <!-- Display content table -->
                                 <?php
                                 include("../../../Config/database_con.php");
                                 $bilNum = 0;
@@ -320,6 +335,7 @@ if (!isset($_SESSION["Current_admin_id"])) {
                 }
             }
 
+            //search function
             function myFunction() {
                 var input, filter, table, tr, td, i, txtValue;
                 input = document.getElementById("form1");
