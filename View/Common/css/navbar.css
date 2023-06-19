@@ -12,7 +12,12 @@ nav a{
     background-color: rgb(180, 189, 237);
     border: transparent;
 }
-  
+
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+  }
 
 .profile_section{
     margin-right: 3vw;

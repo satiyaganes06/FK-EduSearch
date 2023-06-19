@@ -17,7 +17,7 @@ $sql = "SELECT * FROM user_profile WHERE user_id ='$user_id'";
 $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
 $row = mysqli_fetch_assoc($result);
 
-$sql2 = "SELECT * FROM posting WHERE user_id ='$user_id' ORDER BY posting_date DESC";
+$sql2 = "SELECT * FROM posting WHERE user_id ='$user_id' AND posting_status != 'Expiry' ORDER BY posting_date DESC";
 $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
 ?>
 <!DOCTYPE html>
