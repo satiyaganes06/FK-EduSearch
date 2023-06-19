@@ -173,8 +173,8 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                             <?php } ?>
                                         </div>
                                         <div class="d-flex flex-column pl-2">
-                                            <strong><?php echo $row['user_name']; ?></strong>
-                                            <i class="pt-2"  style="font-weight: normal;"><?php echo $row['posting_title']; ?></i>
+                                            <p class="font-weight-bold" ><?php echo $row['user_name']; ?></p>
+                                            <i class="pt-2"><?php echo $row['posting_title']; ?></i>
                                             <p><?php echo $row['posting_content']; ?></p>
                                         </div>
                                         <!-- Determine the color of status -->
@@ -232,7 +232,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     <!-- Comment section -->
                                     <hr class="solid">
                                     <div class="py-4">
-                                        <strong>Comments</strong>
+                                        <p class="font-weight-bold" >Comments</p>
                                     </div>
                                     <?php if ($user_id == $id) {
                                         if ($status == 'Revised') {
@@ -266,7 +266,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                                     </div>
                                                     <div class="d-flex flex-column pl-2">
                                                         <div class="d-flex">
-                                                            <strong><?php echo $row2['user_name']; ?></strong>
+                                                            <p class="font-weight-bold" ><?php echo $row2['user_name']; ?></p>
                                                             <p style="font-size:small" class="pl-2 pt-1"> (<?php echo $row2['discussion_date'] . " " . $row2['discussion_time']; ?>)</p>
                                                         </div>
 
@@ -295,7 +295,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             <div class="col-2">
                 <!-- Info Status -->
                 <div class="infoBoard">
-                    <p><strong>Info Status</strong></p>
+                    <p class="font-weight-bold" >Info Status</p>
                     <p>
                     <div class="rounded-circle mr-2 float-left" style="width:20px;height:20px;background-color: #84D17E;"></div> Completed</p>
                     <p>

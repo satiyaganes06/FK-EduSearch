@@ -88,14 +88,38 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
                         <?php } else {
                         ?>
                             <div class="d-flex">
-                                <p>ID: <?php echo $row['user_id']; ?></p>
-                                <p class="ml-auto pr-3">Age: <?php echo $row['user_age']; ?></p>
+                                <div class="d-flex">
+                                    <p class="font-weight-bold">ID</p>
+                                    <p>: <?php echo $row['user_id']; ?></p>
+                                </div>
+                                <div class="d-flex ml-auto pr-3" >
+                                    <p class="font-weight-bold">Age</p>
+                                    <p>: <?php echo $row['user_age']; ?></p>
+                                </div>
                             </div>
-                            <p>Name: <?php echo $row['user_fullName']; ?></p>
-                            <p>Email: <?php echo $row['user_email']; ?></p>
-                            <p>Academic Level: <?php echo $row['user_academicStatus']; ?></p>
-                            <p>Social Media: <?php echo $row['user_socialMedia']; ?></p>
-                            <p>Research Area: <br>
+                            <hr class="solid pb-2">
+                            <div class="d-flex">
+                                <p class="font-weight-bold">Name</p>
+                                <p>: <?php echo $row['user_fullName']; ?></p>
+                            </div>
+                            <hr class="solid pb-2">
+                            <div class="d-flex">
+                                <p class="font-weight-bold">Email</p>
+                                <p>: <?php echo $row['user_email']; ?></p>
+                            </div>
+                            <hr class="solid pb-2">
+                            <div class="d-flex">
+                                <p class="font-weight-bold">Social Media</p>
+                                <p>: <?php echo $row['user_socialMedia']; ?></p>
+                            </div>
+                            <hr class="solid pb-2">
+                            <div class="d-flex">
+                                <p class="font-weight-bold">Academic Level</p>
+                                <p>: <?php echo "  " . $row['user_academicStatus']; ?></p>
+                            </div>
+                            <hr class="solid pb-2">
+                            <p class="font-weight-bold">Research area:</p>
+                            <p>
                                 <?php
                                 $user_researchArea = $row['user_researchArea'];
                                 // Explode the comma-separated string into an array
@@ -105,7 +129,9 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
                                 foreach ($researchAreas as $area) {
                                     echo $area . "<br>";
                                 }
-                                ?></p>
+                                ?>
+                            </p>
+                            <hr class="solid pb-2">
                         <?php } ?>
                     </div>
                 </div>
@@ -133,7 +159,7 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
                                         </div>
                                         <div class="d-flex flex-column pl-2">
                                             <strong><?php echo $row['user_name']; ?></strong>
-                                            <i class="pt-2"  style="font-weight: normal;"><?php echo $row2['posting_title']; ?></i>
+                                            <i class="pt-2" style="font-weight: normal;"><?php echo $row2['posting_title']; ?></i>
                                             <p><?php echo $row2['posting_content']; ?></p>
                                         </div>
                                         <!-- Determine the color of status -->

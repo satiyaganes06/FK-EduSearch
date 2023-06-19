@@ -97,9 +97,7 @@ include("../../Config/database_con.php");
                             </tr>
                             <?php
                                 $count++;
-                                }} else {
-                                    echo "No publication post yet";
-                                }
+                                }}
                             ?>
                         </tbody>
                     </table>

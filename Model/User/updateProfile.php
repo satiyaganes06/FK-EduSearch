@@ -91,7 +91,7 @@ if (!isset($_SESSION["Current_user_id"])) {
 
         $sql .= " WHERE user_id = '$user_id'";
     } else {
-        $sql = "INSERT INTO temp_user_profile (
+        $sql = "INSERT INTO temp_user_profile  (
             user_id,
             user_name,
             user_fullName,
