@@ -1,38 +1,5 @@
 <?php
 include("../../Config/database_con.php");
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $date = date("Y-m-d");
-    
-    if (isset($_POST['liked'])) {
-        $postID = $_POST['postID'];
-        $resultLike = mysqli_query($conn, "SELECT * FROM posting WHERE posting_id = '$postID'");
-        $rowLike = mysqli_fetch_array($resultLike);
-        $n = $rowLike['posting_like'];
-    
-        // Check if the user has already liked the post
-        $likedResult = mysqli_query($conn, "SELECT * FROM posting_like WHERE user_id = '$id' AND posting_id = '$postID'");
-        if (mysqli_num_rows($likedResult) == 0) {
-            mysqli_query($conn, "UPDATE posting SET posting_like = $n+1 WHERE posting_id = '$postID'");
-            mysqli_query($conn, "INSERT INTO posting_like (user_id, posting_id, date) VALUES ('$user_id', '$postID', '$date')");
-        }
-    }
-    
-    
-    if (isset($_POST['unliked'])) {
-        $postID = $_POST['postID'];
-        $resultLike = mysqli_query($conn, "SELECT * FROM posting WHERE posting_id = '$postID'");
-        $rowLike = mysqli_fetch_array($resultLike);
-        $n = $rowLike['posting_like'];
-    
-        // Check if the user has previously liked the post
-        $likedResult = mysqli_query($conn, "SELECT * FROM posting_like WHERE user_id = '$id' AND posting_id = '$postID'");
-        if (mysqli_num_rows($likedResult) > 0) {
-            mysqli_query($conn, "UPDATE posting SET posting_like = $n-1 WHERE posting_id = '$postID'");
-            mysqli_query($conn, "DELETE FROM posting_like WHERE user_id = '$id' AND posting_id = '$postID'");
-        }
-    }
-}
 ?>
 
 <!-- LIKE -->
