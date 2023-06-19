@@ -35,6 +35,7 @@ if (!isset($_SESSION["Current_user_id"])) {
     $posting_status = 'Assign';
     $posting_rating = 0;
     $posting_date = date("Y-m-d H:i:s");
+    $posting_title= $_POST['title'];
 
     $sql = "INSERT INTO posting (
         user_id,
@@ -45,7 +46,8 @@ if (!isset($_SESSION["Current_user_id"])) {
         posting_view,
         posting_status,
         posting_rating,
-        posting_date
+        posting_date,
+        posting_title
     ) VALUE (
         '$user_id',
         '$posting_content',
@@ -55,7 +57,8 @@ if (!isset($_SESSION["Current_user_id"])) {
         '$posting_view',
         '$posting_status',
         '$posting_rating',
-        '$posting_date'
+        '$posting_date',
+        '$posting_title'
     )";
 
     if (!mysqli_query($conn, $sql)) {

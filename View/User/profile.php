@@ -133,6 +133,7 @@ $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
                                         </div>
                                         <div class="d-flex flex-column pl-2">
                                             <strong><?php echo $row['user_name']; ?></strong>
+                                            <i class="pt-2"  style="font-weight: normal;"><?php echo $row2['posting_title']; ?></i>
                                             <p><?php echo $row2['posting_content']; ?></p>
                                         </div>
                                         <!-- Determine the color of status -->

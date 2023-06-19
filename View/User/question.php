@@ -75,6 +75,12 @@
             </div>
           </div>
 
+          <!-- Title input -->
+          <div class="mb-3">
+            <label class="form-label" for="title">Title<span style="color: red;"> *</span></label>
+            <input class="form-control" type="text" id="title" name="title" required></textarea>
+          </div>
+
           <!-- Message input -->
           <div class="mb-3">
             <label class="form-label" for="question">Question<span style="color: red;"> *</span></label>

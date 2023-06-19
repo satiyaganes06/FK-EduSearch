@@ -160,6 +160,7 @@ $row_modal = mysqli_fetch_assoc($result_modal);
                                         </div>
                                         <div class="d-flex flex-column pl-2">
                                             <strong><?php echo $row['user_name']; ?></strong>
+                                            <i class="pt-2"  style="font-weight: normal;"><?php echo $row['posting_title']; ?></i>
                                             <p><?php echo $row['posting_content']; ?></p>
                                         </div>
                                         <!-- Determine the color of status -->

@@ -128,6 +128,10 @@
                                     <input type="text" name="posting_categories" class="form-control" readonly value="<?php echo $row['posting_categories'] ?>" disabled/>
                                 </div>
                                 <div class="form-group">
+                                    <label class="form-label" for="complaintType">Title</label>
+                                    <input type="text" name="posting_title" class="form-control" readonly value="<?php echo $row['posting_title'] ?>" disabled/>
+                                </div>
+                                <div class="form-group">
                                     <label class="form-label" for="desc">Question</label>
                                     <textarea class="form-control" name="posting_content" rows="4"><?php echo $row['posting_content']; ?></textarea>
                                 </div>
