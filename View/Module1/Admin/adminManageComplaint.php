@@ -236,7 +236,8 @@ if (!isset($_SESSION["Current_admin_id"])) {
                                 <tr>
                                     <th>Bil</th>
                                     <th>User ID</th>
-                                    <th>Complaint Type</th>
+                                    <th>Title Post</th>
+                                    <th>Complain Type</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
@@ -249,7 +250,8 @@ if (!isset($_SESSION["Current_admin_id"])) {
 
 
                                 $sql = "SELECT * FROM complaint
-                                        INNER JOIN user_profile ON complaint.user_id=user_profile.user_id";
+                                        INNER JOIN user_profile ON complaint.user_id=user_profile.user_id
+                                        INNER JOIN posting ON complaint.user_id=posting.user_id";
                                 $result = mysqli_query($conn, $sql);
 
 
@@ -261,6 +263,7 @@ if (!isset($_SESSION["Current_admin_id"])) {
                                         <tr>
                                             <td><?php echo ++$bilNum; ?></td>
                                             <td><?php echo $row['user_id']; ?></td>
+                                            <td><?php echo $row['posting_title']; ?></td>
                                             <td><?php echo $row['complaint_type']; ?></td>
 
                                             <?php
