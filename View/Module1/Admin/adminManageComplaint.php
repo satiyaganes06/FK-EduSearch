@@ -13,6 +13,26 @@ if (!isset($_SESSION["Current_admin_id"])) {
 
 } else {
     include("../../../Config/database_con.php");
+    // Display percentage total
+    // current month
+    $currentPostQuery = "SELECT SUM(complaint_id) AS discuss FROM complaint WHERE MONTH(complaint_date) = MONTH(CURRENT_DATE)";
+    $resultCurrentPost = mysqli_query($conn, $currentPostQuery);
+    $rowCurrentMonth = mysqli_fetch_assoc($resultCurrentPost);
+    $currentPost = $rowCurrentMonth['discuss'];
+
+    // previous month
+    $previousPostQuery = "SELECT SUM(complaint_id) AS view FROM complaint WHERE MONTH(complaint_date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH)";
+    $resultPreviousPost = mysqli_query($conn, $previousPostQuery);
+    $rowPreviousPost = mysqli_fetch_assoc($resultPreviousPost);
+    $previousPost = $rowPreviousPost['view'];
+
+    // Calculate percentage difference
+    if ($previousPost != 0) {
+        $percentageD = (($currentPost - $previousPost) / $previousPost) * 100;
+    } else {
+        $percentageD = 0; 
+    }
+    $percentage = number_format($percentageD, 2);
 }
 ?>
 <!DOCTYPE html>
@@ -56,11 +76,6 @@ if (!isset($_SESSION["Current_admin_id"])) {
         <div class="menu-section">
             <h2 class="section-heading">Menu</h2>
             <ul class="nav-list">
-                <!-- <li>
-          <i class='bx bx-search' ></i>
-          <input type="text" placeholder="Search...">
-          <span class="tooltip">Search</span>
-        </li> -->
                 <li>
                     <a href="adminDashboard.php">
                         <i class='bx bx-grid-alt'></i>
@@ -117,59 +132,85 @@ if (!isset($_SESSION["Current_admin_id"])) {
         </div>
     </div>
 
-    <div class="container-fluid p-0">
+    <div class="container-fluid p-0" style="  margin-bottom: 50px;">
         <div class="main-section">
-            <!--Tulis coding kat sini-->
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">
-                        <div class="column">
-                            <div class="vl" style="left:5%;"></div>
-                            <div class="activity-title" style="margin-left:25%;">
-                                Total Complaint
-                                <h5 class="total-number">85</h5>
-                                <div class="container">
-                                    <div class="left">
-                                        <span>17 %</span>
+
+            <!-- Diplay total investigation,resolved & on hold -->
+            <?php
+            $comp_status1 = "In Investigation";
+            $comp_status2 = "On Hold";
+            $comp_status3 = "Resolved";
+
+            $complaints = "SELECT COUNT(*) AS total_complaints, 
+                            SUM(complaint_status = '$comp_status1') AS total_investigation,
+                            SUM(complaint_status = '$comp_status2') AS total_onHold,
+                            SUM(complaint_status = '$comp_status3') AS resolved
+                            FROM complaint";
+
+            $total = mysqli_query($conn, $complaints);
+            if ($total) {
+                $row = mysqli_fetch_assoc($total);
+                $totalComplaints = $row['total_complaints'];
+                $totalInvestigation = $row['total_investigation'];
+                $totalOnHold = $row['total_onHold'];
+                $totalResolved = $row['resolved'];
+            ?>
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="column">
+                                <div class="vl" style="left:5%;"></div>
+                                <div class="activity-title" style="margin-left:25%;">
+                                    Total Complaint
+                                    <h5 class="total-number"><?php echo $totalComplaints; ?></h5>
+                                    <div class="container">
+                                        <div class="left">
+                                            <span><?php echo $percentage; ?>%</span>
+                                        </div>
+                                        <div class="right" style="width:100%;">
+                                            <span>than last month</span>
+                                        </div>
                                     </div>
-                                    <div class="right">
-                                        <span>than last week</span>
-                                    </div>
+                                    <div class="vl" style="left:40%;"></div>
                                 </div>
-                                <div class="vl" style="left:40%;"></div>
                             </div>
-                        </div>
-                        <div class="column" style=" width: 70%;">
-                            <div class="complaint">
-                                <div class="container">
-                                    <div class="left">
-                                        <span>Total Investigation</span>
+                            <div class="column" style=" width: 70%;">
+                                <div class="complaint">
+                                    <div class="container">
+                                        <div class="left">
+                                            <span>Total Investigation</span>
+                                        </div>
+                                        <div class="right">
+                                            <span><?php echo $totalInvestigation ?></span>
+                                        </div>
                                     </div>
-                                    <div class="right">
-                                        <span>100</span>
+                                    <div class="container">
+                                        <div class="left">
+                                            <span>Total On Hold</span>
+                                        </div>
+                                        <div class="right">
+                                            <span><?php echo $totalOnHold ?></span>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="container">
-                                    <div class="left">
-                                        <span>Total On Hold</span>
-                                    </div>
-                                    <div class="right">
-                                        <span>100</span>
-                                    </div>
-                                </div>
-                                <div class="container">
-                                    <div class="left">
-                                        <span>Total Resolved</span>
-                                    </div>
-                                    <div class="right">
-                                        <span>100</span>
+                                    <div class="container">
+                                        <div class="left">
+                                            <span>Total Resolved</span>
+                                        </div>
+                                        <div class="right">
+                                            <span><?php echo $totalResolved ?></span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            <?php } else {
+                echo "Error retrieving total number of complaints: " . mysqli_error($conn);
+            }
+
+            mysqli_close($conn);
+            ?>
         </div>
     </div>
 
@@ -181,7 +222,7 @@ if (!isset($_SESSION["Current_admin_id"])) {
                     <h5 class="card-title fw-bold text-left">Complaint List</h5>
                     <div class="input-group d-flex w-25">
                         <div class="form-outline d-flex">
-                            <input type="search" id="form1" class="form-control rounded" style="border-radius: 25px;" />
+                            <input type="search" id="form1" class="form-control rounded" style="border-radius: 25px;" onkeyup="myFunction()" />
                             <label class="form-label" for="form1">Search</label>
                             <button type="button" class="btn" style="background-color:rgba(44, 88, 100, 1); color: white;">
                                 <i class="fas fa-search"></i>
@@ -194,26 +235,56 @@ if (!isset($_SESSION["Current_admin_id"])) {
                             <thead>
                                 <tr>
                                     <th>Bil</th>
-                                    <th>Date</th>
+                                    <th>User ID</th>
                                     <th>Complaint Type</th>
                                     <th>Status</th>
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>12/2/2022</td>
-                                    <td>Unsatisfied Expert's Feedback</td>
-                                    <td>
-                                        <span class="badge badge-danger rounded-pill d-inline">In Investigation</span>
-                                    </td>
-                                    <td>
-                                        <a href="#editModal" data-toggle="modal"><i class="fas fa-edit" style="padding-right:15px;color:blue"></i></a>
-                                        <a href="#viewModal" data-toggle="modal"><i class="fas fa-eye" style="padding-right:15px;color:green"></i></a>
-                                        <a href="#deleteModal" data-toggle="modal"><i class="fas fa-trash" style="padding-right:15px;color:rgb(255, 5, 5)"></i></a>
-                                    </td>
-                                </tr>
+                                <!-- Display content table -->
+                                <?php
+                                include("../../../Config/database_con.php");
+                                $bilNum = 0;
+
+
+                                $sql = "SELECT * FROM complaint
+                                        INNER JOIN user_profile ON complaint.user_id=user_profile.user_id";
+                                $result = mysqli_query($conn, $sql);
+
+
+                                if ($result->num_rows > 0) {
+                                    while ($row = mysqli_fetch_assoc($result)) {
+
+
+                                ?>
+                                        <tr>
+                                            <td><?php echo ++$bilNum; ?></td>
+                                            <td><?php echo $row['user_id']; ?></td>
+                                            <td><?php echo $row['complaint_type']; ?></td>
+
+                                            <?php
+
+                                            if ($row['complaint_status'] === "In Investigation") {
+                                                echo '<td><span class="badge badge-danger rounded-pill d-inline">In Investigation</span></td>';
+                                            } elseif ($row['complaint_status'] === "On Hold") {
+                                                echo '<td><span class="badge badge-warning rounded-pill d-inline">On Hold</span></td>';
+                                            } else {
+                                                echo '<td><span class="badge badge-success rounded-pill d-inline">Resolved</span></td>';
+                                            }
+                                            ?></span>
+                                            <td>
+                                                <a href="#editModal<?php echo $row['complaint_id'] ?>" data-toggle="modal"><i class="fas fa-edit" style="padding-right:15px;color:blue"></i></a>
+                                                <a href="#viewModal<?php echo $row['user_id'] ?><?php echo $row['complaint_id'] ?>" data-toggle="modal"><i class="fas fa-eye" style="padding-right:15px;color:green"></i></a>
+                                                <a href="#deleteModal<?php echo $row['complaint_id'] ?>" data-toggle="modal"><i class="fas fa-trash" style="padding-right:15px;color:rgb(255, 5, 5)"></i></a>
+                                                <?php include('modal.php'); ?>
+                                            </td>
+                                        </tr>
+                                <?php  }
+                                } else {
+                                    echo 'No complaint was made.';
+                                } ?>
+
                             </tbody>
                         </table>
                     </div>
@@ -223,16 +294,12 @@ if (!isset($_SESSION["Current_admin_id"])) {
         </div>
         </section>
         <footer class="text-center text-white fixed-bottom overflow-hidden" style="background-color: #21081a; margin-top: 20px;">
-
-
             <!-- Copyright -->
             <div class="text-center text-white p-3" style="background-color: rgba(44, 88, 100, 1)">
                 © 2019 2023. FK-EDU SEARCH
             </div>
             <!-- Copyright -->
         </footer>
-
-
 
         <!-- MDB -->
         <script type="text/javascript" src="../../../Bootstrap/mdb.min.js"></script>
@@ -267,32 +334,26 @@ if (!isset($_SESSION["Current_admin_id"])) {
                     imagelogo.style.display = "none";
                 }
             }
-        </script>
-        <script>
-            var xValues = ["User", "Expert", "Staff"];
-            var yValues = [55, 49, 44];
-            var barColors = [
-                "#b91d47",
-                "#00aba9",
-                "#2b5797"
-            ];
 
-            new Chart("myChart", {
-                type: "doughnut",
-                data: {
-                    labels: xValues,
-                    datasets: [{
-                        backgroundColor: barColors,
-                        data: yValues
-                    }]
-                },
-                options: {
-                    title: {
-                        display: true,
-                        text: "List of Users"
+            //search function
+            function myFunction() {
+                var input, filter, table, tr, td, i, txtValue;
+                input = document.getElementById("form1");
+                filter = input.value.toUpperCase();
+                table = document.getElementsByTagName("table")[0];
+                tr = table.getElementsByTagName("tr");
+                for (i = 0; i < tr.length; i++) {
+                    td = tr[i].getElementsByTagName("td")[1]; // Change index to match the column you want to search
+                    if (td) {
+                        txtValue = td.textContent || td.innerText;
+                        if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                            tr[i].style.display = "";
+                        } else {
+                            tr[i].style.display = "none";
+                        }
                     }
                 }
-            });
+            }
         </script>
 </body>
 

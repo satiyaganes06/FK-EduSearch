@@ -3,12 +3,11 @@ session_start();
 
 include("../../Config/database_con.php");
 
-if (isset($_POST['filter'])) {
-    $id = $_POST['posting_id'];
+if (isset($_POST['delete'])) {
 
-    $sql = "DELETE posting, discussion FROM posting
-            INNER JOIN discussion ON posting.posting_id = discussion.posting_id
-            WHERE posting.posting_id = '$id'";
+    $id = $_POST['complaint_id'];
+
+    $sql = "DELETE FROM complaint WHERE complaint_id = '$id'";
 
     if (!$result = mysqli_query($conn, $sql)) {
         echo 'Not deleted';
@@ -18,7 +17,7 @@ if (isset($_POST['filter'])) {
 ?>
         <script>
             alert("The Data was Deleted Successfully");
-            window.history.back();
+            window.location = '../../View/Module1/Admin/adminManageComplaint.php';
         </script>
 <?php
     }

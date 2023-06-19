@@ -1,82 +1,62 @@
 <?php
 session_start();
 //If the user is not logged in send him/her to the login form
-  if(!isset( $_SESSION["Current_user_id"] )) {
+if (!isset($_SESSION["Current_user_id"])) {
 
-  ?>
-      <script>
-          alert("Access denied !!!")
-          window.location = "../Module 1/Login/General User Login/userLogin.php";
-      </script>
-  <?php
-}else{
+?>
+  <script>
+    alert("Access denied !!!")
+    window.location = "../Module 1/Login/General User Login/userLogin.php";
+  </script>
+<?php
+} else {
   $_SESSION["user_route"] = "rating";
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FK-Edu Search</title>
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+Knujsl5/6en8XCp+HHAAK5GSLf2xlYtvJ8U2Q4U+9cuEnJoa3" crossorigin="anonymous">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FK-Edu Search</title>
 
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-    <!--Bootstrap Script-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <!--Bootstrap Script-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-    <!-- MDB -->
-    <link rel="stylesheet" href="../../Bootstrap/mdb.min.css" />
+  <!-- MDB -->
+  <link rel="stylesheet" href="../../Bootstrap/mdb.min.css" />
 
-    <!--CSS-->
-    <link rel="stylesheet" href="css/dashboardStyle.css">
-    <link rel="stylesheet" href="../Common//css/navbar.css">
-    <link rel="stylesheet" href="../Common//css/footer.css">
-    
-    <!-- Icon -->
-    <link rel="shortcut icon" type="image/jpg" href="../../Asset/icon_logo.png" />   
- 
-  
-    <style>
-    .rating {
-      display: inline-flex;
-      flex-direction: row-reverse;
-      justify-content: center;
-    }
-    
-    .rating input[type="radio"] {
-      display: none;
-    }
-    
-    .rating label {
-      font-size: 2rem;
-      color: lightgray;
-      cursor: pointer;
-    }
+  <!--CSS-->
+  <link rel="stylesheet" href="css/dashboardStyle.css">
+  <link rel="stylesheet" href="../Common//css/navbar.css">
+  <link rel="stylesheet" href="../Common//css/footer.css">
 
-    .rating input[type="radio"]:checked ~ label {
-      color: gold;
-    }
-  </style>
-    
+  <!-- Icon -->
+  <link rel="shortcut icon" type="image/jpg" href="../../Asset/icon_logo.png" />
+
 </head>
+
 <body>
-    <!-- Navbar -->
-    <?php
-        include_once('../Common/html/userNavBar.php');
-    ?>
-    <section>
+
+  <!-- Navbar -->
+  <?php
+  include_once('../Common/html/userNavBar.php');
+  ?>
+
+
+  <section>
     <div class="container text-center pt-4 pb-3 bg-white">
       <div class="col">
         <h1>Star Rating</h1>
-        <form action="save_rating.php" method="post">
+        <form action="../../Model/User/save_rating.php" method="post">
           <div class="rating col">
             <input type="radio" name="rating" value="5" id="5">
             <label for="5"><i class="fa-solid fa-star"></i></label>
@@ -94,8 +74,13 @@ session_start();
       </div>
     </div>
   </section>
-    
-      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- MDB -->
+  <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
+  <!--Bootstrap 4 & 5 & jQuery Script-->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

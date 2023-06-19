@@ -69,6 +69,7 @@ if (!isset($_SESSION["Current_user_id"])) {
     $row = mysqli_fetch_assoc($result);
 
     if (mysqli_num_rows($result) > 0) {
+        
         $sql = "UPDATE temp_user_profile SET
             user_name = '$user_name',
             user_fullName = '$user_fullName',
@@ -124,7 +125,7 @@ if (!isset($_SESSION["Current_user_id"])) {
         ?>
         <script>
             alert("The Data was updated successfully");
-            window.location = '../../../View/User/profile.php';
+            window.location = '../../View/User/profile.php';
         </script>
         <?php
     }

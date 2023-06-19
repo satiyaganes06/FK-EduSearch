@@ -1,6 +1,5 @@
 <?php
 session_start();
-$researchArea = $_GET["researchArea"];
 
 if (!isset($_SESSION["Current_user_id"])) {
 ?>
@@ -12,12 +11,41 @@ if (!isset($_SESSION["Current_user_id"])) {
 }
 
 include("../../Config/database_con.php");
+$id = $_SESSION["Current_user_id"];
 
-$sql = "SELECT * FROM user_profile 
-        INNER JOIN posting ON user_profile.user_id = posting.user_id
-        WHERE posting_course='$researchArea'";
-$result = mysqli_query($conn, $sql) or die("Could not execute query in view");
+
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $postID = $_POST['postID'];
+    $resultLike = mysqli_query($conn, "SELECT * FROM posting WHERE posting_id = '$postID'");
+    $rowLike = mysqli_fetch_array($resultLike);
+    $n = $rowLike['posting_like'];
+
+    if (isset($_POST['like'])) {
+        mysqli_query($conn, "UPDATE posting SET posting_like = $n+1 WHERE posting_id = '$postID'");
+        mysqli_query($conn, "INSERT INTO posting_like (user_id, posting_id) VALUES ('$id', '$postID')");
+    }
+
+    if (isset($_POST['unlike'])) {
+        mysqli_query($conn, "UPDATE posting SET posting_like = $n-1 WHERE posting_id = '$postID'");
+        mysqli_query($conn, "DELETE FROM posting_like WHERE user_id = '$id' AND posting_id = '$postID'");
+    }
+
+    if (empty($_GET["researchArea"])) {
+        $researchArea = $rowLike['posting_course'];
+    } 
+}else {
+    $researchArea = $_GET["researchArea"];
+}
+
+
 //$row = mysqli_fetch_assoc($result);
+
+$sql_modal = "SELECT user_profile.*, posting.* FROM user_profile 
+        RIGHT JOIN posting ON user_profile.user_id = posting.user_id
+        WHERE posting_course='$researchArea'";
+$result_modal = mysqli_query($conn, $sql_modal) or die("Could not execute query in view");
+$row_modal = mysqli_fetch_assoc($result_modal);
+
 
 ?>
 <!DOCTYPE html>
@@ -41,6 +69,7 @@ $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
     <link rel="stylesheet" href="../../Bootstrap/mdb.min.css" />
 
     <!--CSS-->
+    <link rel="stylesheet" href="css/dashboard.css">
     <link rel="stylesheet" href="css/posting.css">
     <link rel="stylesheet" href="../Common//css/navbar.css">
     <link rel="stylesheet" href="../Common//css/footer.css">
@@ -65,13 +94,47 @@ $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
                 <?php
                 echo $researchArea;
                 ?>
-            </p> <!--
+            </p>
+            <form class="pt-2 pr-2 input-group w-auto" action="" method="POST">
+                <input type="search" name="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+            </form>
+
+            <?php
+            if (isset($_POST['search'])) {
+                $searchq = $_POST['search'];
+                $searchq = preg_replace("#[^0-9a-z]#i", "", $searchq);
+
+                $sql = "SELECT user_profile.*, posting.* FROM user_profile 
+                RIGHT JOIN posting ON user_profile.user_id = posting.user_id
+                WHERE posting_course='$researchArea' AND posting_content LIKE '%$searchq%'";
+
+                $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
+                $count = mysqli_num_rows($result);
+
+                if ($count == 0) {
+            ?>
+                    <script>
+                        alert("There was no search result!");
+                        window.history.back();
+                    </script>
+            <?php
+                }
+            } else {
+                $sql = "SELECT user_profile.*, posting.* FROM user_profile 
+                        RIGHT JOIN posting ON user_profile.user_id = posting.user_id
+                        WHERE posting_course='$researchArea'";
+                $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
+            }
+
+            ?>
+
+            <!--
             <select onchange="myFunction()" class="form-select" aria-label="questionForm" id="categoriesDropdown">
                 <option value="all" selected>All Categories</option>
             </select>-->
             <?php //include_once('../../Model/User/dropdownPosting.php'); 
             ?>
-            <div class=box1> <button> <i class="fa-solid fa-filter" style="color: #757D8A;"></i></button></div>
+            <?php include('../../Model/User/filter.php'); ?>
         </div>
 
         <!-- Lower section -->
@@ -83,6 +146,10 @@ $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
                     if ($result->num_rows > 0) {
                         while ($row = mysqli_fetch_assoc($result)) {
                             $posting_id = $row['posting_id'];
+                            $user_id = $row['user_id'];
+
+                            $sql_retrieve = "SELECT * FROM posting_like WHERE user_id = '$id' AND posting_id = '$posting_id'";
+                            $result_retrieve = mysqli_query($conn, $sql_retrieve);
                     ?>
                             <div class="pb-2">
                                 <div class="question">
@@ -108,36 +175,31 @@ $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
                                             $colorStatus = "84D17E";
                                         }
                                         ?>
-                                        <div class="ml-auto d-flex text-center" id="status">
-                                            <div class="circle1" style="background-color: #<?php echo $colorStatus; ?>;"></div>
-                                                    <?php if ($status == "Revised") { ?>
-                                            <a class="dropdown-item" href="#closeCase"><i class="pt-3 fas fa-edit fa-xl"></i></a>
+                                        <div class="right ml-auto d-flex text-center" id="status">
+                                            <?php if ($user_id == $id) { ?>
+                                                <div class="col-1">
+                                                    <?php
+                                                    if ($status == "Completed" && $row['posting_rating'] == 0) { ?>
+                                                        <a class="dropdown-item" href="#ratePosting<?php echo $posting_id ?>" data-toggle="modal"><i class="pt-3 fa-solid fa-star fa-xl"></i></a>
+                                                    <?php } else if ($status == "Revised") { ?>
+                                                        <a class="dropdown-item" href="#closeCase<?php echo $posting_id ?>" data-toggle="modal"><i class="pt-3 fas fa-edit fa-xl"></i></a>
+                                                    <?php } else if ($status == "Assign") { ?>
+                                                        <a class="dropdown-item" href="#editQues<?php echo $posting_id ?>" data-toggle="modal"><i class="pt-3 fas fa-edit fa-xl"></i></a>
                                                     <?php } ?>
-                                            <a class="dropdown-item" href="#deleteQues<?php echo $posting_id ?>" data-toggle="modal"><i class="pt-3 fas fa-trash fa-xl"></i></a>
-                                            <?php include('popup.php'); ?>
-
+                                                </div>
+                                                <div class="col-1">
+                                                    <a class="dropdown-item" href="#deleteQues<?php echo $posting_id ?>" data-toggle="modal"><i class="pt-3 fas fa-trash fa-xl"></i></a>
+                                                    <?php include('popup.php'); ?>
+                                                </div>
+                                            <?php } ?>
+                                            <div class="col-1">
+                                                <div class="circle1" style="background-color: #<?php echo $colorStatus; ?>;"></div>
+                                            </div>
                                         </div>
                                     </div>
                                     <!-- icon section -->
                                     <div class="d-flex pt-1 pb-1">
-                                        <div id="like">
-                                            <i id="likeButton" class="fa-regular fa-heart fa-l"></i>
-                                        </div>
-                                        <div class="likeCounter">
-                                            <p><?php echo $row['posting_like']; ?> Like</p>
-                                        </div>
-                                        <div class="views">
-                                            <i id="viewButton" class="fa-solid fa-eye fa-l"></i>
-                                        </div>
-                                        <div class="viewCounter">
-                                            <p><?php echo $row['posting_view']; ?> View</p>
-                                        </div>
-                                        <div class="comment">
-                                            <i id="iconComment" class="fa-regular fa-comment fa-l"></i>
-                                        </div>
-                                        <div class="commentCounter">
-                                            <p>Comment</p>
-                                        </div>
+                                        <?php include("interactionPosting.php") ?>
                                         <?php
                                         if ($status == "Completed") {
                                         ?>
@@ -152,19 +214,31 @@ $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
                                             <p><?php echo $row['posting_date']; ?></p>
                                         </div>
                                     </div>
-
                                     <!-- Comment section -->
                                     <hr class="solid">
                                     <div class="py-4">
                                         <strong>Comments</strong>
                                     </div>
-
+                                    <?php if ($user_id == $id) {
+                                        if ($status == 'Revised') {
+                                    ?>
+                                            <form id="comment-form" action="../../Model/User/addComment.php" method="POST">
+                                                <div class="input-group mb-4 mt-3">
+                                                    <textarea name="reply" id="reply" class="form-control" id="exampleFormControlTextarea1" placeholder="Reply" required="text"></textarea>
+                                                    <input type="hidden" name="posting_id" value="<?php echo $posting_id; ?>">
+                                                    <div class="input-group-append">
+                                                        <button class="btn btn-primary" type="submit"><i class="fas fa-paper-plane"></i></button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                    <?php }
+                                    } ?>
                                     <?php
                                     $sql2 = "SELECT * FROM discussion 
-                                        INNER JOIN posting ON  discussion.posting_id=posting.posting_id 
-                                        INNER JOIN user_profile ON discussion.user_id=user_profile.user_id
-                                        WHERE discussion.posting_id='$posting_id'
-                                        ORDER BY discussion.discussion_date, discussion.discussion_time ASC";
+                                                INNER JOIN posting ON  discussion.posting_id=posting.posting_id 
+                                                INNER JOIN user_profile ON discussion.user_id=user_profile.user_id
+                                                WHERE discussion.posting_id='$posting_id'
+                                                ORDER BY discussion.discussion_date, discussion.discussion_time ASC";
                                     $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
                                     if ($result2->num_rows > 0) {
                                         while ($row2 = mysqli_fetch_assoc($result2)) {
@@ -176,11 +250,14 @@ $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
                                                         <img src="data:image/jpeg;base64,<?php echo base64_encode($row2['user_profile_img']); ?>" class="rounded-circle shadow" height="40" width="40" ; alt="Black and White Portrait of a Man" loading="lazy" />
                                                     </div>
                                                     <div class="d-flex flex-column pl-2">
-                                                        <strong><?php echo $row2['user_name']; ?></strong>
+                                                        <div class="d-flex">
+                                                            <strong><?php echo $row2['user_name']; ?></strong>
+                                                            <p style="font-size:small" class="pl-2 pt-1"> (<?php echo $row2['discussion_date'] . " " . $row2['discussion_time']; ?>)</p>
+                                                        </div>
+
                                                         <p><?php echo $row2['discussion_content']; ?></p>
                                                     </div>
                                                 </div>
-                                                <textarea id="textareaComment" placeholder="Enter your text..."></textarea>
                                             </div>
                                         <?php }
                                     } else { ?>
@@ -205,13 +282,13 @@ $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
                 <div class="infoBoard">
                     <p><strong>Info Status</strong></p>
                     <p>
-                    <div class="circle" style="background-color: #84D17E;"></div> Completed</p>
+                    <div class="rounded-circle mr-2 float-left" style="width:20px;height:20px;background-color: #84D17E;"></div> Completed</p>
                     <p>
-                    <div class="circle" style="background-color: #DFF45C;"></div>Revised</p>
+                    <div class="rounded-circle mr-2 float-left" style="width:20px;height:20px;background-color: #DFF45C;"></div>Revised</p>
                     <p>
-                    <div class="circle" style="background-color: #3E9BA8;"></div>Accepted</p>
+                    <div class="rounded-circle mr-2 float-left" style="width:20px;height:20px;background-color: #3E9BA8;"></div>Accepted</p>
                     <p>
-                    <div class="circle" style="background-color: #FFFFFF;"></div>Assign</p>
+                    <div class="rounded-circle mr-2 float-left" style="width:20px;height:20px;background-color: #FFFFFF;"></div>Assign</p>
                 </div>
             </div>
         </div>
@@ -224,11 +301,10 @@ $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
 
 
     <!-- MDB -->
-    <script src="../../js/interaction.js"></script>
     <script src="../../js/posting.js"></script>
     <script type="text/javascript" src="../../Bootstrap/mdb.min.js"></script>
     <!--Bootstrap 4 & 5 & jQuery Script-->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>

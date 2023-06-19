@@ -73,8 +73,8 @@ h4.userName{
     border: none;
     cursor: pointer;
   }
-  .likeCounter, .commentCounter, .viewCounter, .rateCounter{
-    padding-right: 30px;
+  .hide {
+    display: none;
   }
   
   /* status */

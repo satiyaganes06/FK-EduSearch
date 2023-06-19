@@ -51,19 +51,19 @@ if ($user_route == 'home') {
           <a class="nav-link ml-2" href="../../View/User/question.php"><strong>QUESTION</strong></a>
         </li>
         <li class="nav-item <?php echo $rating ?>">
-          <a class="nav-link ml-2" href="../../../View/User/rating.php"><strong>RATING</strong></a>
+          <a class="nav-link ml-2" href="../../View/User/rating.php"><strong>RATING</strong></a>
         </li>
       </ul>
     </div>
 
     <!-- Right elements -->
     <div class="d-flex align-items-center search_Section">
-      <form class="d-flex input-group w-auto">
+      <!--<form class="d-flex input-group w-auto">
         <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
         <span class="input-group-text text-white border-0" id="search-addon">
           <i class="fas fa-search"></i>
         </span>
-      </form>
+      </form>-->
 
 
       <!-- Profile Avatar -->
@@ -71,11 +71,11 @@ if ($user_route == 'home') {
 
         <div class="mr-3 profile_name_Section">
           <h6 id="navName"><strong><?php echo $row0['user_name']; ?></strong></h6>
-          <h6 id="navUsername">@<?php echo $row0['user_name']; ?></h6>
+          <h6 id="navUsername">@<?php echo $row0['user_id']; ?></h6>
         </div>
         <div class="dropdown">
           <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-            <img src="data:image/jpeg;base64,<?php echo base64_encode($row['user_profile_img']); ?>" class="rounded-circle shadow" height="40" alt="Black and White Portrait of a Man" loading="lazy" />
+            <img src="data:image/jpeg;base64,<?php echo base64_encode($row0['user_profile_img']); ?>" class="rounded-circle shadow" height="40" alt="Black and White Portrait of a Man" loading="lazy" />
           </a>
           
           <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
