@@ -1,6 +1,6 @@
 <?php
 session_start();
-$_SESSION["user_route"] = "home";
+$_SESSION["user_route"] = "dashboard";
 if(!isset( $_SESSION["Current_user_id"] )) {
 
     ?>
