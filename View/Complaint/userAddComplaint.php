@@ -12,6 +12,9 @@ if (!isset($_SESSION['Current_user_id'])) {
   $sql = "SELECT * FROM user_profile WHERE user_id  = '$id'";
   $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
   $row = mysqli_fetch_assoc($result);
+
+  $sql2 = "SELECT * FROM posting WHERE user_id = '$id'";
+  $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
 }
 
 ?>
@@ -73,36 +76,32 @@ if (!isset($_SESSION['Current_user_id'])) {
           </div>
           <div class="mb-2">
             <label class="form-label" for="phoneNum">Phone Number</label>
-            <input type="tel" id="phoneNum" class="form-control" value="<?php echo $row['user_phoneNum']; ?>" />
+            <input type="tel" id="phoneNum" class="form-control" value="<?php echo $row['user_phoneNum']; ?>" disabled/>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label" for="type">Choose Post<span style="color: red;"> *</span></label>
+            <select class="form-select" name="typePost" required="required">
+              <option disabled selected>Please Select...</option>
+              <?php while ($row2 = mysqli_fetch_assoc($result2)) { ?>
+                <option value="<?php echo $row2['posting_id']; ?>"><?php echo $row2['posting_content']; ?></option>
+              <?php } ?>
+            </select>
           </div>
 
           <div class="mb-3">
             <label class="form-label" for="type">Type of Complaints<span style="color: red;"> *</span></label>
             <select class="form-select" name="typeComplaint" required="required">
-              <option>Please Select...</option>
+              <option disabled selected>Please Select...</option>
               <option value="1">Unsatisfied Expert's Feedback</option>
               <option value="2">Wrongly Assigned Research Area</option>
             </select>
           </div>
-
-          <!--<div class="mb-3">
-            <label class="form-label" for="type">Choose Post</label>
-            <select class="form-select" name="typePost">
-              <option selected>Please Select...</option>
-              <option value="1">Unsatisfied Expert's Feedback</option>
-              <option value="2">Wrongly Assigned Research Area</option>
-            </select>
-          </div>-->
 
           <!-- Message input -->
           <div class="mb-3">
             <label class="form-label" for="desc">Brief Description<span style="color: red;"> *</span></label>
             <textarea class="form-control" id="desc" name="desc" rows="4" required></textarea>
-          </div>
-
-          <div class="mb-5">
-            <label class="form-label" for="phoneNum">Upload Attachment (Optional)</label>
-            <input type="file" id="attachment" name="attachment" class="form-control"/>
           </div>
 
           <!-- button -->

@@ -1,5 +1,5 @@
 <!-- Edit Modal -->
-<div id="editModal<?php echo $row['complaint_id'] ?>" class="modal fade" role="dialog" tabindex="-1">
+<div id="editModal<?php echo $row['complaint_id'] ?><?php echo $row['posting_content'] ?>" class="modal fade" role="dialog" tabindex="-1">
     <div class="modal-dialog  modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,6 +11,10 @@
             <div class="modal-body">
                 <form action="../../Model/Complaint/updateComplaint.php" id="edit-form" method="POST">
                     <input type="hidden" name="complaint_id" value="<?php echo $row['complaint_id'] ?>">
+                    <div class="form-group">
+                        <label class="form-label" for="desc">Posting Content</label>
+                        <input type="text" class="form-control" value="<?php echo $row['posting_content'] ?>" disabled></input>
+                    </div>
                     <div class="form-group">
                         <label class="form-label" name="type">Type of Complaints<span style="color: red;"> *</span></label>
                         <select class="form-select" name="typeComplaint" required="required">
@@ -34,7 +38,7 @@
 </div>
 
 <!-- View Modal -->
-<div id="viewModal<?php echo $row['user_id'] ?><?php echo $row['complaint_id'] ?>" class="modal fade" role="dialog" tabindex="-1">
+<div id="viewModal<?php echo $row['user_id'] ?><?php echo $row['complaint_id'] ?><?php echo $row['posting_content'] ?>" class="modal fade" role="dialog" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -66,6 +70,10 @@
                     <div class="form-group">
                         <label class="form-label" for="phoneNum">Phone Number</label>
                         <input type="tel" id="phoneNum" class="form-control" readonly value="<?php echo $row['user_phoneNum'] ?>" />
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label" for="postContent">Post Content</label>
+                        <input type="text" id="postContent" class="form-control" readonly value="<?php echo $row['posting_content'] ?>" />
                     </div>
                     <div class="form-group">
                         <label class="form-label" for="complaintType">Type of Complaint</label>

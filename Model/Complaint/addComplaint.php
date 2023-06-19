@@ -8,6 +8,7 @@ if(isset($_POST['submit'])){
     extract($_POST);
     $id = $_SESSION['Current_user_id'];
     $status = "In Investigation";
+    $post = $_POST['typePost'];
     $type = $_POST['typeComplaint'];
     $desc = $_POST['desc'];
     $date = date("Y-m-d");
@@ -21,8 +22,8 @@ if(isset($_POST['submit'])){
         $com_type = "Wrongly Assigned Research Area";
     }
 
-    $sql = "INSERT INTO complaint (user_id, complaint_description, complaint_type, complaint_date, complaint_time, complaint_status) 
-            VALUES ('$id', '$desc', '$com_type', '$date', '$time', '$status')";
+    $sql = "INSERT INTO complaint (user_id, posting_id, complaint_description, complaint_type, complaint_date, complaint_time, complaint_status) 
+            VALUES ('$id', '$post', '$desc', '$com_type', '$date', '$time', '$status')";
 
     if(!mysqli_query($conn,$sql)){
         echo 'not inserted';
