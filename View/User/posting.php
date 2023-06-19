@@ -1,5 +1,6 @@
 <?php
 session_start();
+$researchArea = $_GET["researchArea"];
 
 if (!isset($_SESSION["Current_user_id"])) {
 ?>
@@ -12,30 +13,6 @@ if (!isset($_SESSION["Current_user_id"])) {
 
 include("../../Config/database_con.php");
 $id = $_SESSION["Current_user_id"];
-
-
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $postID = $_POST['postID'];
-    $resultLike = mysqli_query($conn, "SELECT * FROM posting WHERE posting_id = '$postID'");
-    $rowLike = mysqli_fetch_array($resultLike);
-    $n = $rowLike['posting_like'];
-
-    if (isset($_POST['like'])) {
-        mysqli_query($conn, "UPDATE posting SET posting_like = $n+1 WHERE posting_id = '$postID'");
-        mysqli_query($conn, "INSERT INTO posting_like (user_id, posting_id) VALUES ('$id', '$postID')");
-    }
-
-    if (isset($_POST['unlike'])) {
-        mysqli_query($conn, "UPDATE posting SET posting_like = $n-1 WHERE posting_id = '$postID'");
-        mysqli_query($conn, "DELETE FROM posting_like WHERE user_id = '$id' AND posting_id = '$postID'");
-    }
-
-    if (empty($_GET["researchArea"])) {
-        $researchArea = $rowLike['posting_course'];
-    } 
-}else {
-    $researchArea = $_GET["researchArea"];
-}
 
 
 //$row = mysqli_fetch_assoc($result);
@@ -115,7 +92,7 @@ $row_modal = mysqli_fetch_assoc($result_modal);
             ?>
                     <script>
                         alert("There was no search result!");
-                        window.history.back();
+                        //window.history.back();
                     </script>
             <?php
                 }
