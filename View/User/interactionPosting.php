@@ -111,3 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 <div class="viewCounter pr-3">
     <p><?php echo $row['posting_view']; ?> View</p>
 </div>
+<?php
+$sql6 = "UPDATE posting SET posting_view = posting_view + 1 WHERE posting_id = '$posting_id' AND user_id != '$id'";
+mysqli_query($conn, $sql6);
+?>
