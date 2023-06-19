@@ -62,7 +62,7 @@ if(!isset( $_SESSION["Current_admin_id"] )) {
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="shortcut icon" type="image/jpg" href="/Asset/icon_logo.png" />
+    <link rel="shortcut icon" type="image/jpg" href="../../../Asset/icon_logo.png" />
   </head>
   <body>
     <div class="sidebar">
