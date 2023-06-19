@@ -38,7 +38,6 @@ section {
     font-weight:600;
    }
 
-
    /* Styles for responsive layout */
    @media (max-width: 767px) {
     section {
