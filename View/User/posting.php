@@ -19,7 +19,7 @@ $id = $_SESSION["Current_user_id"];
 
 $sql_modal = "SELECT user_profile.*, posting.* FROM user_profile 
         RIGHT JOIN posting ON user_profile.user_id = posting.user_id
-        WHERE posting_course='$researchArea'";
+        WHERE posting_course='$researchArea' AND posting_status != 'Expiry'";
 $result_modal = mysqli_query($conn, $sql_modal) or die("Could not execute query in view");
 $row_modal = mysqli_fetch_assoc($result_modal);
 
@@ -114,7 +114,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
                 $sql = "SELECT user_profile.*, posting.* FROM user_profile 
                 RIGHT JOIN posting ON user_profile.user_id = posting.user_id
-                WHERE posting_course='$researchArea' AND posting_content LIKE '%$searchq%'";
+                WHERE posting_course='$researchArea' AND posting_status != 'Expiry' AND posting_content LIKE '%$searchq%' ";
 
                 $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
                 $count = mysqli_num_rows($result);
@@ -130,7 +130,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             } else {
                 $sql = "SELECT user_profile.*, posting.* FROM user_profile 
                         RIGHT JOIN posting ON user_profile.user_id = posting.user_id
-                        WHERE posting_course='$researchArea'";
+                        WHERE posting_course='$researchArea' AND posting_status != 'Expiry'";
                 $result = mysqli_query($conn, $sql) or die("Could not execute query in view");
             }
 
@@ -249,9 +249,11 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                                     <?php }
                                     } ?>
                                     <?php
+
                                     $sql2 = "SELECT * FROM discussion 
-                                                INNER JOIN posting ON  discussion.posting_id=posting.posting_id 
-                                                INNER JOIN user_profile ON discussion.user_id=user_profile.user_id
+                                                LEFT JOIN posting ON  discussion.posting_id=posting.posting_id 
+                                                LEFT JOIN user_profile ON discussion.user_id=user_profile.user_id
+                                                LEFT JOIN expert ON discussion.expert_id= expert.user_id
                                                 WHERE discussion.posting_id='$posting_id'
                                                 ORDER BY discussion.discussion_date, discussion.discussion_time ASC";
                                     $result2 = mysqli_query($conn, $sql2) or die("Could not execute query in view");
