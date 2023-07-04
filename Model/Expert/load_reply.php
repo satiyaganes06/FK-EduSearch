@@ -27,7 +27,7 @@ if ($result->num_rows > 0) {
         echo '<div class="ml-5 mt-3 d-flex">
 
         <!-- Image -->
-        <img class="rounded-circle shadow" src="data:image/jpeg;base64,' . $row3['user_profile_img'] . '" height="40"
+        <img class="rounded-circle shadow" src="data:image/jpeg;base64,' . base64_encode($row3['user_profile_img']) . '" height="40"
             alt="Expert Profile"
             loading="lazy"">
         

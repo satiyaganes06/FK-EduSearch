@@ -44,7 +44,7 @@ if (!isset($_SESSION["Current_user_id"])) {
         if (in_array($fileType, $allowedTypes)) {
             // Read the uploaded file
             $imgContent = file_get_contents($_FILES["imgBack"]["tmp_name"]);
-            $imgContent = mysqli_real_escape_string($conn, $imgContent); // Escape the binary data to prevent SQL injection
+            $imgContent = mysqli_real_escape_string($conn, addslashes($imgContent)); // Escape the binary data to prevent SQL injection
         }
     }
 

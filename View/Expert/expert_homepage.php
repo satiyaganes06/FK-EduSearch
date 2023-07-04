@@ -61,7 +61,9 @@
 
   <section class="flexSection">
     <div class="mainSection mb-5">
+
         <h1><strong>Top Publication</strong></h1>
+
 
         <div id="publication_Component">
           <?php
@@ -80,9 +82,7 @@
                     $result2 = mysqli_query($conn,$sql2) or die ("Could not execute query in homepage");
                     $row2 = mysqli_fetch_assoc($result2);
                   }
-                  
-
-                  
+                
 
                 ?> 
                 

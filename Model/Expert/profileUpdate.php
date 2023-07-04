@@ -34,8 +34,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         user_researchArea,
         user_socialMedia,
         user_phoneNum
-      ) VALUE('$user_id', '$name', '$age', '$email', '$academicLevel', '$researchArea', '$socialMediaLink', '$phoneNum')";
-      $resultUser = mysqli_query($conn, $sql) or die("Could not execute query");
+      ) VALUE('$user_id', '$name' ,'$age', '$email', '$academicLevel', '$researchArea', '$socialMediaLink', '$phoneNum')";
+      $resultUser = mysqli_query($conn, $sql) or die("Could not execute query1: " . mysqli_error($conn));
 
 
       if ($_FILES["cover-letter"]["type"] == "application/pdf") {
@@ -44,7 +44,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $base64FileData = base64_encode($file);
         
         $query = "INSERT INTO temp_expert (expert_id, user_id, expert_cv) VALUE('$expert_id', '$user_id', '$base64FileData')";
-        $resultExpert = mysqli_query($conn, $query) or die("Could not execute query");
+        $resultExpert = mysqli_query($conn, $query) or die("Could not execute query2");
 
       }
 
@@ -70,7 +70,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if ($_FILES["profile-image"]["type"] == "image/jpeg" || $_FILES["profile-image"]["type"] == "image/png") {
         // Get the submitted form data
         $file = file_get_contents($_FILES["profile-image"]["tmp_name"]);
-        $base64FileData = base64_encode($file);
+        $base64FileData = addslashes($file);
 
         // Insert user profile data into temp_user_profile table
         $sql = "UPDATE user_profile set user_profile_img = '$base64FileData' WHERE user_id = '$user_id'";
@@ -99,7 +99,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if ($_FILES["profile-image-bg"]["type"] == "image/jpeg" || $_FILES["profile-image-bg"]["type"] == "image/png") {
         // Get the submitted form data
         $file = file_get_contents($_FILES["profile-image-bg"]["tmp_name"]);
-        $base64FileData = base64_encode($file);
+        $base64FileData = addslashes($file);
 
         // Insert user profile data into temp_user_profile table
         $sql = "UPDATE user_profile set user_profile_bg = '$base64FileData' WHERE user_id = '$user_id'";

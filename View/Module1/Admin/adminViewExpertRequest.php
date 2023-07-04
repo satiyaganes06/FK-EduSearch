@@ -17,17 +17,11 @@
     include("../../../Config/database_con.php");
 
     $userid = $_GET['userid'];
-    $temp_user_id = $_GET['temp_id'];
 
     //Data from user profile table
     $sql = "SELECT * FROM user_profile WHERE user_id = '$userid'";
     $result = mysqli_query($conn,$sql) or die ("Could not execute query in homepage");
     $userinfo = mysqli_fetch_assoc($result);
-
-    //Data from temp user profile table
-    $sql1 = "SELECT * FROM temp_user_profile WHERE temp_user_id = '$temp_user_id'";
-    $result1 = mysqli_query($conn,$sql1) or die ("Could not execute query in homepage");
-    $updateUserInfo = mysqli_fetch_assoc($result1);
 
   }
 
@@ -176,16 +170,18 @@
                   echo '<img class="rounded-circle shadow-5 profile_Avatar" src="data:image/jpeg;base64,' . "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541" . '" 
                   alt="Placeholder" loading="lazy"">';
                 }else{
-                  echo '<img class="rounded-circle shadow-5 profile_Avatar  mt-5" src="data:image/jpeg;base64,' . base64_encode($userinfo['user_profile_img']) . '" alt="Profile Avatar" loading="lazy"">';
-                    
+                  ?>  <img  src="data:image/jpeg;base64,<?php echo base64_encode($userinfo['user_profile_img']); ?>" class="rounded-circle shadow-5 profile_Avatar"  alt="Black and White Portrait of a Man" /> <?php
+                 
+ 
                 } ?>
+
 
                 <div class="profile_content">
                   <div class="d-flex justify-content-between">
                     <div class="d-flex">
-                      <?php if($updateUserInfo['user_name'] != $userinfo['user_name']){ ?>
+                      
                         <h2><strong><?php echo $userinfo['user_name']; ?></strong></h2>
-                      <?php } ?>
+                     
                       
                       <i
                         class="fas fa-circle-check fa-2x ml-3"
@@ -197,40 +193,39 @@
                   </div>
 
                   <div class="d-flex justify-content-start mt-3">
-                    <?php if($updateUserInfo['user_email'] != $userinfo['user_email']){ ?>
+                    
                       <p class="w-50 text-truncate mr-3"><?php echo $userinfo['user_email']; ?></p>
-                    <?php } ?>
+                    
 
-                    <?php if($updateUserInfo['user_age'] != $userinfo['user_age']){ ?>
+                    
                       <p class="w-50 text-truncate">Age : <?php echo $userinfo['user_age']; ?></p>
-                    <?php } ?>
+                    
                   </div>
 
                   <div class="d-flex justify-content-start">
-                    <?php if($updateUserInfo['user_academicStatus'] !== $userinfo['user_academicStatus']){ ?>
-                      <p class="w-50 text-truncate mr-3">
-                        Academic Level : <?php echo $userinfo['user_academicStatus']; ?>
-                      </p>
-                    <?php } ?>
+                      
+                        <p class="w-50 text-truncate mr-3">
+                          Academic Level : <?php echo $userinfo['user_academicStatus']; ?>
+                        </p>
+                      
+                        <p class="w-50 text-truncate">Social Media : <a href=<?php echo $userinfo['user_socialMedia']; ?> target="_blank"><i class="fab fa-instagram"></i></a></p>
+                      
+                      
+                    </div>
 
-                    <?php if($updateUserInfo['user_socialMedia'] != $userinfo['user_socialMedia']){ ?>
-                      <p class="w-50 text-truncate">Social Media : <a href=<?php echo $userinfo['user_socialMedia']; ?> target="_blank"><i class="fab fa-instagram"></i></a></p>
-                    <?php } ?>
-                  </div>
-
-                    <?php if($updateUserInfo['user_phoneNum'] != $userinfo['user_phoneNum']){ ?>
+                    
                       <div class="d-flex justify-content-between">
                         <p class="w-50 text-truncate">Phone Number: <?php echo $userinfo['user_phoneNum']; ?></p>
                         
                       </div>
-                    <?php } ?>
+                   
 
-                    <?php if($updateUserInfo['user_researchArea'] != $userinfo['user_researchArea']){ ?>
+                    
                       <div class="d-flex w-50">
                         <p class="mr-3">Research Area : </p>
                         <p class="bg-secondary rounded-6" style="font-size: 12px; padding-top: 2px; padding-right: 10px; padding-left: 10px; color: white;"><?php echo $userinfo['user_researchArea']; ?></p>
                       </div>
-                    <?php } ?>
+                    
 
                     
 
@@ -238,95 +233,13 @@
               </div>
 
 
-              <div class="tabletitle2">
-                <h4>After Change</h4>
-              </div>
-                <div id="profile_details" class="position-relative">
-
-                  <?php if(empty($userinfo['user_profile_bg'])){
-                    echo '<img class="shadows" src="data:image/jpeg;base64,' . "https://libg.s3.us-east-2.amazonaws.com/download/Plain-Background.jpg" . '" width="100%"
-                    height="300px" alt="Grey profile background" loading="lazy"">';
-                  }else{
-                    echo '<img class="shadows" src="data:image/jpeg;base64,' . base64_encode($userinfo['user_profile_bg']) . '" width="100%"
-                      height="300px" alt="Grey profile background" loading="lazy"">';
-                      
-                  } ?>
-
-
-                  <?php if(empty($userinfo['user_profile_img'])){
-                    echo '<img class="rounded-circle shadow-5 profile_Avatar" src="data:image/jpeg;base64,' . "https://upload.wikimedia.org/wikipedia/commons/7/7c/Profile_avatar_placeholder_large.png?20150327203541" . '" 
-                    alt="Placeholder" loading="lazy"">';
-                  }else{
-                    echo '<img class="rounded-circle shadow-5 profile_Avatar mt-5" src="data:image/jpeg;base64,' . base64_encode($userinfo['user_profile_img']) . '" alt="Profile Avatar" loading="lazy" ">';
-                      
-                  } ?>
-
-                  <div class="profile_content">
-                    <div class="d-flex justify-content-between">
-                      <div class="d-flex">
-
-                        <?php if($updateUserInfo['user_name'] != $userinfo['user_name']){ ?>
-                          <h2><strong><?php echo $updateUserInfo['user_name']; ?></strong></h2>
-                        <?php } ?>
-                        
-                        <i
-                          class="fas fa-circle-check fa-2x ml-3"
-                          style="color: #00ff00"
-                        ></i>
-                      </div>
-
-                  
-                    </div>
-
-                    <div class="d-flex justify-content-start mt-3">
-                      <?php if($updateUserInfo['user_email'] != $userinfo['user_email']){ ?>
-                        <p class="w-50 text-truncate mr-3"><?php echo $updateUserInfo['user_email']; ?></p>
-                      <?php } ?>
-
-                      <?php if($updateUserInfo['user_age'] != $userinfo['user_age']){ ?>
-                        <p class="w-50 text-truncate">Age : <?php echo $updateUserInfo['user_age']; ?></p>
-                      <?php } ?>
-                    </div>
-
-                    <div class="d-flex justify-content-start">
-                      <?php if($updateUserInfo['user_academicStatus'] != $userinfo['user_academicStatus']){ ?>
-                        <p class="w-50 text-truncate mr-3">
-                          Academic Level : <?php echo $updateUserInfo['user_academicStatus']; ?>
-                        </p>
-                      <?php } ?>
-
-                      <?php if($updateUserInfo['user_socialMedia'] != $userinfo['user_socialMedia']){ ?>
-                        <p class="w-50 text-truncate">Social Media : <a href=<?php echo $updateUserInfo['user_socialMedia']; ?> target="_blank"><i class="fab fa-instagram"></i></a></p>
-                      <?php } ?>
-                      
-                    </div>
-
-                    <?php if($updateUserInfo['user_phoneNum'] != $userinfo['user_phoneNum']){ ?>
-                      <div class="d-flex justify-content-between">
-                          <p class="w-50 text-truncate">Phone Number: <?php echo $updateUserInfo['user_phoneNum']; ?></p>
-                          
-                      </div>
-                    <?php } ?>
-
-                    <?php if($updateUserInfo['user_researchArea'] != $userinfo['user_researchArea']){ ?>
-                      <div class="d-flex w-50">
-                        <p class="mr-3">Research Area : </p>
-                        <p class="bg-secondary rounded-6" style="font-size: 12px; padding-top: 2px; padding-right: 10px; padding-left: 10px; color: white;"><?php echo $updateUserInfo['user_researchArea']; ?></p>
-                      </div>
-                    <?php } ?>
-
-                    
-
-                  </div> 
-                </div>
-                <div class="d-flex justify-content-between">
-                  <div class="text-start">
-                  <a href="../../../Model/Expert/openCV.php?user_id=<?=$userid?>" target="_blank"><button type="button"  class="btn btn-info me-2" >View CV</button></a>
-                  </div>
+    
+                <div class="d-flex justify-content-end">
+                
 
                   <div class="text-end">
-                    <a href="../../../Model/Expert/profileAdminValidateApprove.php?temp_id=<?php echo $temp_user_id ?>&userid=<?php echo $userid ?>"><button type="button" class="btn btn-success me-2" >Approve</button></a>
-                    <a href="../../../Model/Expert/profileAdminValidateReject.php?temp_id=<?php echo $temp_user_id ?>"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Reject</button></a>
+                    <a href="../../../Model/Expert/expertAccountApprove_Reject.php?user_id=<?php echo $userid ?>&action=Approve"><button type="button" class="btn btn-success me-2" >Approve</button></a>
+                    <a href="../../../Model/Expert/expertAccountApprove_Reject.php?user_id=<?php echo $userid?>&action=Reject"><button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Reject</button></a>
                   </div>
                 </div>
                 

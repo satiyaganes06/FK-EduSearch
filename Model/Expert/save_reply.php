@@ -27,6 +27,8 @@ $post_id = $_SESSION['current_comment_post_id'];
 
 $sql = "INSERT INTO discussion (posting_id, expert_id, user_id, discussion_content) 
             VALUES ('$post_id', '$expert_id', '$user_id', '$reply')";
+$sql2 = "UPDATE posting set posting_status = 'Revised' WHERE posting_id = '$post_id'";
+$conn->query($sql2);
 $conn->query($sql);
 
 $conn->close();

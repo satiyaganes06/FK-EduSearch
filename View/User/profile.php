@@ -81,12 +81,7 @@ $row3 = mysqli_fetch_assoc($result3);
                             <img id="profile-background-pic" src="data:image/jpeg;base64,<?php echo base64_encode($row['user_profile_img']); ?>" class="rounded-circle" height="100" width="100" alt="Black and White Portrait of a Man" />
                         </div>
                     </div>
-                    <div class="infoUser">
-                        <h4 class="userName">
-                            <strong><?php echo $row['user_name']; ?></strong>
-                            <a href="updateInfo.php"><i class="fa-solid fa-gear" style="color: #8d9096;"></i></a>
-                        </h4>
-                        <?php
+                    <?php
                             if($row3['acc_role'] == "Staff"){
                                 ?>
                                     <a href="../../Model/Expert/expertReq.php"><button class="btn btn-dark ml-4">Request for Expert</button></a>
@@ -94,6 +89,12 @@ $row3 = mysqli_fetch_assoc($result3);
                                 <?php
                             }
                         ?>
+                    <div class="infoUser">
+                        <h4 class="userName">
+                            <strong><?php echo $row['user_name']; ?></strong>
+                            <a href="updateInfo.php"><i class="fa-solid fa-gear" style="color: #8d9096;"></i></a>
+                        </h4>
+                        
                         <?php
                         if ($row['user_fullName'] == "") { ?>
                             <p class="text-center">Update your profile!</p>

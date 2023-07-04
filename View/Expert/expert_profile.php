@@ -82,7 +82,7 @@
                         <div id="profile_details" class="position-relative">
 
                           <div >
-                            <?php echo '<img id="profile-background-pic" class="shadows " src="data:image/jpeg;base64,' . $userinfo['user_profile_bg'] . '" width="100%"
+                            <?php echo '<img id="profile-background-pic" class="shadows " src="data:image/jpeg;base64,' . base64_encode($userinfo['user_profile_bg']) . '" width="100%"
                               alt="Black profile background"
                               loading="lazy"">';  ?>
                             <a type="button" data-toggle="modal" data-target="#editProfileBgModal" class="edit-icon-button2">
@@ -93,9 +93,11 @@
 
                           <div class="profile_Avatar">
                             
-                            <?php echo '<img class="rounded-circle shadow-5 " src="data:image/jpeg;base64,' . $userinfo['user_profile_img'] . '" height="120"
+                            <?php echo '<img class="rounded-circle shadow-5 " src="data:image/jpeg;base64,' . base64_encode($userinfo['user_profile_img']) . '" height="120"
                                 alt="Black and White Portrait of a Man"
                                 loading="lazy"">';  ?>
+
+                            
                             <a type="button" data-toggle="modal" data-target="#editProfileImgModal" class="edit-icon-button">
                                 <i class="fa fa-pencil" style="color:blue;"></i>
                             </a>

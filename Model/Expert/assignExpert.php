@@ -46,26 +46,7 @@
         }
     }
 
-    $sql = "SELECT posting_id FROM posting WHERE posting_status = 'Assigned' AND TIMEDIFF('$currentTime', CONCAT(CURDATE(), ' ', posting_assign_time)) >= '24:00:00'";
-    $result = $conn->query($sql);
-
-    if ($result->num_rows > 0) {
-        // Get all experts
-        $experts = $conn->query("SELECT expert_id FROM expert");
-        $expert_ids = [];
-        while($row = $experts->fetch_assoc()) {
-            array_push($expert_ids, $row['expert_id']);
-        }
-
-        while($row = $result->fetch_assoc()) {
-            // Assign a random expert to the post
-            $randomExpert = $expert_ids[array_rand($expert_ids)];
-            $assignTime = date("H:i:s");
-            $conn->query("UPDATE posting SET expert_id = '', posting_status = 'Expiry' WHERE posting_id = " . $row["posting_id"]);
-           
-        }
-    }
-
+    //If no expert accept within 1 days, The posting will expiry
     $sql = "SELECT * FROM posting WHERE posting_status = 'Assigned'";
     $result = $conn->query($sql);
      
@@ -79,13 +60,32 @@
 
 
         echo "Its working <br>";
-        if($postingDate->diff($current_date)->days >= 1){
+        if($postingDate->diff($current_date)->days >= 2){
 
             $conn->query("UPDATE posting SET expert_id = '', posting_status = 'Expiry' WHERE posting_id ='$posting_id' ");
 
-
         }
     }
+
+    // $sql = "SELECT posting_id FROM posting WHERE posting_status = 'Assigned' AND TIMEDIFF('$currentTime', CONCAT(CURDATE(), ' ', posting_assign_time)) >= '24:00:00'";
+    // $result = $conn->query($sql);
+
+    // if ($result->num_rows > 0) {
+    //     // Get all experts
+    //     $experts = $conn->query("SELECT expert_id FROM expert");
+    //     $expert_ids = [];
+    //     while($row = $experts->fetch_assoc()) {
+    //         array_push($expert_ids, $row['expert_id']);
+    //     }
+
+    //     while($row = $result->fetch_assoc()) {
+    //         // Assign a random expert to the post
+    //         $randomExpert = $expert_ids[array_rand($expert_ids)];
+    //         $assignTime = date("H:i:s");
+    //         $conn->query("UPDATE posting SET expert_id = '', posting_status = 'Expiry' WHERE posting_id = " . $row["posting_id"]);
+           
+    //     }
+    // }
     
 
     $conn->close();

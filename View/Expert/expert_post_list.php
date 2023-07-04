@@ -16,7 +16,7 @@
 
     //Post Info
     $expert_id = $_SESSION['expertID'];
-    $sql = "SELECT * FROM posting WHERE expert_id = '$expert_id' AND posting_status = 'Accepted'";
+    $sql = "SELECT * FROM posting WHERE expert_id = '$expert_id' AND posting_status IN ('Accepted', 'Revised')";
     $result = mysqli_query($conn,$sql) or die ("Could not execute query in homepage");
 
     $_SESSION["route"] = "post";

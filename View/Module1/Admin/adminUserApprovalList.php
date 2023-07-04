@@ -209,7 +209,81 @@
               </table>
             </div>
 
-            
+
+            <div class="tabletitle1 mt-5">
+                <h4>Approval for Expert Request List</h4>
+            </div>
+           
+            <div>
+               
+              <table class="table align-middle mb-0 bg-white mt-2 table-responsive-sm table-hover">
+                <thead>
+                  <tr>
+                    <th class="firstcol">No</th>
+                    <th>Username</th>
+                    <th>User ID</th>
+                    <th>Academic Status</th>
+                    <th class="lastcol">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                <?php
+
+                  $expertSql = "SELECT * FROM expert WHERE expert_Access = 'Pending'";
+                  $expResult = mysqli_query($conn,$expertSql) or die ("Could not execute query in homepage");
+                  $bilNum = 0;
+                  if ($expResult->num_rows > 0) {
+                      // Loop through each row and display the data
+                      while ($row = $expResult->fetch_assoc()) {
+
+                          $user_id = $row["user_id"];
+
+                          //User Info
+                          $userSql = "SELECT * FROM user_profile WHERE user_id = '$user_id'";
+                          $userResult = mysqli_query($conn,$userSql) or die ("Could not execute query in homepage");
+                          $row2 = mysqli_fetch_assoc($userResult); 
+                          ?>
+                    <tr>
+                      <td>
+                        <div class="d-flex align-items-center">
+                          
+                          <div class="ms-3">
+                            <p class="fw-bold mb-1"><?php echo ++$bilNum; ?></p>
+                            
+                          </div>
+                        </div>
+                      </td>
+                      <td>
+                        <p class="fw-normal mb-1"><?php echo $row2['user_name']; ?></p>
+                      
+                      </td>
+                      <td><?php echo $user_id; ?></td>
+                      <td>
+                        <span class="badge badge-success rounded-pill d-inline"><?php echo $row2['user_academicStatus']; ?></span>
+                      </td>
+                    
+                      <td>
+                        <div class="btn-group shadow-0" role="group">
+                          <a href="adminViewExpertRequest.php?userid=<?php echo $user_id; ?>"><i class="fa-solid fa-eye" style="color: #00ff59; font-size: 20px;"></i></a>
+                          
+                        </div>
+                      </td>
+                    </tr>
+
+                  <?php }
+                
+                      }else {
+                          ?>
+                              <div class="text-center" style="height: 20px; margin:100px">
+                                  <p><?php echo "No Approval List found.";?></p>
+                              </div>
+                          <?php
+                  }?>
+                  
+                </tbody>
+              </table>
+            </div>      
+
 
             <div class="tabletitle2">
                 <h4>Approval for Publication</h4>
@@ -331,7 +405,7 @@
                               </div>
                             </td>
                             <td>
-                              <p class="fw-normal mb-1 text-truncate"><?php echo $row3['posting_content']; ?></p>
+                              <p class="fw-normal mb-1 text-truncate" style="width: 300px;"><?php echo $row3['posting_content']; ?></p>
                              
                             </td>
                             <td>
@@ -399,7 +473,7 @@
       document.getElementById('expertSelect').addEventListener('change', function() {
           var selectedExpertId = this.value;
           var postingId = '<?php echo $postingid ?>';
-          var assignExpertUrl = '../../../Model/expert/adminAssignExpert.php?post_id=' + postingId + '&expert_id=' + selectedExpertId;
+          var assignExpertUrl = '../../../Model/Expert/adminAssignExpert.php?post_id=' + postingId + '&expert_id=' + selectedExpertId;
           document.getElementById('assignExpertLink').setAttribute('href', assignExpertUrl);
       });
   </script>

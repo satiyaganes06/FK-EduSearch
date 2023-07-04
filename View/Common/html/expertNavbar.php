@@ -103,9 +103,7 @@
               alt="Black and White Portrait of a Man"
               loading="lazy"">';
             }else{
-              echo '<img class="rounded-circle " src="data:image/jpeg;base64,' . $row1['user_profile_img'] . '" height="35"
-                  alt="Black and White Portrait of a Man"
-                  loading="lazy"">'; 
+              ?> <img  src="data:image/jpeg;base64,<?php echo base64_encode($row1['user_profile_img']); ?>" class="rounded-circle shadow-5" height="35" alt="Black and White Portrait of a Man" /> <?php 
             } ?>
             
             
